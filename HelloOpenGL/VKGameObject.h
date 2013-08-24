@@ -9,18 +9,17 @@
 #import <Foundation/Foundation.h>
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
+#import "CC3GLMatrix.h"
 
 typedef struct {
     float Position[3];
-    float Color[4];
 } Vertex;
 
 @interface VKGameObject : NSObject{
+    GLushort _style;
     @private
-    GLfloat *_glProjectionMatrix;
-    GLfloat _glModelMatrix [16];
     GLuint _positionSlot;
-    GLuint _colorSlot;
+    GLuint _colorUniform;
     GLuint _projectionUniform;
     GLuint _modelViewUniform;
     int _indicesCount;
@@ -29,12 +28,18 @@ typedef struct {
     GLuint _indexBuffer;
     
     CGSize _viewSize;
+    CGFloat _red;
+    CGFloat _green;
+    CGFloat _blue;
+    CGFloat _alpha;
 }
 
+@property (strong,nonatomic) CC3GLMatrix *projection;
 @property (nonatomic) CGPoint position;
 @property (nonatomic) CGFloat rotation;
+@property (nonatomic,strong) UIColor *color;
 
-- (id) initWithViewSize:(CGSize) size;
+- (id) initWithViewSize:(CGSize) size Projection:(CC3GLMatrix *) projection;
 - (void) render;
 - (void) compileShaders;
 - (void) setVertexBuffer:(int) verticesCount Vertices:(Vertex *) vertices;

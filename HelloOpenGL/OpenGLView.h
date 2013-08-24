@@ -10,7 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
-#import "VKGameObject.h"
+#import "VKShip.h"
 #import "CC3GLMatrix.h"
 
 @interface OpenGLView : UIView {
@@ -19,8 +19,7 @@
     GLuint _colorRenderBuffer;
     GLuint _depthRenderBuffer;
     
-    
-    VKGameObject *_gameObject;
+    VKShip *_gameObject;
 }
 
 @end

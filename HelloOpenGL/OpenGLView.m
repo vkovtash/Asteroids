@@ -8,6 +8,10 @@
 
 #import "OpenGLView.h"
 
+@interface OpenGLView()
+@property (strong ,nonatomic) CC3GLMatrix *projection;
+@end
+
 @implementation OpenGLView
 
 #define TEX_COORD_MAX   4
@@ -86,7 +90,18 @@
         [self setupFrameBuffer];
         [self setupDisplayLink];
         
-        _gameObject = [[VKGameObject alloc] initWithViewSize:self.frame.size];
+        _projection = [CC3GLMatrix matrix];
+        [_projection populateOrthoFromFrustumLeft:-self.frame.size.width/2
+                                        andRight:self.frame.size.width/2
+                                       andBottom:-self.frame.size.height/2
+                                          andTop:self.frame.size.height/2
+                                         andNear:0
+                                          andFar:10];
+        _gameObject = [[VKShip alloc] initWithViewSize:self.frame.size Projection:_projection];
+        
+        _gameObject.position = CGPointMake(100, 100);
+        _gameObject.rotation = 90;
+        _gameObject.color = [UIColor yellowColor];
     }
     return self;
 }
