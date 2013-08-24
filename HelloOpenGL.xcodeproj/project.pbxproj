@@ -14,7 +14,6 @@
 		35DF644E138C40D500FF9459 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 35DF644D138C40D500FF9459 /* main.m */; };
 		35DF6451138C40D500FF9459 /* HelloOpenGLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 35DF6450138C40D500FF9459 /* HelloOpenGLAppDelegate.m */; };
 		35DF6454138C40D500FF9459 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35DF6452138C40D500FF9459 /* MainWindow.xib */; };
-		35DF645C138C422900FF9459 /* OpenGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35DF645B138C422800FF9459 /* OpenGLView.m */; };
 		35DF645E138C427700FF9459 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35DF645D138C427700FF9459 /* QuartzCore.framework */; };
 		35DF6460138C427E00FF9459 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35DF645F138C427E00FF9459 /* OpenGLES.framework */; };
 		35DF6463138C44F400FF9459 /* SimpleVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 35DF6461138C44F300FF9459 /* SimpleVertex.glsl */; };
@@ -26,6 +25,7 @@
 		F340C56E17C92A8400C2948D /* CC3Math.m in Sources */ = {isa = PBXBuildFile; fileRef = F340C56917C92A8400C2948D /* CC3Math.m */; };
 		F340C57117C9510700C2948D /* VKShip.m in Sources */ = {isa = PBXBuildFile; fileRef = F340C57017C9510700C2948D /* VKShip.m */; };
 		F340C57717C9571300C2948D /* VKAsteroid.m in Sources */ = {isa = PBXBuildFile; fileRef = F340C57617C9571300C2948D /* VKAsteroid.m */; };
+		F374124E17C95E1000AF822B /* VKGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = F374124D17C95E1000AF822B /* VKGLView.m */; };
 		F3CD697617C8FFBF00D3972A /* VKGameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F3CD697517C8FFBF00D3972A /* VKGameObject.m */; };
 /* End PBXBuildFile section */
 
@@ -41,8 +41,6 @@
 		35DF644F138C40D500FF9459 /* HelloOpenGLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloOpenGLAppDelegate.h; sourceTree = "<group>"; };
 		35DF6450138C40D500FF9459 /* HelloOpenGLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloOpenGLAppDelegate.m; sourceTree = "<group>"; };
 		35DF6453138C40D500FF9459 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		35DF645A138C422800FF9459 /* OpenGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLView.h; sourceTree = "<group>"; };
-		35DF645B138C422800FF9459 /* OpenGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLView.m; sourceTree = "<group>"; };
 		35DF645D138C427700FF9459 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		35DF645F138C427E00FF9459 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		35DF6461138C44F300FF9459 /* SimpleVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleVertex.glsl; sourceTree = "<group>"; };
@@ -62,6 +60,9 @@
 		F340C57017C9510700C2948D /* VKShip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VKShip.m; path = ../VKShip.m; sourceTree = "<group>"; };
 		F340C57517C9571300C2948D /* VKAsteroid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKAsteroid.h; sourceTree = "<group>"; };
 		F340C57617C9571300C2948D /* VKAsteroid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKAsteroid.m; sourceTree = "<group>"; };
+		F340C57817C95AC800C2948D /* VKGLObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VKGLObject.h; sourceTree = "<group>"; };
+		F374124C17C95E1000AF822B /* VKGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKGLView.h; sourceTree = "<group>"; };
+		F374124D17C95E1000AF822B /* VKGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKGLView.m; sourceTree = "<group>"; };
 		F3CD697417C8FFBF00D3972A /* VKGameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKGameObject.h; sourceTree = "<group>"; };
 		F3CD697517C8FFBF00D3972A /* VKGameObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKGameObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,11 +134,12 @@
 				35DF644F138C40D500FF9459 /* HelloOpenGLAppDelegate.h */,
 				35DF6450138C40D500FF9459 /* HelloOpenGLAppDelegate.m */,
 				35DF6452138C40D500FF9459 /* MainWindow.xib */,
-				35DF645A138C422800FF9459 /* OpenGLView.h */,
-				35DF645B138C422800FF9459 /* OpenGLView.m */,
 				35DF6447138C40D500FF9459 /* Supporting Files */,
 				F3CD697417C8FFBF00D3972A /* VKGameObject.h */,
 				F3CD697517C8FFBF00D3972A /* VKGameObject.m */,
+				F340C57817C95AC800C2948D /* VKGLObject.h */,
+				F374124C17C95E1000AF822B /* VKGLView.h */,
+				F374124D17C95E1000AF822B /* VKGLView.m */,
 			);
 			path = HelloOpenGL;
 			sourceTree = "<group>";
@@ -218,7 +220,6 @@
 			files = (
 				35DF644E138C40D500FF9459 /* main.m in Sources */,
 				35DF6451138C40D500FF9459 /* HelloOpenGLAppDelegate.m in Sources */,
-				35DF645C138C422900FF9459 /* OpenGLView.m in Sources */,
 				F3CD697617C8FFBF00D3972A /* VKGameObject.m in Sources */,
 				F340C56B17C92A8400C2948D /* CC3Foundation.m in Sources */,
 				F340C56C17C92A8400C2948D /* CC3GLMatrix.m in Sources */,
@@ -226,6 +227,7 @@
 				F340C56E17C92A8400C2948D /* CC3Math.m in Sources */,
 				F340C57117C9510700C2948D /* VKShip.m in Sources */,
 				F340C57717C9571300C2948D /* VKAsteroid.m in Sources */,
+				F374124E17C95E1000AF822B /* VKGLView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

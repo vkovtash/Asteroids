@@ -7,13 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OpenGLView.h"
+#import "VKGLView.h"
 
-@interface HelloOpenGLAppDelegate : NSObject <UIApplicationDelegate> {
-    OpenGLView* _glView;
-}
+@interface HelloOpenGLAppDelegate : NSObject <UIApplicationDelegate>
 
 @property (nonatomic, strong) IBOutlet UIWindow *window;
-@property (nonatomic, strong) IBOutlet OpenGLView *glView;
+@property (nonatomic, strong) IBOutlet VKGLView *glView;
 
 @end

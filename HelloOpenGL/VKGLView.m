@@ -1,21 +1,25 @@
 //
-//  OpenGLView.m
+//  VKTestView.m
 //  HelloOpenGL
 //
-//  Created by Ray Wenderlich on 5/24/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created by kovtash on 25.08.13.
+//
 //
 
-#import "OpenGLView.h"
+#import "VKGLView.h"
 #import "VKShip.h"
 #import "VKAsteroid.h"
 
-@interface OpenGLView()
-@property (strong, nonatomic) CC3GLMatrix *projection;
+@interface VKGLView()
 @property (strong, nonatomic) NSMutableArray *gameObjects;
 @end
 
-@implementation OpenGLView
+@implementation VKGLView{
+    CAEAGLLayer* _eaglLayer;
+    EAGLContext* _context;
+    GLuint _colorRenderBuffer;
+    GLuint _depthRenderBuffer;
+}
 
 #define TEX_COORD_MAX   4
 
@@ -24,6 +28,10 @@
         _gameObjects = [NSMutableArray array];
     }
     return _gameObjects;
+}
+
+- (CGSize) glViewSize{
+    return self.frame.size;
 }
 
 + (Class)layerClass {
@@ -35,7 +43,7 @@
     _eaglLayer.opaque = YES;
 }
 
-- (void)setupContext {   
+- (void)setupContext {
     EAGLRenderingAPI api = kEAGLRenderingAPIOpenGLES2;
     _context = [[EAGLContext alloc] initWithAPI:api];
     if (!_context) {
@@ -51,26 +59,26 @@
 
 - (void)setupRenderBuffer {
     glGenRenderbuffers(1, &_colorRenderBuffer);
-    glBindRenderbuffer(GL_RENDERBUFFER, _colorRenderBuffer);        
-    [_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:_eaglLayer];    
+    glBindRenderbuffer(GL_RENDERBUFFER, _colorRenderBuffer);
+    [_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:_eaglLayer];
 }
 
 - (void)setupDepthBuffer {
     glGenRenderbuffers(1, &_depthRenderBuffer);
     glBindRenderbuffer(GL_RENDERBUFFER, _depthRenderBuffer);
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, self.frame.size.width, self.frame.size.height);    
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, self.frame.size.width, self.frame.size.height);
 }
 
-- (void)setupFrameBuffer {    
+- (void)setupFrameBuffer {
     GLuint framebuffer;
     glGenFramebuffers(1, &framebuffer);
-    glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);   
+    glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _colorRenderBuffer);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _depthRenderBuffer);
     
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
-    glEnable(GL_DEPTH_TEST); 
+    glEnable(GL_DEPTH_TEST);
     glClearColor(0, 104.0/255.0, 55.0/255.0, 1.0);
 }
 
@@ -85,37 +93,48 @@
 
 - (void)setupDisplayLink {
     CADisplayLink* displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(render:)];
-    [displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];    
+    [displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
 }
 
+
+-(void) addGLObject:(id <VKGLObject>) glObject{
+    [glObject setGlView:self];
+    [self.gameObjects addObject:glObject];
+}
+
+-(void) removeGLObject:(id <VKGLObject>) glObject{
+    [self.gameObjects removeObjectIdenticalTo:glObject];
+    [glObject setGlView:nil];
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {        
-        [self setupLayer];        
-        [self setupContext];    
+    if (self) {
+        [self setupLayer];
+        [self setupContext];
         [self setupDepthBuffer];
-        [self setupRenderBuffer];        
+        [self setupRenderBuffer];
         [self setupFrameBuffer];
         [self setupDisplayLink];
         
         _projection = [CC3GLMatrix matrix];
         [_projection populateOrthoFromFrustumLeft:-self.frame.size.width/2
-                                        andRight:self.frame.size.width/2
-                                       andBottom:-self.frame.size.height/2
-                                          andTop:self.frame.size.height/2
-                                         andNear:0
-                                          andFar:10];
-        VKShip *ship = [[VKShip alloc] initWithViewSize:self.frame.size Projection:_projection];
+                                         andRight:self.frame.size.width/2
+                                        andBottom:-self.frame.size.height/2
+                                           andTop:self.frame.size.height/2
+                                          andNear:0
+                                           andFar:10];
+        VKShip *ship = [[VKShip alloc] init];
         ship.position = CGPointMake(100, 100);
         ship.rotation = 90;
         ship.color = [UIColor yellowColor];
-        [self.gameObjects addObject:ship];
         
-        VKAsteroid *asteroid = [[VKAsteroid alloc] initWithViewSize:self.frame.size Projection:_projection];
+        [self addGLObject:ship];
+        
+        VKAsteroid *asteroid = [[VKAsteroid alloc] init];
         asteroid.position = CGPointMake(200, 200);
-        [self.gameObjects addObject:asteroid];
+        [self addGLObject:asteroid];
     }
     return self;
 }

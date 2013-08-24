@@ -12,10 +12,26 @@
 @property (nonatomic) CGColorRef internalColor;
 @end
 
-@implementation VKGameObject
+@implementation VKGameObject{
+    GLuint _positionSlot;
+    GLuint _colorUniform;
+    GLuint _projectionUniform;
+    GLuint _modelViewUniform;
+    int _indicesCount;
+    
+    GLuint _vertexBuffer;
+    GLuint _indexBuffer;
+    
+    CGFloat _red;
+    CGFloat _green;
+    CGFloat _blue;
+    CGFloat _alpha;
+}
+
 @synthesize position = _position;
 @synthesize rotation = _rotation;
 @synthesize color = _color;
+@synthesize glView = _glView;
 
 - (UIColor *) color{
     if (!_color) {
@@ -28,15 +44,6 @@
 - (void) setColor:(UIColor *)color{
     _color = color;
     [_color getRed:&_red green:&_green blue:&_blue alpha:&_alpha];
-}
-
-- (id) initWithViewSize:(CGSize) size Projection:(CC3GLMatrix *) projection{
-    self = [self init];
-    if (self) {
-        _viewSize = size;
-        _projection = projection;
-    }
-    return self;
 }
 
 - (id) init{
@@ -140,11 +147,15 @@
     _indicesCount = indicesCount;
 }
 
-- (void)render {    
-    glUniformMatrix4fv(_projectionUniform, 1, GL_FALSE, _projection.glMatrix);
+- (void) render {
+    if (!self.glView) {
+        return;
+    }
+    glUniformMatrix4fv(_projectionUniform, 1, GL_FALSE, self.glView.projection.glMatrix);
     
     CC3GLMatrix *modelView = [CC3GLMatrix matrix];
-    [modelView populateFromTranslation:CC3VectorMake(-_viewSize.width/2, _viewSize.height/2, 0)];
+    CGSize size = self.glView.glViewSize;
+    [modelView populateFromTranslation:CC3VectorMake(-size.width/2, size.height/2, 0)];
     [modelView translateByX:_position.x];
     [modelView translateByY:-_position.y];
     [modelView rotateByZ:_rotation];
@@ -159,5 +170,7 @@
     glDrawElements(_style, _indicesCount, GL_UNSIGNED_BYTE, 0);
 }
 
-
+- (void) removeFromGLView{
+    [self.glView removeGLObject:self];
+}
 @end

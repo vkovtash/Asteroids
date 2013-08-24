@@ -7,40 +7,24 @@
 //
 
 #import <Foundation/Foundation.h>
-#include <OpenGLES/ES2/gl.h>
-#include <OpenGLES/ES2/glext.h>
+#import <OpenGLES/ES2/gl.h>
+#import <OpenGLES/ES2/glext.h>
 #import "CC3GLMatrix.h"
+#import "VKGLObject.h"
 
 typedef struct {
     float Position[3];
 } Vertex;
 
-@interface VKGameObject : NSObject{
-    GLushort _style;
-    @private
-    GLuint _positionSlot;
-    GLuint _colorUniform;
-    GLuint _projectionUniform;
-    GLuint _modelViewUniform;
-    int _indicesCount;
-    
-    GLuint _vertexBuffer;
-    GLuint _indexBuffer;
-    
-    CGSize _viewSize;
-    CGFloat _red;
-    CGFloat _green;
-    CGFloat _blue;
-    CGFloat _alpha;
-}
+@interface VKGameObject : NSObject <VKGLObject>
 
-@property (strong,nonatomic) CC3GLMatrix *projection;
+@property (strong, nonatomic) CC3GLMatrix *projection;
 @property (nonatomic) CGPoint position;
 @property (nonatomic) CGFloat rotation;
-@property (nonatomic,strong) UIColor *color;
+@property (nonatomic) GLushort style;
+@property (strong, nonatomic) UIColor *color;
 
-- (id) initWithViewSize:(CGSize) size Projection:(CC3GLMatrix *) projection;
-- (void) render;
+- (void) removeFromGLView;
 - (void) compileShaders;
 - (void) setVertexBuffer:(int) verticesCount Vertices:(Vertex *) vertices;
 - (void) setIndexBuffer:(int) indicesCount Indices:(GLubyte *) indices;
