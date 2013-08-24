@@ -13,7 +13,7 @@
     OpenGLView* _glView;
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet OpenGLView *glView;
+@property (nonatomic, strong) IBOutlet UIWindow *window;
+@property (nonatomic, strong) IBOutlet OpenGLView *glView;
 
 @end

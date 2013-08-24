@@ -93,9 +93,7 @@
 
 - (void)dealloc
 {
-    [_context release];
     _context = nil;
-    [super dealloc];
 }
 
 @end

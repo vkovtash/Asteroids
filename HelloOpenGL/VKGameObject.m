@@ -206,8 +206,5 @@
     glDrawElements(GL_LINE_STRIP, _indicesCount, GL_UNSIGNED_BYTE, 0);
 }
 
-- (void) dealloc{
-    [super dealloc];
-}
 
 @end
