@@ -25,6 +25,7 @@
 		F340C56D17C92A8400C2948D /* CC3Kazmath.c in Sources */ = {isa = PBXBuildFile; fileRef = F340C56517C92A8400C2948D /* CC3Kazmath.c */; };
 		F340C56E17C92A8400C2948D /* CC3Math.m in Sources */ = {isa = PBXBuildFile; fileRef = F340C56917C92A8400C2948D /* CC3Math.m */; };
 		F340C57117C9510700C2948D /* VKShip.m in Sources */ = {isa = PBXBuildFile; fileRef = F340C57017C9510700C2948D /* VKShip.m */; };
+		F340C57717C9571300C2948D /* VKAsteroid.m in Sources */ = {isa = PBXBuildFile; fileRef = F340C57617C9571300C2948D /* VKAsteroid.m */; };
 		F3CD697617C8FFBF00D3972A /* VKGameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F3CD697517C8FFBF00D3972A /* VKGameObject.m */; };
 /* End PBXBuildFile section */
 
@@ -57,8 +58,10 @@
 		F340C56817C92A8400C2948D /* CC3Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CC3Math.h; path = "../../HelloOpenGL-1/HelloOpenGL/CC3Math.h"; sourceTree = "<group>"; };
 		F340C56917C92A8400C2948D /* CC3Math.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CC3Math.m; path = "../../HelloOpenGL-1/HelloOpenGL/CC3Math.m"; sourceTree = "<group>"; };
 		F340C56A17C92A8400C2948D /* ccTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ccTypes.h; path = "../../HelloOpenGL-1/HelloOpenGL/ccTypes.h"; sourceTree = "<group>"; };
-		F340C56F17C9510700C2948D /* VKShip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKShip.h; sourceTree = "<group>"; };
-		F340C57017C9510700C2948D /* VKShip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKShip.m; sourceTree = "<group>"; };
+		F340C56F17C9510700C2948D /* VKShip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VKShip.h; path = ../VKShip.h; sourceTree = "<group>"; };
+		F340C57017C9510700C2948D /* VKShip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VKShip.m; path = ../VKShip.m; sourceTree = "<group>"; };
+		F340C57517C9571300C2948D /* VKAsteroid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKAsteroid.h; sourceTree = "<group>"; };
+		F340C57617C9571300C2948D /* VKAsteroid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKAsteroid.m; sourceTree = "<group>"; };
 		F3CD697417C8FFBF00D3972A /* VKGameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKGameObject.h; sourceTree = "<group>"; };
 		F3CD697517C8FFBF00D3972A /* VKGameObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKGameObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,8 +85,6 @@
 		35DF6431138C40D500FF9459 = {
 			isa = PBXGroup;
 			children = (
-				F340C56F17C9510700C2948D /* VKShip.h */,
-				F340C57017C9510700C2948D /* VKShip.m */,
 				35DF6446138C40D500FF9459 /* HelloOpenGL */,
 				35DF643F138C40D500FF9459 /* Frameworks */,
 				35DF643D138C40D500FF9459 /* Products */,
@@ -113,6 +114,10 @@
 		35DF6446138C40D500FF9459 /* HelloOpenGL */ = {
 			isa = PBXGroup;
 			children = (
+				F340C57517C9571300C2948D /* VKAsteroid.h */,
+				F340C57617C9571300C2948D /* VKAsteroid.m */,
+				F340C56F17C9510700C2948D /* VKShip.h */,
+				F340C57017C9510700C2948D /* VKShip.m */,
 				F340C56117C92A8400C2948D /* CC3Foundation.h */,
 				F340C56217C92A8400C2948D /* CC3Foundation.m */,
 				F340C56317C92A8400C2948D /* CC3GLMatrix.h */,
@@ -220,6 +225,7 @@
 				F340C56D17C92A8400C2948D /* CC3Kazmath.c in Sources */,
 				F340C56E17C92A8400C2948D /* CC3Math.m in Sources */,
 				F340C57117C9510700C2948D /* VKShip.m in Sources */,
+				F340C57717C9571300C2948D /* VKAsteroid.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

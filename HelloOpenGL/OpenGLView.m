@@ -7,14 +7,24 @@
 //
 
 #import "OpenGLView.h"
+#import "VKShip.h"
+#import "VKAsteroid.h"
 
 @interface OpenGLView()
-@property (strong ,nonatomic) CC3GLMatrix *projection;
+@property (strong, nonatomic) CC3GLMatrix *projection;
+@property (strong, nonatomic) NSMutableArray *gameObjects;
 @end
 
 @implementation OpenGLView
 
 #define TEX_COORD_MAX   4
+
+- (NSMutableArray *) gameObjects{
+    if (!_gameObjects) {
+        _gameObjects = [NSMutableArray array];
+    }
+    return _gameObjects;
+}
 
 + (Class)layerClass {
     return [CAEAGLLayer class];
@@ -68,7 +78,7 @@
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glViewport(0, 0, self.frame.size.width, self.frame.size.height);
     
-    [_gameObject render];
+    [self.gameObjects makeObjectsPerformSelector:@selector(render)];
     
     [_context presentRenderbuffer:GL_RENDERBUFFER];
 }
@@ -97,11 +107,15 @@
                                           andTop:self.frame.size.height/2
                                          andNear:0
                                           andFar:10];
-        _gameObject = [[VKShip alloc] initWithViewSize:self.frame.size Projection:_projection];
+        VKShip *ship = [[VKShip alloc] initWithViewSize:self.frame.size Projection:_projection];
+        ship.position = CGPointMake(100, 100);
+        ship.rotation = 90;
+        ship.color = [UIColor yellowColor];
+        [self.gameObjects addObject:ship];
         
-        _gameObject.position = CGPointMake(100, 100);
-        _gameObject.rotation = 90;
-        _gameObject.color = [UIColor yellowColor];
+        VKAsteroid *asteroid = [[VKAsteroid alloc] initWithViewSize:self.frame.size Projection:_projection];
+        asteroid.position = CGPointMake(200, 200);
+        [self.gameObjects addObject:asteroid];
     }
     return self;
 }
