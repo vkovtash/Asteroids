@@ -13,8 +13,8 @@
 #import "SIAlertView.h"
 
 #define OFFSCREEN_WORLD_SIZE 100 //points
-#define WORLD_SIZE_X 1000 //points
-#define WORLD_SIZE_Y 1000 //points
+#define WORLD_SIZE_X 800 //points
+#define WORLD_SIZE_Y 800 //points
 #define GAME_LOOP_RATE 100 //loops per second
 #define MAX_ASTEROID_SIZE 4 //in parts
 #define ASTEROID_PART_SIZE 5 //points
@@ -37,6 +37,7 @@
 @property (strong ,nonatomic) JSAnalogueStick *joyStik;
 @property (nonatomic) int points;
 @property (strong, nonatomic) UILabel *pointsLabel;
+@property (strong ,nonatomic) UILabel *asteroidsCountLabel;
 @end
 
 @implementation VKViewController
@@ -61,7 +62,8 @@
 
 - (void) setPoints:(int)points{
     _points = points;
-    self.pointsLabel.text = [NSString stringWithFormat:@"Score: %d Asteroids: %d",points, self.asteroids.count];
+    self.pointsLabel.text = [NSString stringWithFormat:@"SCORE: %d",points];
+    self.asteroidsCountLabel.text = [NSString stringWithFormat:@"ASTEROIDS: %d",self.asteroids.count];
 }
 
 #pragma mark - ViewController life cycle
@@ -91,8 +93,16 @@
                                                                  self.view.bounds.size.width-40,
                                                                  20)];
     self.pointsLabel.backgroundColor = [UIColor clearColor];
-    self.pointsLabel.textColor = [UIColor greenColor];
-    self.pointsLabel.font = [UIFont fontWithName:@"Helvetica-Light" size:20];
+    self.pointsLabel.textColor = [UIColor yellowColor];
+    self.pointsLabel.font = [UIFont fontWithName:@"Gill-Sans" size:18];
+    
+    self.asteroidsCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2+20,
+                                                                         20,
+                                                                         self.view.bounds.size.width/2-20,
+                                                                         20)];
+    self.asteroidsCountLabel.backgroundColor = [UIColor clearColor];
+    self.asteroidsCountLabel.textColor = [UIColor yellowColor];
+    self.asteroidsCountLabel.font = [UIFont fontWithName:@"Gill-Sans" size:18];
     
     self.glView = [[VKGLView alloc] initWithFrame:self.view.bounds];
     
@@ -100,6 +110,7 @@
     [self.view addSubview:self.fireButton];
     [self.view addSubview:self.joyStik];
     [self.view addSubview:self.pointsLabel];
+    [self.view addSubview:self.asteroidsCountLabel];
     
     self.ship = [[VKShip alloc] init];
     self.ship.position = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2);
