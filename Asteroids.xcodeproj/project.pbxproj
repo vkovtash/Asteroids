@@ -64,6 +64,7 @@
 		F38B0B9F17CA525E001951BA /* JSDPad.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B7417CA525E001951BA /* JSDPad.m */; };
 		F38B0BA417CA5442001951BA /* SIAlertView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F38B0BA117CA5442001951BA /* SIAlertView.bundle */; };
 		F38B0BA517CA5442001951BA /* SIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0BA317CA5442001951BA /* SIAlertView.m */; };
+		F38B0BA817CA9B03001951BA /* VKStar.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0BA717CA9B03001951BA /* VKStar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -146,6 +147,8 @@
 		F38B0BA117CA5442001951BA /* SIAlertView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SIAlertView.bundle; sourceTree = "<group>"; };
 		F38B0BA217CA5442001951BA /* SIAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIAlertView.h; sourceTree = "<group>"; };
 		F38B0BA317CA5442001951BA /* SIAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIAlertView.m; sourceTree = "<group>"; };
+		F38B0BA617CA9B03001951BA /* VKStar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKStar.h; sourceTree = "<group>"; };
+		F38B0BA717CA9B03001951BA /* VKStar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKStar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,6 +259,8 @@
 				F38B0B4C17CA525E001951BA /* VKMissle.m */,
 				F38B0B4D17CA525E001951BA /* VKShip.h */,
 				F38B0B4E17CA525E001951BA /* VKShip.m */,
+				F38B0BA617CA9B03001951BA /* VKStar.h */,
+				F38B0BA717CA9B03001951BA /* VKStar.m */,
 			);
 			path = GameObjects;
 			sourceTree = "<group>";
@@ -423,6 +428,7 @@
 				F38B0B9E17CA525E001951BA /* JSControlLayout.m in Sources */,
 				F38B0B9F17CA525E001951BA /* JSDPad.m in Sources */,
 				F38B0BA517CA5442001951BA /* SIAlertView.m in Sources */,
+				F38B0BA817CA9B03001951BA /* VKStar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

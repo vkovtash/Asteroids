@@ -11,15 +11,18 @@
 #import "VKAsteroid.h"
 #import "VKMissle.h"
 #import "SIAlertView.h"
+#import "VKStar.h"
 
 #define OFFSCREEN_WORLD_SIZE 100 //points
 #define WORLD_SIZE_X 800 //points
 #define WORLD_SIZE_Y 800 //points
 #define GAME_LOOP_RATE 100 //loops per second
+#define STAR_RADIUS 3 //points
+#define STARS_COUNT 30
 #define MAX_ASTEROID_SIZE 4 //in parts
 #define ASTEROID_PART_SIZE 5 //points
 #define SCORE_MULTIPLIER 5
-#define INITIAL_ASTEROIDS_COUNT 20
+#define INITIAL_ASTEROIDS_COUNT 10
 #define SHIP_MAX_SPEED 200 //points per sec
 #define MAX_MISSLE_DISTANCE 300 //points
 #define MISSLE_SPEED 1800 //points per sec
@@ -36,13 +39,14 @@ float distance(float x1, float y1, float x2, float y2){
 }
 
 @interface VKViewController ()
-@property (strong ,nonatomic) VKGLView *glView;
+@property (strong, nonatomic) VKGLView *glView;
 @property (strong, nonatomic) NSThread *gameLoop;
-@property (strong ,nonatomic) UIButton *fireButton;
-@property (strong ,nonatomic) JSAnalogueStick *joyStik;
+@property (strong, nonatomic) UIButton *fireButton;
+@property (strong, nonatomic) UIButton *accelerationButton;
+@property (strong, nonatomic) JSAnalogueStick *joyStik;
 @property (nonatomic) int points;
 @property (strong, nonatomic) UILabel *pointsLabel;
-@property (strong ,nonatomic) UILabel *asteroidsCountLabel;
+@property (strong, nonatomic) UILabel *asteroidsCountLabel;
 @end
 
 @implementation VKViewController
@@ -82,7 +86,6 @@ float distance(float x1, float y1, float x2, float y2){
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"%@",self.view);
     self.fireButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.fireButton.frame = CGRectMake(self.view.bounds.size.width-90,
                                        self.view.bounds.size.height-90,
@@ -118,7 +121,10 @@ float distance(float x1, float y1, float x2, float y2){
     self.asteroidsCountLabel.font = [UIFont fontWithName:@"Gill-Sans" size:18];
     self.asteroidsCountLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleLeftMargin;
     
-    self.glView = [[VKGLView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.height, self.view.bounds.size.width)];
+    self.glView = [[VKGLView alloc] initWithFrame:CGRectMake(0,
+                                                             0,
+                                                             self.view.bounds.size.height,
+                                                             self.view.bounds.size.width)];
     
     [self.view addSubview:self.glView];
     [self.view addSubview:self.fireButton];
@@ -155,9 +161,8 @@ float distance(float x1, float y1, float x2, float y2){
 
 - (void) prepareWorld{
     int asteroids_count = INITIAL_ASTEROIDS_COUNT;
-    float x;
-    float y;
-    for (int i = 0; i<asteroids_count; i++) {
+    float x, y;
+    for (int i = 0; i < asteroids_count; i++) {
         x = arc4random_uniform((int)WORLD_SIZE_X);
         y = arc4random_uniform((int)WORLD_SIZE_Y);
         
@@ -168,6 +173,18 @@ float distance(float x1, float y1, float x2, float y2){
         }
         [self makeAsteroidWithSize:arc4random_uniform(MAX_ASTEROID_SIZE-2) + 3
                           Position:CGPointMake(x,y)];
+    }
+    
+    if (!self.stars){
+        self.stars = [NSMutableArray array];
+        for (int i; i < STARS_COUNT; i++) {
+            VKStar *star = [[VKStar alloc] initWithRadius:STAR_RADIUS];
+            x = arc4random_uniform((int)WORLD_SIZE_X);
+            y = arc4random_uniform((int)WORLD_SIZE_Y);
+            star.position = CGPointMake(x, y);
+            [self.stars addObject:star];
+            [self.glView addGLObject:star];
+        }
     }
 }
 
@@ -296,20 +313,27 @@ float distance(float x1, float y1, float x2, float y2){
         }
     }
     
+    //moving starts
+    for (VKStar *star in self.stars) {
+        x = star.position.x + offset_x;
+        y = star.position.y + offset_y;
+        star.position = [self worldCoordinatesForX:x Y:y];
+    }
+    
     [self checkHit:missles Asteroids:asteroids];
     [self checkCollision:asteroids];
 }
 
 - (CGPoint) worldCoordinatesForX:(float) x Y:(float) y{
     if (x > WORLD_SIZE_X - OFFSCREEN_WORLD_SIZE ) {
-        x = x - WORLD_SIZE_X - OFFSCREEN_WORLD_SIZE;
+        x = -OFFSCREEN_WORLD_SIZE;
     }
     else if (x < -OFFSCREEN_WORLD_SIZE){
         x = WORLD_SIZE_X - OFFSCREEN_WORLD_SIZE;
     }
     
     if (y > WORLD_SIZE_Y - OFFSCREEN_WORLD_SIZE) {
-        y = y - WORLD_SIZE_Y - OFFSCREEN_WORLD_SIZE;
+        y = -OFFSCREEN_WORLD_SIZE;
     }
     else if (y < -OFFSCREEN_WORLD_SIZE){
         y = WORLD_SIZE_Y - OFFSCREEN_WORLD_SIZE;

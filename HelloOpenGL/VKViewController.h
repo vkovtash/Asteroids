@@ -15,6 +15,7 @@ float distance(float x1, float y1, float x2, float y2);
 @interface VKViewController : UIViewController <JSAnalogueStickDelegate>
 @property (strong, nonatomic) NSMutableArray *asteroids;
 @property (strong, nonatomic) NSMutableArray *missles;
-@property (strong ,nonatomic) VKShip *ship;
+@property (strong, nonatomic) NSMutableArray *stars;
+@property (strong, nonatomic) VKShip *ship;
 - (void) processGameStep:(NSTimeInterval) time;
 @end
