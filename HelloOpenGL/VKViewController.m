@@ -28,7 +28,12 @@
 #define MIN_ASTEROID_ROTATION_SPEED 50 //degrees per sec
 #define MAX_ASTEROID_ROTATION_SPEED 180 //degrees per sec
 #define COLLISION_RADIUS_MULTIPLIER 0.8f
+#define FREE_SPACE_RADIUS 80 //points - radius around the ship that will be free of asteroids on the start
 
+
+float distance(float x1, float y1, float x2, float y2){
+    return sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
+}
 
 @interface VKViewController ()
 @property (strong ,nonatomic) VKGLView *glView;
@@ -144,12 +149,19 @@
 
 - (void) prepareWorld{
     int asteroids_count = INITIAL_ASTEROIDS_COUNT;
+    float x;
+    float y;
     for (int i = 0; i<asteroids_count; i++) {
-        float x = arc4random_uniform((int)WORLD_SIZE_X);
-        float y = arc4random_uniform((int)WORLD_SIZE_Y);
+        x = arc4random_uniform((int)WORLD_SIZE_X);
+        y = arc4random_uniform((int)WORLD_SIZE_Y);
+        
+        //ensure that any of asteroids will be placed over the ship on game start
+        while (distance(x,y,self.ship.position.x, self.ship.position.y) < FREE_SPACE_RADIUS) {
+            x = arc4random_uniform((int)WORLD_SIZE_X);
+            y = arc4random_uniform((int)WORLD_SIZE_Y);
+        }
         [self makeAsteroidWithSize:arc4random_uniform(MAX_ASTEROID_SIZE-2) + 3
-                          Position:CGPointMake(x,
-                                               y)];
+                          Position:CGPointMake(x,y)];
     }
 }
 
@@ -169,6 +181,8 @@
     [self clearWorld];
     [self prepareWorld];
     self.points = 0;
+    self.ship.velocity = 0;
+    self.ship.rotation = 0;
     self.gameLoop = [[NSThread alloc] initWithTarget:self
                                             selector:@selector(loop:)
                                               object:self];
@@ -304,11 +318,11 @@
     if (self.gameLoop.isCancelled) {
         return;
     }
-    double distance;
+    double distance_value;
     for (VKAsteroid *asteroid in asteroids){
-        distance = sqrt(pow(asteroid.position.x-self.ship.position.x, 2)
-                        + pow(asteroid.position.y - self.ship.position.y, 2));
-        if (distance < (asteroid.radius + self.ship.radius) * COLLISION_RADIUS_MULTIPLIER) {
+        distance_value = distance(asteroid.position.x, asteroid.position.y,
+                                  self.ship.position.x, self.ship.position.y);
+        if (distance_value < (asteroid.radius + self.ship.radius) * COLLISION_RADIUS_MULTIPLIER) {
             [self gameOver];
         }
     }
@@ -318,12 +332,12 @@
     if (self.gameLoop.isCancelled) {
         return;
     }
-    double distance;
+    double distance_value;
     for (VKMissle *missle in missles) {
         for (VKAsteroid *asteroid in asteroids){
-            distance = sqrt(pow(asteroid.position.x-missle.position.x, 2)
-                            + pow(asteroid.position.y - missle.position.y, 2));
-            if (distance < asteroid.radius + missle.radius) {
+            distance_value = distance(asteroid.position.x, asteroid.position.y,
+                                      missle.position.x, missle.position.y);
+            if (distance_value < asteroid.radius + missle.radius) {
                 dispatch_sync(dispatch_get_main_queue(), ^{
                     [self.glView removeGLObject:asteroid];
                     [self.glView removeGLObject:missle];
