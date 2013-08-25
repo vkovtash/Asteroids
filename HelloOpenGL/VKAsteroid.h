@@ -9,5 +9,6 @@
 #import "VKGameObject.h"
 
 @interface VKAsteroid : VKGameObject
-
+@property (nonatomic) float velocity;
+@property (nonatomic) float direction;
 @end

@@ -13,6 +13,7 @@
 
 @interface VKViewController ()
 @property (strong ,nonatomic) VKGLView *glView;
+@property (strong, nonatomic) NSThread *gameLoop;
 @end
 
 @implementation VKViewController
@@ -23,6 +24,7 @@
     self.glView = [[VKGLView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.glView];
     [self prepareWorld];
+    [self start];
 }
 
 - (void) prepareWorld{
@@ -35,6 +37,28 @@
     VKAsteroid *asteroid = [[VKAsteroid alloc] init];
     asteroid.position = CGPointMake(200, 200);
     [self.glView addGLObject:asteroid];
+}
+
+- (void) start{
+    self.gameLoop = [[NSThread alloc] initWithTarget:self
+                                            selector:@selector(loop:)
+                                              object:self];
+    [self.gameLoop start];
+}
+
+- (void) stop{
+    [self.gameLoop cancel];
+}
+
+- (void) loop:(VKViewController *) gameController{
+    NSThread *thread = [NSThread currentThread];
+    while (thread.isExecuting) {
+        [gameController processGameStep];
+    }
+}
+
+- (void) processGameStep{
+    NSLog(@"test");
 }
 
 - (void)didReceiveMemoryWarning

@@ -9,5 +9,5 @@
 #import "VKGameObject.h"
 
 @interface VKShip : VKGameObject
-
+@property (nonatomic) float velocity;
 @end

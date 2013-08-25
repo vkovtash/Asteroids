@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface VKViewController : UIViewController
-
+- (void) processGameStep;
 @end
