@@ -9,6 +9,13 @@
 #import "VKAsteroid.h"
 #define ASTEROID_SIZE 20
 
+@interface VKAsteroid(){
+    Vertex *vertices;
+    GLubyte *indices;
+}
+
+@end
+
 @implementation VKAsteroid
 - (id) init{
     self = [self initWithRadius:ASTEROID_SIZE];
@@ -19,22 +26,29 @@
     self = [super init];
     if (self) {
         _radius = radius;
-        Vertex vertices[] = {
-            {{0, radius, 0}},
-            {{-radius/2, radius/2, 0}},
-            {{-radius, 0, 0}},
-            {{-radius/2, -radius/2, 0}},
-            {{0, -radius, 0}},
-            {{radius/2, -radius/2, 0}},
-            {{radius, 0, 0}},
-            {{radius/2, radius/2, 0}}
-        };
+        int sides = 6 + arc4random_uniform(6);
+        float step = 2 * M_PI / sides;
         
-        GLubyte indices[] = {1, 2, 3, 4, 5, 6, 7, 0, 1};
+        vertices = malloc(sizeof(Vertex)*sides);
+        indices = malloc(sizeof(GLubyte)*sides + 1);
+            
+        for(int i = 0; i < sides; i++)
+        {
+            vertices[i] = (Vertex){
+                cos(i * step) * radius * ((float)arc4random_uniform(10)/20 + 0.5),
+                sin(i * step) * radius * ((float)arc4random_uniform(10)/20 + 0.5), 0};
+            indices[i] = i;
+        }
+        indices[sides] = 0;
         
-        [self setVertexBuffer:8 Vertices:vertices];
-        [self setIndexBuffer:9 Indices:indices];
+        [self setVertexBuffer:sides Vertices:vertices];
+        [self setIndexBuffer:sides + 1 Indices:indices];
     }
     return self;
+}
+
+- (void) dealloc{
+    free(vertices);
+    free(indices);
 }
 @end
