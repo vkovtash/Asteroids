@@ -17,7 +17,7 @@
 #define WORLD_SIZE_X 800 //points
 #define WORLD_SIZE_Y 800 //points
 #define GAME_LOOP_RATE 100 //loops per second
-#define STAR_RADIUS 3 //points
+#define STAR_RADIUS 2 //points
 #define STARS_COUNT 30
 #define MAX_ASTEROID_SIZE 4 //in parts
 #define ASTEROID_PART_SIZE 5 //points

@@ -20,9 +20,9 @@
     if (self) {
         _radius = radius;
         Vertex vertices[4] = {
-            {{-radius, -radius, 0}},
+            {{-radius/2, -radius, 0}},
             {{0, radius, 0}},
-            {{radius, -radius, 0}},
+            {{radius/2, -radius, 0}},
             {{0, -radius/2, 0}}
         };
         
