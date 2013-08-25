@@ -27,6 +27,40 @@
 		F340C57717C9571300C2948D /* VKAsteroid.m in Sources */ = {isa = PBXBuildFile; fileRef = F340C57617C9571300C2948D /* VKAsteroid.m */; };
 		F374124E17C95E1000AF822B /* VKGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = F374124D17C95E1000AF822B /* VKGLView.m */; };
 		F38B0ADA17C9EBAD001951BA /* VKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0AD917C9EBAD001951BA /* VKViewController.m */; };
+		F38B0ADD17CA112F001951BA /* VKMissle.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0ADC17CA112F001951BA /* VKMissle.m */; };
+		F38B0B1017CA22BF001951BA /* analogue_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0ADF17CA22BF001951BA /* analogue_bg.png */; };
+		F38B0B1117CA22BF001951BA /* analogue_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AE017CA22BF001951BA /* analogue_bg@2x.png */; };
+		F38B0B1217CA22BF001951BA /* analogue_handle.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AE117CA22BF001951BA /* analogue_handle.png */; };
+		F38B0B1317CA22BF001951BA /* analogue_handle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AE217CA22BF001951BA /* analogue_handle@2x.png */; };
+		F38B0B1417CA22BF001951BA /* button-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AE317CA22BF001951BA /* button-pressed.png */; };
+		F38B0B1517CA22BF001951BA /* button-pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AE417CA22BF001951BA /* button-pressed@2x.png */; };
+		F38B0B1617CA22BF001951BA /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AE517CA22BF001951BA /* button.png */; };
+		F38B0B1717CA22BF001951BA /* button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AE617CA22BF001951BA /* button@2x.png */; };
+		F38B0B1817CA22BF001951BA /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AE717CA22BF001951BA /* Default-568h@2x.png */; };
+		F38B0B1917CA22BF001951BA /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AE817CA22BF001951BA /* Default.png */; };
+		F38B0B1A17CA22BF001951BA /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AE917CA22BF001951BA /* Default@2x.png */; };
+		F38B0B1B17CA22BF001951BA /* dPad-Down.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AEA17CA22BF001951BA /* dPad-Down.png */; };
+		F38B0B1C17CA22BF001951BA /* dPad-Down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AEB17CA22BF001951BA /* dPad-Down@2x.png */; };
+		F38B0B1D17CA22BF001951BA /* dPad-DownLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AEC17CA22BF001951BA /* dPad-DownLeft.png */; };
+		F38B0B1E17CA22BF001951BA /* dPad-DownLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AED17CA22BF001951BA /* dPad-DownLeft@2x.png */; };
+		F38B0B1F17CA22BF001951BA /* dPad-DownRight.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AEE17CA22BF001951BA /* dPad-DownRight.png */; };
+		F38B0B2017CA22BF001951BA /* dPad-DownRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AEF17CA22BF001951BA /* dPad-DownRight@2x.png */; };
+		F38B0B2117CA22BF001951BA /* dPad-Left.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AF017CA22BF001951BA /* dPad-Left.png */; };
+		F38B0B2217CA22BF001951BA /* dPad-Left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AF117CA22BF001951BA /* dPad-Left@2x.png */; };
+		F38B0B2317CA22BF001951BA /* dPad-None.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AF217CA22BF001951BA /* dPad-None.png */; };
+		F38B0B2417CA22BF001951BA /* dPad-None@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AF317CA22BF001951BA /* dPad-None@2x.png */; };
+		F38B0B2517CA22BF001951BA /* dPad-Right.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AF417CA22BF001951BA /* dPad-Right.png */; };
+		F38B0B2617CA22BF001951BA /* dPad-Right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AF517CA22BF001951BA /* dPad-Right@2x.png */; };
+		F38B0B2717CA22BF001951BA /* dPad-Up.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AF617CA22BF001951BA /* dPad-Up.png */; };
+		F38B0B2817CA22BF001951BA /* dPad-Up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AF717CA22BF001951BA /* dPad-Up@2x.png */; };
+		F38B0B2917CA22BF001951BA /* dPad-UpLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AF817CA22BF001951BA /* dPad-UpLeft.png */; };
+		F38B0B2A17CA22BF001951BA /* dPad-UpLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AF917CA22BF001951BA /* dPad-UpLeft@2x.png */; };
+		F38B0B2B17CA22BF001951BA /* dPad-UpRight.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AFA17CA22BF001951BA /* dPad-UpRight.png */; };
+		F38B0B2C17CA22BF001951BA /* dPad-UpRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0AFB17CA22BF001951BA /* dPad-UpRight@2x.png */; };
+		F38B0B3017CA22BF001951BA /* JSAnalogueStick.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B0217CA22BF001951BA /* JSAnalogueStick.m */; };
+		F38B0B3217CA22BF001951BA /* JSButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B0617CA22BF001951BA /* JSButton.m */; };
+		F38B0B3317CA22BF001951BA /* JSControlLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B0817CA22BF001951BA /* JSControlLayout.m */; };
+		F38B0B3517CA22BF001951BA /* JSDPad.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B0C17CA22BF001951BA /* JSDPad.m */; };
 		F3CD697617C8FFBF00D3972A /* VKGameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F3CD697517C8FFBF00D3972A /* VKGameObject.m */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +100,45 @@
 		F374124D17C95E1000AF822B /* VKGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKGLView.m; sourceTree = "<group>"; };
 		F38B0AD817C9EBAD001951BA /* VKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKViewController.h; sourceTree = "<group>"; };
 		F38B0AD917C9EBAD001951BA /* VKViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKViewController.m; sourceTree = "<group>"; };
+		F38B0ADB17CA112F001951BA /* VKMissle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKMissle.h; sourceTree = "<group>"; };
+		F38B0ADC17CA112F001951BA /* VKMissle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKMissle.m; sourceTree = "<group>"; };
+		F38B0ADF17CA22BF001951BA /* analogue_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = analogue_bg.png; sourceTree = "<group>"; };
+		F38B0AE017CA22BF001951BA /* analogue_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "analogue_bg@2x.png"; sourceTree = "<group>"; };
+		F38B0AE117CA22BF001951BA /* analogue_handle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = analogue_handle.png; sourceTree = "<group>"; };
+		F38B0AE217CA22BF001951BA /* analogue_handle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "analogue_handle@2x.png"; sourceTree = "<group>"; };
+		F38B0AE317CA22BF001951BA /* button-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-pressed.png"; sourceTree = "<group>"; };
+		F38B0AE417CA22BF001951BA /* button-pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-pressed@2x.png"; sourceTree = "<group>"; };
+		F38B0AE517CA22BF001951BA /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
+		F38B0AE617CA22BF001951BA /* button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button@2x.png"; sourceTree = "<group>"; };
+		F38B0AE717CA22BF001951BA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		F38B0AE817CA22BF001951BA /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		F38B0AE917CA22BF001951BA /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		F38B0AEA17CA22BF001951BA /* dPad-Down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-Down.png"; sourceTree = "<group>"; };
+		F38B0AEB17CA22BF001951BA /* dPad-Down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-Down@2x.png"; sourceTree = "<group>"; };
+		F38B0AEC17CA22BF001951BA /* dPad-DownLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-DownLeft.png"; sourceTree = "<group>"; };
+		F38B0AED17CA22BF001951BA /* dPad-DownLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-DownLeft@2x.png"; sourceTree = "<group>"; };
+		F38B0AEE17CA22BF001951BA /* dPad-DownRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-DownRight.png"; sourceTree = "<group>"; };
+		F38B0AEF17CA22BF001951BA /* dPad-DownRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-DownRight@2x.png"; sourceTree = "<group>"; };
+		F38B0AF017CA22BF001951BA /* dPad-Left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-Left.png"; sourceTree = "<group>"; };
+		F38B0AF117CA22BF001951BA /* dPad-Left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-Left@2x.png"; sourceTree = "<group>"; };
+		F38B0AF217CA22BF001951BA /* dPad-None.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-None.png"; sourceTree = "<group>"; };
+		F38B0AF317CA22BF001951BA /* dPad-None@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-None@2x.png"; sourceTree = "<group>"; };
+		F38B0AF417CA22BF001951BA /* dPad-Right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-Right.png"; sourceTree = "<group>"; };
+		F38B0AF517CA22BF001951BA /* dPad-Right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-Right@2x.png"; sourceTree = "<group>"; };
+		F38B0AF617CA22BF001951BA /* dPad-Up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-Up.png"; sourceTree = "<group>"; };
+		F38B0AF717CA22BF001951BA /* dPad-Up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-Up@2x.png"; sourceTree = "<group>"; };
+		F38B0AF817CA22BF001951BA /* dPad-UpLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-UpLeft.png"; sourceTree = "<group>"; };
+		F38B0AF917CA22BF001951BA /* dPad-UpLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-UpLeft@2x.png"; sourceTree = "<group>"; };
+		F38B0AFA17CA22BF001951BA /* dPad-UpRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-UpRight.png"; sourceTree = "<group>"; };
+		F38B0AFB17CA22BF001951BA /* dPad-UpRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-UpRight@2x.png"; sourceTree = "<group>"; };
+		F38B0B0117CA22BF001951BA /* JSAnalogueStick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSAnalogueStick.h; sourceTree = "<group>"; };
+		F38B0B0217CA22BF001951BA /* JSAnalogueStick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSAnalogueStick.m; sourceTree = "<group>"; };
+		F38B0B0517CA22BF001951BA /* JSButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSButton.h; sourceTree = "<group>"; };
+		F38B0B0617CA22BF001951BA /* JSButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSButton.m; sourceTree = "<group>"; };
+		F38B0B0717CA22BF001951BA /* JSControlLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSControlLayout.h; sourceTree = "<group>"; };
+		F38B0B0817CA22BF001951BA /* JSControlLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSControlLayout.m; sourceTree = "<group>"; };
+		F38B0B0B17CA22BF001951BA /* JSDPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSDPad.h; sourceTree = "<group>"; };
+		F38B0B0C17CA22BF001951BA /* JSDPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSDPad.m; sourceTree = "<group>"; };
 		F3CD697417C8FFBF00D3972A /* VKGameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKGameObject.h; sourceTree = "<group>"; };
 		F3CD697517C8FFBF00D3972A /* VKGameObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKGameObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,6 +191,7 @@
 		35DF6446138C40D500FF9459 /* HelloOpenGL */ = {
 			isa = PBXGroup;
 			children = (
+				F38B0ADE17CA22BE001951BA /* Controller */,
 				F340C57517C9571300C2948D /* VKAsteroid.h */,
 				F340C57617C9571300C2948D /* VKAsteroid.m */,
 				F340C56F17C9510700C2948D /* VKShip.h */,
@@ -145,6 +219,8 @@
 				F374124D17C95E1000AF822B /* VKGLView.m */,
 				F38B0AD817C9EBAD001951BA /* VKViewController.h */,
 				F38B0AD917C9EBAD001951BA /* VKViewController.m */,
+				F38B0ADB17CA112F001951BA /* VKMissle.h */,
+				F38B0ADC17CA112F001951BA /* VKMissle.m */,
 			);
 			path = HelloOpenGL;
 			sourceTree = "<group>";
@@ -159,6 +235,50 @@
 				35DF644D138C40D500FF9459 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F38B0ADE17CA22BE001951BA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F38B0ADF17CA22BF001951BA /* analogue_bg.png */,
+				F38B0AE017CA22BF001951BA /* analogue_bg@2x.png */,
+				F38B0AE117CA22BF001951BA /* analogue_handle.png */,
+				F38B0AE217CA22BF001951BA /* analogue_handle@2x.png */,
+				F38B0AE317CA22BF001951BA /* button-pressed.png */,
+				F38B0AE417CA22BF001951BA /* button-pressed@2x.png */,
+				F38B0AE517CA22BF001951BA /* button.png */,
+				F38B0AE617CA22BF001951BA /* button@2x.png */,
+				F38B0AE717CA22BF001951BA /* Default-568h@2x.png */,
+				F38B0AE817CA22BF001951BA /* Default.png */,
+				F38B0AE917CA22BF001951BA /* Default@2x.png */,
+				F38B0AEA17CA22BF001951BA /* dPad-Down.png */,
+				F38B0AEB17CA22BF001951BA /* dPad-Down@2x.png */,
+				F38B0AEC17CA22BF001951BA /* dPad-DownLeft.png */,
+				F38B0AED17CA22BF001951BA /* dPad-DownLeft@2x.png */,
+				F38B0AEE17CA22BF001951BA /* dPad-DownRight.png */,
+				F38B0AEF17CA22BF001951BA /* dPad-DownRight@2x.png */,
+				F38B0AF017CA22BF001951BA /* dPad-Left.png */,
+				F38B0AF117CA22BF001951BA /* dPad-Left@2x.png */,
+				F38B0AF217CA22BF001951BA /* dPad-None.png */,
+				F38B0AF317CA22BF001951BA /* dPad-None@2x.png */,
+				F38B0AF417CA22BF001951BA /* dPad-Right.png */,
+				F38B0AF517CA22BF001951BA /* dPad-Right@2x.png */,
+				F38B0AF617CA22BF001951BA /* dPad-Up.png */,
+				F38B0AF717CA22BF001951BA /* dPad-Up@2x.png */,
+				F38B0AF817CA22BF001951BA /* dPad-UpLeft.png */,
+				F38B0AF917CA22BF001951BA /* dPad-UpLeft@2x.png */,
+				F38B0AFA17CA22BF001951BA /* dPad-UpRight.png */,
+				F38B0AFB17CA22BF001951BA /* dPad-UpRight@2x.png */,
+				F38B0B0117CA22BF001951BA /* JSAnalogueStick.h */,
+				F38B0B0217CA22BF001951BA /* JSAnalogueStick.m */,
+				F38B0B0517CA22BF001951BA /* JSButton.h */,
+				F38B0B0617CA22BF001951BA /* JSButton.m */,
+				F38B0B0717CA22BF001951BA /* JSControlLayout.h */,
+				F38B0B0817CA22BF001951BA /* JSControlLayout.m */,
+				F38B0B0B17CA22BF001951BA /* JSDPad.h */,
+				F38B0B0C17CA22BF001951BA /* JSDPad.m */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,6 +333,35 @@
 				35DF6463138C44F400FF9459 /* SimpleVertex.glsl in Resources */,
 				35DF6464138C44F400FF9459 /* SimpleFragment.glsl in Resources */,
 				35DF647F138C869600FF9459 /* Icon.png in Resources */,
+				F38B0B1017CA22BF001951BA /* analogue_bg.png in Resources */,
+				F38B0B1117CA22BF001951BA /* analogue_bg@2x.png in Resources */,
+				F38B0B1217CA22BF001951BA /* analogue_handle.png in Resources */,
+				F38B0B1317CA22BF001951BA /* analogue_handle@2x.png in Resources */,
+				F38B0B1417CA22BF001951BA /* button-pressed.png in Resources */,
+				F38B0B1517CA22BF001951BA /* button-pressed@2x.png in Resources */,
+				F38B0B1617CA22BF001951BA /* button.png in Resources */,
+				F38B0B1717CA22BF001951BA /* button@2x.png in Resources */,
+				F38B0B1817CA22BF001951BA /* Default-568h@2x.png in Resources */,
+				F38B0B1917CA22BF001951BA /* Default.png in Resources */,
+				F38B0B1A17CA22BF001951BA /* Default@2x.png in Resources */,
+				F38B0B1B17CA22BF001951BA /* dPad-Down.png in Resources */,
+				F38B0B1C17CA22BF001951BA /* dPad-Down@2x.png in Resources */,
+				F38B0B1D17CA22BF001951BA /* dPad-DownLeft.png in Resources */,
+				F38B0B1E17CA22BF001951BA /* dPad-DownLeft@2x.png in Resources */,
+				F38B0B1F17CA22BF001951BA /* dPad-DownRight.png in Resources */,
+				F38B0B2017CA22BF001951BA /* dPad-DownRight@2x.png in Resources */,
+				F38B0B2117CA22BF001951BA /* dPad-Left.png in Resources */,
+				F38B0B2217CA22BF001951BA /* dPad-Left@2x.png in Resources */,
+				F38B0B2317CA22BF001951BA /* dPad-None.png in Resources */,
+				F38B0B2417CA22BF001951BA /* dPad-None@2x.png in Resources */,
+				F38B0B2517CA22BF001951BA /* dPad-Right.png in Resources */,
+				F38B0B2617CA22BF001951BA /* dPad-Right@2x.png in Resources */,
+				F38B0B2717CA22BF001951BA /* dPad-Up.png in Resources */,
+				F38B0B2817CA22BF001951BA /* dPad-Up@2x.png in Resources */,
+				F38B0B2917CA22BF001951BA /* dPad-UpLeft.png in Resources */,
+				F38B0B2A17CA22BF001951BA /* dPad-UpLeft@2x.png in Resources */,
+				F38B0B2B17CA22BF001951BA /* dPad-UpRight.png in Resources */,
+				F38B0B2C17CA22BF001951BA /* dPad-UpRight@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +383,11 @@
 				F340C57717C9571300C2948D /* VKAsteroid.m in Sources */,
 				F374124E17C95E1000AF822B /* VKGLView.m in Sources */,
 				F38B0ADA17C9EBAD001951BA /* VKViewController.m in Sources */,
+				F38B0ADD17CA112F001951BA /* VKMissle.m in Sources */,
+				F38B0B3017CA22BF001951BA /* JSAnalogueStick.m in Sources */,
+				F38B0B3217CA22BF001951BA /* JSButton.m in Sources */,
+				F38B0B3317CA22BF001951BA /* JSControlLayout.m in Sources */,
+				F38B0B3517CA22BF001951BA /* JSDPad.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

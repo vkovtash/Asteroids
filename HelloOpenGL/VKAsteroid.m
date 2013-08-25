@@ -11,13 +11,19 @@
 
 @implementation VKAsteroid
 - (id) init{
+    self = [self initWithRadius:ASTEROID_SIZE];
+    return self;
+}
+
+- (id) initWithRadius:(float) radius{
     self = [super init];
     if (self) {
+        self.radius = radius;
         Vertex vertices[4] = {
-            {{-ASTEROID_SIZE, -ASTEROID_SIZE, 0}},
-            {{0, ASTEROID_SIZE, 0}},
-            {{ASTEROID_SIZE, -ASTEROID_SIZE, 0}},
-            {{0, -ASTEROID_SIZE/2, 0}}
+            {{-self.radius, -self.radius, 0}},
+            {{0, self.radius, 0}},
+            {{self.radius, -self.radius, 0}},
+            {{0, -self.radius/2, 0}}
         };
         
         GLubyte indices[6] = {0, 1, 2, 2, 3, 0};

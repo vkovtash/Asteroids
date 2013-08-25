@@ -86,7 +86,8 @@
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glViewport(0, 0, self.frame.size.width, self.frame.size.height);
     
-    [self.gameObjects makeObjectsPerformSelector:@selector(render)];
+    NSArray *renderArray = [self.gameObjects copy];
+    [renderArray makeObjectsPerformSelector:@selector(render)];
     
     [_context presentRenderbuffer:GL_RENDERBUFFER];
 }
