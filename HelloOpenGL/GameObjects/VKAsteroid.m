@@ -13,7 +13,6 @@
     Vertex *vertices;
     GLubyte *indices;
 }
-
 @end
 
 @implementation VKAsteroid

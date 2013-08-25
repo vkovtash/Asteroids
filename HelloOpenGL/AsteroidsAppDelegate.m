@@ -7,6 +7,7 @@
 //
 
 #import "AsteroidsAppDelegate.h"
+#import "VKViewController.h"
 
 @implementation AsteroidsAppDelegate
 @synthesize window=_window;
@@ -14,11 +15,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    self.viewController = [[VKViewController alloc] init];
-    [self.window addSubview:self.viewController.view];
+    
+    VKViewController *viewController = [[VKViewController alloc] init];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    navigationController.navigationBarHidden = YES;
+    self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
     
-    NSLog(@"%@",self.window);
     return YES;
 }
 

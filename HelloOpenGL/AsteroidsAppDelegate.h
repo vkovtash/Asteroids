@@ -7,11 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "VKViewController.h"
 
 @interface AsteroidsAppDelegate : NSObject <UIApplicationDelegate>
-
 @property (nonatomic, strong) IBOutlet UIWindow *window;
-@property (nonatomic ,strong) IBOutlet VKViewController *viewController;
-
 @end

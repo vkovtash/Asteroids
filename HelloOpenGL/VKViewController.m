@@ -73,10 +73,16 @@ float distance(float x1, float y1, float x2, float y2){
 
 #pragma mark - ViewController life cycle
 
+- (void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.ship.position = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2);
+    [self start];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    NSLog(@"%@",self.view);
     self.fireButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.fireButton.frame = CGRectMake(self.view.bounds.size.width-90,
                                        self.view.bounds.size.height-90,
@@ -86,12 +92,14 @@ float distance(float x1, float y1, float x2, float y2){
                      forState:UIControlStateNormal];
     [self.fireButton setImage:[UIImage imageNamed:@"button-pressed"] forState:UIControlStateSelected];
     [self.fireButton addTarget:self action:@selector(fire) forControlEvents:UIControlEventTouchDown];
+    self.fireButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin;
     
     self.joyStik = [[JSAnalogueStick alloc] initWithFrame:CGRectMake(20,
                                                                      self.view.bounds.size.height-120,
                                                                      100,
                                                                      100)];
     self.joyStik.delegate = self;
+    self.joyStik.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleRightMargin;
     
     self.pointsLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,
                                                                  20,
@@ -108,8 +116,9 @@ float distance(float x1, float y1, float x2, float y2){
     self.asteroidsCountLabel.backgroundColor = [UIColor clearColor];
     self.asteroidsCountLabel.textColor = [UIColor yellowColor];
     self.asteroidsCountLabel.font = [UIFont fontWithName:@"Gill-Sans" size:18];
+    self.asteroidsCountLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleLeftMargin;
     
-    self.glView = [[VKGLView alloc] initWithFrame:self.view.bounds];
+    self.glView = [[VKGLView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.height, self.view.bounds.size.width)];
     
     [self.view addSubview:self.glView];
     [self.view addSubview:self.fireButton];
@@ -118,11 +127,8 @@ float distance(float x1, float y1, float x2, float y2){
     [self.view addSubview:self.asteroidsCountLabel];
     
     self.ship = [[VKShip alloc] init];
-    self.ship.position = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2);
     self.ship.color = [UIColor yellowColor];
     [self.glView addGLObject:self.ship];
-    
-    [self start];
 }
 
 - (void)didReceiveMemoryWarning
