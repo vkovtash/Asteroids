@@ -12,7 +12,7 @@
 		35DF6445138C40D500FF9459 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35DF6444138C40D500FF9459 /* CoreGraphics.framework */; };
 		35DF644B138C40D500FF9459 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 35DF6449138C40D500FF9459 /* InfoPlist.strings */; };
 		35DF644E138C40D500FF9459 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 35DF644D138C40D500FF9459 /* main.m */; };
-		35DF6451138C40D500FF9459 /* HelloOpenGLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 35DF6450138C40D500FF9459 /* HelloOpenGLAppDelegate.m */; };
+		35DF6451138C40D500FF9459 /* AsteroidsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 35DF6450138C40D500FF9459 /* AsteroidsAppDelegate.m */; };
 		35DF6454138C40D500FF9459 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35DF6452138C40D500FF9459 /* MainWindow.xib */; };
 		35DF645E138C427700FF9459 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35DF645D138C427700FF9459 /* QuartzCore.framework */; };
 		35DF6460138C427E00FF9459 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35DF645F138C427E00FF9459 /* OpenGLES.framework */; };
@@ -65,16 +65,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		35DF643C138C40D500FF9459 /* HelloOpenGL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloOpenGL.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		35DF643C138C40D500FF9459 /* Asteroids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Asteroids.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35DF6440138C40D500FF9459 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		35DF6442138C40D500FF9459 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		35DF6444138C40D500FF9459 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		35DF6448138C40D500FF9459 /* HelloOpenGL-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HelloOpenGL-Info.plist"; sourceTree = "<group>"; };
+		35DF6448138C40D500FF9459 /* Asteroids-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Asteroids-Info.plist"; sourceTree = "<group>"; };
 		35DF644A138C40D500FF9459 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		35DF644C138C40D500FF9459 /* HelloOpenGL-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HelloOpenGL-Prefix.pch"; sourceTree = "<group>"; };
+		35DF644C138C40D500FF9459 /* Asteroids-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Asteroids-Prefix.pch"; sourceTree = "<group>"; };
 		35DF644D138C40D500FF9459 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		35DF644F138C40D500FF9459 /* HelloOpenGLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloOpenGLAppDelegate.h; sourceTree = "<group>"; };
-		35DF6450138C40D500FF9459 /* HelloOpenGLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloOpenGLAppDelegate.m; sourceTree = "<group>"; };
+		35DF644F138C40D500FF9459 /* AsteroidsAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AsteroidsAppDelegate.h; sourceTree = "<group>"; };
+		35DF6450138C40D500FF9459 /* AsteroidsAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AsteroidsAppDelegate.m; sourceTree = "<group>"; };
 		35DF6453138C40D500FF9459 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		35DF645D138C427700FF9459 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		35DF645F138C427E00FF9459 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -162,7 +162,7 @@
 		35DF6431138C40D500FF9459 = {
 			isa = PBXGroup;
 			children = (
-				35DF6446138C40D500FF9459 /* HelloOpenGL */,
+				35DF6446138C40D500FF9459 /* Asteroids */,
 				35DF643F138C40D500FF9459 /* Frameworks */,
 				35DF643D138C40D500FF9459 /* Products */,
 			);
@@ -171,7 +171,7 @@
 		35DF643D138C40D500FF9459 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				35DF643C138C40D500FF9459 /* HelloOpenGL.app */,
+				35DF643C138C40D500FF9459 /* Asteroids.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -188,14 +188,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		35DF6446138C40D500FF9459 /* HelloOpenGL */ = {
+		35DF6446138C40D500FF9459 /* Asteroids */ = {
 			isa = PBXGroup;
 			children = (
 				F38B0B3817CA525E001951BA /* CC3 */,
 				F38B0B4317CA525E001951BA /* GameObjects */,
 				F38B0B4F17CA525E001951BA /* JSController */,
-				35DF644F138C40D500FF9459 /* HelloOpenGLAppDelegate.h */,
-				35DF6450138C40D500FF9459 /* HelloOpenGLAppDelegate.m */,
+				35DF644F138C40D500FF9459 /* AsteroidsAppDelegate.h */,
+				35DF6450138C40D500FF9459 /* AsteroidsAppDelegate.m */,
 				F374124C17C95E1000AF822B /* VKGLView.h */,
 				F374124D17C95E1000AF822B /* VKGLView.m */,
 				F38B0AD817C9EBAD001951BA /* VKViewController.h */,
@@ -203,6 +203,7 @@
 				35DF6452138C40D500FF9459 /* MainWindow.xib */,
 				35DF6447138C40D500FF9459 /* Supporting Files */,
 			);
+			name = Asteroids;
 			path = HelloOpenGL;
 			sourceTree = "<group>";
 		};
@@ -210,9 +211,9 @@
 			isa = PBXGroup;
 			children = (
 				35DF647E138C869600FF9459 /* Icon.png */,
-				35DF6448138C40D500FF9459 /* HelloOpenGL-Info.plist */,
+				35DF6448138C40D500FF9459 /* Asteroids-Info.plist */,
 				35DF6449138C40D500FF9459 /* InfoPlist.strings */,
-				35DF644C138C40D500FF9459 /* HelloOpenGL-Prefix.pch */,
+				35DF644C138C40D500FF9459 /* Asteroids-Prefix.pch */,
 				35DF644D138C40D500FF9459 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -300,9 +301,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		35DF643B138C40D500FF9459 /* HelloOpenGL */ = {
+		35DF643B138C40D500FF9459 /* Asteroids */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 35DF6457138C40D500FF9459 /* Build configuration list for PBXNativeTarget "HelloOpenGL" */;
+			buildConfigurationList = 35DF6457138C40D500FF9459 /* Build configuration list for PBXNativeTarget "Asteroids" */;
 			buildPhases = (
 				35DF6438138C40D500FF9459 /* Sources */,
 				35DF6439138C40D500FF9459 /* Frameworks */,
@@ -312,9 +313,9 @@
 			);
 			dependencies = (
 			);
-			name = HelloOpenGL;
+			name = Asteroids;
 			productName = HelloOpenGL;
-			productReference = 35DF643C138C40D500FF9459 /* HelloOpenGL.app */;
+			productReference = 35DF643C138C40D500FF9459 /* Asteroids.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -322,7 +323,7 @@
 /* Begin PBXProject section */
 		35DF6433138C40D500FF9459 /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = 35DF6436138C40D500FF9459 /* Build configuration list for PBXProject "HelloOpenGL" */;
+			buildConfigurationList = 35DF6436138C40D500FF9459 /* Build configuration list for PBXProject "Asteroids" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -334,7 +335,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				35DF643B138C40D500FF9459 /* HelloOpenGL */,
+				35DF643B138C40D500FF9459 /* Asteroids */,
 			);
 		};
 /* End PBXProject section */
@@ -389,7 +390,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35DF644E138C40D500FF9459 /* main.m in Sources */,
-				35DF6451138C40D500FF9459 /* HelloOpenGLAppDelegate.m in Sources */,
+				35DF6451138C40D500FF9459 /* AsteroidsAppDelegate.m in Sources */,
 				F374124E17C95E1000AF822B /* VKGLView.m in Sources */,
 				F38B0ADA17C9EBAD001951BA /* VKViewController.m in Sources */,
 				F38B0B7517CA525E001951BA /* CC3Foundation.m in Sources */,
@@ -469,11 +470,11 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "HelloOpenGL/HelloOpenGL-Prefix.pch";
+				GCC_PREFIX_HEADER = "HelloOpenGL/Asteroids-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = "HelloOpenGL/HelloOpenGL-Info.plist";
+				INFOPLIST_FILE = "HelloOpenGL/Asteroids-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Asteroids;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -485,11 +486,11 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "HelloOpenGL/HelloOpenGL-Prefix.pch";
+				GCC_PREFIX_HEADER = "HelloOpenGL/Asteroids-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = "HelloOpenGL/HelloOpenGL-Info.plist";
+				INFOPLIST_FILE = "HelloOpenGL/Asteroids-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Asteroids;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -498,7 +499,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		35DF6436138C40D500FF9459 /* Build configuration list for PBXProject "HelloOpenGL" */ = {
+		35DF6436138C40D500FF9459 /* Build configuration list for PBXProject "Asteroids" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				35DF6455138C40D500FF9459 /* Debug */,
@@ -507,7 +508,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		35DF6457138C40D500FF9459 /* Build configuration list for PBXNativeTarget "HelloOpenGL" */ = {
+		35DF6457138C40D500FF9459 /* Build configuration list for PBXNativeTarget "Asteroids" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				35DF6458138C40D500FF9459 /* Debug */,

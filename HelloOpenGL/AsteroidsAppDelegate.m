@@ -6,9 +6,9 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "HelloOpenGLAppDelegate.h"
+#import "AsteroidsAppDelegate.h"
 
-@implementation HelloOpenGLAppDelegate
+@implementation AsteroidsAppDelegate
 @synthesize window=_window;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
