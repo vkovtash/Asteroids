@@ -10,4 +10,7 @@
 
 @interface VKShip : VKGameObject
 @property (nonatomic) float velocity;
+@property (nonatomic,readonly) float radius;
+
+- (id) initWithRadius:(float) radius;
 @end

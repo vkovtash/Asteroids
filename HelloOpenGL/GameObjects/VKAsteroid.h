@@ -12,7 +12,7 @@
 @property (nonatomic) float velocity;
 @property (nonatomic) float direction;
 @property (nonatomic) float rotationVelocity;
-@property (nonatomic) float radius;
+@property (nonatomic,readonly) float radius;
 @property (nonatomic) int parts;
 
 - (id) initWithRadius:(float) radius;

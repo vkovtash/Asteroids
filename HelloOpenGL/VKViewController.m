@@ -10,14 +10,25 @@
 #import "VKGLView.h"
 #import "VKAsteroid.h"
 #import "VKMissle.h"
+#import "SIAlertView.h"
 
-#define OFFSCREEN_WORLD_SIZE 100.0f
-#define WORLD_SIZE_X 1000.0f
-#define WORLD_SIZE_Y 1000.0f
+#define OFFSCREEN_WORLD_SIZE 100 //points
+#define WORLD_SIZE_X 1000 //points
+#define WORLD_SIZE_Y 1000 //points
 #define GAME_LOOP_RATE 100 //loops per second
-#define MAX_ASTEROID_SIZE 4
-#define POINTS_MULTIPLIER 5
+#define MAX_ASTEROID_SIZE 4 //in parts
+#define ASTEROID_PART_SIZE 5 //points
+#define SCORE_MULTIPLIER 5
 #define INITIAL_ASTEROIDS_COUNT 20
+#define SHIP_MAX_SPEED 200 //points per sec
+#define MAX_MISSLE_DISTANCE 300 //points
+#define MISSLE_SPEED 1800 //points per sec
+#define MIN_ASTEROID_SPEED 50 //points per sec
+#define MAX_ASTEROID_SPEED 200 //points per sec
+#define MIN_ASTEROID_ROTATION_SPEED 50 //degrees per sec
+#define MAX_ASTEROID_ROTATION_SPEED 180 //degrees per sec
+#define COLLISION_RADIUS_MULTIPLIER 0.8f
+
 
 @interface VKViewController ()
 @property (strong ,nonatomic) VKGLView *glView;
@@ -29,6 +40,8 @@
 @end
 
 @implementation VKViewController
+
+#pragma mark - Publick properties
 
 - (NSMutableArray *) asteroids{
     if (!_asteroids) {
@@ -44,10 +57,14 @@
     return _missles;
 }
 
+#pragma mark - Private properties
+
 - (void) setPoints:(int)points{
     _points = points;
-    self.pointsLabel.text = [NSString stringWithFormat:@"Points: %d",points];
+    self.pointsLabel.text = [NSString stringWithFormat:@"Score: %d Asteroids: %d",points, self.asteroids.count];
 }
+
+#pragma mark - ViewController life cycle
 
 - (void)viewDidLoad
 {
@@ -69,7 +86,10 @@
                                                                      100)];
     self.joyStik.delegate = self;
     
-    self.pointsLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 100, 20)];
+    self.pointsLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,
+                                                                 20,
+                                                                 self.view.bounds.size.width-40,
+                                                                 20)];
     self.pointsLabel.backgroundColor = [UIColor clearColor];
     self.pointsLabel.textColor = [UIColor greenColor];
     self.pointsLabel.font = [UIFont fontWithName:@"Helvetica-Light" size:20];
@@ -80,16 +100,49 @@
     [self.view addSubview:self.fireButton];
     [self.view addSubview:self.joyStik];
     [self.view addSubview:self.pointsLabel];
+    
+    self.ship = [[VKShip alloc] init];
+    self.ship.position = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2);
+    self.ship.color = [UIColor yellowColor];
+    [self.glView addGLObject:self.ship];
+    
     [self start];
 }
 
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+}
+
+#pragma mark - Factory methods
+
+- (void) makeAsteroidWithSize:(int) parts Position:(CGPoint) position{
+    VKAsteroid *asteroid = [[VKAsteroid alloc] initWithRadius:parts * ASTEROID_PART_SIZE];
+    asteroid.parts = parts;
+    asteroid.position = position;
+    asteroid.direction = arc4random_uniform(360);
+    asteroid.velocity = MIN_ASTEROID_SPEED +
+    arc4random_uniform(MAX_ASTEROID_SPEED - MIN_ASTEROID_SPEED);
+    asteroid.rotationVelocity = MIN_ASTEROID_ROTATION_SPEED +
+    arc4random_uniform(MAX_ASTEROID_ROTATION_SPEED - MIN_ASTEROID_ROTATION_SPEED);
+    [self.glView addGLObject:asteroid];
+    [self.asteroids addObject:asteroid];
+}
+
+#pragma mark - Game events
+
 - (void) prepareWorld{
-    self.ship = [[VKShip alloc] init];
-    self.ship.position = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2);
-    self.ship.velocity = 0;
-    self.ship.rotation = 0;
-    self.ship.color = [UIColor yellowColor];
-    
+    int asteroids_count = INITIAL_ASTEROIDS_COUNT;
+    for (int i = 0; i<asteroids_count; i++) {
+        float x = arc4random_uniform((int)WORLD_SIZE_X);
+        float y = arc4random_uniform((int)WORLD_SIZE_Y);
+        [self makeAsteroidWithSize:arc4random_uniform(MAX_ASTEROID_SIZE-2) + 3
+                          Position:CGPointMake(x,
+                                               y)];
+    }
+}
+
+- (void) clearWorld{
     for (VKAsteroid *asteroid in self.asteroids) {
         [asteroid removeFromGLView];
     }
@@ -99,31 +152,12 @@
         [missle removeFromGLView];
     }
     [self.missles removeAllObjects];
-    
-    [self.glView addGLObject:self.ship];
-    
-    int asteroids_count = INITIAL_ASTEROIDS_COUNT;
-    for (int i = 0; i<asteroids_count; i++) {
-        [self makeAsteroidWithSize:arc4random_uniform(MAX_ASTEROID_SIZE-3) + 3
-                          Position:CGPointMake(arc4random_uniform((int)WORLD_SIZE_X),
-                                               arc4random_uniform((int)WORLD_SIZE_Y))];
-    }
-}
-
-- (void) makeAsteroidWithSize:(int) parts Position:(CGPoint) position{
-    VKAsteroid *asteroid = [[VKAsteroid alloc] initWithRadius:parts * 5];
-    asteroid.parts = parts;
-    asteroid.position = position;
-    asteroid.direction = arc4random_uniform(360);
-    asteroid.velocity = 50 + arc4random_uniform(150);
-    asteroid.rotationVelocity = 50 + arc4random_uniform(100);
-    [self.glView addGLObject:asteroid];
-    [self.asteroids addObject:asteroid];
 }
 
 - (void) start{
-    self.points = 0;
+    [self clearWorld];
     [self prepareWorld];
+    self.points = 0;
     self.gameLoop = [[NSThread alloc] initWithTarget:self
                                             selector:@selector(loop:)
                                               object:self];
@@ -133,7 +167,48 @@
 
 - (void) stop{
     [self.gameLoop cancel];
+    self.ship.velocity = 0;
+    self.ship.rotation = 0;
 }
+
+- (void) win{
+    [self stop];
+    SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"You win the Game!!!"
+                                                     andMessage:[NSString stringWithFormat:@"You score is %d",self.points]];
+    [alertView addButtonWithTitle:@"Restart Game"
+                             type:SIAlertViewDidDismissNotification
+                          handler:^(SIAlertView *alertView){
+                              [self start];
+                          }];
+    [alertView show];
+}
+
+- (void) gameOver{
+    [self stop];
+    SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"The game is over."
+                                                     andMessage:[NSString stringWithFormat:@"You score is %d",self.points]];
+    [alertView addButtonWithTitle:@"Restart Game"
+                             type:SIAlertViewDidDismissNotification
+                          handler:^(SIAlertView *alertView){
+                              [self start];
+                          }];
+    [alertView show];
+}
+
+- (void) fire{
+    if (!self.gameLoop.isFinished) {
+        VKMissle *missle = [[VKMissle alloc] init];
+        missle.position = self.ship.position;
+        missle.direction = self.ship.rotation;
+        missle.velocity = MISSLE_SPEED;
+        missle.rotation = self.ship.rotation;
+        missle.leftDistance = MAX_MISSLE_DISTANCE;
+        [self.glView addGLObject:missle];
+        [self.missles addObject:missle];
+    }
+}
+
+#pragma mark - game run loop
 
 - (void) loop:(VKViewController *) gameController{
     NSThread *thread = [NSThread currentThread];
@@ -145,69 +220,49 @@
 }
 
 - (void) processGameStep:(NSTimeInterval) time{
+    if (self.gameLoop.isCancelled) {
+        return;
+    }
     double x;
     double y;
-    double rad;
+    double radians;
     double distance;
     
-    rad = self.ship.rotation * M_PI / 180;
-    double offset_x = self.ship.velocity*time * sin(rad);
-    double offset_y = self.ship.velocity*time * cos(rad);
+    //moving ship
+    radians = self.ship.rotation * M_PI / 180;
+    double offset_x = self.ship.velocity*time * sin(radians);
+    double offset_y = self.ship.velocity*time * cos(radians);
     
+    //moving asteroids
     NSArray *asteroids = [self.asteroids copy];
     
     for (VKAsteroid *asteroid in asteroids) {
-        rad = asteroid.direction * M_PI / 180;
+        radians = asteroid.direction * M_PI / 180;
         distance = asteroid.velocity*time;
-        x = asteroid.position.x - distance * sin(rad) + offset_x;
-        y = asteroid.position.y - distance * cos(rad) + offset_y;
-        if (x > WORLD_SIZE_X - OFFSCREEN_WORLD_SIZE ) {
-            x = x - WORLD_SIZE_X - OFFSCREEN_WORLD_SIZE;
-        }
-        else if (x < -OFFSCREEN_WORLD_SIZE){
-            x = WORLD_SIZE_X - OFFSCREEN_WORLD_SIZE;
-        }
-        
-        if (y > WORLD_SIZE_Y - OFFSCREEN_WORLD_SIZE) {
-            y = y - WORLD_SIZE_Y - OFFSCREEN_WORLD_SIZE;
-        }
-        else if (y < -OFFSCREEN_WORLD_SIZE){
-            y = WORLD_SIZE_Y - OFFSCREEN_WORLD_SIZE;
-        }
-        asteroid.position = CGPointMake(x, y);
+        x = asteroid.position.x - distance * sin(radians) + offset_x;
+        y = asteroid.position.y - distance * cos(radians) + offset_y;
+        asteroid.position = [self worldCoordinatesForX:x Y:y];
         asteroid.rotation += asteroid.rotationVelocity * time;
     }
     
+    //moving missles
     NSArray *missles = [self.missles copy];
     
     for (VKMissle *missle in missles) {
-        rad = missle.direction * M_PI/180;
+        radians = missle.direction * M_PI/180;
         distance = missle.velocity*time;
-        x = missle.position.x - distance * sin(rad) + offset_x;
-        y = missle.position.y - distance * cos(rad) + offset_y;
-        if (x > WORLD_SIZE_X - OFFSCREEN_WORLD_SIZE ) {
-            x = x - WORLD_SIZE_X - OFFSCREEN_WORLD_SIZE;
-        }
-        else if (x < -OFFSCREEN_WORLD_SIZE){
-            x = WORLD_SIZE_X - OFFSCREEN_WORLD_SIZE;
-        }
-        
-        if (y > WORLD_SIZE_Y - OFFSCREEN_WORLD_SIZE) {
-            y = y - WORLD_SIZE_Y - OFFSCREEN_WORLD_SIZE;
-        }
-        else if (y < -OFFSCREEN_WORLD_SIZE){
-            y = WORLD_SIZE_Y - OFFSCREEN_WORLD_SIZE;
-        }
+        x = missle.position.x - distance * sin(radians) + offset_x;
+        y = missle.position.y - distance * cos(radians) + offset_y;
         
         missle.leftDistance -= distance;
         if (missle.leftDistance < 0) {
-            dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_sync(dispatch_get_main_queue(), ^{
                 [self.glView removeGLObject:missle];
                 [self.missles removeObject:missle];
             });
         }
         else{
-            missle.position = CGPointMake(x, y);
+            missle.position = [self worldCoordinatesForX:x Y:y];
         }
     }
     
@@ -215,34 +270,68 @@
     [self checkCollision:asteroids];
 }
 
+- (CGPoint) worldCoordinatesForX:(float) x Y:(float) y{
+    if (x > WORLD_SIZE_X - OFFSCREEN_WORLD_SIZE ) {
+        x = x - WORLD_SIZE_X - OFFSCREEN_WORLD_SIZE;
+    }
+    else if (x < -OFFSCREEN_WORLD_SIZE){
+        x = WORLD_SIZE_X - OFFSCREEN_WORLD_SIZE;
+    }
+    
+    if (y > WORLD_SIZE_Y - OFFSCREEN_WORLD_SIZE) {
+        y = y - WORLD_SIZE_Y - OFFSCREEN_WORLD_SIZE;
+    }
+    else if (y < -OFFSCREEN_WORLD_SIZE){
+        y = WORLD_SIZE_Y - OFFSCREEN_WORLD_SIZE;
+    }
+    return CGPointMake(x, y);
+}
+
+#pragma mark - collision detection
+
 - (void) checkCollision:(NSArray *) asteroids{
+    if (self.gameLoop.isCancelled) {
+        return;
+    }
     double distance;
     for (VKAsteroid *asteroid in asteroids){
         distance = sqrt(pow(asteroid.position.x-self.ship.position.x, 2)
                         + pow(asteroid.position.y - self.ship.position.y, 2));
-        if (distance < asteroid.radius + 10) {
-            [self stop];
+        if (distance < (asteroid.radius + self.ship.radius) * COLLISION_RADIUS_MULTIPLIER) {
+            [self gameOver];
         }
     }
 }
 
 - (void) checkHit:(NSArray *) missles Asteroids:(NSArray *) asteroids{
+    if (self.gameLoop.isCancelled) {
+        return;
+    }
     double distance;
     for (VKMissle *missle in missles) {
         for (VKAsteroid *asteroid in asteroids){
             distance = sqrt(pow(asteroid.position.x-missle.position.x, 2)
                             + pow(asteroid.position.y - missle.position.y, 2));
-            if (distance < asteroid.radius + 5) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    self.points += POINTS_MULTIPLIER*MAX_ASTEROID_SIZE - asteroid.parts * POINTS_MULTIPLIER;
-                    for (int i=0; i<asteroid.parts; i++) {
-                        [self makeAsteroidWithSize:asteroid.parts - 1
-                                          Position:asteroid.position];
-                    }
+            if (distance < asteroid.radius + missle.radius) {
+                dispatch_sync(dispatch_get_main_queue(), ^{
                     [self.glView removeGLObject:asteroid];
                     [self.glView removeGLObject:missle];
                     [self.asteroids removeObject:asteroid];
                     [self.missles removeObject:missle];
+                    
+                    if (asteroid.parts > 1){
+                        for (int i=0; i<asteroid.parts; i++) {
+                            [self makeAsteroidWithSize:asteroid.parts - 1
+                                              Position:asteroid.position];
+                        }
+                    }
+                    
+                    self.points += SCORE_MULTIPLIER * MAX_ASTEROID_SIZE - asteroid.parts * SCORE_MULTIPLIER;
+                    if (self.asteroids.count == 0) {
+                        dispatch_sync(dispatch_get_main_queue(), ^{
+                            [self win];
+                        });
+                    }
                 });
                 break;
             }
@@ -250,25 +339,10 @@
     }
 }
 
-- (void) fire{
-    if (!self.gameLoop.isFinished) {
-        VKMissle *missle = [[VKMissle alloc] init];
-        missle.position = self.ship.position;
-        missle.direction = self.ship.rotation;
-        missle.velocity = 1800.f;
-        missle.rotation = self.ship.rotation;
-        missle.leftDistance = 300;
-        [self.glView addGLObject:missle];
-        [self.missles addObject:missle];
-    }
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
+#pragma mark - JSAnalogueStickDelegate
 
 - (void)analogueStickDidChangeValue:(JSAnalogueStick *)analogueStick{
+    //Setting ship direcrion and velocity
     if (!self.gameLoop.isFinished) {
         float acceleration = sqrt(pow(self.joyStik.xValue, 2)
                                   + pow(self.joyStik.yValue, 2));
@@ -284,7 +358,7 @@
         if (acceleration > 1) {
             acceleration = 1.0f;
         }
-        self.ship.velocity = 200*acceleration;
+        self.ship.velocity = SHIP_MAX_SPEED*acceleration;
     }
 }
 

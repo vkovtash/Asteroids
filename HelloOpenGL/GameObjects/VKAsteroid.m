@@ -18,16 +18,16 @@
 - (id) initWithRadius:(float) radius{
     self = [super init];
     if (self) {
-        self.radius = radius;
+        _radius = radius;
         Vertex vertices[] = {
-            {{0, self.radius, 0}},
-            {{-self.radius/2, self.radius/2, 0}},
-            {{-self.radius, 0, 0}},
-            {{-self.radius/2, -self.radius/2, 0}},
-            {{0, -self.radius, 0}},
-            {{self.radius/2, -self.radius/2, 0}},
-            {{self.radius, 0, 0}},
-            {{self.radius/2, self.radius/2, 0}}
+            {{0, radius, 0}},
+            {{-radius/2, radius/2, 0}},
+            {{-radius, 0, 0}},
+            {{-radius/2, -radius/2, 0}},
+            {{0, -radius, 0}},
+            {{radius/2, -radius/2, 0}},
+            {{radius, 0, 0}},
+            {{radius/2, radius/2, 0}}
         };
         
         GLubyte indices[] = {1, 2, 3, 4, 5, 6, 7, 0, 1};

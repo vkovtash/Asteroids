@@ -62,6 +62,8 @@
 		F38B0B9D17CA525E001951BA /* JSButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B7017CA525E001951BA /* JSButton.m */; };
 		F38B0B9E17CA525E001951BA /* JSControlLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B7217CA525E001951BA /* JSControlLayout.m */; };
 		F38B0B9F17CA525E001951BA /* JSDPad.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B7417CA525E001951BA /* JSDPad.m */; };
+		F38B0BA417CA5442001951BA /* SIAlertView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F38B0BA117CA5442001951BA /* SIAlertView.bundle */; };
+		F38B0BA517CA5442001951BA /* SIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0BA317CA5442001951BA /* SIAlertView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -141,6 +143,9 @@
 		F38B0B7217CA525E001951BA /* JSControlLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSControlLayout.m; sourceTree = "<group>"; };
 		F38B0B7317CA525E001951BA /* JSDPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSDPad.h; sourceTree = "<group>"; };
 		F38B0B7417CA525E001951BA /* JSDPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSDPad.m; sourceTree = "<group>"; };
+		F38B0BA117CA5442001951BA /* SIAlertView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SIAlertView.bundle; sourceTree = "<group>"; };
+		F38B0BA217CA5442001951BA /* SIAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIAlertView.h; sourceTree = "<group>"; };
+		F38B0BA317CA5442001951BA /* SIAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIAlertView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +196,7 @@
 		35DF6446138C40D500FF9459 /* Asteroids */ = {
 			isa = PBXGroup;
 			children = (
+				F38B0BA017CA5442001951BA /* SIAlertView */,
 				F38B0B3817CA525E001951BA /* CC3 */,
 				F38B0B4317CA525E001951BA /* GameObjects */,
 				F38B0B4F17CA525E001951BA /* JSController */,
@@ -241,11 +247,11 @@
 			children = (
 				F38B0B4417CA525E001951BA /* SimpleFragment.glsl */,
 				F38B0B4517CA525E001951BA /* SimpleVertex.glsl */,
-				F38B0B4617CA525E001951BA /* VKAsteroid.h */,
-				F38B0B4717CA525E001951BA /* VKAsteroid.m */,
+				F38B0B4A17CA525E001951BA /* VKGLObject.h */,
 				F38B0B4817CA525E001951BA /* VKGameObject.h */,
 				F38B0B4917CA525E001951BA /* VKGameObject.m */,
-				F38B0B4A17CA525E001951BA /* VKGLObject.h */,
+				F38B0B4617CA525E001951BA /* VKAsteroid.h */,
+				F38B0B4717CA525E001951BA /* VKAsteroid.m */,
 				F38B0B4B17CA525E001951BA /* VKMissle.h */,
 				F38B0B4C17CA525E001951BA /* VKMissle.m */,
 				F38B0B4D17CA525E001951BA /* VKShip.h */,
@@ -296,6 +302,16 @@
 				F38B0B7417CA525E001951BA /* JSDPad.m */,
 			);
 			path = JSController;
+			sourceTree = "<group>";
+		};
+		F38B0BA017CA5442001951BA /* SIAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				F38B0BA117CA5442001951BA /* SIAlertView.bundle */,
+				F38B0BA217CA5442001951BA /* SIAlertView.h */,
+				F38B0BA317CA5442001951BA /* SIAlertView.m */,
+			);
+			path = SIAlertView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -379,6 +395,7 @@
 				F38B0B9917CA525E001951BA /* dPad-UpLeft@2x.png in Resources */,
 				F38B0B9A17CA525E001951BA /* dPad-UpRight.png in Resources */,
 				F38B0B9B17CA525E001951BA /* dPad-UpRight@2x.png in Resources */,
+				F38B0BA417CA5442001951BA /* SIAlertView.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +422,7 @@
 				F38B0B9D17CA525E001951BA /* JSButton.m in Sources */,
 				F38B0B9E17CA525E001951BA /* JSControlLayout.m in Sources */,
 				F38B0B9F17CA525E001951BA /* JSDPad.m in Sources */,
+				F38B0BA517CA5442001951BA /* SIAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,7 +460,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -456,7 +474,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 			};
@@ -473,7 +491,7 @@
 				GCC_PREFIX_HEADER = "HelloOpenGL/Asteroids-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "HelloOpenGL/Asteroids-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = Asteroids;
 				WRAPPER_EXTENSION = app;
 			};
@@ -489,7 +507,7 @@
 				GCC_PREFIX_HEADER = "HelloOpenGL/Asteroids-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "HelloOpenGL/Asteroids-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = Asteroids;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

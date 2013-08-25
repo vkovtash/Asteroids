@@ -11,13 +11,19 @@
 
 @implementation VKShip
 - (id) init{
+    self = [self initWithRadius:SHIP_SIZE];
+    return self;
+}
+
+- (id) initWithRadius:(float) radius{
     self = [super init];
     if (self) {
+        _radius = radius;
         Vertex vertices[4] = {
-            {{-SHIP_SIZE, -SHIP_SIZE, 0}},
-            {{0, SHIP_SIZE, 0}},
-            {{SHIP_SIZE, -SHIP_SIZE, 0}},
-            {{0, -SHIP_SIZE/2, 0}}
+            {{-radius, -radius, 0}},
+            {{0, radius, 0}},
+            {{radius, -radius, 0}},
+            {{0, -radius/2, 0}}
         };
         
         GLubyte indices[6] = {0, 1, 2, 2, 3, 0};
