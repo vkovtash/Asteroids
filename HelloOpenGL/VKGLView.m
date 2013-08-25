@@ -79,7 +79,7 @@
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
     glEnable(GL_DEPTH_TEST);
-    glClearColor(0, 104.0/255.0, 55.0/255.0, 1.0);
+    glClearColor(0, 0, 0, 1.0);
 }
 
 - (void)render:(CADisplayLink*)displayLink {
