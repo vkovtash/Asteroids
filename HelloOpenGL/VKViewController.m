@@ -15,12 +15,17 @@
 #define WORLD_SIZE_X 1000.0f
 #define WORLD_SIZE_Y 1000.0f
 #define GAME_LOOP_RATE 100 //loops per second
+#define MAX_ASTEROID_SIZE 4
+#define POINTS_MULTIPLIER 5
+#define INITIAL_ASTEROIDS_COUNT 20
 
 @interface VKViewController ()
 @property (strong ,nonatomic) VKGLView *glView;
 @property (strong, nonatomic) NSThread *gameLoop;
-@property (strong ,nonatomic) JSButton *fireButton;
+@property (strong ,nonatomic) UIButton *fireButton;
 @property (strong ,nonatomic) JSAnalogueStick *joyStik;
+@property (nonatomic) int points;
+@property (strong, nonatomic) UILabel *pointsLabel;
 @end
 
 @implementation VKViewController
@@ -39,17 +44,24 @@
     return _missles;
 }
 
+- (void) setPoints:(int)points{
+    _points = points;
+    self.pointsLabel.text = [NSString stringWithFormat:@"Points: %d",points];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.fireButton = [[JSButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width-70,
-                                                                 self.view.bounds.size.height-70,
-                                                                 50,
-                                                                 50)];
-    [[self.fireButton titleLabel] setText:@"A"];
-	[self.fireButton setBackgroundImage:[UIImage imageNamed:@"button"]];
-	[self.fireButton setBackgroundImagePressed:[UIImage imageNamed:@"button-pressed"]];
-    self.fireButton.delegate = self;
+    
+    self.fireButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.fireButton.frame = CGRectMake(self.view.bounds.size.width-90,
+                                       self.view.bounds.size.height-90,
+                                       60,
+                                       60);
+    [self.fireButton setImage:[UIImage imageNamed:@"button"]
+                     forState:UIControlStateNormal];
+    [self.fireButton setImage:[UIImage imageNamed:@"button-pressed"] forState:UIControlStateSelected];
+    [self.fireButton addTarget:self action:@selector(fire) forControlEvents:UIControlEventTouchDown];
     
     self.joyStik = [[JSAnalogueStick alloc] initWithFrame:CGRectMake(20,
                                                                      self.view.bounds.size.height-120,
@@ -57,12 +69,17 @@
                                                                      100)];
     self.joyStik.delegate = self;
     
+    self.pointsLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 100, 20)];
+    self.pointsLabel.backgroundColor = [UIColor clearColor];
+    self.pointsLabel.textColor = [UIColor greenColor];
+    self.pointsLabel.font = [UIFont fontWithName:@"Helvetica-Light" size:20];
+    
     self.glView = [[VKGLView alloc] initWithFrame:self.view.bounds];
     
     [self.view addSubview:self.glView];
     [self.view addSubview:self.fireButton];
     [self.view addSubview:self.joyStik];
-    [self prepareWorld];
+    [self.view addSubview:self.pointsLabel];
     [self start];
 }
 
@@ -70,14 +87,24 @@
     self.ship = [[VKShip alloc] init];
     self.ship.position = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2);
     self.ship.velocity = 0;
-    self.ship.rotation = 180;
+    self.ship.rotation = 0;
     self.ship.color = [UIColor yellowColor];
+    
+    for (VKAsteroid *asteroid in self.asteroids) {
+        [asteroid removeFromGLView];
+    }
+    [self.asteroids removeAllObjects];
+    
+    for (VKMissle * missle in self.missles) {
+        [missle removeFromGLView];
+    }
+    [self.missles removeAllObjects];
     
     [self.glView addGLObject:self.ship];
     
-    int asteroids_count = 10;
+    int asteroids_count = INITIAL_ASTEROIDS_COUNT;
     for (int i = 0; i<asteroids_count; i++) {
-        [self makeAsteroidWithSize:arc4random_uniform(5)+ 1
+        [self makeAsteroidWithSize:arc4random_uniform(MAX_ASTEROID_SIZE-3) + 3
                           Position:CGPointMake(arc4random_uniform((int)WORLD_SIZE_X),
                                                arc4random_uniform((int)WORLD_SIZE_Y))];
     }
@@ -95,6 +122,8 @@
 }
 
 - (void) start{
+    self.points = 0;
+    [self prepareWorld];
     self.gameLoop = [[NSThread alloc] initWithTarget:self
                                             selector:@selector(loop:)
                                               object:self];
@@ -205,8 +234,10 @@
                             + pow(asteroid.position.y - missle.position.y, 2));
             if (distance < asteroid.radius + 5) {
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    self.points += POINTS_MULTIPLIER*MAX_ASTEROID_SIZE - asteroid.parts * POINTS_MULTIPLIER;
                     for (int i=0; i<asteroid.parts; i++) {
-                        [self makeAsteroidWithSize:asteroid.parts-1 Position:asteroid.position];
+                        [self makeAsteroidWithSize:asteroid.parts - 1
+                                          Position:asteroid.position];
                     }
                     [self.glView removeGLObject:asteroid];
                     [self.glView removeGLObject:missle];
@@ -220,14 +251,16 @@
 }
 
 - (void) fire{
-    VKMissle *missle = [[VKMissle alloc] init];
-    missle.position = self.ship.position;
-    missle.direction = self.ship.rotation;
-    missle.velocity = 1800.f;
-    missle.rotation = self.ship.rotation;
-    missle.leftDistance = 300;
-    [self.glView addGLObject:missle];
-    [self.missles addObject:missle];
+    if (!self.gameLoop.isFinished) {
+        VKMissle *missle = [[VKMissle alloc] init];
+        missle.position = self.ship.position;
+        missle.direction = self.ship.rotation;
+        missle.velocity = 1800.f;
+        missle.rotation = self.ship.rotation;
+        missle.leftDistance = 300;
+        [self.glView addGLObject:missle];
+        [self.missles addObject:missle];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -235,37 +268,24 @@
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark - JSButtonDelegate
-
-- (void)buttonPressed:(JSButton *)button
-{
-    if (button == self.fireButton)
-	{
-		[self fire];
-		return;
-	}
-}
-
-- (void) buttonReleased:(JSButton *)button{
-    
-}
-
 - (void)analogueStickDidChangeValue:(JSAnalogueStick *)analogueStick{
-    float acceleration = sqrt(pow(self.joyStik.xValue, 2)
-                    + pow(self.joyStik.yValue, 2));
-    
-    if (acceleration != 0) {
-        float rotation = acosf(self.joyStik.yValue/acceleration) * 180/M_PI;
-        if (self.joyStik.xValue > 0) {
-            rotation = 360 - rotation;
+    if (!self.gameLoop.isFinished) {
+        float acceleration = sqrt(pow(self.joyStik.xValue, 2)
+                                  + pow(self.joyStik.yValue, 2));
+        
+        if (acceleration != 0) {
+            float rotation = acosf(self.joyStik.yValue/acceleration) * 180/M_PI;
+            if (self.joyStik.xValue > 0) {
+                rotation = 360 - rotation;
+            }
+            self.ship.rotation = rotation;
         }
-        self.ship.rotation = rotation;
+        
+        if (acceleration > 1) {
+            acceleration = 1.0f;
+        }
+        self.ship.velocity = 200*acceleration;
     }
-    
-    if (acceleration > 1) {
-        acceleration = 1.0f;
-    }
-    self.ship.velocity = 200*acceleration;
 }
 
 @end
