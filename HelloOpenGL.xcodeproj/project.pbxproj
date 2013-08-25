@@ -26,6 +26,7 @@
 		F340C57117C9510700C2948D /* VKShip.m in Sources */ = {isa = PBXBuildFile; fileRef = F340C57017C9510700C2948D /* VKShip.m */; };
 		F340C57717C9571300C2948D /* VKAsteroid.m in Sources */ = {isa = PBXBuildFile; fileRef = F340C57617C9571300C2948D /* VKAsteroid.m */; };
 		F374124E17C95E1000AF822B /* VKGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = F374124D17C95E1000AF822B /* VKGLView.m */; };
+		F38B0ADA17C9EBAD001951BA /* VKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0AD917C9EBAD001951BA /* VKViewController.m */; };
 		F3CD697617C8FFBF00D3972A /* VKGameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F3CD697517C8FFBF00D3972A /* VKGameObject.m */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,8 @@
 		F340C57817C95AC800C2948D /* VKGLObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VKGLObject.h; sourceTree = "<group>"; };
 		F374124C17C95E1000AF822B /* VKGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKGLView.h; sourceTree = "<group>"; };
 		F374124D17C95E1000AF822B /* VKGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKGLView.m; sourceTree = "<group>"; };
+		F38B0AD817C9EBAD001951BA /* VKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKViewController.h; sourceTree = "<group>"; };
+		F38B0AD917C9EBAD001951BA /* VKViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKViewController.m; sourceTree = "<group>"; };
 		F3CD697417C8FFBF00D3972A /* VKGameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKGameObject.h; sourceTree = "<group>"; };
 		F3CD697517C8FFBF00D3972A /* VKGameObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKGameObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -140,6 +143,8 @@
 				F340C57817C95AC800C2948D /* VKGLObject.h */,
 				F374124C17C95E1000AF822B /* VKGLView.h */,
 				F374124D17C95E1000AF822B /* VKGLView.m */,
+				F38B0AD817C9EBAD001951BA /* VKViewController.h */,
+				F38B0AD917C9EBAD001951BA /* VKViewController.m */,
 			);
 			path = HelloOpenGL;
 			sourceTree = "<group>";
@@ -228,6 +233,7 @@
 				F340C57117C9510700C2948D /* VKShip.m in Sources */,
 				F340C57717C9571300C2948D /* VKAsteroid.m in Sources */,
 				F374124E17C95E1000AF822B /* VKGLView.m in Sources */,
+				F38B0ADA17C9EBAD001951BA /* VKViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

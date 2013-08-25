@@ -9,16 +9,13 @@
 #import "HelloOpenGLAppDelegate.h"
 
 @implementation HelloOpenGLAppDelegate
-@synthesize glView=_glView;
-
 @synthesize window=_window;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    CGRect screenBounds = [[UIScreen mainScreen] bounds];    
-    self.glView = [[VKGLView alloc] initWithFrame:screenBounds];
-    [self.window addSubview:_glView];
+    self.viewController = [[VKViewController alloc] init];
+    [self.window addSubview:self.viewController.view];
     [self.window makeKeyAndVisible];
     
     NSLog(@"%@",self.window);

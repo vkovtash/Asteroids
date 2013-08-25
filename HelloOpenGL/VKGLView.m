@@ -125,16 +125,6 @@
                                            andTop:self.frame.size.height/2
                                           andNear:0
                                            andFar:10];
-        VKShip *ship = [[VKShip alloc] init];
-        ship.position = CGPointMake(100, 100);
-        ship.rotation = 90;
-        ship.color = [UIColor yellowColor];
-        
-        [self addGLObject:ship];
-        
-        VKAsteroid *asteroid = [[VKAsteroid alloc] init];
-        asteroid.position = CGPointMake(200, 200);
-        [self addGLObject:asteroid];
     }
     return self;
 }
