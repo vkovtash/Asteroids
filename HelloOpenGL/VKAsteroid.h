@@ -11,4 +11,5 @@
 @interface VKAsteroid : VKGameObject
 @property (nonatomic) float velocity;
 @property (nonatomic) float direction;
+@property (nonatomic) float rotationVelocity;
 @end

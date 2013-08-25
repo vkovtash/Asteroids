@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VKShip.h"
 
 @interface VKViewController : UIViewController
-- (void) processGameStep;
+@property (strong, nonatomic) NSMutableArray *asteroids;
+@property (strong ,nonatomic) VKShip *ship;
+- (void) processGameStep:(NSTimeInterval) time;
 @end
