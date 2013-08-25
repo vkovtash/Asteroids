@@ -193,7 +193,6 @@ float distance(float x1, float y1, float x2, float y2){
 - (void) stop{
     [self.gameLoop cancel];
     self.ship.velocity = 0;
-    self.ship.rotation = 0;
 }
 
 - (void) win{
