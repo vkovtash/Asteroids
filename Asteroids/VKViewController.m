@@ -44,6 +44,7 @@ float distance(float x1, float y1, float x2, float y2){
 @interface VKViewController () {
     SystemSoundID blast;
     SystemSoundID explosion;
+    SystemSoundID death;
 }
 @property (strong, nonatomic) VKGLView *glView;
 @property (nonatomic,strong) AVAudioPlayer *audioPlayer;
@@ -201,6 +202,10 @@ float distance(float x1, float y1, float x2, float y2){
     pathURL = [NSURL fileURLWithPath : path];
     AudioServicesCreateSystemSoundID((__bridge CFURLRef) pathURL, &explosion);
     
+    path  = [[NSBundle mainBundle] pathForResource:@"death" ofType:@"m4a"];
+    pathURL = [NSURL fileURLWithPath : path];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef) pathURL, &death);
+    
     self.ship = [[VKShip alloc] init];
     self.ship.color = [UIColor yellowColor];
     self.ship.maxSpeed = SHIP_MAX_SPEED;
@@ -309,6 +314,7 @@ float distance(float x1, float y1, float x2, float y2){
 
 - (void) gameOver{
     [self stop];
+    AudioServicesPlaySystemSound(death);
     SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"The game is over."
                                                      andMessage:[NSString stringWithFormat:@"You score is %d",self.points]];
     [alertView addButtonWithTitle:@"Restart Game"
