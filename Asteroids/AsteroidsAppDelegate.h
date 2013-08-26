@@ -1,9 +1,8 @@
 //
-//  HelloOpenGLAppDelegate.h
-//  HelloOpenGL
+//  AsteroidsAppDelegate.h
+//  Asteroids
 //
-//  Created by Ray Wenderlich on 5/24/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created by kovtash on 25.08.13.
 //
 
 #import <UIKit/UIKit.h>

@@ -1,6 +1,6 @@
 //
 //  VKGameObject.h
-//  HelloOpenGL
+//  Asteroids
 //
 //  Created by kovtash on 24.08.13.
 //
