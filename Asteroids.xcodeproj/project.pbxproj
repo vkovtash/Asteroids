@@ -16,8 +16,9 @@
 		35DF6454138C40D500FF9459 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35DF6452138C40D500FF9459 /* MainWindow.xib */; };
 		35DF645E138C427700FF9459 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35DF645D138C427700FF9459 /* QuartzCore.framework */; };
 		35DF6460138C427E00FF9459 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35DF645F138C427E00FF9459 /* OpenGLES.framework */; };
-		35DF647F138C869600FF9459 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 35DF647E138C869600FF9459 /* Icon.png */; };
+		F33D393017CB2DD80026385A /* Icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = F33D392F17CB2DD80026385A /* Icon-114.png */; };
 		F374124E17C95E1000AF822B /* VKGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = F374124D17C95E1000AF822B /* VKGLView.m */; };
+		F37675FD17CB318400C8DEC4 /* Icon-57.png in Resources */ = {isa = PBXBuildFile; fileRef = F37675FC17CB318400C8DEC4 /* Icon-57.png */; };
 		F38B0ADA17C9EBAD001951BA /* VKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0AD917C9EBAD001951BA /* VKViewController.m */; };
 		F38B0B7517CA525E001951BA /* CC3Foundation.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B3A17CA525E001951BA /* CC3Foundation.m */; };
 		F38B0B7617CA525E001951BA /* CC3GLMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B3C17CA525E001951BA /* CC3GLMatrix.m */; };
@@ -81,9 +82,10 @@
 		35DF6453138C40D500FF9459 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		35DF645D138C427700FF9459 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		35DF645F138C427E00FF9459 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		35DF647E138C869600FF9459 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		F33D392F17CB2DD80026385A /* Icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-114.png"; path = "Resources/Icon-114.png"; sourceTree = "<group>"; };
 		F374124C17C95E1000AF822B /* VKGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKGLView.h; sourceTree = "<group>"; };
 		F374124D17C95E1000AF822B /* VKGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKGLView.m; sourceTree = "<group>"; };
+		F37675FC17CB318400C8DEC4 /* Icon-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-57.png"; path = "Resources/Icon-57.png"; sourceTree = "<group>"; };
 		F38B0AD817C9EBAD001951BA /* VKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKViewController.h; sourceTree = "<group>"; };
 		F38B0AD917C9EBAD001951BA /* VKViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKViewController.m; sourceTree = "<group>"; };
 		F38B0B3917CA525E001951BA /* CC3Foundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3Foundation.h; sourceTree = "<group>"; };
@@ -115,9 +117,9 @@
 		F38B0B5517CA525E001951BA /* button-pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-pressed@2x.png"; sourceTree = "<group>"; };
 		F38B0B5617CA525E001951BA /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
 		F38B0B5717CA525E001951BA /* button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button@2x.png"; sourceTree = "<group>"; };
-		F38B0B5817CA525E001951BA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		F38B0B5917CA525E001951BA /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		F38B0B5A17CA525E001951BA /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		F38B0B5817CA525E001951BA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Resources/Default-568h@2x.png"; sourceTree = "<group>"; };
+		F38B0B5917CA525E001951BA /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resources/Default.png; sourceTree = "<group>"; };
+		F38B0B5A17CA525E001951BA /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Resources/Default@2x.png"; sourceTree = "<group>"; };
 		F38B0B5B17CA525E001951BA /* dPad-Down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-Down.png"; sourceTree = "<group>"; };
 		F38B0B5C17CA525E001951BA /* dPad-Down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-Down@2x.png"; sourceTree = "<group>"; };
 		F38B0B5D17CA525E001951BA /* dPad-DownLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-DownLeft.png"; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 		35DF6446138C40D500FF9459 /* Asteroids */ = {
 			isa = PBXGroup;
 			children = (
+				F37675FB17CB314500C8DEC4 /* Resources */,
 				F38B0BA017CA5442001951BA /* SIAlertView */,
 				F38B0B3817CA525E001951BA /* CC3 */,
 				F38B0B4317CA525E001951BA /* GameObjects */,
@@ -212,20 +215,30 @@
 				35DF6452138C40D500FF9459 /* MainWindow.xib */,
 				35DF6447138C40D500FF9459 /* Supporting Files */,
 			);
-			name = Asteroids;
-			path = HelloOpenGL;
+			path = Asteroids;
 			sourceTree = "<group>";
 		};
 		35DF6447138C40D500FF9459 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				35DF647E138C869600FF9459 /* Icon.png */,
 				35DF6448138C40D500FF9459 /* Asteroids-Info.plist */,
 				35DF6449138C40D500FF9459 /* InfoPlist.strings */,
 				35DF644C138C40D500FF9459 /* Asteroids-Prefix.pch */,
 				35DF644D138C40D500FF9459 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F37675FB17CB314500C8DEC4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F37675FC17CB318400C8DEC4 /* Icon-57.png */,
+				F38B0B5817CA525E001951BA /* Default-568h@2x.png */,
+				F38B0B5917CA525E001951BA /* Default.png */,
+				F38B0B5A17CA525E001951BA /* Default@2x.png */,
+				F33D392F17CB2DD80026385A /* Icon-114.png */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		F38B0B3817CA525E001951BA /* CC3 */ = {
@@ -276,9 +289,6 @@
 				F38B0B5517CA525E001951BA /* button-pressed@2x.png */,
 				F38B0B5617CA525E001951BA /* button.png */,
 				F38B0B5717CA525E001951BA /* button@2x.png */,
-				F38B0B5817CA525E001951BA /* Default-568h@2x.png */,
-				F38B0B5917CA525E001951BA /* Default.png */,
-				F38B0B5A17CA525E001951BA /* Default@2x.png */,
 				F38B0B5B17CA525E001951BA /* dPad-Down.png */,
 				F38B0B5C17CA525E001951BA /* dPad-Down@2x.png */,
 				F38B0B5D17CA525E001951BA /* dPad-DownLeft.png */,
@@ -368,7 +378,6 @@
 			files = (
 				35DF644B138C40D500FF9459 /* InfoPlist.strings in Resources */,
 				35DF6454138C40D500FF9459 /* MainWindow.xib in Resources */,
-				35DF647F138C869600FF9459 /* Icon.png in Resources */,
 				F38B0B7917CA525E001951BA /* SimpleFragment.glsl in Resources */,
 				F38B0B7A17CA525E001951BA /* SimpleVertex.glsl in Resources */,
 				F38B0B7F17CA525E001951BA /* analogue_bg.png in Resources */,
@@ -401,6 +410,8 @@
 				F38B0B9A17CA525E001951BA /* dPad-UpRight.png in Resources */,
 				F38B0B9B17CA525E001951BA /* dPad-UpRight@2x.png in Resources */,
 				F38B0BA417CA5442001951BA /* SIAlertView.bundle in Resources */,
+				F33D393017CB2DD80026385A /* Icon-114.png in Resources */,
+				F37675FD17CB318400C8DEC4 /* Icon-57.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,9 +505,9 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "HelloOpenGL/Asteroids-Prefix.pch";
+				GCC_PREFIX_HEADER = "Asteroids/Asteroids-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = "HelloOpenGL/Asteroids-Info.plist";
+				INFOPLIST_FILE = "Asteroids/Asteroids-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = Asteroids;
 				WRAPPER_EXTENSION = app;
@@ -510,9 +521,9 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "HelloOpenGL/Asteroids-Prefix.pch";
+				GCC_PREFIX_HEADER = "Asteroids/Asteroids-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = "HelloOpenGL/Asteroids-Info.plist";
+				INFOPLIST_FILE = "Asteroids/Asteroids-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = Asteroids;
 				VALIDATE_PRODUCT = YES;
