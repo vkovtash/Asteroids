@@ -7,11 +7,13 @@
 //
 
 #import "VKShip.h"
-#define SHIP_SIZE 10
+#define DEFAULT_SHIP_SIZE 10
+#define DEFAULT_ACCELERATION_RATE 200
+#define DEFAULT_MAX_SPEED 200
 
 @implementation VKShip
 - (id) init{
-    self = [self initWithRadius:SHIP_SIZE];
+    self = [self initWithRadius:DEFAULT_SHIP_SIZE];
     return self;
 }
 
@@ -19,6 +21,9 @@
     self = [super init];
     if (self) {
         _radius = radius;
+        self.maxSpeed = DEFAULT_MAX_SPEED;
+        self.accelerationRate = DEFAULT_ACCELERATION_RATE;
+        
         Vertex vertices[4] = {
             {{-radius, -radius, 0}},
             {{0, radius, 0}},
@@ -33,4 +38,15 @@
     }
     return self;
 }
+
+- (void) accelerateWithTimeInterval:(NSTimeInterval) timeInterval{
+    double radians = self.rotation * M_PI / 180;
+    if (self.x_velocity < self.maxSpeed) {
+        self.x_velocity += 200 * timeInterval * sin(radians);
+    }
+    if (self.y_velocity < self.maxSpeed) {
+        self.y_velocity += 200 * timeInterval * cos(radians);
+    }
+}
+
 @end

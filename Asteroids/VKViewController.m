@@ -122,6 +122,18 @@ float distance(float x1, float y1, float x2, float y2){
     [self.fireButton addTarget:self action:@selector(fire) forControlEvents:UIControlEventTouchDown];
     self.fireButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin;
     
+    self.accelerationButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.accelerationButton.frame = CGRectMake(self.view.bounds.size.width-180,
+                                       self.view.bounds.size.height-90,
+                                       60,
+                                       60);
+    [self.accelerationButton setImage:[UIImage imageNamed:@"button"]
+                     forState:UIControlStateNormal];
+    [self.accelerationButton setImage:[UIImage imageNamed:@"button-pressed"] forState:UIControlStateSelected];
+    [self.accelerationButton addTarget:self action:@selector(startAcceleration) forControlEvents:UIControlEventTouchDown];
+    [self.accelerationButton addTarget:self action:@selector(stopAcceleration) forControlEvents:UIControlEventTouchUpInside];
+    self.accelerationButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin;
+    
     self.joyStik = [[JSAnalogueStick alloc] initWithFrame:CGRectMake(20,
                                                                      self.view.bounds.size.height-120,
                                                                      100,
@@ -153,6 +165,7 @@ float distance(float x1, float y1, float x2, float y2){
     
     [self.view addSubview:self.glView];
     [self.view addSubview:self.fireButton];
+    [self.view addSubview:self.accelerationButton];
     [self.view addSubview:self.joyStik];
     [self.view addSubview:self.pointsLabel];
     [self.view addSubview:self.asteroidsCountLabel];
@@ -239,7 +252,9 @@ float distance(float x1, float y1, float x2, float y2){
     [self clearWorld];
     [self prepareWorld];
     self.points = 0;
-    self.ship.velocity = 0;
+    self.ship.x_velocity = 0;
+    self.ship.y_velocity = 0;
+    self.ship.accelerating = NO;
     self.ship.rotation = 0;
     self.gameLoop = [[NSThread alloc] initWithTarget:self
                                             selector:@selector(loop:)
@@ -252,7 +267,9 @@ float distance(float x1, float y1, float x2, float y2){
 - (void) stop{
     [self.audioPlayer stop];
     [self.gameLoop cancel];
-    self.ship.velocity = 0;
+    self.ship.x_velocity = 0;
+    self.ship.y_velocity = 0;
+    self.ship.accelerating = NO;
 }
 
 - (void) win{
@@ -293,11 +310,19 @@ float distance(float x1, float y1, float x2, float y2){
     }
 }
 
+- (void) startAcceleration{
+    self.ship.accelerating = YES;
+}
+
+- (void) stopAcceleration{
+    self.ship.accelerating = NO;
+}
+
 #pragma mark - game run loop
 
 - (void) loop:(VKViewController *) gameController{
     NSThread *thread = [NSThread currentThread];
-    NSTimeInterval interval = 1.0f/GAME_LOOP_RATE;
+    NSTimeInterval interval = 1.0f / GAME_LOOP_RATE;
     while (!thread.isCancelled) {
         [gameController processGameStep:interval];
         [NSThread sleepForTimeInterval:interval];
@@ -308,15 +333,18 @@ float distance(float x1, float y1, float x2, float y2){
     if (self.gameLoop.isCancelled) {
         return;
     }
+    
     double x;
     double y;
     double radians;
     double distance;
     
     //moving ship
-    radians = self.ship.rotation * M_PI / 180;
-    double offset_x = self.ship.velocity*time * sin(radians);
-    double offset_y = self.ship.velocity*time * cos(radians);
+    if (self.ship.accelerating) {
+        [self.ship accelerateWithTimeInterval:time];
+    }
+    double offset_x = self.ship.x_velocity * time;
+    double offset_y = self.ship.y_velocity * time;
     
     //moving asteroids
     NSArray *asteroids = [self.asteroids copy];
@@ -448,11 +476,6 @@ float distance(float x1, float y1, float x2, float y2){
             }
             self.ship.rotation = rotation;
         }
-        
-        if (acceleration > 1) {
-            acceleration = 1.0f;
-        }
-        self.ship.velocity = SHIP_MAX_SPEED*acceleration;
     }
 }
 
