@@ -336,8 +336,6 @@ float distance(float x1, float y1, float x2, float y2){
     
     double x;
     double y;
-    double radians;
-    double distance;
     
     //moving ship
     if (self.ship.accelerating) {
@@ -350,32 +348,27 @@ float distance(float x1, float y1, float x2, float y2){
     NSArray *asteroids = [self.asteroids copy];
     
     for (VKAsteroid *asteroid in asteroids) {
-        radians = asteroid.direction * M_PI / 180;
-        distance = asteroid.velocity*time;
-        x = asteroid.position.x - distance * sin(radians) + offset_x;
-        y = asteroid.position.y - distance * cos(radians) + offset_y;
+        x = asteroid.position.x - asteroid.x_velocity * time + offset_x;
+        y = asteroid.position.y - asteroid.y_velocity * time + offset_y;
         asteroid.position = [self worldCoordinatesForX:x Y:y];
-        asteroid.rotation += asteroid.rotationVelocity * time;
+        [asteroid rotateWithTimeInterval:time];
     }
     
     //moving missles
     NSArray *missles = [self.missles copy];
     
-    for (VKMissle *missle in missles) {
-        radians = missle.direction * M_PI/180;
-        distance = missle.velocity*time;
-        x = missle.position.x - distance * sin(radians) + offset_x;
-        y = missle.position.y - distance * cos(radians) + offset_y;
-        
-        missle.leftDistance -= distance;
-        if (missle.leftDistance < 0) {
+    for (VKMissle *missle in missles) {        
+        if (missle.leftDistance > 0) {
+            x = missle.position.x - missle.x_velocity * time + offset_x;
+            y = missle.position.y - missle.y_velocity * time + offset_y;
+            missle.position = [self worldCoordinatesForX:x Y:y];
+            [missle decreaseLeftDistanceWithTimeInterval:time];
+        }
+        else{
             dispatch_sync(dispatch_get_main_queue(), ^{
                 [self.glView removeGLObject:missle];
                 [self.missles removeObject:missle];
             });
-        }
-        else{
-            missle.position = [self worldCoordinatesForX:x Y:y];
         }
     }
     

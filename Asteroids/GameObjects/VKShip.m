@@ -41,11 +41,11 @@
 
 - (void) accelerateWithTimeInterval:(NSTimeInterval) timeInterval{
     double radians = self.rotation * M_PI / 180;
-    if (self.x_velocity < self.maxSpeed) {
-        self.x_velocity += 200 * timeInterval * sin(radians);
+    if (_x_velocity < self.maxSpeed) {
+        _x_velocity += 200 * timeInterval * sin(radians);
     }
-    if (self.y_velocity < self.maxSpeed) {
-        self.y_velocity += 200 * timeInterval * cos(radians);
+    if (_y_velocity < self.maxSpeed) {
+        _y_velocity += 200 * timeInterval * cos(radians);
     }
 }
 

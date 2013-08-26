@@ -9,7 +9,7 @@
 #import "VKGameObject.h"
 
 @interface VKShip : VKGameObject
-@property (nonatomic,readonly) float radius;
+@property (nonatomic, readonly) float radius;
 @property (nonatomic) float accelerationRate;
 @property (nonatomic) float maxSpeed;
 @property (nonatomic) float x_velocity;
