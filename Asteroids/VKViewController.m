@@ -16,16 +16,17 @@
 #import <AVFoundation/AVFoundation.h>
 
 #define OFFSCREEN_WORLD_SIZE 100 //points
-#define WORLD_SIZE_X 800 //points
-#define WORLD_SIZE_Y 800 //points
+#define WORLD_SIZE_X 1000 //points
+#define WORLD_SIZE_Y 1000 //points
+#define INITIAL_ASTEROIDS_COUNT 10
 #define GAME_LOOP_RATE 100 //loops per second
 #define STAR_RADIUS 2 //points
 #define STARS_COUNT 30
 #define MAX_ASTEROID_SIZE 4 //in parts
 #define ASTEROID_PART_SIZE 5 //points
 #define SCORE_MULTIPLIER 5
-#define INITIAL_ASTEROIDS_COUNT 10
-#define SHIP_MAX_SPEED 200 //points per sec
+#define SHIP_MAX_SPEED 400 //points per sec
+#define SHIP_ACCELERATION_RATE 200 //poins per sec^2
 #define MAX_MISSLE_DISTANCE 300 //points
 #define MISSLE_SPEED 1800 //points per sec
 #define MIN_ASTEROID_SPEED 50 //points per sec
@@ -112,7 +113,7 @@ float distance(float x1, float y1, float x2, float y2){
 {
     [super viewDidLoad];
     self.fireButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.fireButton.frame = CGRectMake(self.view.bounds.size.width-90,
+    self.fireButton.frame = CGRectMake(self.view.bounds.size.width-160,
                                        self.view.bounds.size.height-90,
                                        60,
                                        60);
@@ -123,8 +124,8 @@ float distance(float x1, float y1, float x2, float y2){
     self.fireButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin;
     
     self.accelerationButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.accelerationButton.frame = CGRectMake(self.view.bounds.size.width-180,
-                                       self.view.bounds.size.height-90,
+    self.accelerationButton.frame = CGRectMake(self.view.bounds.size.width-80,
+                                       self.view.bounds.size.height-120,
                                        60,
                                        60);
     [self.accelerationButton setImage:[UIImage imageNamed:@"button"]
@@ -182,6 +183,9 @@ float distance(float x1, float y1, float x2, float y2){
     
     self.ship = [[VKShip alloc] init];
     self.ship.color = [UIColor yellowColor];
+    self.ship.maxSpeed = SHIP_MAX_SPEED;
+    self.ship.accelerationRate = SHIP_ACCELERATION_RATE;
+    
     [self.glView addGLObject:self.ship];
 }
 
@@ -208,9 +212,8 @@ float distance(float x1, float y1, float x2, float y2){
 #pragma mark - Game events
 
 - (void) prepareWorld{
-    int asteroids_count = INITIAL_ASTEROIDS_COUNT;
     float x, y;
-    for (int i = 0; i < asteroids_count; i++) {
+    for (int i = 0; i < INITIAL_ASTEROIDS_COUNT; i++) {
         x = arc4random_uniform((int)WORLD_SIZE_X);
         y = arc4random_uniform((int)WORLD_SIZE_Y);
         
