@@ -17,6 +17,8 @@
 		35DF645E138C427700FF9459 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35DF645D138C427700FF9459 /* QuartzCore.framework */; };
 		35DF6460138C427E00FF9459 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35DF645F138C427E00FF9459 /* OpenGLES.framework */; };
 		F33D393017CB2DD80026385A /* Icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = F33D392F17CB2DD80026385A /* Icon-114.png */; };
+		F358A19017CB3BDB00CF776C /* blast.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F358A18E17CB3BDB00CF776C /* blast.m4a */; };
+		F358A19117CB3BDB00CF776C /* explosion.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F358A18F17CB3BDB00CF776C /* explosion.m4a */; };
 		F374124E17C95E1000AF822B /* VKGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = F374124D17C95E1000AF822B /* VKGLView.m */; };
 		F375408A17CB360700B2D482 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F375408917CB360700B2D482 /* AudioToolbox.framework */; };
 		F375408C17CB368200B2D482 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F375408B17CB368200B2D482 /* AVFoundation.framework */; };
@@ -86,6 +88,8 @@
 		35DF645D138C427700FF9459 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		35DF645F138C427E00FF9459 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		F33D392F17CB2DD80026385A /* Icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-114.png"; path = "Resources/Icon-114.png"; sourceTree = "<group>"; };
+		F358A18E17CB3BDB00CF776C /* blast.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = blast.m4a; path = Resources/blast.m4a; sourceTree = "<group>"; };
+		F358A18F17CB3BDB00CF776C /* explosion.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = explosion.m4a; path = Resources/explosion.m4a; sourceTree = "<group>"; };
 		F374124C17C95E1000AF822B /* VKGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKGLView.h; sourceTree = "<group>"; };
 		F374124D17C95E1000AF822B /* VKGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKGLView.m; sourceTree = "<group>"; };
 		F375408917CB360700B2D482 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -242,6 +246,8 @@
 		F37675FB17CB314500C8DEC4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F358A18E17CB3BDB00CF776C /* blast.m4a */,
+				F358A18F17CB3BDB00CF776C /* explosion.m4a */,
 				F375408D17CB37D100B2D482 /* Searching.m4a */,
 				F37675FC17CB318400C8DEC4 /* Icon-57.png */,
 				F38B0B5817CA525E001951BA /* Default-568h@2x.png */,
@@ -424,6 +430,8 @@
 				F33D393017CB2DD80026385A /* Icon-114.png in Resources */,
 				F37675FD17CB318400C8DEC4 /* Icon-57.png in Resources */,
 				F375408E17CB37D100B2D482 /* Searching.m4a in Resources */,
+				F358A19017CB3BDB00CF776C /* blast.m4a in Resources */,
+				F358A19117CB3BDB00CF776C /* explosion.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

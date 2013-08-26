@@ -40,7 +40,10 @@ float distance(float x1, float y1, float x2, float y2){
     return sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
 }
 
-@interface VKViewController ()
+@interface VKViewController () {
+    SystemSoundID blast;
+    SystemSoundID explosion;
+}
 @property (strong, nonatomic) VKGLView *glView;
 @property (nonatomic,strong) AVAudioPlayer *audioPlayer;
 @property (strong, nonatomic) NSThread *gameLoop;
@@ -85,7 +88,7 @@ float distance(float x1, float y1, float x2, float y2){
         if (self.audioPlayer != nil) {
             [self.audioPlayer prepareToPlay];
             self.audioPlayer.numberOfLoops = -1; //Infinite
-            [self.audioPlayer setVolume:0.05];
+            [self.audioPlayer setVolume:1.0];
         }
     }
     return _audioPlayer;
@@ -153,6 +156,16 @@ float distance(float x1, float y1, float x2, float y2){
     [self.view addSubview:self.joyStik];
     [self.view addSubview:self.pointsLabel];
     [self.view addSubview:self.asteroidsCountLabel];
+    
+    //Sound effects
+    
+    NSString *path  = [[NSBundle mainBundle] pathForResource:@"blast" ofType:@"m4a"];
+    NSURL *pathURL = [NSURL fileURLWithPath : path];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef) pathURL, &blast);
+    
+    path  = [[NSBundle mainBundle] pathForResource:@"explosion" ofType:@"m4a"];
+    pathURL = [NSURL fileURLWithPath : path];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef) pathURL, &explosion);
     
     self.ship = [[VKShip alloc] init];
     self.ship.color = [UIColor yellowColor];
@@ -276,6 +289,7 @@ float distance(float x1, float y1, float x2, float y2){
         missle.leftDistance = MAX_MISSLE_DISTANCE;
         [self.glView addGLObject:missle];
         [self.missles addObject:missle];
+        AudioServicesPlaySystemSound(blast);
     }
 }
 
@@ -403,6 +417,8 @@ float distance(float x1, float y1, float x2, float y2){
                                               Position:asteroid.position];
                         }
                     }
+                    
+                    AudioServicesPlaySystemSound(explosion);
                     
                     self.points += SCORE_MULTIPLIER * MAX_ASTEROID_SIZE - asteroid.parts * SCORE_MULTIPLIER;
                     if (self.asteroids.count == 0) {
