@@ -1,6 +1,6 @@
 //
 //  VKShip.h
-//  HelloOpenGL
+//  Asteroids
 //
 //  Created by kovtash on 25.08.13.
 //

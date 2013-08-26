@@ -1,6 +1,6 @@
 //
 //  VKViewController.m
-//  HelloOpenGL
+//  Asteroids
 //
 //  Created by kovtash on 25.08.13.
 //
@@ -15,26 +15,26 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 
-#define OFFSCREEN_WORLD_SIZE 100 //points
 #define WORLD_SIZE_X 1000 //points
 #define WORLD_SIZE_Y 1000 //points
+#define FREE_SPACE_RADIUS 80 //points - radius around the ship that will be free of asteroids on the start
 #define INITIAL_ASTEROIDS_COUNT 10
+#define OFFSCREEN_WORLD_SIZE 100 //points
+#define SCORE_MULTIPLIER 5
 #define GAME_LOOP_RATE 100 //loops per second
+#define ASTEROID_MAX_SIZE 4 //in parts
+#define ASTEROID_PART_SIZE 5 //points
+#define ASTEROID_MIN_SPEED 50 //points per sec
+#define ASTEROID_MAX_SPEED 200 //points per sec
+#define ASTEROID_MIN_ROTATION_SPEED 50 //degrees per sec
+#define ASTEROID_MAX_ROTATION_SPEED 180 //degrees per sec
+#define MISSLE_MAX_DISTANCE 300 //points
+#define MISSLE_SPEED 1800 //points per se
+#define SHIP_MAX_SPEED 400 //points per sec
+#define SHIP_ACCELERATION_RATE 200 //poins per sec^2c
 #define STAR_RADIUS 2 //points
 #define STARS_COUNT 30
-#define MAX_ASTEROID_SIZE 4 //in parts
-#define ASTEROID_PART_SIZE 5 //points
-#define SCORE_MULTIPLIER 5
-#define SHIP_MAX_SPEED 400 //points per sec
-#define SHIP_ACCELERATION_RATE 200 //poins per sec^2
-#define MAX_MISSLE_DISTANCE 300 //points
-#define MISSLE_SPEED 1800 //points per sec
-#define MIN_ASTEROID_SPEED 50 //points per sec
-#define MAX_ASTEROID_SPEED 200 //points per sec
-#define MIN_ASTEROID_ROTATION_SPEED 50 //degrees per sec
-#define MAX_ASTEROID_ROTATION_SPEED 180 //degrees per sec
 #define COLLISION_RADIUS_MULTIPLIER 0.8f
-#define FREE_SPACE_RADIUS 80 //points - radius around the ship that will be free of asteroids on the start
 
 
 float distance(float x1, float y1, float x2, float y2){
@@ -201,10 +201,10 @@ float distance(float x1, float y1, float x2, float y2){
     asteroid.parts = parts;
     asteroid.position = position;
     asteroid.direction = arc4random_uniform(360);
-    asteroid.velocity = MIN_ASTEROID_SPEED +
-    arc4random_uniform(MAX_ASTEROID_SPEED - MIN_ASTEROID_SPEED);
-    asteroid.rotationVelocity = MIN_ASTEROID_ROTATION_SPEED +
-    arc4random_uniform(MAX_ASTEROID_ROTATION_SPEED - MIN_ASTEROID_ROTATION_SPEED);
+    asteroid.velocity = ASTEROID_MIN_SPEED +
+    arc4random_uniform(ASTEROID_MAX_SPEED - ASTEROID_MIN_SPEED);
+    asteroid.rotationVelocity = ASTEROID_MIN_ROTATION_SPEED +
+    arc4random_uniform(ASTEROID_MAX_ROTATION_SPEED - ASTEROID_MIN_ROTATION_SPEED);
     [self.glView addGLObject:asteroid];
     [self.asteroids addObject:asteroid];
 }
@@ -222,7 +222,7 @@ float distance(float x1, float y1, float x2, float y2){
             x = arc4random_uniform((int)WORLD_SIZE_X);
             y = arc4random_uniform((int)WORLD_SIZE_Y);
         }
-        [self makeAsteroidWithSize:arc4random_uniform(MAX_ASTEROID_SIZE-2) + 3
+        [self makeAsteroidWithSize:arc4random_uniform(ASTEROID_MAX_SIZE-2) + 3
                           Position:CGPointMake(x,y)];
     }
     
@@ -306,7 +306,7 @@ float distance(float x1, float y1, float x2, float y2){
         missle.direction = self.ship.rotation;
         missle.velocity = MISSLE_SPEED;
         missle.rotation = self.ship.rotation;
-        missle.leftDistance = MAX_MISSLE_DISTANCE;
+        missle.leftDistance = MISSLE_MAX_DISTANCE;
         [self.glView addGLObject:missle];
         [self.missles addObject:missle];
         AudioServicesPlaySystemSound(blast);
@@ -444,7 +444,7 @@ float distance(float x1, float y1, float x2, float y2){
                     
                     AudioServicesPlaySystemSound(explosion);
                     
-                    self.points += SCORE_MULTIPLIER * MAX_ASTEROID_SIZE - asteroid.parts * SCORE_MULTIPLIER;
+                    self.points += SCORE_MULTIPLIER * ASTEROID_MAX_SIZE - asteroid.parts * SCORE_MULTIPLIER;
                     if (self.asteroids.count == 0) {
                         dispatch_sync(dispatch_get_main_queue(), ^{
                             [self win];
