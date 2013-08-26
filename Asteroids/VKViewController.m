@@ -123,6 +123,16 @@ float distance(float x1, float y1, float x2, float y2){
     [self.fireButton addTarget:self action:@selector(fire) forControlEvents:UIControlEventTouchDown];
     self.fireButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin;
     
+    UILabel *fireLabel = [[UILabel alloc] initWithFrame:self.fireButton.bounds];
+    fireLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+    fireLabel.backgroundColor = [UIColor clearColor];
+    fireLabel.textAlignment = UITextAlignmentCenter;
+    fireLabel.textColor = [UIColor darkGrayColor];
+    fireLabel.shadowColor = [UIColor whiteColor];
+    fireLabel.shadowOffset = CGSizeMake(0, 1);
+    fireLabel.text = @"fire";
+    [self.fireButton addSubview:fireLabel];
+    
     self.accelerationButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.accelerationButton.frame = CGRectMake(self.view.bounds.size.width-80,
                                        self.view.bounds.size.height-120,
@@ -134,6 +144,16 @@ float distance(float x1, float y1, float x2, float y2){
     [self.accelerationButton addTarget:self action:@selector(startAcceleration) forControlEvents:UIControlEventTouchDown];
     [self.accelerationButton addTarget:self action:@selector(stopAcceleration) forControlEvents:UIControlEventTouchUpInside];
     self.accelerationButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin;
+    
+    UILabel *accelLabel = [[UILabel alloc] initWithFrame:self.fireButton.bounds];
+    accelLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+    accelLabel.backgroundColor = [UIColor clearColor];
+    accelLabel.textAlignment = UITextAlignmentCenter;
+    accelLabel.textColor = [UIColor darkGrayColor];
+    accelLabel.shadowColor = [UIColor whiteColor];
+    accelLabel.shadowOffset = CGSizeMake(0, 1);
+    accelLabel.text = @"accel";
+    [self.accelerationButton addSubview:accelLabel];
     
     self.joyStik = [[JSAnalogueStick alloc] initWithFrame:CGRectMake(20,
                                                                      self.view.bounds.size.height-120,
