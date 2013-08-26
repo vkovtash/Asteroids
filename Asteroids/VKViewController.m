@@ -302,9 +302,9 @@ float distance(float x1, float y1, float x2, float y2){
 
 - (void) win{
     [self stop];
-    SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"You win the Game!!!"
-                                                     andMessage:[NSString stringWithFormat:@"You score is %d",self.points]];
-    [alertView addButtonWithTitle:@"Restart Game"
+    SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"Congratulations"
+                                                     andMessage:[NSString stringWithFormat:@"You win tha game.\n Your score is %d", self.points]];
+    [alertView addButtonWithTitle:@"Try again"
                              type:SIAlertViewDidDismissNotification
                           handler:^(SIAlertView *alertView){
                               [self start];
@@ -316,8 +316,8 @@ float distance(float x1, float y1, float x2, float y2){
     [self stop];
     AudioServicesPlaySystemSound(death);
     SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"The game is over."
-                                                     andMessage:[NSString stringWithFormat:@"You score is %d",self.points]];
-    [alertView addButtonWithTitle:@"Restart Game"
+                                                     andMessage:[NSString stringWithFormat:@"Your score is %d", self.points]];
+    [alertView addButtonWithTitle:@"Try again"
                              type:SIAlertViewDidDismissNotification
                           handler:^(SIAlertView *alertView){
                               [self start];
