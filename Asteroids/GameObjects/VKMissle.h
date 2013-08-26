@@ -1,6 +1,6 @@
 //
 //  VKMissle.h
-//  HelloOpenGL
+//  Asteroids
 //
 //  Created by kovtash on 25.08.13.
 //
@@ -13,6 +13,9 @@
 @property (nonatomic) float direction;
 @property (nonatomic) float leftDistance;
 @property (nonatomic,readonly) float radius;
+@property (nonatomic, readonly) float x_velocity;
+@property (nonatomic, readonly) float y_velocity;
 
+- (void) decreaseLeftDistanceWithTimeInterval:(NSTimeInterval) timeInterval;
 - (id) initWithRadius:(float) radius;
 @end

@@ -1,6 +1,6 @@
 //
 //  VKViewController.m
-//  HelloOpenGL
+//  Asteroids
 //
 //  Created by kovtash on 25.08.13.
 //
@@ -15,25 +15,26 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 
+#define WORLD_SIZE_X 1000 //points
+#define WORLD_SIZE_Y 1000 //points
+#define FREE_SPACE_RADIUS 80 //points - radius around the ship that will be free of asteroids on the start
+#define INITIAL_ASTEROIDS_COUNT 10
 #define OFFSCREEN_WORLD_SIZE 100 //points
-#define WORLD_SIZE_X 800 //points
-#define WORLD_SIZE_Y 800 //points
+#define SCORE_MULTIPLIER 5
 #define GAME_LOOP_RATE 100 //loops per second
+#define ASTEROID_MAX_SIZE 4 //in parts
+#define ASTEROID_PART_SIZE 5 //points
+#define ASTEROID_MIN_SPEED 50 //points per sec
+#define ASTEROID_MAX_SPEED 200 //points per sec
+#define ASTEROID_MIN_ROTATION_SPEED 50 //degrees per sec
+#define ASTEROID_MAX_ROTATION_SPEED 180 //degrees per sec
+#define MISSLE_MAX_DISTANCE 300 //points
+#define MISSLE_SPEED 1800 //points per se
+#define SHIP_MAX_SPEED 400 //points per sec
+#define SHIP_ACCELERATION_RATE 200 //poins per sec^2c
 #define STAR_RADIUS 2 //points
 #define STARS_COUNT 30
-#define MAX_ASTEROID_SIZE 4 //in parts
-#define ASTEROID_PART_SIZE 5 //points
-#define SCORE_MULTIPLIER 5
-#define INITIAL_ASTEROIDS_COUNT 10
-#define SHIP_MAX_SPEED 200 //points per sec
-#define MAX_MISSLE_DISTANCE 300 //points
-#define MISSLE_SPEED 1800 //points per sec
-#define MIN_ASTEROID_SPEED 50 //points per sec
-#define MAX_ASTEROID_SPEED 200 //points per sec
-#define MIN_ASTEROID_ROTATION_SPEED 50 //degrees per sec
-#define MAX_ASTEROID_ROTATION_SPEED 180 //degrees per sec
 #define COLLISION_RADIUS_MULTIPLIER 0.8f
-#define FREE_SPACE_RADIUS 80 //points - radius around the ship that will be free of asteroids on the start
 
 
 float distance(float x1, float y1, float x2, float y2){
@@ -112,7 +113,7 @@ float distance(float x1, float y1, float x2, float y2){
 {
     [super viewDidLoad];
     self.fireButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.fireButton.frame = CGRectMake(self.view.bounds.size.width-90,
+    self.fireButton.frame = CGRectMake(self.view.bounds.size.width-160,
                                        self.view.bounds.size.height-90,
                                        60,
                                        60);
@@ -121,6 +122,38 @@ float distance(float x1, float y1, float x2, float y2){
     [self.fireButton setImage:[UIImage imageNamed:@"button-pressed"] forState:UIControlStateSelected];
     [self.fireButton addTarget:self action:@selector(fire) forControlEvents:UIControlEventTouchDown];
     self.fireButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin;
+    
+    UILabel *fireLabel = [[UILabel alloc] initWithFrame:self.fireButton.bounds];
+    fireLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+    fireLabel.backgroundColor = [UIColor clearColor];
+    fireLabel.textAlignment = UITextAlignmentCenter;
+    fireLabel.textColor = [UIColor darkGrayColor];
+    fireLabel.shadowColor = [UIColor whiteColor];
+    fireLabel.shadowOffset = CGSizeMake(0, 1);
+    fireLabel.text = @"fire";
+    [self.fireButton addSubview:fireLabel];
+    
+    self.accelerationButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.accelerationButton.frame = CGRectMake(self.view.bounds.size.width-80,
+                                       self.view.bounds.size.height-120,
+                                       60,
+                                       60);
+    [self.accelerationButton setImage:[UIImage imageNamed:@"button"]
+                     forState:UIControlStateNormal];
+    [self.accelerationButton setImage:[UIImage imageNamed:@"button-pressed"] forState:UIControlStateSelected];
+    [self.accelerationButton addTarget:self action:@selector(startAcceleration) forControlEvents:UIControlEventTouchDown];
+    [self.accelerationButton addTarget:self action:@selector(stopAcceleration) forControlEvents:UIControlEventTouchUpInside];
+    self.accelerationButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin;
+    
+    UILabel *accelLabel = [[UILabel alloc] initWithFrame:self.fireButton.bounds];
+    accelLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+    accelLabel.backgroundColor = [UIColor clearColor];
+    accelLabel.textAlignment = UITextAlignmentCenter;
+    accelLabel.textColor = [UIColor darkGrayColor];
+    accelLabel.shadowColor = [UIColor whiteColor];
+    accelLabel.shadowOffset = CGSizeMake(0, 1);
+    accelLabel.text = @"accel";
+    [self.accelerationButton addSubview:accelLabel];
     
     self.joyStik = [[JSAnalogueStick alloc] initWithFrame:CGRectMake(20,
                                                                      self.view.bounds.size.height-120,
@@ -153,6 +186,7 @@ float distance(float x1, float y1, float x2, float y2){
     
     [self.view addSubview:self.glView];
     [self.view addSubview:self.fireButton];
+    [self.view addSubview:self.accelerationButton];
     [self.view addSubview:self.joyStik];
     [self.view addSubview:self.pointsLabel];
     [self.view addSubview:self.asteroidsCountLabel];
@@ -169,6 +203,9 @@ float distance(float x1, float y1, float x2, float y2){
     
     self.ship = [[VKShip alloc] init];
     self.ship.color = [UIColor yellowColor];
+    self.ship.maxSpeed = SHIP_MAX_SPEED;
+    self.ship.accelerationRate = SHIP_ACCELERATION_RATE;
+    
     [self.glView addGLObject:self.ship];
 }
 
@@ -184,10 +221,10 @@ float distance(float x1, float y1, float x2, float y2){
     asteroid.parts = parts;
     asteroid.position = position;
     asteroid.direction = arc4random_uniform(360);
-    asteroid.velocity = MIN_ASTEROID_SPEED +
-    arc4random_uniform(MAX_ASTEROID_SPEED - MIN_ASTEROID_SPEED);
-    asteroid.rotationVelocity = MIN_ASTEROID_ROTATION_SPEED +
-    arc4random_uniform(MAX_ASTEROID_ROTATION_SPEED - MIN_ASTEROID_ROTATION_SPEED);
+    asteroid.velocity = ASTEROID_MIN_SPEED +
+    arc4random_uniform(ASTEROID_MAX_SPEED - ASTEROID_MIN_SPEED);
+    asteroid.rotationVelocity = ASTEROID_MIN_ROTATION_SPEED +
+    arc4random_uniform(ASTEROID_MAX_ROTATION_SPEED - ASTEROID_MIN_ROTATION_SPEED);
     [self.glView addGLObject:asteroid];
     [self.asteroids addObject:asteroid];
 }
@@ -195,9 +232,8 @@ float distance(float x1, float y1, float x2, float y2){
 #pragma mark - Game events
 
 - (void) prepareWorld{
-    int asteroids_count = INITIAL_ASTEROIDS_COUNT;
     float x, y;
-    for (int i = 0; i < asteroids_count; i++) {
+    for (int i = 0; i < INITIAL_ASTEROIDS_COUNT; i++) {
         x = arc4random_uniform((int)WORLD_SIZE_X);
         y = arc4random_uniform((int)WORLD_SIZE_Y);
         
@@ -206,7 +242,7 @@ float distance(float x1, float y1, float x2, float y2){
             x = arc4random_uniform((int)WORLD_SIZE_X);
             y = arc4random_uniform((int)WORLD_SIZE_Y);
         }
-        [self makeAsteroidWithSize:arc4random_uniform(MAX_ASTEROID_SIZE-2) + 3
+        [self makeAsteroidWithSize:arc4random_uniform(ASTEROID_MAX_SIZE-2) + 3
                           Position:CGPointMake(x,y)];
     }
     
@@ -239,7 +275,9 @@ float distance(float x1, float y1, float x2, float y2){
     [self clearWorld];
     [self prepareWorld];
     self.points = 0;
-    self.ship.velocity = 0;
+    self.ship.x_velocity = 0;
+    self.ship.y_velocity = 0;
+    self.ship.accelerating = NO;
     self.ship.rotation = 0;
     self.gameLoop = [[NSThread alloc] initWithTarget:self
                                             selector:@selector(loop:)
@@ -252,7 +290,9 @@ float distance(float x1, float y1, float x2, float y2){
 - (void) stop{
     [self.audioPlayer stop];
     [self.gameLoop cancel];
-    self.ship.velocity = 0;
+    self.ship.x_velocity = 0;
+    self.ship.y_velocity = 0;
+    self.ship.accelerating = NO;
 }
 
 - (void) win{
@@ -286,18 +326,26 @@ float distance(float x1, float y1, float x2, float y2){
         missle.direction = self.ship.rotation;
         missle.velocity = MISSLE_SPEED;
         missle.rotation = self.ship.rotation;
-        missle.leftDistance = MAX_MISSLE_DISTANCE;
+        missle.leftDistance = MISSLE_MAX_DISTANCE;
         [self.glView addGLObject:missle];
         [self.missles addObject:missle];
         AudioServicesPlaySystemSound(blast);
     }
 }
 
+- (void) startAcceleration{
+    self.ship.accelerating = YES;
+}
+
+- (void) stopAcceleration{
+    self.ship.accelerating = NO;
+}
+
 #pragma mark - game run loop
 
 - (void) loop:(VKViewController *) gameController{
     NSThread *thread = [NSThread currentThread];
-    NSTimeInterval interval = 1.0f/GAME_LOOP_RATE;
+    NSTimeInterval interval = 1.0f / GAME_LOOP_RATE;
     while (!thread.isCancelled) {
         [gameController processGameStep:interval];
         [NSThread sleepForTimeInterval:interval];
@@ -308,46 +356,42 @@ float distance(float x1, float y1, float x2, float y2){
     if (self.gameLoop.isCancelled) {
         return;
     }
+    
     double x;
     double y;
-    double radians;
-    double distance;
     
     //moving ship
-    radians = self.ship.rotation * M_PI / 180;
-    double offset_x = self.ship.velocity*time * sin(radians);
-    double offset_y = self.ship.velocity*time * cos(radians);
+    if (self.ship.accelerating) {
+        [self.ship accelerateWithTimeInterval:time];
+    }
+    double offset_x = self.ship.x_velocity * time;
+    double offset_y = self.ship.y_velocity * time;
     
     //moving asteroids
     NSArray *asteroids = [self.asteroids copy];
     
     for (VKAsteroid *asteroid in asteroids) {
-        radians = asteroid.direction * M_PI / 180;
-        distance = asteroid.velocity*time;
-        x = asteroid.position.x - distance * sin(radians) + offset_x;
-        y = asteroid.position.y - distance * cos(radians) + offset_y;
+        x = asteroid.position.x - asteroid.x_velocity * time + offset_x;
+        y = asteroid.position.y - asteroid.y_velocity * time + offset_y;
         asteroid.position = [self worldCoordinatesForX:x Y:y];
-        asteroid.rotation += asteroid.rotationVelocity * time;
+        [asteroid rotateWithTimeInterval:time];
     }
     
     //moving missles
     NSArray *missles = [self.missles copy];
     
-    for (VKMissle *missle in missles) {
-        radians = missle.direction * M_PI/180;
-        distance = missle.velocity*time;
-        x = missle.position.x - distance * sin(radians) + offset_x;
-        y = missle.position.y - distance * cos(radians) + offset_y;
-        
-        missle.leftDistance -= distance;
-        if (missle.leftDistance < 0) {
+    for (VKMissle *missle in missles) {        
+        if (missle.leftDistance > 0) {
+            x = missle.position.x - missle.x_velocity * time + offset_x;
+            y = missle.position.y - missle.y_velocity * time + offset_y;
+            missle.position = [self worldCoordinatesForX:x Y:y];
+            [missle decreaseLeftDistanceWithTimeInterval:time];
+        }
+        else{
             dispatch_sync(dispatch_get_main_queue(), ^{
                 [self.glView removeGLObject:missle];
                 [self.missles removeObject:missle];
             });
-        }
-        else{
-            missle.position = [self worldCoordinatesForX:x Y:y];
         }
     }
     
@@ -420,7 +464,7 @@ float distance(float x1, float y1, float x2, float y2){
                     
                     AudioServicesPlaySystemSound(explosion);
                     
-                    self.points += SCORE_MULTIPLIER * MAX_ASTEROID_SIZE - asteroid.parts * SCORE_MULTIPLIER;
+                    self.points += SCORE_MULTIPLIER * ASTEROID_MAX_SIZE - asteroid.parts * SCORE_MULTIPLIER;
                     if (self.asteroids.count == 0) {
                         dispatch_sync(dispatch_get_main_queue(), ^{
                             [self win];
@@ -448,11 +492,6 @@ float distance(float x1, float y1, float x2, float y2){
             }
             self.ship.rotation = rotation;
         }
-        
-        if (acceleration > 1) {
-            acceleration = 1.0f;
-        }
-        self.ship.velocity = SHIP_MAX_SPEED*acceleration;
     }
 }
 

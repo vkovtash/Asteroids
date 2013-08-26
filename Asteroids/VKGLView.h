@@ -1,6 +1,6 @@
 //
-//  VKTestView.h
-//  HelloOpenGL
+//  VKGLView.h
+//  Asteroids
 //
 //  Created by kovtash on 25.08.13.
 //
