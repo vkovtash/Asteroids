@@ -9,9 +9,22 @@
 #import "VKShip.h"
 #define DEFAULT_SHIP_SIZE 10
 #define DEFAULT_ACCELERATION_RATE 200
-#define DEFAULT_MAX_SPEED 200
+#define DEFAULT_MAX_SPEED 400
+
+@interface VKShip(){
+    double _rotation_radians;
+}
+@end
 
 @implementation VKShip
+
+- (void) setRotation:(CGFloat)rotation{
+    if (self.rotation != rotation) {
+        [super setRotation:rotation];
+        _rotation_radians = self.rotation * M_PI / 180;
+    }
+}
+
 - (id) init{
     self = [self initWithRadius:DEFAULT_SHIP_SIZE];
     return self;
@@ -40,12 +53,22 @@
 }
 
 - (void) accelerateWithTimeInterval:(NSTimeInterval) timeInterval{
-    double radians = self.rotation * M_PI / 180;
-    if (_x_velocity < self.maxSpeed) {
-        _x_velocity += 200 * timeInterval * sin(radians);
+    _x_velocity += self.accelerationRate * timeInterval * sin(_rotation_radians);
+    
+    if (_x_velocity < -_maxSpeed){
+        _x_velocity = -_maxSpeed;
     }
-    if (_y_velocity < self.maxSpeed) {
-        _y_velocity += 200 * timeInterval * cos(radians);
+    else if (_x_velocity > _maxSpeed){
+        _x_velocity = _maxSpeed;
+    }
+
+    _y_velocity += self.accelerationRate * timeInterval * cos(_rotation_radians);
+    
+    if (_y_velocity < -_maxSpeed) {
+        _y_velocity = -_maxSpeed;
+    }
+    else if (_y_velocity > _maxSpeed){
+        _y_velocity = _maxSpeed;
     }
 }
 
