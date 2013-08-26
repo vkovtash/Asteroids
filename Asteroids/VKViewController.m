@@ -303,7 +303,7 @@ float distance(float x1, float y1, float x2, float y2){
 - (void) win{
     [self stop];
     SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"Congratulations"
-                                                     andMessage:[NSString stringWithFormat:@"You win tha game.\n Your score is %d", self.points]];
+                                                     andMessage:[NSString stringWithFormat:@"You win the game.\n Your score is %d", self.points]];
     [alertView addButtonWithTitle:@"Try again"
                              type:SIAlertViewDidDismissNotification
                           handler:^(SIAlertView *alertView){
@@ -472,9 +472,7 @@ float distance(float x1, float y1, float x2, float y2){
                     
                     self.points += SCORE_MULTIPLIER * ASTEROID_MAX_SIZE - asteroid.parts * SCORE_MULTIPLIER;
                     if (self.asteroids.count == 0) {
-                        dispatch_sync(dispatch_get_main_queue(), ^{
-                            [self win];
-                        });
+                        [self win];
                     }
                 });
                 break;
