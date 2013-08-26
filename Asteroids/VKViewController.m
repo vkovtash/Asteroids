@@ -12,6 +12,8 @@
 #import "VKMissle.h"
 #import "SIAlertView.h"
 #import "VKStar.h"
+#import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
 
 #define OFFSCREEN_WORLD_SIZE 100 //points
 #define WORLD_SIZE_X 800 //points
@@ -40,6 +42,7 @@ float distance(float x1, float y1, float x2, float y2){
 
 @interface VKViewController ()
 @property (strong, nonatomic) VKGLView *glView;
+@property (nonatomic,strong) AVAudioPlayer *audioPlayer;
 @property (strong, nonatomic) NSThread *gameLoop;
 @property (strong, nonatomic) UIButton *fireButton;
 @property (strong, nonatomic) UIButton *accelerationButton;
@@ -68,6 +71,25 @@ float distance(float x1, float y1, float x2, float y2){
 }
 
 #pragma mark - Private properties
+
+- (AVAudioPlayer *) audioPlayer{
+    if (_audioPlayer == nil) {
+        NSError *error = nil;
+        _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Searching.m4a",
+                                                                                            [[NSBundle mainBundle] resourcePath]]] error:&error];
+        
+        if (error != nil){
+            NSLog(@"Error loading audio %@",error.description);
+        }
+        
+        if (self.audioPlayer != nil) {
+            [self.audioPlayer prepareToPlay];
+            self.audioPlayer.numberOfLoops = -1; //Infinite
+            [self.audioPlayer setVolume:0.05];
+        }
+    }
+    return _audioPlayer;
+}
 
 - (void) setPoints:(int)points{
     _points = points;
@@ -210,10 +232,12 @@ float distance(float x1, float y1, float x2, float y2){
                                             selector:@selector(loop:)
                                               object:self];
     [self.gameLoop setThreadPriority:1.0];
+    [self.audioPlayer play];
     [self.gameLoop start];
 }
 
 - (void) stop{
+    [self.audioPlayer stop];
     [self.gameLoop cancel];
     self.ship.velocity = 0;
 }

@@ -18,6 +18,9 @@
 		35DF6460138C427E00FF9459 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35DF645F138C427E00FF9459 /* OpenGLES.framework */; };
 		F33D393017CB2DD80026385A /* Icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = F33D392F17CB2DD80026385A /* Icon-114.png */; };
 		F374124E17C95E1000AF822B /* VKGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = F374124D17C95E1000AF822B /* VKGLView.m */; };
+		F375408A17CB360700B2D482 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F375408917CB360700B2D482 /* AudioToolbox.framework */; };
+		F375408C17CB368200B2D482 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F375408B17CB368200B2D482 /* AVFoundation.framework */; };
+		F375408E17CB37D100B2D482 /* Searching.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F375408D17CB37D100B2D482 /* Searching.m4a */; };
 		F37675FD17CB318400C8DEC4 /* Icon-57.png in Resources */ = {isa = PBXBuildFile; fileRef = F37675FC17CB318400C8DEC4 /* Icon-57.png */; };
 		F38B0ADA17C9EBAD001951BA /* VKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0AD917C9EBAD001951BA /* VKViewController.m */; };
 		F38B0B7517CA525E001951BA /* CC3Foundation.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B3A17CA525E001951BA /* CC3Foundation.m */; };
@@ -85,6 +88,9 @@
 		F33D392F17CB2DD80026385A /* Icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-114.png"; path = "Resources/Icon-114.png"; sourceTree = "<group>"; };
 		F374124C17C95E1000AF822B /* VKGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKGLView.h; sourceTree = "<group>"; };
 		F374124D17C95E1000AF822B /* VKGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKGLView.m; sourceTree = "<group>"; };
+		F375408917CB360700B2D482 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		F375408B17CB368200B2D482 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		F375408D17CB37D100B2D482 /* Searching.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Searching.m4a; path = Resources/Searching.m4a; sourceTree = "<group>"; };
 		F37675FC17CB318400C8DEC4 /* Icon-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-57.png"; path = "Resources/Icon-57.png"; sourceTree = "<group>"; };
 		F38B0AD817C9EBAD001951BA /* VKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKViewController.h; sourceTree = "<group>"; };
 		F38B0AD917C9EBAD001951BA /* VKViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKViewController.m; sourceTree = "<group>"; };
@@ -158,6 +164,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F375408C17CB368200B2D482 /* AVFoundation.framework in Frameworks */,
+				F375408A17CB360700B2D482 /* AudioToolbox.framework in Frameworks */,
 				35DF6460138C427E00FF9459 /* OpenGLES.framework in Frameworks */,
 				35DF645E138C427700FF9459 /* QuartzCore.framework in Frameworks */,
 				35DF6441138C40D500FF9459 /* UIKit.framework in Frameworks */,
@@ -189,6 +197,8 @@
 		35DF643F138C40D500FF9459 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F375408B17CB368200B2D482 /* AVFoundation.framework */,
+				F375408917CB360700B2D482 /* AudioToolbox.framework */,
 				35DF645F138C427E00FF9459 /* OpenGLES.framework */,
 				35DF645D138C427700FF9459 /* QuartzCore.framework */,
 				35DF6440138C40D500FF9459 /* UIKit.framework */,
@@ -232,6 +242,7 @@
 		F37675FB17CB314500C8DEC4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F375408D17CB37D100B2D482 /* Searching.m4a */,
 				F37675FC17CB318400C8DEC4 /* Icon-57.png */,
 				F38B0B5817CA525E001951BA /* Default-568h@2x.png */,
 				F38B0B5917CA525E001951BA /* Default.png */,
@@ -412,6 +423,7 @@
 				F38B0BA417CA5442001951BA /* SIAlertView.bundle in Resources */,
 				F33D393017CB2DD80026385A /* Icon-114.png in Resources */,
 				F37675FD17CB318400C8DEC4 /* Icon-57.png in Resources */,
+				F375408E17CB37D100B2D482 /* Searching.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
