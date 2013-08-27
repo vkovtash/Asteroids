@@ -280,7 +280,7 @@ float distance(float x1, float y1, float x2, float y2){
     
     if (!self.stars){
         self.stars = [NSMutableArray array];
-        for (int i; i < STARS_COUNT; i++) {
+        for (int i = 0; i < STARS_COUNT; i++) {
             VKStar *star = [[VKStar alloc] initWithRadius:STAR_RADIUS];
             x = arc4random_uniform((int)WORLD_SIZE_X);
             y = arc4random_uniform((int)WORLD_SIZE_Y);
