@@ -312,12 +312,13 @@ float distance(float x1, float y1, float x2, float y2){
     self.gameLoop = [[NSThread alloc] initWithTarget:self
                                             selector:@selector(loop:)
                                               object:self];
+    
     [self.audioPlayer play];
     [self.gameLoop start];
 }
 
 - (void) stop{
-    [self.audioPlayer pause];
+    [self.audioPlayer next];
     [self.gameLoop cancel];
     self.ship.x_velocity = 0;
     self.ship.y_velocity = 0;

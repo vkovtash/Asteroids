@@ -71,13 +71,16 @@
 }
 
 - (void) next{
-    [self.audioPlayer stop];
+    BOOL shouldContinuePlayback = self.audioPlayer.isPlaying;
+    [self stop];
     self.currentIndex++;
-    [self.audioPlayer play];
+    if (shouldContinuePlayback) {
+        [self.audioPlayer play];
+    }
 }
 
-- (void) shuffle{
-    for (int i = 0; i < self.internalAudioFiles.count; ++i) {
+- (void) shuffle{    
+    for (int i = 0; i < self.internalAudioFiles.count; i++) {
         [self.internalAudioFiles exchangeObjectAtIndex:i
                                      withObjectAtIndex:arc4random_uniform(self.internalAudioFiles.count)];
     }
