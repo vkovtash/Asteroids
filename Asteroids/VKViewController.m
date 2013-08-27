@@ -441,19 +441,19 @@ float distance(float x1, float y1, float x2, float y2){
 }
 
 - (CGPoint) worldCoordinatesForX:(float) x Y:(float) y{
-    if (x > WORLD_SIZE_X - OFFSCREEN_WORLD_SIZE ) {
-        x = -OFFSCREEN_WORLD_SIZE;
-    }
-    else if (x < -OFFSCREEN_WORLD_SIZE){
-        x = WORLD_SIZE_X - OFFSCREEN_WORLD_SIZE;
-    }
-    
-    if (y > WORLD_SIZE_Y - OFFSCREEN_WORLD_SIZE) {
-        y = -OFFSCREEN_WORLD_SIZE;
-    }
-    else if (y < -OFFSCREEN_WORLD_SIZE){
-        y = WORLD_SIZE_Y - OFFSCREEN_WORLD_SIZE;
-    }
+    if (x > WORLD_SIZE_X - OFFSCREEN_WORLD_SIZE) {
+     x -= WORLD_SIZE_X;
+     }
+     else if (x < -OFFSCREEN_WORLD_SIZE){
+     x += WORLD_SIZE_X - OFFSCREEN_WORLD_SIZE;
+     }
+     
+     if (y > WORLD_SIZE_Y - OFFSCREEN_WORLD_SIZE) {
+     y -= WORLD_SIZE_Y;
+     }
+     else if (y < -OFFSCREEN_WORLD_SIZE){
+     y += WORLD_SIZE_Y - OFFSCREEN_WORLD_SIZE;
+     }
     return CGPointMake(x, y);
 }
 
