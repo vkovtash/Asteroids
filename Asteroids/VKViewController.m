@@ -14,6 +14,7 @@
 #import "VKStar.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
+#import "VKPlayer.h"
 
 #define WORLD_SIZE_X 1200 //points
 #define WORLD_SIZE_Y 1200 //points
@@ -47,7 +48,7 @@ float distance(float x1, float y1, float x2, float y2){
     SystemSoundID death;
 }
 @property (strong, nonatomic) VKGLView *glView;
-@property (nonatomic,strong) AVAudioPlayer *audioPlayer;
+@property (nonatomic,strong) VKPlayer *audioPlayer;
 @property (strong, nonatomic) NSThread *gameLoop;
 @property (strong, nonatomic) UIButton *fireButton;
 @property (strong, nonatomic) UIButton *accelerationButton;
@@ -79,21 +80,19 @@ float distance(float x1, float y1, float x2, float y2){
 
 #pragma mark - Private properties
 
-- (AVAudioPlayer *) audioPlayer{
+- (VKPlayer *) audioPlayer{
     if (_audioPlayer == nil) {
-        NSError *error = nil;
-        _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Searching.m4a",
-                                                                                            [[NSBundle mainBundle] resourcePath]]] error:&error];
-        
-        if (error != nil){
-            NSLog(@"Error loading audio %@",error.description);
-        }
-        
-        if (self.audioPlayer != nil) {
-            [self.audioPlayer prepareToPlay];
-            self.audioPlayer.numberOfLoops = -1; //Infinite
-            [self.audioPlayer setVolume:1.0];
-        }
+        _audioPlayer = [[VKPlayer alloc] init];
+        NSBundle *mainBundle = [NSBundle mainBundle];
+        [_audioPlayer appendAudioFile:[NSURL fileURLWithPath:[mainBundle pathForResource:@"All_of_Us" ofType:@"m4a"]]];
+        [_audioPlayer appendAudioFile:[NSURL fileURLWithPath:[mainBundle pathForResource:@"Come_and_Find_Me" ofType:@"m4a"]]];
+        [_audioPlayer appendAudioFile:[NSURL fileURLWithPath:[mainBundle pathForResource:@"Digital_Native" ofType:@"m4a"]]];
+        [_audioPlayer appendAudioFile:[NSURL fileURLWithPath:[mainBundle pathForResource:@"HHavok-intro" ofType:@"m4a"]]];
+        [_audioPlayer appendAudioFile:[NSURL fileURLWithPath:[mainBundle pathForResource:@"HHavok-main" ofType:@"m4a"]]];
+        [_audioPlayer appendAudioFile:[NSURL fileURLWithPath:[mainBundle pathForResource:@"Underclocked" ofType:@"m4a"]]];
+        [_audioPlayer appendAudioFile:[NSURL fileURLWithPath:[mainBundle pathForResource:@"We're_the_Resistors" ofType:@"m4a"]]];
+        [_audioPlayer appendAudioFile:[NSURL fileURLWithPath:[mainBundle pathForResource:@"Searching" ofType:@"m4a"]]];
+        [_audioPlayer shuffle];
     }
     return _audioPlayer;
 }
@@ -318,7 +317,7 @@ float distance(float x1, float y1, float x2, float y2){
 }
 
 - (void) stop{
-    [self.audioPlayer stop];
+    [self.audioPlayer pause];
     [self.gameLoop cancel];
     self.ship.x_velocity = 0;
     self.ship.y_velocity = 0;
