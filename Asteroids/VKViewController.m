@@ -13,7 +13,6 @@
 #import "SIAlertView.h"
 #import "VKStar.h"
 #import <AudioToolbox/AudioToolbox.h>
-#import <AVFoundation/AVFoundation.h>
 #import "VKPlayer.h"
 
 #define WORLD_SIZE_X 1200 //points
@@ -30,11 +29,12 @@
 #define ASTEROID_MIN_ROTATION_SPEED 50 //degrees per sec
 #define ASTEROID_MAX_ROTATION_SPEED 180 //degrees per sec
 #define MISSLE_MAX_DISTANCE 300 //points
-#define MISSLE_SPEED 1800 //points per se
+#define MISSLE_SPEED 1800 //points per sec
 #define SHIP_MAX_SPEED 400 //points per sec
 #define SHIP_ACCELERATION_RATE 200 //poins per sec^2c
 #define STAR_RADIUS 2 //points
-#define STARS_COUNT 30
+#define STARS_DENCITY 1 //starts per start STARS_GENERATOR_PART_SIZE
+#define STARS_GENERATOR_PART_SIZE 160 //points
 #define COLLISION_RADIUS_MULTIPLIER 0.8f
 
 
@@ -279,13 +279,26 @@ float distance(float x1, float y1, float x2, float y2){
     
     if (!self.stars){
         self.stars = [NSMutableArray array];
-        for (int i = 0; i < STARS_COUNT; i++) {
-            VKStar *star = [[VKStar alloc] initWithRadius:STAR_RADIUS];
-            x = arc4random_uniform((int)WORLD_SIZE_X);
-            y = arc4random_uniform((int)WORLD_SIZE_Y);
-            star.position = CGPointMake(x, y);
-            [self.stars addObject:star];
-            [self.glView addGLObject:star];
+        
+        int part_size = 160;
+        int x_parts = WORLD_SIZE_X / STARS_GENERATOR_PART_SIZE + 1;
+        int y_parts = WORLD_SIZE_Y / STARS_GENERATOR_PART_SIZE + 1;
+        int stars_per_part = STARS_DENCITY;
+        
+        int star_x;
+        int star_y;
+        
+        for (int x = 0; x < x_parts; x++) {
+            for (int y = 0; y < y_parts; y++) {
+                for (int i = 0; i < stars_per_part; i++) {
+                    star_x = x * part_size + arc4random_uniform(part_size);
+                    star_y = y * part_size + arc4random_uniform(part_size);
+                    VKStar *star = [[VKStar alloc] initWithRadius:STAR_RADIUS];
+                    star.position = [self worldCoordinatesForX:star_x Y:star_y];
+                    [self.stars addObject:star];
+                    [self.glView addGLObject:star];
+                }
+            }
         }
     }
 }
