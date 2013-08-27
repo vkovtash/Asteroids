@@ -52,9 +52,11 @@ float distance(float x1, float y1, float x2, float y2){
 @property (strong, nonatomic) UIButton *fireButton;
 @property (strong, nonatomic) UIButton *accelerationButton;
 @property (strong, nonatomic) JSAnalogueStick *joyStik;
+@property (nonatomic) int level;
 @property (nonatomic) int points;
 @property (strong, nonatomic) UILabel *pointsLabel;
 @property (strong, nonatomic) UILabel *asteroidsCountLabel;
+@property (strong, nonatomic) UILabel *levelLabel;
 @end
 
 @implementation VKViewController
@@ -102,6 +104,11 @@ float distance(float x1, float y1, float x2, float y2){
     self.asteroidsCountLabel.text = [NSString stringWithFormat:@"ASTEROIDS: %d",self.asteroids.count];
 }
 
+- (void) setLevel:(int)level{
+    _level = level;
+    self.levelLabel.text = [NSString stringWithFormat:@"LEVEL %d",level];
+}
+
 #pragma mark - ViewController life cycle
 
 - (void) viewWillAppear:(BOOL)animated{
@@ -113,6 +120,9 @@ float distance(float x1, float y1, float x2, float y2){
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //int views
+    
     self.fireButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.fireButton.frame = CGRectMake(self.view.bounds.size.width-160,
                                        self.view.bounds.size.height-90,
@@ -127,7 +137,7 @@ float distance(float x1, float y1, float x2, float y2){
     UILabel *fireLabel = [[UILabel alloc] initWithFrame:self.fireButton.bounds];
     fireLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     fireLabel.backgroundColor = [UIColor clearColor];
-    fireLabel.textAlignment = UITextAlignmentCenter;
+    fireLabel.textAlignment = NSTextAlignmentCenter;
     fireLabel.textColor = [UIColor darkGrayColor];
     fireLabel.shadowColor = [UIColor whiteColor];
     fireLabel.shadowOffset = CGSizeMake(0, 1);
@@ -149,7 +159,7 @@ float distance(float x1, float y1, float x2, float y2){
     UILabel *accelLabel = [[UILabel alloc] initWithFrame:self.fireButton.bounds];
     accelLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     accelLabel.backgroundColor = [UIColor clearColor];
-    accelLabel.textAlignment = UITextAlignmentCenter;
+    accelLabel.textAlignment = NSTextAlignmentCenter;
     accelLabel.textColor = [UIColor darkGrayColor];
     accelLabel.shadowColor = [UIColor whiteColor];
     accelLabel.shadowOffset = CGSizeMake(0, 1);
@@ -169,16 +179,26 @@ float distance(float x1, float y1, float x2, float y2){
                                                                  20)];
     self.pointsLabel.backgroundColor = [UIColor clearColor];
     self.pointsLabel.textColor = [UIColor yellowColor];
-    self.pointsLabel.font = [UIFont fontWithName:@"Gill-Sans" size:18];
+    self.pointsLabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:18];
     
-    self.asteroidsCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2+20,
+    self.asteroidsCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width-140,
                                                                          20,
-                                                                         self.view.bounds.size.width/2-20,
+                                                                         140,
                                                                          20)];
     self.asteroidsCountLabel.backgroundColor = [UIColor clearColor];
     self.asteroidsCountLabel.textColor = [UIColor yellowColor];
-    self.asteroidsCountLabel.font = [UIFont fontWithName:@"Gill-Sans" size:18];
+    self.asteroidsCountLabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:18];
     self.asteroidsCountLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleLeftMargin;
+    
+    self.levelLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,
+                                                                20,
+                                                                self.view.bounds.size.width - 40,
+                                                                20)];
+    self.levelLabel.backgroundColor = [UIColor clearColor];
+    self.levelLabel.textColor = [UIColor yellowColor];
+    self.levelLabel.font = [UIFont fontWithName:@"STHeitiTC-Medium" size:20];
+    self.levelLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleWidth;
+    self.levelLabel.textAlignment = NSTextAlignmentCenter;
    
     self.glView = [[VKGLView alloc] initWithFrame:CGRectMake(0,
                                                              0,
@@ -191,6 +211,7 @@ float distance(float x1, float y1, float x2, float y2){
     [self.view addSubview:self.joyStik];
     [self.view addSubview:self.pointsLabel];
     [self.view addSubview:self.asteroidsCountLabel];
+    [self.view addSubview:self.levelLabel];
     
     //Sound effects
     
@@ -206,6 +227,10 @@ float distance(float x1, float y1, float x2, float y2){
     pathURL = [NSURL fileURLWithPath : path];
     AudioServicesCreateSystemSoundID((__bridge CFURLRef) pathURL, &death);
     
+    // init game state
+    
+    self.level = 1;
+    self.points = 0;
     self.ship = [[VKShip alloc] init];
     self.ship.color = [UIColor yellowColor];
     self.ship.maxSpeed = SHIP_MAX_SPEED;
@@ -238,7 +263,7 @@ float distance(float x1, float y1, float x2, float y2){
 
 - (void) prepareWorld{
     float x, y;
-    for (int i = 0; i < INITIAL_ASTEROIDS_COUNT; i++) {
+    for (int i = 0; i < INITIAL_ASTEROIDS_COUNT + self.level-1; i++) { //asteroids count increased with level
         x = arc4random_uniform((int)WORLD_SIZE_X);
         y = arc4random_uniform((int)WORLD_SIZE_Y);
         
@@ -250,6 +275,8 @@ float distance(float x1, float y1, float x2, float y2){
         [self makeAsteroidWithSize:arc4random_uniform(ASTEROID_MAX_SIZE-2) + 3
                           Position:CGPointMake(x,y)];
     }
+    
+    self.asteroidsCountLabel.text = [NSString stringWithFormat:@"ASTEROIDS: %d",self.asteroids.count];
     
     if (!self.stars){
         self.stars = [NSMutableArray array];
@@ -279,7 +306,6 @@ float distance(float x1, float y1, float x2, float y2){
 - (void) start{
     [self clearWorld];
     [self prepareWorld];
-    self.points = 0;
     self.ship.x_velocity = 0;
     self.ship.y_velocity = 0;
     self.ship.accelerating = NO;
@@ -299,13 +325,14 @@ float distance(float x1, float y1, float x2, float y2){
     self.ship.accelerating = NO;
 }
 
-- (void) win{
+- (void) levelDone{
     [self stop];
-    SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"Congratulations"
-                                                     andMessage:[NSString stringWithFormat:@"You win the game.\n Your score is %d", self.points]];
-    [alertView addButtonWithTitle:@"Try again"
+    SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"Level Done"
+                                                     andMessage:[NSString stringWithFormat:@"Your score is %d", self.points]];
+    [alertView addButtonWithTitle:@"Next level"
                              type:SIAlertViewDidDismissNotification
                           handler:^(SIAlertView *alertView){
+                              self.level += 1;
                               [self start];
                           }];
     [alertView show];
@@ -314,11 +341,13 @@ float distance(float x1, float y1, float x2, float y2){
 - (void) gameOver{
     [self stop];
     AudioServicesPlaySystemSound(death);
-    SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"The game is over."
+    SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"Game Over"
                                                      andMessage:[NSString stringWithFormat:@"Your score is %d", self.points]];
     [alertView addButtonWithTitle:@"Try again"
                              type:SIAlertViewDidDismissNotification
                           handler:^(SIAlertView *alertView){
+                              self.points = 0;
+                              self.level = 1;
                               [self start];
                           }];
     [alertView show];
@@ -469,9 +498,9 @@ float distance(float x1, float y1, float x2, float y2){
                     
                     AudioServicesPlaySystemSound(explosion);
                     
-                    self.points += SCORE_MULTIPLIER * ASTEROID_MAX_SIZE - asteroid.parts * SCORE_MULTIPLIER;
+                    self.points += SCORE_MULTIPLIER * (ASTEROID_MAX_SIZE+1) - asteroid.parts * SCORE_MULTIPLIER;
                     if (self.asteroids.count == 0) {
-                        [self win];
+                        [self levelDone];
                     }
                 });
                 break;
