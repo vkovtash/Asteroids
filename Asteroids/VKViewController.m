@@ -10,35 +10,34 @@
 #import "VKGLView.h"
 #import "VKAsteroid.h"
 #import "VKMissle.h"
-#import "SIAlertView.h"
 #import "VKStar.h"
-#import <AudioToolbox/AudioToolbox.h>
 #import "VKPlayer.h"
+#import <AudioToolbox/AudioToolbox.h>
+#import "SIAlertView.h"
 
-#define WORLD_SIZE_X 1200 //points
-#define WORLD_SIZE_Y 1200 //points
-#define FREE_SPACE_RADIUS 80 //points - radius around the ship that will be free of asteroids on the start
+#define WORLD_SIZE_X 1200.0f //points
+#define WORLD_SIZE_Y 1200.0f //points
+#define FREE_SPACE_RADIUS 80.0f //points - radius around the ship that will be free of asteroids on the start
 #define INITIAL_ASTEROIDS_COUNT 10
-#define OFFSCREEN_WORLD_SIZE 100 //points
 #define SCORE_MULTIPLIER 5
-#define GAME_LOOP_RATE 100 //loops per second
-#define ASTEROID_MAX_SIZE 4 //in parts
+#define GAME_LOOP_RATE 100.0f //loops per second
+#define ASTEROID_MAX_SIZE 4.0f //in parts
 #define ASTEROID_PART_SIZE 5 //points
-#define ASTEROID_MIN_SPEED 50 //points per sec
-#define ASTEROID_MAX_SPEED 200 //points per sec
-#define ASTEROID_MIN_ROTATION_SPEED 50 //degrees per sec
-#define ASTEROID_MAX_ROTATION_SPEED 180 //degrees per sec
-#define MISSLE_MAX_DISTANCE 300 //points
-#define MISSLE_SPEED 1800 //points per sec
-#define SHIP_MAX_SPEED 400 //points per sec
-#define SHIP_ACCELERATION_RATE 200 //poins per sec^2c
-#define STAR_RADIUS 2 //points
+#define ASTEROID_MIN_SPEED 50.0f //points per sec
+#define ASTEROID_MAX_SPEED 200.0f //points per sec
+#define ASTEROID_MIN_ROTATION_SPEED 50.0f //degrees per sec
+#define ASTEROID_MAX_ROTATION_SPEED 180.0f //degrees per sec
+#define MISSLE_MAX_DISTANCE 300.0f //points
+#define MISSLE_SPEED 1800.0f //points per sec
+#define SHIP_MAX_SPEED 400.0f //points per sec
+#define SHIP_ACCELERATION_RATE 200.0f //poins per sec^2c
+#define STAR_RADIUS 2.0f //points
 #define STARS_DENCITY 1 //starts per start STARS_GENERATOR_PART_SIZE
-#define STARS_GENERATOR_PART_SIZE 160 //points
+#define STARS_GENERATOR_PART_SIZE 160.0f //points
 #define COLLISION_RADIUS_MULTIPLIER 0.8f
 
 
-float distance(float x1, float y1, float x2, float y2){
+double distance(double x1, double y1, double x2, double y2){
     return sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
 }
 
@@ -261,7 +260,7 @@ float distance(float x1, float y1, float x2, float y2){
 #pragma mark - Game events
 
 - (void) prepareWorld{
-    float x, y;
+    double x, y;
     for (int i = 0; i < INITIAL_ASTEROIDS_COUNT + self.level-1; i++) { //asteroids count increased with level
         x = arc4random_uniform((int)WORLD_SIZE_X);
         y = arc4random_uniform((int)WORLD_SIZE_Y);
@@ -280,9 +279,9 @@ float distance(float x1, float y1, float x2, float y2){
     if (!self.stars){
         self.stars = [NSMutableArray array];
         
-        int part_size = 160;
-        int x_parts = WORLD_SIZE_X / STARS_GENERATOR_PART_SIZE + 1;
-        int y_parts = WORLD_SIZE_Y / STARS_GENERATOR_PART_SIZE + 1;
+        int part_size = STARS_GENERATOR_PART_SIZE;
+        int x_parts = WORLD_SIZE_X / part_size + 1;
+        int y_parts = WORLD_SIZE_Y / part_size + 1;
         int stars_per_part = STARS_DENCITY;
         
         int star_x;
@@ -333,9 +332,6 @@ float distance(float x1, float y1, float x2, float y2){
 - (void) stop{
     [self.audioPlayer next];
     [self.gameLoop cancel];
-    self.ship.x_velocity = 0;
-    self.ship.y_velocity = 0;
-    self.ship.accelerating = NO;
 }
 
 - (void) levelDone{
@@ -461,19 +457,19 @@ float distance(float x1, float y1, float x2, float y2){
     [self checkCollision:asteroids];
 }
 
-- (CGPoint) worldCoordinatesForX:(float) x Y:(float) y{
-    if (x > WORLD_SIZE_X - OFFSCREEN_WORLD_SIZE) {
+- (CGPoint) worldCoordinatesForX:(double) x Y:(double) y{
+    if (x > WORLD_SIZE_X/2) {
      x -= WORLD_SIZE_X;
      }
-     else if (x < -OFFSCREEN_WORLD_SIZE){
-     x += WORLD_SIZE_X - OFFSCREEN_WORLD_SIZE;
+     else if (x < -WORLD_SIZE_X/2){
+     x += WORLD_SIZE_X;
      }
      
-     if (y > WORLD_SIZE_Y - OFFSCREEN_WORLD_SIZE) {
+     if (y > WORLD_SIZE_Y/2) {
      y -= WORLD_SIZE_Y;
      }
-     else if (y < -OFFSCREEN_WORLD_SIZE){
-     y += WORLD_SIZE_Y - OFFSCREEN_WORLD_SIZE;
+     else if (y < -WORLD_SIZE_Y/2){
+     y += WORLD_SIZE_Y;
      }
     return CGPointMake(x, y);
 }
@@ -535,11 +531,11 @@ float distance(float x1, float y1, float x2, float y2){
 - (void)analogueStickDidChangeValue:(JSAnalogueStick *)analogueStick{
     //Setting ship direcrion and velocity
     if (!self.gameLoop.isFinished) {
-        float acceleration = sqrt(pow(self.joyStik.xValue, 2)
+        double acceleration = sqrt(pow(self.joyStik.xValue, 2)
                                   + pow(self.joyStik.yValue, 2));
         
         if (acceleration != 0) {
-            float rotation = acosf(self.joyStik.yValue/acceleration) * 180/M_PI;
+            double rotation = acosf(self.joyStik.yValue/acceleration) * 180/M_PI;
             if (self.joyStik.xValue > 0) {
                 rotation = 360 - rotation;
             }
