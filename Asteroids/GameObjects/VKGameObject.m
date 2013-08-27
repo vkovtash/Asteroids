@@ -106,26 +106,29 @@
 }
 
 - (void)compileShaders {
-    GLuint vertexShader = [self compileShader:@"SimpleVertex" withType:GL_VERTEX_SHADER];
-    GLuint fragmentShader = [self compileShader:@"SimpleFragment" withType:GL_FRAGMENT_SHADER];
+    static GLuint programHandle = 0;
     
-    GLuint programHandle = glCreateProgram();
-    glAttachShader(programHandle, vertexShader);
-    glAttachShader(programHandle, fragmentShader);
-    glLinkProgram(programHandle);
-    
-    GLint linkSuccess;
-    glGetProgramiv(programHandle, GL_LINK_STATUS, &linkSuccess);
-    if (linkSuccess == GL_FALSE) {
-        GLchar messages[256];
-        glGetProgramInfoLog(programHandle, sizeof(messages), 0, &messages[0]);
-        NSString *messageString = [NSString stringWithUTF8String:messages];
-        NSLog(@"%@", messageString);
-        exit(1);
+    if (! programHandle){
+        programHandle = glCreateProgram();
+        GLuint vertexShader = [self compileShader:@"SimpleVertex" withType:GL_VERTEX_SHADER];
+        GLuint fragmentShader = [self compileShader:@"SimpleFragment" withType:GL_FRAGMENT_SHADER];
+        
+        glAttachShader(programHandle, vertexShader);
+        glAttachShader(programHandle, fragmentShader);
+        glLinkProgram(programHandle);
+        
+        GLint linkSuccess;
+        glGetProgramiv(programHandle, GL_LINK_STATUS, &linkSuccess);
+        if (linkSuccess == GL_FALSE) {
+            GLchar messages[256];
+            glGetProgramInfoLog(programHandle, sizeof(messages), 0, &messages[0]);
+            NSString *messageString = [NSString stringWithUTF8String:messages];
+            NSLog(@"%@", messageString);
+            exit(1);
+        }
     }
     
     glUseProgram(programHandle);
-    
     _positionSlot = glGetAttribLocation(programHandle, "Position");
     glEnableVertexAttribArray(_positionSlot);
     
@@ -154,8 +157,8 @@
     glUniformMatrix4fv(_projectionUniform, 1, GL_FALSE, self.glView.projection.glMatrix);
     
     CC3GLMatrix *modelView = [CC3GLMatrix matrix];
-    CGSize size = self.glView.glViewSize;
-    [modelView populateFromTranslation:CC3VectorMake(-size.width/2, size.height/2, 0)];
+    [modelView populateFromTranslation:CC3VectorMake(-self.glView.glViewSize.width/2,
+                                                     self.glView.glViewSize.height/2, 0)];
     [modelView translateByX:_position.x];
     [modelView translateByY:-_position.y];
     [modelView rotateByZ:_rotation];

@@ -8,6 +8,9 @@
 
 #import "VKAsteroid.h"
 #define ASTEROID_SIZE 20
+#define ASTEROID_MIN_SIDES 6
+#define ASTEROID_MAX_SIDES 12
+#define ASTEROID_SIDE_STEP 3
 
 @interface VKAsteroid(){
     Vertex *vertices;
@@ -42,7 +45,11 @@
     self = [super init];
     if (self) {
         _radius = radius;
-        int sides = 6 + arc4random_uniform(6);
+        int additionalSides = radius/ASTEROID_SIDE_STEP;
+        if (additionalSides > ASTEROID_MAX_SIDES){
+            additionalSides = ASTEROID_MAX_SIDES;
+        }
+        int sides = ASTEROID_MIN_SIDES + arc4random_uniform(additionalSides);
         float step = 2 * M_PI / sides;
         
         vertices = malloc(sizeof(Vertex)*sides);
