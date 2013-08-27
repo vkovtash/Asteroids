@@ -23,7 +23,6 @@
 		F374124E17C95E1000AF822B /* VKGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = F374124D17C95E1000AF822B /* VKGLView.m */; };
 		F375408A17CB360700B2D482 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F375408917CB360700B2D482 /* AudioToolbox.framework */; };
 		F375408C17CB368200B2D482 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F375408B17CB368200B2D482 /* AVFoundation.framework */; };
-		F375408E17CB37D100B2D482 /* Searching.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F375408D17CB37D100B2D482 /* Searching.m4a */; };
 		F37675FD17CB318400C8DEC4 /* Icon-57.png in Resources */ = {isa = PBXBuildFile; fileRef = F37675FC17CB318400C8DEC4 /* Icon-57.png */; };
 		F38B0ADA17C9EBAD001951BA /* VKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0AD917C9EBAD001951BA /* VKViewController.m */; };
 		F38B0B7517CA525E001951BA /* CC3Foundation.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B3A17CA525E001951BA /* CC3Foundation.m */; };
@@ -73,6 +72,18 @@
 		F38B0BA517CA5442001951BA /* SIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0BA317CA5442001951BA /* SIAlertView.m */; };
 		F38B0BA817CA9B03001951BA /* VKStar.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0BA717CA9B03001951BA /* VKStar.m */; };
 		F39937BA17CC6CD0004BE9CB /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F39937B917CC6CD0004BE9CB /* MainWindow-iPad.xib */; };
+		F3F4E99417CCD66700EDA7CC /* VKPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F4E99317CCD66700EDA7CC /* VKPlayer.m */; };
+		F3F4E9A117CCE0E100EDA7CC /* All_of_Us.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F3F4E99617CCE0E100EDA7CC /* All_of_Us.m4a */; };
+		F3F4E9A217CCE0E100EDA7CC /* Arpanauts.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F3F4E99717CCE0E100EDA7CC /* Arpanauts.m4a */; };
+		F3F4E9A317CCE0E100EDA7CC /* Ascending.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F3F4E99817CCE0E100EDA7CC /* Ascending.m4a */; };
+		F3F4E9A417CCE0E100EDA7CC /* Come_and_Find_Me.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F3F4E99917CCE0E100EDA7CC /* Come_and_Find_Me.m4a */; };
+		F3F4E9A517CCE0E100EDA7CC /* Digital_Native.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F3F4E99A17CCE0E100EDA7CC /* Digital_Native.m4a */; };
+		F3F4E9A617CCE0E100EDA7CC /* HHavok-intro.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F3F4E99B17CCE0E100EDA7CC /* HHavok-intro.m4a */; };
+		F3F4E9A717CCE0E100EDA7CC /* HHavok-main.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F3F4E99C17CCE0E100EDA7CC /* HHavok-main.m4a */; };
+		F3F4E9A817CCE0E100EDA7CC /* LICENSE.md in Resources */ = {isa = PBXBuildFile; fileRef = F3F4E99D17CCE0E100EDA7CC /* LICENSE.md */; };
+		F3F4E9A917CCE0E100EDA7CC /* Searching.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F3F4E99E17CCE0E100EDA7CC /* Searching.m4a */; };
+		F3F4E9AA17CCE0E100EDA7CC /* Underclocked.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F3F4E99F17CCE0E100EDA7CC /* Underclocked.m4a */; };
+		F3F4E9AB17CCE0E100EDA7CC /* We're_the_Resistors.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F3F4E9A017CCE0E100EDA7CC /* We're_the_Resistors.m4a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,7 +108,6 @@
 		F374124D17C95E1000AF822B /* VKGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKGLView.m; sourceTree = "<group>"; };
 		F375408917CB360700B2D482 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		F375408B17CB368200B2D482 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		F375408D17CB37D100B2D482 /* Searching.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Searching.m4a; path = Resources/Searching.m4a; sourceTree = "<group>"; };
 		F37675FC17CB318400C8DEC4 /* Icon-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-57.png"; path = "Resources/Icon-57.png"; sourceTree = "<group>"; };
 		F38B0AD817C9EBAD001951BA /* VKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKViewController.h; sourceTree = "<group>"; };
 		F38B0AD917C9EBAD001951BA /* VKViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKViewController.m; sourceTree = "<group>"; };
@@ -165,6 +175,19 @@
 		F38B0BA617CA9B03001951BA /* VKStar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKStar.h; sourceTree = "<group>"; };
 		F38B0BA717CA9B03001951BA /* VKStar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKStar.m; sourceTree = "<group>"; };
 		F39937B917CC6CD0004BE9CB /* MainWindow-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "MainWindow-iPad.xib"; sourceTree = "<group>"; };
+		F3F4E99217CCD66700EDA7CC /* VKPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKPlayer.h; sourceTree = "<group>"; };
+		F3F4E99317CCD66700EDA7CC /* VKPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKPlayer.m; sourceTree = "<group>"; };
+		F3F4E99617CCE0E100EDA7CC /* All_of_Us.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = All_of_Us.m4a; sourceTree = "<group>"; };
+		F3F4E99717CCE0E100EDA7CC /* Arpanauts.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Arpanauts.m4a; sourceTree = "<group>"; };
+		F3F4E99817CCE0E100EDA7CC /* Ascending.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ascending.m4a; sourceTree = "<group>"; };
+		F3F4E99917CCE0E100EDA7CC /* Come_and_Find_Me.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Come_and_Find_Me.m4a; sourceTree = "<group>"; };
+		F3F4E99A17CCE0E100EDA7CC /* Digital_Native.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Digital_Native.m4a; sourceTree = "<group>"; };
+		F3F4E99B17CCE0E100EDA7CC /* HHavok-intro.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HHavok-intro.m4a"; sourceTree = "<group>"; };
+		F3F4E99C17CCE0E100EDA7CC /* HHavok-main.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HHavok-main.m4a"; sourceTree = "<group>"; };
+		F3F4E99D17CCE0E100EDA7CC /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.md; sourceTree = "<group>"; };
+		F3F4E99E17CCE0E100EDA7CC /* Searching.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Searching.m4a; sourceTree = "<group>"; };
+		F3F4E99F17CCE0E100EDA7CC /* Underclocked.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Underclocked.m4a; sourceTree = "<group>"; };
+		F3F4E9A017CCE0E100EDA7CC /* We're_the_Resistors.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "We're_the_Resistors.m4a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,6 +256,8 @@
 				F39937B917CC6CD0004BE9CB /* MainWindow-iPad.xib */,
 				35DF6452138C40D500FF9459 /* MainWindow.xib */,
 				35DF6447138C40D500FF9459 /* Supporting Files */,
+				F3F4E99217CCD66700EDA7CC /* VKPlayer.h */,
+				F3F4E99317CCD66700EDA7CC /* VKPlayer.m */,
 			);
 			path = Asteroids;
 			sourceTree = "<group>";
@@ -251,10 +276,10 @@
 		F37675FB17CB314500C8DEC4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F3F4E99517CCE0E100EDA7CC /* Music */,
 				F358A19417CB908D00CF776C /* death.m4a */,
 				F358A18E17CB3BDB00CF776C /* blast.m4a */,
 				F358A18F17CB3BDB00CF776C /* explosion.m4a */,
-				F375408D17CB37D100B2D482 /* Searching.m4a */,
 				F37675FC17CB318400C8DEC4 /* Icon-57.png */,
 				F38B0B5817CA525E001951BA /* Default-568h@2x.png */,
 				F38B0B5917CA525E001951BA /* Default.png */,
@@ -352,6 +377,25 @@
 			path = SIAlertView;
 			sourceTree = "<group>";
 		};
+		F3F4E99517CCE0E100EDA7CC /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				F3F4E99617CCE0E100EDA7CC /* All_of_Us.m4a */,
+				F3F4E99717CCE0E100EDA7CC /* Arpanauts.m4a */,
+				F3F4E99817CCE0E100EDA7CC /* Ascending.m4a */,
+				F3F4E99917CCE0E100EDA7CC /* Come_and_Find_Me.m4a */,
+				F3F4E99A17CCE0E100EDA7CC /* Digital_Native.m4a */,
+				F3F4E99B17CCE0E100EDA7CC /* HHavok-intro.m4a */,
+				F3F4E99C17CCE0E100EDA7CC /* HHavok-main.m4a */,
+				F3F4E99D17CCE0E100EDA7CC /* LICENSE.md */,
+				F3F4E99E17CCE0E100EDA7CC /* Searching.m4a */,
+				F3F4E99F17CCE0E100EDA7CC /* Underclocked.m4a */,
+				F3F4E9A017CCE0E100EDA7CC /* We're_the_Resistors.m4a */,
+			);
+			name = Music;
+			path = Resources/Music;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -435,11 +479,21 @@
 				F38B0BA417CA5442001951BA /* SIAlertView.bundle in Resources */,
 				F33D393017CB2DD80026385A /* Icon-114.png in Resources */,
 				F37675FD17CB318400C8DEC4 /* Icon-57.png in Resources */,
-				F375408E17CB37D100B2D482 /* Searching.m4a in Resources */,
 				F358A19017CB3BDB00CF776C /* blast.m4a in Resources */,
 				F358A19117CB3BDB00CF776C /* explosion.m4a in Resources */,
 				F358A19517CB908D00CF776C /* death.m4a in Resources */,
 				F39937BA17CC6CD0004BE9CB /* MainWindow-iPad.xib in Resources */,
+				F3F4E9A117CCE0E100EDA7CC /* All_of_Us.m4a in Resources */,
+				F3F4E9A217CCE0E100EDA7CC /* Arpanauts.m4a in Resources */,
+				F3F4E9A317CCE0E100EDA7CC /* Ascending.m4a in Resources */,
+				F3F4E9A417CCE0E100EDA7CC /* Come_and_Find_Me.m4a in Resources */,
+				F3F4E9A517CCE0E100EDA7CC /* Digital_Native.m4a in Resources */,
+				F3F4E9A617CCE0E100EDA7CC /* HHavok-intro.m4a in Resources */,
+				F3F4E9A717CCE0E100EDA7CC /* HHavok-main.m4a in Resources */,
+				F3F4E9A817CCE0E100EDA7CC /* LICENSE.md in Resources */,
+				F3F4E9A917CCE0E100EDA7CC /* Searching.m4a in Resources */,
+				F3F4E9AA17CCE0E100EDA7CC /* Underclocked.m4a in Resources */,
+				F3F4E9AB17CCE0E100EDA7CC /* We're_the_Resistors.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,6 +522,7 @@
 				F38B0B9F17CA525E001951BA /* JSDPad.m in Sources */,
 				F38B0BA517CA5442001951BA /* SIAlertView.m in Sources */,
 				F38B0BA817CA9B03001951BA /* VKStar.m in Sources */,
+				F3F4E99417CCD66700EDA7CC /* VKPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
