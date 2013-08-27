@@ -14,6 +14,7 @@
 #import "VKStar.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
+#import "VKPlayer.h"
 
 #define WORLD_SIZE_X 1200 //points
 #define WORLD_SIZE_Y 1200 //points
@@ -47,7 +48,7 @@ float distance(float x1, float y1, float x2, float y2){
     SystemSoundID death;
 }
 @property (strong, nonatomic) VKGLView *glView;
-@property (nonatomic,strong) AVAudioPlayer *audioPlayer;
+@property (nonatomic,strong) VKPlayer *audioPlayer;
 @property (strong, nonatomic) NSThread *gameLoop;
 @property (strong, nonatomic) UIButton *fireButton;
 @property (strong, nonatomic) UIButton *accelerationButton;
@@ -79,21 +80,19 @@ float distance(float x1, float y1, float x2, float y2){
 
 #pragma mark - Private properties
 
-- (AVAudioPlayer *) audioPlayer{
+- (VKPlayer *) audioPlayer{
     if (_audioPlayer == nil) {
-        NSError *error = nil;
-        _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Searching.m4a",
-                                                                                            [[NSBundle mainBundle] resourcePath]]] error:&error];
-        
-        if (error != nil){
-            NSLog(@"Error loading audio %@",error.description);
-        }
-        
-        if (self.audioPlayer != nil) {
-            [self.audioPlayer prepareToPlay];
-            self.audioPlayer.numberOfLoops = -1; //Infinite
-            [self.audioPlayer setVolume:1.0];
-        }
+        _audioPlayer = [[VKPlayer alloc] init];
+        NSBundle *mainBundle = [NSBundle mainBundle];
+        [_audioPlayer appendAudioFile:[NSURL fileURLWithPath:[mainBundle pathForResource:@"All_of_Us" ofType:@"m4a"]]];
+        [_audioPlayer appendAudioFile:[NSURL fileURLWithPath:[mainBundle pathForResource:@"Come_and_Find_Me" ofType:@"m4a"]]];
+        [_audioPlayer appendAudioFile:[NSURL fileURLWithPath:[mainBundle pathForResource:@"Digital_Native" ofType:@"m4a"]]];
+        [_audioPlayer appendAudioFile:[NSURL fileURLWithPath:[mainBundle pathForResource:@"HHavok-intro" ofType:@"m4a"]]];
+        [_audioPlayer appendAudioFile:[NSURL fileURLWithPath:[mainBundle pathForResource:@"HHavok-main" ofType:@"m4a"]]];
+        [_audioPlayer appendAudioFile:[NSURL fileURLWithPath:[mainBundle pathForResource:@"Underclocked" ofType:@"m4a"]]];
+        [_audioPlayer appendAudioFile:[NSURL fileURLWithPath:[mainBundle pathForResource:@"We're_the_Resistors" ofType:@"m4a"]]];
+        [_audioPlayer appendAudioFile:[NSURL fileURLWithPath:[mainBundle pathForResource:@"Searching" ofType:@"m4a"]]];
+        [_audioPlayer shuffle];
     }
     return _audioPlayer;
 }
@@ -280,7 +279,7 @@ float distance(float x1, float y1, float x2, float y2){
     
     if (!self.stars){
         self.stars = [NSMutableArray array];
-        for (int i; i < STARS_COUNT; i++) {
+        for (int i = 0; i < STARS_COUNT; i++) {
             VKStar *star = [[VKStar alloc] initWithRadius:STAR_RADIUS];
             x = arc4random_uniform((int)WORLD_SIZE_X);
             y = arc4random_uniform((int)WORLD_SIZE_Y);
@@ -313,12 +312,13 @@ float distance(float x1, float y1, float x2, float y2){
     self.gameLoop = [[NSThread alloc] initWithTarget:self
                                             selector:@selector(loop:)
                                               object:self];
+    self.gameLoop.threadPriority = 1.0;
     [self.audioPlayer play];
     [self.gameLoop start];
 }
 
 - (void) stop{
-    [self.audioPlayer stop];
+    [self.audioPlayer next];
     [self.gameLoop cancel];
     self.ship.x_velocity = 0;
     self.ship.y_velocity = 0;
@@ -380,9 +380,17 @@ float distance(float x1, float y1, float x2, float y2){
 - (void) loop:(VKViewController *) gameController{
     NSThread *thread = [NSThread currentThread];
     NSTimeInterval interval = 1.0f / GAME_LOOP_RATE;
+    NSTimeInterval sleepFor;
+    clock_t start;
     while (!thread.isCancelled) {
+        start = clock();
+        
         [gameController processGameStep:interval];
-        [NSThread sleepForTimeInterval:interval];
+        
+        sleepFor = interval - (double)(clock()-start)/CLOCKS_PER_SEC;
+        if (sleepFor > 0) {
+            [NSThread sleepForTimeInterval:interval];
+        }
     }
 }
 
@@ -441,19 +449,19 @@ float distance(float x1, float y1, float x2, float y2){
 }
 
 - (CGPoint) worldCoordinatesForX:(float) x Y:(float) y{
-    if (x > WORLD_SIZE_X - OFFSCREEN_WORLD_SIZE ) {
-        x = -OFFSCREEN_WORLD_SIZE;
-    }
-    else if (x < -OFFSCREEN_WORLD_SIZE){
-        x = WORLD_SIZE_X - OFFSCREEN_WORLD_SIZE;
-    }
-    
-    if (y > WORLD_SIZE_Y - OFFSCREEN_WORLD_SIZE) {
-        y = -OFFSCREEN_WORLD_SIZE;
-    }
-    else if (y < -OFFSCREEN_WORLD_SIZE){
-        y = WORLD_SIZE_Y - OFFSCREEN_WORLD_SIZE;
-    }
+    if (x > WORLD_SIZE_X - OFFSCREEN_WORLD_SIZE) {
+     x -= WORLD_SIZE_X;
+     }
+     else if (x < -OFFSCREEN_WORLD_SIZE){
+     x += WORLD_SIZE_X - OFFSCREEN_WORLD_SIZE;
+     }
+     
+     if (y > WORLD_SIZE_Y - OFFSCREEN_WORLD_SIZE) {
+     y -= WORLD_SIZE_Y;
+     }
+     else if (y < -OFFSCREEN_WORLD_SIZE){
+     y += WORLD_SIZE_Y - OFFSCREEN_WORLD_SIZE;
+     }
     return CGPointMake(x, y);
 }
 
