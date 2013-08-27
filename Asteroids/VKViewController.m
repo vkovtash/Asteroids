@@ -15,8 +15,8 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 
-#define WORLD_SIZE_X 1000 //points
-#define WORLD_SIZE_Y 1000 //points
+#define WORLD_SIZE_X 1200 //points
+#define WORLD_SIZE_Y 1200 //points
 #define FREE_SPACE_RADIUS 80 //points - radius around the ship that will be free of asteroids on the start
 #define INITIAL_ASTEROIDS_COUNT 10
 #define OFFSCREEN_WORLD_SIZE 100 //points
@@ -179,7 +179,7 @@ float distance(float x1, float y1, float x2, float y2){
     self.asteroidsCountLabel.textColor = [UIColor yellowColor];
     self.asteroidsCountLabel.font = [UIFont fontWithName:@"Gill-Sans" size:18];
     self.asteroidsCountLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleLeftMargin;
-    
+   
     self.glView = [[VKGLView alloc] initWithFrame:CGRectMake(0,
                                                              0,
                                                              self.view.bounds.size.height,
@@ -287,7 +287,6 @@ float distance(float x1, float y1, float x2, float y2){
     self.gameLoop = [[NSThread alloc] initWithTarget:self
                                             selector:@selector(loop:)
                                               object:self];
-    [self.gameLoop setThreadPriority:1.0];
     [self.audioPlayer play];
     [self.gameLoop start];
 }
