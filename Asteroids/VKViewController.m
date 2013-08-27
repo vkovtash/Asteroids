@@ -312,7 +312,7 @@ float distance(float x1, float y1, float x2, float y2){
     self.gameLoop = [[NSThread alloc] initWithTarget:self
                                             selector:@selector(loop:)
                                               object:self];
-    
+    self.gameLoop.threadPriority = 1.0;
     [self.audioPlayer play];
     [self.gameLoop start];
 }
@@ -380,9 +380,17 @@ float distance(float x1, float y1, float x2, float y2){
 - (void) loop:(VKViewController *) gameController{
     NSThread *thread = [NSThread currentThread];
     NSTimeInterval interval = 1.0f / GAME_LOOP_RATE;
+    NSTimeInterval sleepFor;
+    clock_t start;
     while (!thread.isCancelled) {
+        start = clock();
+        
         [gameController processGameStep:interval];
-        [NSThread sleepForTimeInterval:interval];
+        
+        sleepFor = interval - (double)(clock()-start)/CLOCKS_PER_SEC;
+        if (sleepFor > 0) {
+            [NSThread sleepForTimeInterval:interval];
+        }
     }
 }
 
