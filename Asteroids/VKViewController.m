@@ -18,7 +18,7 @@
 #define WORLD_SIZE_X 1200.0f //points
 #define WORLD_SIZE_Y 1200.0f //points
 #define FREE_SPACE_RADIUS 80.0f //points - radius around the ship that will be free of asteroids on the start
-#define INITIAL_ASTEROIDS_COUNT 10
+#define INITIAL_ASTEROIDS_COUNT 5
 #define SCORE_MULTIPLIER 5
 #define GAME_LOOP_RATE 100.0f //loops per second
 #define ASTEROID_MAX_SIZE 4.0f //in parts
