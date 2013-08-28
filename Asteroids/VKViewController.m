@@ -330,6 +330,7 @@ double distance(double x1, double y1, double x2, double y2){
 }
 
 - (void) stop{
+    [self.audioPlayer stop];
     [self.audioPlayer next];
     [self.gameLoop cancel];
 }
@@ -348,7 +349,6 @@ double distance(double x1, double y1, double x2, double y2){
 }
 
 - (void) gameOver{
-    [self stop];
     AudioServicesPlaySystemSound(death);
     SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"Game Over"
                                                      andMessage:[NSString stringWithFormat:@"Your score is %d", self.points]];
@@ -360,6 +360,7 @@ double distance(double x1, double y1, double x2, double y2){
                               [self start];
                           }];
     [alertView show];
+    [self stop];
 }
 
 - (void) fire{
