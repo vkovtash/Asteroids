@@ -75,7 +75,7 @@
     [self stop];
     self.currentIndex++;
     if (shouldContinuePlayback) {
-        [self.audioPlayer play];
+        [self play];
     }
 }
 
@@ -92,7 +92,7 @@
 
 #pragma mark - AVAudioPlayerDelegate
 
-- (void)audioPlayerEndInterruption:(AVAudioPlayer *)player withOptions:(NSUInteger)flags{
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
     [self next];
 }
 
