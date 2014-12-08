@@ -11,6 +11,7 @@
 
 @interface VKPlayer : NSObject <AVAudioPlayerDelegate>
 @property (nonatomic, readonly) NSArray *audioFiles;
+@property (readonly, nonatomic) AVAudioPlayer *audioPlayer;
 
 - (void) play;
 - (void) pause;
