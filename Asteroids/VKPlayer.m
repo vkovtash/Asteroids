@@ -10,7 +10,6 @@
 
 @interface VKPlayer()
 @property (strong, nonatomic) NSMutableArray *internalAudioFiles;
-@property (nonatomic,strong) AVAudioPlayer *audioPlayer;
 @property (nonatomic) NSUInteger currentIndex;
 @end
 
@@ -36,7 +35,7 @@
         
         NSError *error = nil;
         
-        self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileToPlay
+        _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileToPlay
                                                               error:&error];
         
         if (error != nil){
@@ -67,7 +66,7 @@
 
 - (void) stop{
     [self.audioPlayer stop];
-    self.audioPlayer = nil;
+    _audioPlayer = nil;
 }
 
 - (void) next{
@@ -82,7 +81,7 @@
 - (void) shuffle{    
     for (int i = 0; i < self.internalAudioFiles.count; i++) {
         [self.internalAudioFiles exchangeObjectAtIndex:i
-                                     withObjectAtIndex:arc4random_uniform(self.internalAudioFiles.count)];
+                                     withObjectAtIndex:arc4random_uniform((int)self.internalAudioFiles.count)];
     }
 }
 
