@@ -58,7 +58,7 @@
 - (void) setPoints:(int)points {
     _points = points;
     self.pointsLabel.text = [NSString stringWithFormat:@"SCORE: %d", points];
-    self.asteroidsCountLabel.text = [NSString stringWithFormat:@"ASTEROIDS: %luu", (unsigned long)self.worldController.asteroidsCount];
+    self.asteroidsCountLabel.text = [NSString stringWithFormat:@"ASTEROIDS: %lu", (unsigned long)self.worldController.asteroidsCount];
 }
 
 #pragma mark - ViewController life cycle
@@ -174,12 +174,13 @@
 }
 
 - (void) start {
+    [self.worldController reset];
     [self.worldController resume];
+    [self.audioPlayer next];
 }
 
 - (void) stop {
     [self.audioPlayer stop];
-    [self.audioPlayer next];
     [self.worldController pause];
 }
 
@@ -215,7 +216,8 @@
 }
 
 - (void) controllerDidFinishGame:(ZIMGameWorldController *)controller {
-    [self.sfxController death];
+    [self.audioPlayer stop];
+    [self.sfxController explosion];
     SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"Game Over"
                                                      andMessage:[NSString stringWithFormat:@"Your score is %d", self.points]];
     [alertView addButtonWithTitle:@"Try again"
@@ -226,7 +228,6 @@
                               [self start];
                           }];
     [alertView show];
-    [self stop];
 }
 
 - (void) controller:(ZIMGameWorldController *)controller didDetectAsteroidHit:(VKAsteroid *)asteroid {
