@@ -16,7 +16,10 @@
 #import "ZIMSFXController.h"
 #import "ZIMGameWorldController.h"
 
-@interface VKViewController ()
+#define SCORE_MULTIPLIER 5
+#define ASTEROID_MAX_SIZE 4.0f
+
+@interface VKViewController () <ZIMGameWorldControllerDelegate>
 @property (nonatomic,strong) VKPlayer *audioPlayer;
 @property (strong, nonatomic) UIButton *fireButton;
 @property (strong, nonatomic) UIButton *accelerationButton;
@@ -52,21 +55,15 @@
     return _audioPlayer;
 }
 
-- (void) setPoints:(int)points{
+- (void) setPoints:(int)points {
     _points = points;
-    self.pointsLabel.text = [NSString stringWithFormat:@"SCORE: %d",points];
-    //self.asteroidsCountLabel.text = [NSString stringWithFormat:@"ASTEROIDS: %luu", (unsigned long)self.asteroids.count];
-}
-
-- (void) setLevel:(int)level{
-    _level = level;
-    self.levelLabel.text = [NSString stringWithFormat:@"LEVEL %d",level];
+    self.pointsLabel.text = [NSString stringWithFormat:@"SCORE: %d", points];
+    self.asteroidsCountLabel.text = [NSString stringWithFormat:@"ASTEROIDS: %luu", (unsigned long)self.worldController.asteroidsCount];
 }
 
 #pragma mark - ViewController life cycle
 
-- (void)viewDidLoad
-{
+- (void) viewDidLoad {
     [super viewDidLoad];
     
     self.sfxController = [ZIMSFXController new];
@@ -152,6 +149,7 @@
    
     
     self.worldController = [[ZIMGameWorldController alloc] initWithGlViewSize:self.view.bounds.size];
+    self.worldController.delegate = self;
     
     [self.view addSubview:self.worldController.glView];
     [self.view addSubview:self.fireButton];
@@ -162,7 +160,6 @@
     [self.view addSubview:self.levelLabel];
     
     // init game state
-    
     self.level = 1;
     self.points = 0;
 }
@@ -176,49 +173,48 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void) start{
+- (void) start {
     [self.worldController resume];
-    [self.audioPlayer play];
 }
 
-- (void) stop{
+- (void) stop {
     [self.audioPlayer stop];
     [self.audioPlayer next];
     [self.worldController pause];
 }
 
 - (void) pause {
-    /*[self.audioPlayer pause];
-    [self.gameLoop cancel];*/
+    [self.worldController pause];
 }
 
 - (void) resume {
-    /*self.gameLoop = [[NSThread alloc] initWithTarget:self
-                                            selector:@selector(loop:)
-                                              object:self];
-    self.gameLoop.threadPriority = 1.0;
-    [self.audioPlayer play];
-    [self.gameLoop start];*/
+    [self.worldController resume];
 }
 
 - (void) fire {
+    [self.sfxController blast];
     [self.worldController fire];
 }
 
-- (void) levelDone{
-    [self stop];
-    SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"Level Done"
-                                                     andMessage:[NSString stringWithFormat:@"Your score is %d", self.points]];
-    [alertView addButtonWithTitle:@"Next level"
-                             type:SIAlertViewDidDismissNotification
-                          handler:^(SIAlertView *alertView){
-                              self.level += 1;
-                              [self start];
-                          }];
-    [alertView show];
+- (void) startAcceleration{
+    self.worldController.ship.accelerating = YES;
 }
 
-- (void) gameOver{
+- (void) stopAcceleration{
+    self.worldController.ship.accelerating = NO;
+}
+
+#pragma mark - ZIMGameWorldControllerDelegate
+
+- (void) controllerDidResumeGame:(ZIMGameWorldController *)controller {
+    [self.audioPlayer play];
+}
+
+- (void) controllerDidPauseGame:(ZIMGameWorldController *)controller {
+    [self.audioPlayer pause];
+}
+
+- (void) controllerDidFinishGame:(ZIMGameWorldController *)controller {
     [self.sfxController death];
     SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"Game Over"
                                                      andMessage:[NSString stringWithFormat:@"Your score is %d", self.points]];
@@ -233,19 +229,16 @@
     [self stop];
 }
 
-- (void) startAcceleration{
-    self.worldController.ship.accelerating = YES;
-}
-
-- (void) stopAcceleration{
-    self.worldController.ship.accelerating = NO;
+- (void) controller:(ZIMGameWorldController *)controller didDetectAsteroidHit:(VKAsteroid *)asteroid {
+    [self.sfxController explosion];
+    self.points += SCORE_MULTIPLIER * (ASTEROID_MAX_SIZE + 1) - asteroid.parts * SCORE_MULTIPLIER;
 }
 
 #pragma mark - JSAnalogueStickDelegate
 
-- (void)analogueStickDidChangeValue:(JSAnalogueStick *)analogueStick{
+- (void) analogueStickDidChangeValue:(JSAnalogueStick *)analogueStick {
     //Setting ship direcrion and velocity
-    //if (!self.gameLoop.isFinished) {
+    if (self.worldController.isExecuting) {
         double acceleration = sqrt(pow(self.joyStik.xValue, 2)
                                   + pow(self.joyStik.yValue, 2));
         
@@ -256,7 +249,7 @@
             }
             self.worldController.ship.rotation = rotation;
         }
-    //}
+    }
 }
 
 @end

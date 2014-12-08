@@ -75,6 +75,14 @@ static double distance(double x1, double y1, double x2, double y2){
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (BOOL) isExecuting {
+    return self.gameThread.isExecuting;
+}
+
+- (NSUInteger) asteroidsCount {
+    return self.asteroids.count;
+}
+
 - (void) reset {
     if (self.gameThread.isExecuting) {
         return;
@@ -101,6 +109,7 @@ static double distance(double x1, double y1, double x2, double y2){
                                                 object:nil];
     self.gameThread.threadPriority = 1.0;
     [self.gameThread start];
+    [self.delegate controllerDidResumeGame:self];
 }
 
 #pragma mark - Factory methods
@@ -208,6 +217,15 @@ static double distance(double x1, double y1, double x2, double y2){
         }
     }
     
+    __block BOOL isCancelled = thread.isCancelled;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (isCancelled) {
+            [self.delegate controllerDidPauseGame:self];
+        }
+        else {
+            [self.delegate controllerDidFinishGame:self];
+        }
+    });
 }
 
 - (BOOL) processGameStep:(NSTimeInterval)time {
@@ -294,12 +312,7 @@ static double distance(double x1, double y1, double x2, double y2){
                         }
                     }
                     
-                    /*[self.sfxController explosion];
-                    
-                    self.points += SCORE_MULTIPLIER * (ASTEROID_MAX_SIZE+1) - asteroid.parts * SCORE_MULTIPLIER;
-                    if (self.asteroids.count == 0) {
-                        [self levelDone];
-                    }*/
+                    [self.delegate controller:self didDetectAsteroidHit:asteroid];
                 });
                 break;
             }
