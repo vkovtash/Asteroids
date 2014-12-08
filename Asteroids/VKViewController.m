@@ -12,8 +12,8 @@
 #import "VKMissle.h"
 #import "VKStar.h"
 #import "VKPlayer.h"
-#import <AudioToolbox/AudioToolbox.h>
 #import "SIAlertView.h"
+#import "ZIMSFXController.h"
 
 #define WORLD_SIZE_X 1200.0f //points
 #define WORLD_SIZE_Y 1200.0f //points
@@ -41,11 +41,7 @@ double distance(double x1, double y1, double x2, double y2){
     return sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
 }
 
-@interface VKViewController () {
-    SystemSoundID blast;
-    SystemSoundID explosion;
-    SystemSoundID death;
-}
+@interface VKViewController ()
 @property (strong, nonatomic) VKGLView *glView;
 @property (nonatomic,strong) VKPlayer *audioPlayer;
 @property (strong, nonatomic) NSThread *gameLoop;
@@ -57,6 +53,7 @@ double distance(double x1, double y1, double x2, double y2){
 @property (strong, nonatomic) UILabel *pointsLabel;
 @property (strong, nonatomic) UILabel *asteroidsCountLabel;
 @property (strong, nonatomic) UILabel *levelLabel;
+@property (strong, nonatomic) ZIMSFXController *sfxController;
 @end
 
 @implementation VKViewController
@@ -99,7 +96,7 @@ double distance(double x1, double y1, double x2, double y2){
 - (void) setPoints:(int)points{
     _points = points;
     self.pointsLabel.text = [NSString stringWithFormat:@"SCORE: %d",points];
-    self.asteroidsCountLabel.text = [NSString stringWithFormat:@"ASTEROIDS: %d",self.asteroids.count];
+    self.asteroidsCountLabel.text = [NSString stringWithFormat:@"ASTEROIDS: %luu", (unsigned long)self.asteroids.count];
 }
 
 - (void) setLevel:(int)level{
@@ -118,6 +115,8 @@ double distance(double x1, double y1, double x2, double y2){
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.sfxController = [ZIMSFXController new];
     
     //int views
     
@@ -200,8 +199,9 @@ double distance(double x1, double y1, double x2, double y2){
    
     self.glView = [[VKGLView alloc] initWithFrame:CGRectMake(0,
                                                              0,
-                                                             self.view.bounds.size.height,
-                                                             self.view.bounds.size.width)];
+                                                             self.view.bounds.size.width,
+                                                             self.view.bounds.size.height)];
+    self.glView.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
     
     [self.view addSubview:self.glView];
     [self.view addSubview:self.fireButton];
@@ -210,20 +210,6 @@ double distance(double x1, double y1, double x2, double y2){
     [self.view addSubview:self.pointsLabel];
     [self.view addSubview:self.asteroidsCountLabel];
     [self.view addSubview:self.levelLabel];
-    
-    //Sound effects
-    
-    NSString *path  = [[NSBundle mainBundle] pathForResource:@"blast" ofType:@"m4a"];
-    NSURL *pathURL = [NSURL fileURLWithPath : path];
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef) pathURL, &blast);
-    
-    path  = [[NSBundle mainBundle] pathForResource:@"explosion" ofType:@"m4a"];
-    pathURL = [NSURL fileURLWithPath : path];
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef) pathURL, &explosion);
-    
-    path  = [[NSBundle mainBundle] pathForResource:@"death" ofType:@"m4a"];
-    pathURL = [NSURL fileURLWithPath : path];
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef) pathURL, &death);
     
     // init game state
     
@@ -235,6 +221,12 @@ double distance(double x1, double y1, double x2, double y2){
     self.ship.accelerationRate = SHIP_ACCELERATION_RATE;
     
     [self.glView addGLObject:self.ship];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(pause)
+                                                 name:UIApplicationWillResignActiveNotification
+                                               object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -244,7 +236,7 @@ double distance(double x1, double y1, double x2, double y2){
 
 #pragma mark - Factory methods
 
-- (void) makeAsteroidWithSize:(int) parts Position:(CGPoint) position{
+- (void) makeAsteroidWithSize:(int)parts Position:(CGPoint) position{
     VKAsteroid *asteroid = [[VKAsteroid alloc] initWithRadius:parts * ASTEROID_PART_SIZE];
     asteroid.parts = parts;
     asteroid.position = position;
@@ -274,7 +266,7 @@ double distance(double x1, double y1, double x2, double y2){
                           Position:CGPointMake(x,y)];
     }
     
-    self.asteroidsCountLabel.text = [NSString stringWithFormat:@"ASTEROIDS: %d",self.asteroids.count];
+    self.asteroidsCountLabel.text = [NSString stringWithFormat:@"ASTEROIDS: %lu", (unsigned long)self.asteroids.count];
     
     if (!self.stars){
         self.stars = [NSMutableArray array];
@@ -335,6 +327,20 @@ double distance(double x1, double y1, double x2, double y2){
     [self.gameLoop cancel];
 }
 
+- (void) pause {
+    [self.audioPlayer pause];
+    [self.gameLoop cancel];
+}
+
+- (void) resume {
+    self.gameLoop = [[NSThread alloc] initWithTarget:self
+                                            selector:@selector(loop:)
+                                              object:self];
+    self.gameLoop.threadPriority = 1.0;
+    [self.audioPlayer play];
+    [self.gameLoop start];
+}
+
 - (void) levelDone{
     [self stop];
     SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"Level Done"
@@ -349,7 +355,7 @@ double distance(double x1, double y1, double x2, double y2){
 }
 
 - (void) gameOver{
-    AudioServicesPlaySystemSound(death);
+    [self.sfxController death];
     SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"Game Over"
                                                      andMessage:[NSString stringWithFormat:@"Your score is %d", self.points]];
     [alertView addButtonWithTitle:@"Try again"
@@ -373,7 +379,7 @@ double distance(double x1, double y1, double x2, double y2){
         missle.leftDistance = MISSLE_MAX_DISTANCE;
         [self.glView addGLObject:missle];
         [self.missles addObject:missle];
-        AudioServicesPlaySystemSound(blast);
+        [self.sfxController blast];
     }
 }
 
@@ -514,7 +520,7 @@ double distance(double x1, double y1, double x2, double y2){
                         }
                     }
                     
-                    AudioServicesPlaySystemSound(explosion);
+                    [self.sfxController explosion];
                     
                     self.points += SCORE_MULTIPLIER * (ASTEROID_MAX_SIZE+1) - asteroid.parts * SCORE_MULTIPLIER;
                     if (self.asteroids.count == 0) {
