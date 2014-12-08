@@ -37,13 +37,11 @@ static double distance(double x1, double y1, double x2, double y2){
     return sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
 }
 
-
-
 @interface ZIMGameWorldController()
 @property (strong, nonatomic) NSMutableArray *asteroids;
 @property (strong, nonatomic) NSMutableArray *missles;
 @property (strong, nonatomic) NSMutableArray *stars;
-@property (strong, nonatomic) NSThread *gameLoop;
+@property (strong, nonatomic) NSThread *gameThread;
 @end
 
 @implementation ZIMGameWorldController
@@ -57,7 +55,6 @@ static double distance(double x1, double y1, double x2, double y2){
     _glView = [[VKGLView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     _asteroids = [NSMutableArray array];
     _missles = [NSMutableArray array];
-    _stars = [NSMutableArray array];
     
     _ship = [[VKShip alloc] init];
     _ship.color = [UIColor yellowColor];
@@ -66,11 +63,23 @@ static double distance(double x1, double y1, double x2, double y2){
     
     [_glView addGLObject:_ship];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(pause)
+                                                 name:UIApplicationWillResignActiveNotification
+                                               object:nil];
+    [self reset];
     return self;
 }
 
-- (void) start {
-    self.stars = nil;
+- (void) dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void) reset {
+    if (self.gameThread.isExecuting) {
+        return;
+    }
+    
     [self clearWorld];
     [self prepareWorld];
     self.ship.x_velocity = 0;
@@ -78,18 +87,21 @@ static double distance(double x1, double y1, double x2, double y2){
     self.ship.accelerating = NO;
     self.ship.rotation = 0;
     self.ship.position = CGPointMake(self.glView.bounds.size.width/2,
-                                                     self.glView.bounds.size.height/2);
-    self.gameLoop = [[NSThread alloc] initWithTarget:self
-                                            selector:@selector(loop:)
-                                              object:self];
-    self.gameLoop.threadPriority = 1.0;
-    [self.gameLoop start];
+                                     self.glView.bounds.size.height/2);
 }
 
-- (void) stop {
- [self.gameLoop cancel];
+- (void) pause {
+    [self.gameThread cancel];
+    self.gameThread = nil;
 }
 
+- (void) resume {
+    self.gameThread = [[NSThread alloc] initWithTarget:self
+                                              selector:@selector(loop)
+                                                object:nil];
+    self.gameThread.threadPriority = 1.0;
+    [self.gameThread start];
+}
 
 #pragma mark - Factory methods
 
@@ -108,7 +120,7 @@ static double distance(double x1, double y1, double x2, double y2){
 
 #pragma mark - Game events
 
-- (void) prepareWorld{
+- (void) prepareWorld {
     double x, y;
     for (int i = 0; i < INITIAL_ASTEROIDS_COUNT; i++) { //asteroids count increased with level
         x = arc4random_uniform((int)WORLD_SIZE_X);
@@ -149,7 +161,7 @@ static double distance(double x1, double y1, double x2, double y2){
     }
 }
 
-- (void) clearWorld{
+- (void) clearWorld {
     for (VKAsteroid *asteroid in self.asteroids) {
         [asteroid removeFromGLView];
     }
@@ -161,22 +173,24 @@ static double distance(double x1, double y1, double x2, double y2){
     [self.missles removeAllObjects];
 }
 
-- (void) fire{
-    if (!self.gameLoop.isFinished) {
-        VKMissle *missle = [[VKMissle alloc] init];
-        missle.position = self.ship.position;
-        missle.direction = self.ship.rotation;
-        missle.velocity = MISSLE_SPEED;
-        missle.rotation = self.ship.rotation;
-        missle.leftDistance = MISSLE_MAX_DISTANCE;
-        [self.glView addGLObject:missle];
-        [self.missles addObject:missle];
+- (void) fire {
+    if (!self.gameThread.isExecuting) {
+        return;
     }
+    
+    VKMissle *missle = [[VKMissle alloc] init];
+    missle.position = self.ship.position;
+    missle.direction = self.ship.rotation;
+    missle.velocity = MISSLE_SPEED;
+    missle.rotation = self.ship.rotation;
+    missle.leftDistance = MISSLE_MAX_DISTANCE;
+    [self.glView addGLObject:missle];
+    [self.missles addObject:missle];
 }
 
 #pragma mark - game run loop
 
-- (void) loop:(ZIMGameWorldController *) gameController{
+- (void) loop {
     NSThread *thread = [NSThread currentThread];
     NSTimeInterval interval = 1.0f / GAME_LOOP_RATE;
     NSTimeInterval sleepFor;
@@ -184,20 +198,19 @@ static double distance(double x1, double y1, double x2, double y2){
     while (!thread.isCancelled) {
         start = clock();
         
-        [gameController processGameStep:interval];
+        if (![self processGameStep:interval]) {
+            break;
+        }
         
-        sleepFor = interval - (double)(clock()-start)/CLOCKS_PER_SEC;
+        sleepFor = interval - (double)(clock() - start) / CLOCKS_PER_SEC;
         if (sleepFor > 0) {
             [NSThread sleepForTimeInterval:interval];
         }
     }
+    
 }
 
-- (void) processGameStep:(NSTimeInterval) time{
-    if (self.gameLoop.isCancelled) {
-        return;
-    }
-    
+- (BOOL) processGameStep:(NSTimeInterval)time {
     double x;
     double y;
     
@@ -244,29 +257,24 @@ static double distance(double x1, double y1, double x2, double y2){
     }
     
     [self checkHit:missles Asteroids:asteroids];
-    [self checkCollision:asteroids];
+    return ![self checkCollision:asteroids];
 }
 
 #pragma mark - collision detection
 
-- (void) checkCollision:(NSArray *) asteroids{
-    if (self.gameLoop.isCancelled) {
-        return;
-    }
+- (BOOL) checkCollision:(NSArray *)asteroids {
     double distance_value;
     for (VKAsteroid *asteroid in asteroids){
         distance_value = distance(asteroid.position.x, asteroid.position.y,
                                   self.ship.position.x, self.ship.position.y);
         if (distance_value < (asteroid.radius + self.ship.radius) * COLLISION_RADIUS_MULTIPLIER) {
-            //[self gameOver];
+            return YES;
         }
     }
+    return NO;
 }
 
-- (void) checkHit:(NSArray *) missles Asteroids:(NSArray *) asteroids{
-    if (self.gameLoop.isCancelled) {
-        return;
-    }
+- (void) checkHit:(NSArray *)missles Asteroids:(NSArray *)asteroids {
     double distance_value;
     for (VKMissle *missle in missles) {
         for (VKAsteroid *asteroid in asteroids){
@@ -298,7 +306,6 @@ static double distance(double x1, double y1, double x2, double y2){
         }
     }
 }
-
 
 - (CGPoint) worldCoordinatesForX:(double) x Y:(double) y{
     if (x > WORLD_SIZE_X/2) {

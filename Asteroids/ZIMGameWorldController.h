@@ -17,6 +17,7 @@
 
 - (void) fire;
 
-- (void) start;
-- (void) stop;
+- (void) reset;
+- (void) pause;
+- (void) resume;
 @end

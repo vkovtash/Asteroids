@@ -65,11 +65,6 @@
 
 #pragma mark - ViewController life cycle
 
-- (void) viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self start];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -170,28 +165,26 @@
     
     self.level = 1;
     self.points = 0;
-    
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(pause)
-                                                 name:UIApplicationWillResignActiveNotification
-                                               object:nil];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self start];
+}
+
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
 - (void) start{
-    [self.worldController start];
+    [self.worldController resume];
     [self.audioPlayer play];
 }
 
 - (void) stop{
     [self.audioPlayer stop];
     [self.audioPlayer next];
-    [self.worldController stop];
+    [self.worldController pause];
 }
 
 - (void) pause {
