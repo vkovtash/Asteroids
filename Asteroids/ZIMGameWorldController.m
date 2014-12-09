@@ -11,8 +11,8 @@
 #import "VKMissle.h"
 #import "VKStar.h"
 
-#define WORLD_SIZE_X 1200.0f //points
-#define WORLD_SIZE_Y 1200.0f //points
+#define WORLD_SIZE_X 2200.0f //points
+#define WORLD_SIZE_Y 2200.0f //points
 #define FREE_SPACE_RADIUS 80.0f //points - radius around the ship that will be free of asteroids on the start
 #define INITIAL_ASTEROIDS_COUNT 5
 #define SCORE_MULTIPLIER 5
@@ -52,7 +52,7 @@ static double distance(double x1, double y1, double x2, double y2){
         return nil;
     }
     
-    _glView = [[VKGLView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    _glView = [[VKGLView alloc] initWithGlViewSize:size];
     _asteroids = [NSMutableArray array];
     _missles = [NSMutableArray array];
     
@@ -94,8 +94,8 @@ static double distance(double x1, double y1, double x2, double y2){
     self.ship.y_velocity = 0;
     self.ship.accelerating = NO;
     self.ship.rotation = 0;
-    self.ship.position = CGPointMake(self.glView.bounds.size.width/2,
-                                     self.glView.bounds.size.height/2);
+    self.ship.position = CGPointMake(self.glView.glViewSize.width / 2,
+                                     self.glView.glViewSize.height / 2);
 }
 
 - (void) pause {

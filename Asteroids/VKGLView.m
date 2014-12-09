@@ -21,6 +21,8 @@
     GLuint _depthRenderBuffer;
 }
 
+@synthesize glViewSize = _glViewSize;
+
 #define TEX_COORD_MAX   4
 
 - (NSMutableArray *) gameObjects{
@@ -28,10 +30,6 @@
         _gameObjects = [NSMutableArray array];
     }
     return _gameObjects;
-}
-
-- (CGSize) glViewSize{
-    return self.frame.size;
 }
 
 + (Class)layerClass {
@@ -66,7 +64,7 @@
 - (void)setupDepthBuffer {
     glGenRenderbuffers(1, &_depthRenderBuffer);
     glBindRenderbuffer(GL_RENDERBUFFER, _depthRenderBuffer);
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, self.frame.size.width, self.frame.size.height);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, _glViewSize.width, _glViewSize.height);
 }
 
 - (void)setupFrameBuffer {
@@ -84,10 +82,10 @@
 
 - (void)render:(CADisplayLink*)displayLink {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glViewport(0, 0, self.frame.size.width, self.frame.size.height);
+    glViewport(0, 0, _glViewSize.width, _glViewSize.height);
     
-    NSArray *renderArray = [self.gameObjects copy];
-    [renderArray makeObjectsPerformSelector:@selector(render)];
+    //NSArray *renderArray = [self.gameObjects copy];
+    [self.gameObjects makeObjectsPerformSelector:@selector(render)];
     
     [_context presentRenderbuffer:GL_RENDERBUFFER];
 }
@@ -108,10 +106,11 @@
     [glObject setGlView:nil];
 }
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
+- (instancetype) initWithGlViewSize:(CGSize)size {
+    self = [super initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     if (self) {
+        _glViewSize = size;
+        
         [self setupLayer];
         [self setupContext];
         [self setupDepthBuffer];
@@ -120,10 +119,10 @@
         [self setupDisplayLink];
         
         _projection = [CC3GLMatrix matrix];
-        [_projection populateOrthoFromFrustumLeft:-self.frame.size.width/2
-                                         andRight:self.frame.size.width/2
-                                        andBottom:-self.frame.size.height/2
-                                           andTop:self.frame.size.height/2
+        [_projection populateOrthoFromFrustumLeft:-_glViewSize.width/2
+                                         andRight:_glViewSize.width/2
+                                        andBottom:-_glViewSize.height/2
+                                           andTop:_glViewSize.height/2
                                           andNear:0
                                            andFar:10];
     }

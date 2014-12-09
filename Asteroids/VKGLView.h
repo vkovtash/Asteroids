@@ -19,6 +19,8 @@
 @property (strong, nonatomic) CC3GLMatrix *projection;
 @property (readonly, nonatomic) CGSize glViewSize;
 
+- (instancetype) initWithGlViewSize:(CGSize)size;
+
 -(void) addGLObject:(id <VKGLObject>) glObject;
 -(void) removeGLObject:(id <VKGLObject>) glObject;
 @end

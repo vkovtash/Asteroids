@@ -98,8 +98,13 @@
     self.controlContainerView.layer.cornerRadius = self.controlContainerView.bounds.size.height / 2;
     self.controlContainerView.layer.borderWidth = 1;
     self.controlContainerView.layer.borderColor = [UIColor yellowColor].CGColor;
+    
+    CGSize window = [[UIApplication sharedApplication].delegate window].bounds.size;
+    window.width *= 1.5;
+    window.height *= 1.5;
    
-    self.worldController = [[ZIMGameWorldController alloc] initWithGlViewSize:[[UIApplication sharedApplication].delegate window].bounds.size];
+    self.worldController = [[ZIMGameWorldController alloc] initWithGlViewSize:window];
+    self.worldController.glView.frame = [[UIApplication sharedApplication].delegate window].bounds;
     self.worldController.delegate = self;
     
     [self.view addSubview:self.worldController.glView];

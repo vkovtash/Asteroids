@@ -10,6 +10,7 @@
 
 @interface VKGameObject()
 @property (nonatomic) CGColorRef internalColor;
+@property (strong, nonatomic) CC3GLMatrix *matrix;
 @end
 
 @implementation VKGameObject{
@@ -50,6 +51,7 @@
     self = [super init];
     if (self) {
         
+        _matrix = [CC3GLMatrix matrix];
         _red = 1.0;
         _green = 1.0;
         _blue = 1.0;
@@ -154,9 +156,10 @@
     if (!self.glView) {
         return;
     }
+    
     glUniformMatrix4fv(_projectionUniform, 1, GL_FALSE, self.glView.projection.glMatrix);
     
-    CC3GLMatrix *modelView = [CC3GLMatrix matrix];
+    CC3GLMatrix *modelView = self.matrix;
     [modelView populateFromTranslation:CC3VectorMake(-self.glView.glViewSize.width/2,
                                                      self.glView.glViewSize.height/2, 0)];
     [modelView translateByX:_position.x];
