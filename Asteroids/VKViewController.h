@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "JSAnalogueStick.h"
 
-@interface VKViewController : UIViewController <JSAnalogueStickDelegate>
+@interface VKViewController : UIViewController
 @end

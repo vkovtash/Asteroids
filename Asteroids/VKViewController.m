@@ -7,30 +7,31 @@
 //
 
 #import "VKViewController.h"
-#import "VKGLView.h"
-#import "VKAsteroid.h"
-#import "VKMissle.h"
-#import "VKStar.h"
 #import "VKPlayer.h"
 #import "SIAlertView.h"
 #import "ZIMSFXController.h"
 #import "ZIMGameWorldController.h"
+#import "JSAnalogueStick.h"
+#import <QuartzCore/QuartzCore.h>
+#import "UIButton+ZIMAsteroidsButtons.h"
+#import "ZIMAnimationContainerView.h"
 
 #define SCORE_MULTIPLIER 5
 #define ASTEROID_MAX_SIZE 4.0f
 
-@interface VKViewController () <ZIMGameWorldControllerDelegate>
-@property (nonatomic,strong) VKPlayer *audioPlayer;
-@property (strong, nonatomic) UIButton *fireButton;
-@property (strong, nonatomic) UIButton *accelerationButton;
-@property (strong, nonatomic) JSAnalogueStick *joyStik;
-@property (nonatomic) int level;
-@property (nonatomic) int points;
-@property (strong, nonatomic) UILabel *pointsLabel;
-@property (strong, nonatomic) UILabel *asteroidsCountLabel;
-@property (strong, nonatomic) UILabel *levelLabel;
+@interface VKViewController () <ZIMGameWorldControllerDelegate, JSAnalogueStickDelegate>
+@property (assign, nonatomic) int points;
+@property (strong, nonatomic) VKPlayer *audioPlayer;
 @property (strong, nonatomic) ZIMSFXController *sfxController;
 @property (strong, nonatomic) ZIMGameWorldController *worldController;
+@property (strong, nonatomic) UIButton *fireButton;
+@property (strong, nonatomic) UIButton *accelerationButton;
+@property (strong, nonatomic) UIButton *playButton;
+@property (strong, nonatomic) UIButton *pauseButton;
+@property (strong, nonatomic) JSAnalogueStick *joyStik;
+@property (strong, nonatomic) IBOutlet UILabel *pointsLabel;
+@property (strong, nonatomic) IBOutlet UILabel *asteroidsCountLabel;
+@property (strong, nonatomic) IBOutlet ZIMAnimationContainerView *controlContainerView;
 @end
 
 @implementation VKViewController
@@ -57,8 +58,8 @@
 
 - (void) setPoints:(int)points {
     _points = points;
-    self.pointsLabel.text = [NSString stringWithFormat:@"SCORE: %d", points];
-    self.asteroidsCountLabel.text = [NSString stringWithFormat:@"ASTEROIDS: %lu", (unsigned long)self.worldController.asteroidsCount];
+    self.pointsLabel.text = [NSString stringWithFormat:@"%d", points];
+    self.asteroidsCountLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)self.worldController.asteroidsCount];
 }
 
 #pragma mark - ViewController life cycle
@@ -70,103 +71,57 @@
     
     //int views
     
-    self.fireButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.fireButton.frame = CGRectMake(self.view.bounds.size.width-160,
-                                       self.view.bounds.size.height-90,
-                                       60,
-                                       60);
-    [self.fireButton setImage:[UIImage imageNamed:@"button"]
-                     forState:UIControlStateNormal];
-    [self.fireButton setImage:[UIImage imageNamed:@"button-pressed"] forState:UIControlStateSelected];
+    CGRect bounds = self.view.bounds;
+    
+    self.fireButton = [UIButton zim_fireButton];
+    self.fireButton.center = CGPointMake(bounds.size.width - 130, bounds.size.height - 60);
     [self.fireButton addTarget:self action:@selector(fire) forControlEvents:UIControlEventTouchDown];
-    self.fireButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin;
     
-    UILabel *fireLabel = [[UILabel alloc] initWithFrame:self.fireButton.bounds];
-    fireLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-    fireLabel.backgroundColor = [UIColor clearColor];
-    fireLabel.textAlignment = NSTextAlignmentCenter;
-    fireLabel.textColor = [UIColor darkGrayColor];
-    fireLabel.shadowColor = [UIColor whiteColor];
-    fireLabel.shadowOffset = CGSizeMake(0, 1);
-    fireLabel.text = @"fire";
-    [self.fireButton addSubview:fireLabel];
-    
-    self.accelerationButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.accelerationButton.frame = CGRectMake(self.view.bounds.size.width-80,
-                                       self.view.bounds.size.height-120,
-                                       60,
-                                       60);
-    [self.accelerationButton setImage:[UIImage imageNamed:@"button"]
-                     forState:UIControlStateNormal];
-    [self.accelerationButton setImage:[UIImage imageNamed:@"button-pressed"] forState:UIControlStateSelected];
+    self.accelerationButton = [UIButton zim_accelerationButton];
+    self.accelerationButton.center = CGPointMake(bounds.size.width - 50, bounds.size.height - 90);
     [self.accelerationButton addTarget:self action:@selector(startAcceleration) forControlEvents:UIControlEventTouchDown];
     [self.accelerationButton addTarget:self action:@selector(stopAcceleration) forControlEvents:UIControlEventTouchUpInside];
-    self.accelerationButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin;
     
-    UILabel *accelLabel = [[UILabel alloc] initWithFrame:self.fireButton.bounds];
-    accelLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-    accelLabel.backgroundColor = [UIColor clearColor];
-    accelLabel.textAlignment = NSTextAlignmentCenter;
-    accelLabel.textColor = [UIColor darkGrayColor];
-    accelLabel.shadowColor = [UIColor whiteColor];
-    accelLabel.shadowOffset = CGSizeMake(0, 1);
-    accelLabel.text = @"accel";
-    [self.accelerationButton addSubview:accelLabel];
+    self.playButton = [UIButton zim_playButton];
+    [self.playButton addTarget:self action:@selector(resume) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.pauseButton = [UIButton zim_pauseButton];
+    [self.pauseButton addTarget:self action:@selector(pause) forControlEvents:UIControlEventTouchUpInside];
     
     self.joyStik = [[JSAnalogueStick alloc] initWithFrame:CGRectMake(20,
-                                                                     self.view.bounds.size.height-120,
+                                                                     self.view.bounds.size.height - 120,
                                                                      100,
                                                                      100)];
     self.joyStik.delegate = self;
     self.joyStik.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleRightMargin;
     
-    self.pointsLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,
-                                                                 20,
-                                                                 self.view.bounds.size.width-40,
-                                                                 20)];
-    self.pointsLabel.backgroundColor = [UIColor clearColor];
-    self.pointsLabel.textColor = [UIColor yellowColor];
-    self.pointsLabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:18];
-    
-    self.asteroidsCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width-140,
-                                                                         20,
-                                                                         140,
-                                                                         20)];
-    self.asteroidsCountLabel.backgroundColor = [UIColor clearColor];
-    self.asteroidsCountLabel.textColor = [UIColor yellowColor];
-    self.asteroidsCountLabel.font = [UIFont fontWithName:@"STHeitiTC-Light" size:18];
-    self.asteroidsCountLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleLeftMargin;
-    
-    self.levelLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,
-                                                                20,
-                                                                self.view.bounds.size.width - 40,
-                                                                20)];
-    self.levelLabel.backgroundColor = [UIColor clearColor];
-    self.levelLabel.textColor = [UIColor yellowColor];
-    self.levelLabel.font = [UIFont fontWithName:@"STHeitiTC-Medium" size:20];
-    self.levelLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleWidth;
-    self.levelLabel.textAlignment = NSTextAlignmentCenter;
+    self.controlContainerView.layer.cornerRadius = self.controlContainerView.bounds.size.height / 2;
+    self.controlContainerView.layer.borderWidth = 1;
+    self.controlContainerView.layer.borderColor = [UIColor yellowColor].CGColor;
    
-    
-    self.worldController = [[ZIMGameWorldController alloc] initWithGlViewSize:self.view.bounds.size];
+    self.worldController = [[ZIMGameWorldController alloc] initWithGlViewSize:[[UIApplication sharedApplication].delegate window].bounds.size];
     self.worldController.delegate = self;
     
     [self.view addSubview:self.worldController.glView];
     [self.view addSubview:self.fireButton];
     [self.view addSubview:self.accelerationButton];
     [self.view addSubview:self.joyStik];
-    [self.view addSubview:self.pointsLabel];
-    [self.view addSubview:self.asteroidsCountLabel];
-    [self.view addSubview:self.levelLabel];
+    [self.controlContainerView setCurrentView:self.playButton];
     
     // init game state
-    self.level = 1;
     self.points = 0;
+    
+    [self.view sendSubviewToBack:self.worldController.glView];
+    [self.worldController reset];
+    [self.audioPlayer stop];
+}
+
+- (BOOL) prefersStatusBarHidden {
+    return YES;
 }
 
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self start];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -174,9 +129,8 @@
 }
 
 - (void) start {
-    [self.worldController reset];
     [self.worldController resume];
-    [self.audioPlayer next];
+    //[self.audioPlayer next];
 }
 
 - (void) stop {
@@ -209,14 +163,17 @@
 
 - (void) controllerDidResumeGame:(ZIMGameWorldController *)controller {
     [self.audioPlayer play];
+    [self.controlContainerView replaceCurrentViewWithView:self.pauseButton];
 }
 
 - (void) controllerDidPauseGame:(ZIMGameWorldController *)controller {
     [self.audioPlayer pause];
+    [self.controlContainerView replaceCurrentViewWithView:self.playButton];
 }
 
 - (void) controllerDidFinishGame:(ZIMGameWorldController *)controller {
     [self.audioPlayer stop];
+    [self.audioPlayer next];
     [self.sfxController explosion];
     SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"Game Over"
                                                      andMessage:[NSString stringWithFormat:@"Your score is %d", self.points]];
@@ -224,8 +181,8 @@
                              type:SIAlertViewDidDismissNotification
                           handler:^(SIAlertView *alertView){
                               self.points = 0;
-                              self.level = 1;
-                              [self start];
+                              [self.worldController reset];
+                              [self resume];
                           }];
     [alertView show];
 }

@@ -26,6 +26,15 @@
 		F37675FD17CB318400C8DEC4 /* Icon-57.png in Resources */ = {isa = PBXBuildFile; fileRef = F37675FC17CB318400C8DEC4 /* Icon-57.png */; };
 		F378EF111A35D0BE00380D03 /* ZIMRingEnumertor.m in Sources */ = {isa = PBXBuildFile; fileRef = F378EF101A35D0BE00380D03 /* ZIMRingEnumertor.m */; };
 		F378EF1A1A35FC7700380D03 /* ZIMGameWorldController.m in Sources */ = {isa = PBXBuildFile; fileRef = F378EF191A35FC7700380D03 /* ZIMGameWorldController.m */; };
+		F378EF1C1A36298100380D03 /* VKViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F378EF1B1A36298100380D03 /* VKViewController.xib */; };
+		F378EF1F1A3657CF00380D03 /* UIButton+ZIMAsteroidsButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = F378EF1E1A3657CF00380D03 /* UIButton+ZIMAsteroidsButtons.m */; };
+		F378EF221A36601800380D03 /* ZIMAnimationContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F378EF211A36601800380D03 /* ZIMAnimationContainerView.m */; };
+		F378EF251A366CF200380D03 /* btn_pause@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F378EF231A366CF200380D03 /* btn_pause@3x.png */; };
+		F378EF261A366CF200380D03 /* btn_play@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F378EF241A366CF200380D03 /* btn_play@3x.png */; };
+		F378EF2C1A366D2600380D03 /* btn_pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F378EF281A366D2600380D03 /* btn_pause@2x.png */; };
+		F378EF2E1A366D2600380D03 /* btn_play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F378EF2A1A366D2600380D03 /* btn_play@2x.png */; };
+		F378EF311A366D7600380D03 /* btn_pause.png in Resources */ = {isa = PBXBuildFile; fileRef = F378EF2F1A366D7600380D03 /* btn_pause.png */; };
+		F378EF321A366D7600380D03 /* btn_play.png in Resources */ = {isa = PBXBuildFile; fileRef = F378EF301A366D7600380D03 /* btn_play.png */; };
 		F38B0ADA17C9EBAD001951BA /* VKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0AD917C9EBAD001951BA /* VKViewController.m */; };
 		F38B0B7517CA525E001951BA /* CC3Foundation.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B3A17CA525E001951BA /* CC3Foundation.m */; };
 		F38B0B7617CA525E001951BA /* CC3GLMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B3C17CA525E001951BA /* CC3GLMatrix.m */; };
@@ -119,6 +128,17 @@
 		F378EF101A35D0BE00380D03 /* ZIMRingEnumertor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMRingEnumertor.m; sourceTree = "<group>"; };
 		F378EF181A35FC7700380D03 /* ZIMGameWorldController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMGameWorldController.h; sourceTree = "<group>"; };
 		F378EF191A35FC7700380D03 /* ZIMGameWorldController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMGameWorldController.m; sourceTree = "<group>"; };
+		F378EF1B1A36298100380D03 /* VKViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VKViewController.xib; sourceTree = "<group>"; };
+		F378EF1D1A3657CF00380D03 /* UIButton+ZIMAsteroidsButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+ZIMAsteroidsButtons.h"; sourceTree = "<group>"; };
+		F378EF1E1A3657CF00380D03 /* UIButton+ZIMAsteroidsButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+ZIMAsteroidsButtons.m"; sourceTree = "<group>"; };
+		F378EF201A36601800380D03 /* ZIMAnimationContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMAnimationContainerView.h; sourceTree = "<group>"; };
+		F378EF211A36601800380D03 /* ZIMAnimationContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMAnimationContainerView.m; sourceTree = "<group>"; };
+		F378EF231A366CF200380D03 /* btn_pause@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_pause@3x.png"; path = "Resources/btn_pause@3x.png"; sourceTree = "<group>"; };
+		F378EF241A366CF200380D03 /* btn_play@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_play@3x.png"; path = "Resources/btn_play@3x.png"; sourceTree = "<group>"; };
+		F378EF281A366D2600380D03 /* btn_pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_pause@2x.png"; path = "Resources/btn_pause@2x.png"; sourceTree = "<group>"; };
+		F378EF2A1A366D2600380D03 /* btn_play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_play@2x.png"; path = "Resources/btn_play@2x.png"; sourceTree = "<group>"; };
+		F378EF2F1A366D7600380D03 /* btn_pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btn_pause.png; path = Resources/btn_pause.png; sourceTree = "<group>"; };
+		F378EF301A366D7600380D03 /* btn_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btn_play.png; path = Resources/btn_play.png; sourceTree = "<group>"; };
 		F38B0AD817C9EBAD001951BA /* VKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKViewController.h; sourceTree = "<group>"; };
 		F38B0AD917C9EBAD001951BA /* VKViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKViewController.m; sourceTree = "<group>"; };
 		F38B0B3917CA525E001951BA /* CC3Foundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3Foundation.h; sourceTree = "<group>"; };
@@ -265,6 +285,7 @@
 				35DF6450138C40D500FF9459 /* AsteroidsAppDelegate.m */,
 				F374124C17C95E1000AF822B /* VKGLView.h */,
 				F374124D17C95E1000AF822B /* VKGLView.m */,
+				F378EF1B1A36298100380D03 /* VKViewController.xib */,
 				F38B0AD817C9EBAD001951BA /* VKViewController.h */,
 				F38B0AD917C9EBAD001951BA /* VKViewController.m */,
 				F39937B917CC6CD0004BE9CB /* MainWindow-iPad.xib */,
@@ -278,6 +299,10 @@
 				F378EF101A35D0BE00380D03 /* ZIMRingEnumertor.m */,
 				F378EF181A35FC7700380D03 /* ZIMGameWorldController.h */,
 				F378EF191A35FC7700380D03 /* ZIMGameWorldController.m */,
+				F378EF1D1A3657CF00380D03 /* UIButton+ZIMAsteroidsButtons.h */,
+				F378EF1E1A3657CF00380D03 /* UIButton+ZIMAsteroidsButtons.m */,
+				F378EF201A36601800380D03 /* ZIMAnimationContainerView.h */,
+				F378EF211A36601800380D03 /* ZIMAnimationContainerView.m */,
 			);
 			path = Asteroids;
 			sourceTree = "<group>";
@@ -305,6 +330,12 @@
 		F37675FB17CB314500C8DEC4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F378EF2F1A366D7600380D03 /* btn_pause.png */,
+				F378EF301A366D7600380D03 /* btn_play.png */,
+				F378EF281A366D2600380D03 /* btn_pause@2x.png */,
+				F378EF2A1A366D2600380D03 /* btn_play@2x.png */,
+				F378EF231A366CF200380D03 /* btn_pause@3x.png */,
+				F378EF241A366CF200380D03 /* btn_play@3x.png */,
 				F3F4E99517CCE0E100EDA7CC /* Music */,
 				F358A19417CB908D00CF776C /* death.m4a */,
 				F358A18E17CB3BDB00CF776C /* blast.m4a */,
@@ -479,6 +510,7 @@
 				35DF6454138C40D500FF9459 /* MainWindow.xib in Resources */,
 				F38B0B7917CA525E001951BA /* SimpleFragment.glsl in Resources */,
 				F38B0B7A17CA525E001951BA /* SimpleVertex.glsl in Resources */,
+				F378EF261A366CF200380D03 /* btn_play@3x.png in Resources */,
 				F38B0B7F17CA525E001951BA /* analogue_bg.png in Resources */,
 				F38B0B8017CA525E001951BA /* analogue_bg@2x.png in Resources */,
 				F38B0B8117CA525E001951BA /* analogue_handle.png in Resources */,
@@ -496,10 +528,13 @@
 				F38B0B8D17CA525E001951BA /* dPad-DownLeft@2x.png in Resources */,
 				F38B0B8E17CA525E001951BA /* dPad-DownRight.png in Resources */,
 				F38B0B8F17CA525E001951BA /* dPad-DownRight@2x.png in Resources */,
+				F378EF2C1A366D2600380D03 /* btn_pause@2x.png in Resources */,
 				F38B0B9017CA525E001951BA /* dPad-Left.png in Resources */,
 				F38B0B9117CA525E001951BA /* dPad-Left@2x.png in Resources */,
 				F38B0B9217CA525E001951BA /* dPad-None.png in Resources */,
+				F378EF251A366CF200380D03 /* btn_pause@3x.png in Resources */,
 				F38B0B9317CA525E001951BA /* dPad-None@2x.png in Resources */,
+				F378EF1C1A36298100380D03 /* VKViewController.xib in Resources */,
 				F38B0B9417CA525E001951BA /* dPad-Right.png in Resources */,
 				F38B0B9517CA525E001951BA /* dPad-Right@2x.png in Resources */,
 				F38B0B9617CA525E001951BA /* dPad-Up.png in Resources */,
@@ -507,6 +542,7 @@
 				F38B0B9817CA525E001951BA /* dPad-UpLeft.png in Resources */,
 				F38B0B9917CA525E001951BA /* dPad-UpLeft@2x.png in Resources */,
 				F38B0B9A17CA525E001951BA /* dPad-UpRight.png in Resources */,
+				F378EF311A366D7600380D03 /* btn_pause.png in Resources */,
 				F38B0B9B17CA525E001951BA /* dPad-UpRight@2x.png in Resources */,
 				F38B0BA417CA5442001951BA /* SIAlertView.bundle in Resources */,
 				F33D393017CB2DD80026385A /* Icon-114.png in Resources */,
@@ -524,8 +560,10 @@
 				F3F4E9A717CCE0E100EDA7CC /* HHavok-main.m4a in Resources */,
 				F3F4E9A817CCE0E100EDA7CC /* LICENSE.md in Resources */,
 				F3F4E9A917CCE0E100EDA7CC /* Searching.m4a in Resources */,
+				F378EF321A366D7600380D03 /* btn_play.png in Resources */,
 				F3F4E9AA17CCE0E100EDA7CC /* Underclocked.m4a in Resources */,
 				F3F4E9AB17CCE0E100EDA7CC /* We're_the_Resistors.m4a in Resources */,
+				F378EF2E1A366D2600380D03 /* btn_play@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,12 +579,14 @@
 				F374124E17C95E1000AF822B /* VKGLView.m in Sources */,
 				F38B0ADA17C9EBAD001951BA /* VKViewController.m in Sources */,
 				F38B0B7517CA525E001951BA /* CC3Foundation.m in Sources */,
+				F378EF1F1A3657CF00380D03 /* UIButton+ZIMAsteroidsButtons.m in Sources */,
 				F38B0B7617CA525E001951BA /* CC3GLMatrix.m in Sources */,
 				F38B0B7717CA525E001951BA /* CC3Kazmath.c in Sources */,
 				F38B0B7817CA525E001951BA /* CC3Math.m in Sources */,
 				F3E26B531A35BABB0053111A /* ZIMSFXController.m in Sources */,
 				F38B0B7B17CA525E001951BA /* VKAsteroid.m in Sources */,
 				F38B0B7C17CA525E001951BA /* VKGameObject.m in Sources */,
+				F378EF221A36601800380D03 /* ZIMAnimationContainerView.m in Sources */,
 				F378EF1A1A35FC7700380D03 /* ZIMGameWorldController.m in Sources */,
 				F38B0B7D17CA525E001951BA /* VKMissle.m in Sources */,
 				F38B0B7E17CA525E001951BA /* VKShip.m in Sources */,
