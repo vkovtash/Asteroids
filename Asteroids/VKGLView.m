@@ -12,6 +12,7 @@
 
 @interface VKGLView()
 @property (strong, nonatomic) NSMutableArray *gameObjects;
+@property (strong, nonatomic) CADisplayLink *displayLink;
 @end
 
 @implementation VKGLView{
@@ -25,14 +26,14 @@
 
 #define TEX_COORD_MAX   4
 
-- (NSMutableArray *) gameObjects{
+- (NSMutableArray *) gameObjects {
     if (!_gameObjects) {
         _gameObjects = [NSMutableArray array];
     }
     return _gameObjects;
 }
 
-+ (Class)layerClass {
++ (Class) layerClass {
     return [CAEAGLLayer class];
 }
 
@@ -84,26 +85,30 @@
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glViewport(0, 0, _glViewSize.width, _glViewSize.height);
     
-    //NSArray *renderArray = [self.gameObjects copy];
     [self.gameObjects makeObjectsPerformSelector:@selector(render)];
-    
     [_context presentRenderbuffer:GL_RENDERBUFFER];
 }
 
-- (void)setupDisplayLink {
-    CADisplayLink* displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(render:)];
-    [displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-}
-
-
--(void) addGLObject:(id <VKGLObject>) glObject{
+-(void) addGLObject:(id <VKGLObject>)glObject {
     [glObject setGlView:self];
     [self.gameObjects addObject:glObject];
 }
 
--(void) removeGLObject:(id <VKGLObject>) glObject{
+-(void) removeGLObject:(id <VKGLObject>)glObject {
     [self.gameObjects removeObjectIdenticalTo:glObject];
     [glObject setGlView:nil];
+}
+
+- (void) willResignActive {
+    [self.displayLink invalidate];
+    self.displayLink = nil;
+}
+
+- (void) setupDisplayLink {
+    if (!self.displayLink) {
+        self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(render:)];
+        [self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    }
 }
 
 - (instancetype) initWithGlViewSize:(CGSize)size {
@@ -118,19 +123,28 @@
         [self setupFrameBuffer];
         [self setupDisplayLink];
         
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(willResignActive)
+                                                     name:UIApplicationWillResignActiveNotification
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(setupDisplayLink)
+                                                     name:UIApplicationWillEnterForegroundNotification
+                                                   object:nil];
+        
         _projection = [CC3GLMatrix matrix];
-        [_projection populateOrthoFromFrustumLeft:-_glViewSize.width/2
-                                         andRight:_glViewSize.width/2
-                                        andBottom:-_glViewSize.height/2
-                                           andTop:_glViewSize.height/2
+        [_projection populateOrthoFromFrustumLeft:-_glViewSize.width / 2
+                                         andRight:_glViewSize.width / 2
+                                        andBottom:-_glViewSize.height / 2
+                                           andTop:_glViewSize.height / 2
                                           andNear:0
                                            andFar:10];
     }
     return self;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     _context = nil;
 }
 
