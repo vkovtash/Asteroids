@@ -27,29 +27,23 @@
 }
 
 - (void) prepareToPlay{
-    if(self.internalAudioFiles.count){
-        if (self.currentIndex >= self.internalAudioFiles.count) {
-            self.currentIndex = 0;
-        }
-        NSURL *fileToPlay = [self.internalAudioFiles objectAtIndex:self.currentIndex];
-        
-        NSError *error = nil;
-        
-        _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileToPlay
-                                                              error:&error];
-        
-        if (error != nil){
-            NSLog(@"Error loading audio %@", error.description);
-        }
-        
-        if (self.audioPlayer != nil) {
-            self.audioPlayer.delegate = self;
-            [self.audioPlayer prepareToPlay];
-            [self.audioPlayer setVolume:1.0];
-        }
-    }
-    else{
+    if (self.internalAudioFiles.count == 0) {
         NSLog(@"There is no audio files");
+        return;
+    }
+    
+    NSURL *fileToPlay = [self.internalAudioFiles objectAtIndex:self.currentIndex];
+    NSError *error = nil;
+    _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileToPlay
+                                                          error:&error];
+    if (error != nil){
+        NSLog(@"Error loading audio %@", error.description);
+    }
+    
+    if (self.audioPlayer != nil) {
+        self.audioPlayer.delegate = self;
+        [self.audioPlayer prepareToPlay];
+        [self.audioPlayer setVolume:1.0];
     }
 }
 
@@ -72,7 +66,7 @@
 - (void) next{
     BOOL shouldContinuePlayback = self.audioPlayer.isPlaying;
     [self stop];
-    self.currentIndex++;
+    self.currentIndex = (self.currentIndex + 1) % self.internalAudioFiles.count;
     if (shouldContinuePlayback) {
         [self play];
     }
@@ -91,8 +85,11 @@
 
 #pragma mark - AVAudioPlayerDelegate
 
-- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)successfully {
     [self next];
+    if (!successfully) {
+        [self play];
+    }
 }
 
 @end
