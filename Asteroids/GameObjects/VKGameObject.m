@@ -153,26 +153,30 @@
 }
 
 - (void) render {
-    if (!self.glView) {
+    if (!_glView) {
         return;
     }
     
-    glUniformMatrix4fv(_projectionUniform, 1, GL_FALSE, self.glView.projection.glMatrix);
+    CGSize glViewSize = _glView.glViewSize;
+    if (_position.x < 0 || _position.x > glViewSize.width ||
+        _position.y < 0 || _position.y > glViewSize.height) {
+        //offscreen
+        return;
+    }
     
-    CC3GLMatrix *modelView = self.matrix;
-    [modelView populateFromTranslation:CC3VectorMake(-self.glView.glViewSize.width/2,
-                                                     self.glView.glViewSize.height/2, 0)];
+    glUniformMatrix4fv(_projectionUniform, 1, GL_FALSE, _glView.projection.glMatrix);
+    
+    CC3GLMatrix *modelView = _matrix;
+    [modelView populateFromTranslation:CC3VectorMake(-glViewSize.width/2, glViewSize.height/2, 0)];
     [modelView translateByX:_position.x];
     [modelView translateByY:-_position.y];
     [modelView rotateByZ:_rotation];
-    glUniformMatrix4fv(_modelViewUniform, 1, 0, modelView.glMatrix);
     
+    glUniformMatrix4fv(_modelViewUniform, 1, 0, modelView.glMatrix);
     glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
-    
     glVertexAttribPointer(_positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
     glUniform4f(_colorUniform, _red, _green, _blue, _alpha);
-    
     glDrawElements(_style, _indicesCount, GL_UNSIGNED_BYTE, 0);
 }
 
