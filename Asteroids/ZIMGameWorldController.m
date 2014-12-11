@@ -265,6 +265,7 @@ static inline double distance(CGPoint p1, CGPoint p2) {
         position.y = asteroid.position.y - asteroid.y_velocity * time + offset_y;
         asteroid.position = [self worldCoordinatesFor:position];
         [asteroid rotateWithTimeInterval:time];
+        asteroid.distance = distance(asteroid.position, self.ship.position);
     }
     
     //moving missles
@@ -299,10 +300,8 @@ static inline double distance(CGPoint p1, CGPoint p2) {
 #pragma mark - collision detection
 
 - (BOOL) checkCollision:(NSArray *)asteroids {
-    double distance_value;
     for (VKAsteroid *asteroid in asteroids){
-        distance_value = distance(asteroid.position, self.ship.position);
-        if (distance_value < (asteroid.radius + self.ship.radius) * kShipCollisionRadiusMultiplier) {
+        if (asteroid.distance < (asteroid.radius + _ship.radius) * kShipCollisionRadiusMultiplier) {
             return YES;
         }
     }
@@ -311,8 +310,12 @@ static inline double distance(CGPoint p1, CGPoint p2) {
 
 - (void) checkHit:(NSArray *)missles Asteroids:(NSArray *)asteroids {
     double distance_value;
-    for (VKMissle *missle in missles) {
-        for (VKAsteroid *asteroid in asteroids){
+    for (VKAsteroid *asteroid in asteroids) {
+        if (asteroid.distance > MISSLE_MAX_DISTANCE) {
+            continue;
+        }
+        
+        for (VKMissle *missle in missles) {
             distance_value = distance(asteroid.position, missle.position);
             if (distance_value < asteroid.radius + missle.radius) {
                 dispatch_sync(dispatch_get_main_queue(), ^{
