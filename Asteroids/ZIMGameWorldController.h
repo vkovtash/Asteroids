@@ -39,6 +39,7 @@
 
 - (void) fire;
 
+- (void) spawnAsteroid;
 - (void) reset;
 - (void) pause;
 - (void) resume;

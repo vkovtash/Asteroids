@@ -32,7 +32,7 @@ static CGFloat kShipCollisionRadiusMultiplier = 0.75;
 #define STARS_GENERATOR_PART_SIZE 160.0f //points
 
 
-static inline double distance(CGPoint p1, CGPoint p2){
+static inline double distance(CGPoint p1, CGPoint p2) {
     return sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2));
 }
 
@@ -123,6 +123,12 @@ static inline double distance(CGPoint p1, CGPoint p2){
     }
 }
 
+- (void) spawnAsteroid {
+    [self makeAsteroidWithSize:[self chooseAsteroidSize]
+                      Position:[self worldCoordinatesFor:CGPointMake(self.ship.position.x + self.worldSize.width / 2,
+                                                                     self.ship.position.y + self.worldSize.height / 2)]];
+}
+
 #pragma mark - Factory methods
 
 - (void) makeAsteroidWithSize:(int)parts Position:(CGPoint)position {
@@ -164,16 +170,15 @@ static inline double distance(CGPoint p1, CGPoint p2){
         int y_parts = self.worldSize.height / part_size + 1;
         int stars_per_part = STARS_DENCITY;
         
-        int star_x;
-        int star_y;
+        CGPoint star_position;
         
         for (int x = 0; x < x_parts; x++) {
             for (int y = 0; y < y_parts; y++) {
                 for (int i = 0; i < stars_per_part; i++) {
-                    star_x = x * part_size + arc4random_uniform(part_size);
-                    star_y = y * part_size + arc4random_uniform(part_size);
+                    star_position.x = x * part_size + arc4random_uniform(part_size);
+                    star_position.y = y * part_size + arc4random_uniform(part_size);
                     VKStar *star = [[VKStar alloc] initWithRadius:STAR_RADIUS];
-                    star.position = [self worldCoordinatesForX:star_x Y:star_y];
+                    star.position = [self worldCoordinatesFor:star_position];
                     [self.stars addObject:star];
                     [self.glView addGLObject:star];
                 }
@@ -243,8 +248,7 @@ static inline double distance(CGPoint p1, CGPoint p2){
 }
 
 - (BOOL) processGameStep:(NSTimeInterval)time {
-    double x;
-    double y;
+    CGPoint position;
     
     //moving ship
     if (self.ship.accelerating) {
@@ -257,9 +261,9 @@ static inline double distance(CGPoint p1, CGPoint p2){
     NSArray *asteroids = [self.asteroids copy];
     
     for (VKAsteroid *asteroid in asteroids) {
-        x = asteroid.position.x - asteroid.x_velocity * time + offset_x;
-        y = asteroid.position.y - asteroid.y_velocity * time + offset_y;
-        asteroid.position = [self worldCoordinatesForX:x Y:y];
+        position.x = asteroid.position.x - asteroid.x_velocity * time + offset_x;
+        position.y = asteroid.position.y - asteroid.y_velocity * time + offset_y;
+        asteroid.position = [self worldCoordinatesFor:position];
         [asteroid rotateWithTimeInterval:time];
     }
     
@@ -268,9 +272,9 @@ static inline double distance(CGPoint p1, CGPoint p2){
     
     for (VKMissle *missle in missles) {
         if (missle.leftDistance > 0) {
-            x = missle.position.x - missle.x_velocity * time + offset_x;
-            y = missle.position.y - missle.y_velocity * time + offset_y;
-            missle.position = [self worldCoordinatesForX:x Y:y];
+            position.x = missle.position.x - missle.x_velocity * time + offset_x;
+            position.y = missle.position.y - missle.y_velocity * time + offset_y;
+            missle.position = [self worldCoordinatesFor:position];
             [missle decreaseLeftDistanceWithTimeInterval:time];
         }
         else{
@@ -283,9 +287,9 @@ static inline double distance(CGPoint p1, CGPoint p2){
     
     //moving starts
     for (VKStar *star in self.stars) {
-        x = star.position.x + offset_x;
-        y = star.position.y + offset_y;
-        star.position = [self worldCoordinatesForX:x Y:y];
+        position.x = star.position.x + offset_x;
+        position.y = star.position.y + offset_y;
+        star.position = [self worldCoordinatesFor:position];
     }
     
     [self checkHit:missles Asteroids:asteroids];
@@ -325,7 +329,7 @@ static inline double distance(CGPoint p1, CGPoint p2){
     }
 }
 
-- (void) splitAsteroid:(VKAsteroid *) asteroid {
+- (void) splitAsteroid:(VKAsteroid *)asteroid {
     if (asteroid.parts < 2) {
         return;
     }
@@ -344,22 +348,22 @@ static inline double distance(CGPoint p1, CGPoint p2){
     }
 }
 
-- (CGPoint) worldCoordinatesForX:(double)x Y:(double)y {
+- (CGPoint) worldCoordinatesFor:(CGPoint)point {
     CGSize worldSize = self.worldSize;
-    if (x > worldSize.width / 2) {
-        x -= worldSize.width;
+    if (point.x > worldSize.width / 2) {
+        point.x -= worldSize.width;
     }
-    else if (x < -worldSize.width/2){
-        x += worldSize.width;
+    else if (point.x < -worldSize.width / 2){
+        point.x += worldSize.width;
     }
     
-    if (y > worldSize.height / 2) {
-        y -= worldSize.height;
+    if (point.y > worldSize.height / 2) {
+        point.y -= worldSize.height;
     }
-    else if (y < -worldSize.height/2){
-        y += worldSize.height;
+    else if (point.y < -worldSize.height / 2){
+        point.y += worldSize.height;
     }
-    return CGPointMake(x, y);
+    return point;
 }
 
 @end
