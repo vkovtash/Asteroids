@@ -14,6 +14,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UIButton+ZIMAsteroidsButtons.h"
 #import "ZIMAnimationContainerView.h"
+#import "VKPlayer+ZIMAsteroidsPlaylist.h"
 
 
 static CGFloat kScoreMultiplier = 5;
@@ -36,48 +37,40 @@ static int kSpawnStep = 1000;
 
 @implementation VKViewController
 
-
-#pragma mark - Private properties
-
-- (VKPlayer *) audioPlayer{
-    if (_audioPlayer == nil) {
-        _audioPlayer = [[VKPlayer alloc] init];
-        NSBundle *mainBundle = [NSBundle mainBundle];
-        [_audioPlayer appendAudioFile:[NSURL fileURLWithPath:[mainBundle pathForResource:@"All_of_Us" ofType:@"m4a"]]];
-        [_audioPlayer appendAudioFile:[NSURL fileURLWithPath:[mainBundle pathForResource:@"Come_and_Find_Me" ofType:@"m4a"]]];
-        [_audioPlayer appendAudioFile:[NSURL fileURLWithPath:[mainBundle pathForResource:@"Digital_Native" ofType:@"m4a"]]];
-        [_audioPlayer appendAudioFile:[NSURL fileURLWithPath:[mainBundle pathForResource:@"HHavok-intro" ofType:@"m4a"]]];
-        [_audioPlayer appendAudioFile:[NSURL fileURLWithPath:[mainBundle pathForResource:@"HHavok-main" ofType:@"m4a"]]];
-        [_audioPlayer appendAudioFile:[NSURL fileURLWithPath:[mainBundle pathForResource:@"Underclocked" ofType:@"m4a"]]];
-        [_audioPlayer appendAudioFile:[NSURL fileURLWithPath:[mainBundle pathForResource:@"We're_the_Resistors" ofType:@"m4a"]]];
-        [_audioPlayer appendAudioFile:[NSURL fileURLWithPath:[mainBundle pathForResource:@"Searching" ofType:@"m4a"]]];
-        [_audioPlayer shuffle];
-    }
-    return _audioPlayer;
-}
-
-- (void) setPoints:(int)points {
-    _points = points;
-    self.pointsLabel.text = [NSString stringWithFormat:@"%d", points];
-}
-
 #pragma mark - ViewController life cycle
 
 - (void) viewDidLoad {
     [super viewDidLoad];
     
+    self.audioPlayer = [VKPlayer playerWithAsteroidsPlaylist];
     self.sfxController = [ZIMSFXController new];
     
     //int views
     
     CGRect bounds = self.view.bounds;
     
+    CGFloat visibleWorldHeight;
+    CGPoint fireButtonCenter, accelButtonCenter, joyStikCenter;
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        visibleWorldHeight = 500;
+        fireButtonCenter = CGPointMake(bounds.size.width - 130, bounds.size.height - 60);
+        accelButtonCenter = CGPointMake(bounds.size.width - 50, bounds.size.height - 90);
+        joyStikCenter = CGPointMake(70, bounds.size.height - 70);
+    }
+    else {
+        visibleWorldHeight = 600;
+        fireButtonCenter = CGPointMake(bounds.size.width - 130, bounds.size.height - 100);
+        accelButtonCenter = CGPointMake(bounds.size.width - 50, bounds.size.height - 130);
+        joyStikCenter = CGPointMake(90, bounds.size.height - 110);
+    }
+    
     self.fireButton = [UIButton zim_fireButton];
-    self.fireButton.center = CGPointMake(bounds.size.width - 130, bounds.size.height - 60);
+    self.fireButton.center = fireButtonCenter;
     [self.fireButton addTarget:self action:@selector(fire) forControlEvents:UIControlEventTouchDown];
     
     self.accelerationButton = [UIButton zim_accelerationButton];
-    self.accelerationButton.center = CGPointMake(bounds.size.width - 50, bounds.size.height - 90);
+    self.accelerationButton.center = accelButtonCenter;
     [self.accelerationButton addTarget:self action:@selector(startAcceleration) forControlEvents:UIControlEventTouchDown];
     [self.accelerationButton addTarget:self action:@selector(stopAcceleration) forControlEvents:UIControlEventTouchUpInside];
     
@@ -87,10 +80,8 @@ static int kSpawnStep = 1000;
     self.pauseButton = [UIButton zim_pauseButton];
     [self.pauseButton addTarget:self action:@selector(pause) forControlEvents:UIControlEventTouchUpInside];
     
-    self.joyStik = [[JSAnalogueStick alloc] initWithFrame:CGRectMake(20,
-                                                                     self.view.bounds.size.height - 120,
-                                                                     100,
-                                                                     100)];
+    self.joyStik = [[JSAnalogueStick alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    self.joyStik.center = joyStikCenter;
     self.joyStik.delegate = self;
     self.joyStik.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleRightMargin;
     
@@ -99,8 +90,8 @@ static int kSpawnStep = 1000;
     self.controlContainerView.layer.borderColor = [UIColor yellowColor].CGColor;
     
     CGSize window = [[UIApplication sharedApplication].delegate window].bounds.size;
-    window.width *= 1.5;
-    window.height *= 1.5;
+    window.width *= visibleWorldHeight / window.height;
+    window.height = visibleWorldHeight;
    
     self.worldController = [[ZIMGameWorldController alloc] initWithGlViewSize:window];
     self.worldController.glView.frame = [[UIApplication sharedApplication].delegate window].bounds;
@@ -133,6 +124,11 @@ static int kSpawnStep = 1000;
 }
 
 #pragma mark - private API
+
+- (void) setPoints:(int)points {
+    _points = points;
+    self.pointsLabel.text = [NSString stringWithFormat:@"%d", points];
+}
 
 - (void) stop {
     [self.audioPlayer stop];

@@ -35,6 +35,7 @@
 		F378EF2E1A366D2600380D03 /* btn_play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F378EF2A1A366D2600380D03 /* btn_play@2x.png */; };
 		F378EF311A366D7600380D03 /* btn_pause.png in Resources */ = {isa = PBXBuildFile; fileRef = F378EF2F1A366D7600380D03 /* btn_pause.png */; };
 		F378EF321A366D7600380D03 /* btn_play.png in Resources */ = {isa = PBXBuildFile; fileRef = F378EF301A366D7600380D03 /* btn_play.png */; };
+		F38954F61A3A0FE4000B5081 /* VKPlayer+ZIMAsteroidsPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = F38954F51A3A0FE4000B5081 /* VKPlayer+ZIMAsteroidsPlaylist.m */; };
 		F38B0ADA17C9EBAD001951BA /* VKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0AD917C9EBAD001951BA /* VKViewController.m */; };
 		F38B0B7517CA525E001951BA /* CC3Foundation.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B3A17CA525E001951BA /* CC3Foundation.m */; };
 		F38B0B7617CA525E001951BA /* CC3GLMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B3C17CA525E001951BA /* CC3GLMatrix.m */; };
@@ -137,6 +138,8 @@
 		F378EF2A1A366D2600380D03 /* btn_play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_play@2x.png"; path = "Resources/btn_play@2x.png"; sourceTree = "<group>"; };
 		F378EF2F1A366D7600380D03 /* btn_pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btn_pause.png; path = Resources/btn_pause.png; sourceTree = "<group>"; };
 		F378EF301A366D7600380D03 /* btn_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btn_play.png; path = Resources/btn_play.png; sourceTree = "<group>"; };
+		F38954F41A3A0FE4000B5081 /* VKPlayer+ZIMAsteroidsPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VKPlayer+ZIMAsteroidsPlaylist.h"; sourceTree = "<group>"; };
+		F38954F51A3A0FE4000B5081 /* VKPlayer+ZIMAsteroidsPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VKPlayer+ZIMAsteroidsPlaylist.m"; sourceTree = "<group>"; };
 		F38B0AD817C9EBAD001951BA /* VKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKViewController.h; sourceTree = "<group>"; };
 		F38B0AD917C9EBAD001951BA /* VKViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKViewController.m; sourceTree = "<group>"; };
 		F38B0B3917CA525E001951BA /* CC3Foundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3Foundation.h; sourceTree = "<group>"; };
@@ -297,6 +300,8 @@
 				F378EF1E1A3657CF00380D03 /* UIButton+ZIMAsteroidsButtons.m */,
 				F378EF201A36601800380D03 /* ZIMAnimationContainerView.h */,
 				F378EF211A36601800380D03 /* ZIMAnimationContainerView.m */,
+				F38954F41A3A0FE4000B5081 /* VKPlayer+ZIMAsteroidsPlaylist.h */,
+				F38954F51A3A0FE4000B5081 /* VKPlayer+ZIMAsteroidsPlaylist.m */,
 			);
 			path = Asteroids;
 			sourceTree = "<group>";
@@ -560,6 +565,7 @@
 				35DF644E138C40D500FF9459 /* main.m in Sources */,
 				35DF6451138C40D500FF9459 /* AsteroidsAppDelegate.m in Sources */,
 				F374124E17C95E1000AF822B /* VKGLView.m in Sources */,
+				F38954F61A3A0FE4000B5081 /* VKPlayer+ZIMAsteroidsPlaylist.m in Sources */,
 				F38B0ADA17C9EBAD001951BA /* VKViewController.m in Sources */,
 				F38B0B7517CA525E001951BA /* CC3Foundation.m in Sources */,
 				F378EF1F1A3657CF00380D03 /* UIButton+ZIMAsteroidsButtons.m in Sources */,
