@@ -58,7 +58,7 @@
 - (void) setPoints:(int)points {
     _points = points;
     self.pointsLabel.text = [NSString stringWithFormat:@"%d", points];
-    self.asteroidsCountLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)self.worldController.asteroidsCount];
+    self.asteroidsCountLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)self.worldController.currentAsteroidsCount];
 }
 
 #pragma mark - ViewController life cycle
@@ -146,7 +146,7 @@
         self.points = 0;
         [self.worldController reset];
         [self.audioPlayer next];
-        self.asteroidsCountLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)self.worldController.asteroidsCount];
+        self.asteroidsCountLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)self.worldController.currentAsteroidsCount];
     }
     [self.worldController resume];
 }

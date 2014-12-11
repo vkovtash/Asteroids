@@ -11,12 +11,11 @@
 #import "VKMissle.h"
 #import "VKStar.h"
 
-#define WORLD_SIZE_X 2200.0f //points
-#define WORLD_SIZE_Y 2200.0f //points
+static CGFloat kDefaultWorldSideSize = 2200;
+static NSUInteger kDefaultInitialAsteroidsCount = 15;
+
 #define FREE_SPACE_RADIUS 80.0f //points - radius around the ship that will be free of asteroids on the start
-#define INITIAL_ASTEROIDS_COUNT 5
-#define SCORE_MULTIPLIER 5
-#define GAME_LOOP_RATE 100.0f //loops per second
+#define GAME_LOOP_RATE 60.0f //loops per second
 #define ASTEROID_MAX_SIZE 4.0f //in parts
 #define ASTEROID_PART_SIZE 5 //points
 #define ASTEROID_MIN_SPEED 50.0f //points per sec
@@ -33,7 +32,7 @@
 #define COLLISION_RADIUS_MULTIPLIER 0.8f
 
 
-static double distance(double x1, double y1, double x2, double y2){
+static inline double distance(double x1, double y1, double x2, double y2){
     return sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
 }
 
@@ -46,17 +45,20 @@ static double distance(double x1, double y1, double x2, double y2){
 
 @implementation ZIMGameWorldController
 
-- (instancetype) initWithGlViewSize:(CGSize)size {
+- (instancetype) initWithGlViewSize:(CGSize)size worldSize:(CGSize)worldSize {
     self = [super init];
     if (!self) {
         return nil;
     }
     
     _glView = [[VKGLView alloc] initWithGlViewSize:size];
+    _ship = [[VKShip alloc] init];
     _asteroids = [NSMutableArray array];
     _missles = [NSMutableArray array];
     
-    _ship = [[VKShip alloc] init];
+    _worldSize = worldSize;
+    _initialAsteroidsCount = kDefaultInitialAsteroidsCount;
+    
     _ship.color = [UIColor yellowColor];
     _ship.maxSpeed = SHIP_MAX_SPEED;
     _ship.accelerationRate = SHIP_ACCELERATION_RATE;
@@ -71,6 +73,10 @@ static double distance(double x1, double y1, double x2, double y2){
     return self;
 }
 
+- (instancetype) initWithGlViewSize:(CGSize)size {
+    return [self initWithGlViewSize:size worldSize:CGSizeMake(kDefaultWorldSideSize, kDefaultWorldSideSize)];
+}
+
 - (void) dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -79,7 +85,7 @@ static double distance(double x1, double y1, double x2, double y2){
     return self.gameThread.isExecuting;
 }
 
-- (NSUInteger) asteroidsCount {
+- (NSUInteger) currentAsteroidsCount {
     return self.asteroids.count;
 }
 
@@ -135,14 +141,14 @@ static double distance(double x1, double y1, double x2, double y2){
 
 - (void) prepareWorld {
     double x, y;
-    for (int i = 0; i < INITIAL_ASTEROIDS_COUNT; i++) { //asteroids count increased with level
-        x = arc4random_uniform((int)WORLD_SIZE_X);
-        y = arc4random_uniform((int)WORLD_SIZE_Y);
+    for (int i = 0; i < self.initialAsteroidsCount; i++) {
+        x = arc4random_uniform((int)self.worldSize.width);
+        y = arc4random_uniform((int)self.worldSize.height);
         
         //ensure that any of asteroids will be placed over the ship on game start
         while (distance(x,y,self.ship.position.x, self.ship.position.y) < FREE_SPACE_RADIUS) {
-            x = arc4random_uniform((int)WORLD_SIZE_X);
-            y = arc4random_uniform((int)WORLD_SIZE_Y);
+            x = arc4random_uniform((int)self.worldSize.width);
+            y = arc4random_uniform((int)self.worldSize.height);
         }
         [self makeAsteroidWithSize:arc4random_uniform(ASTEROID_MAX_SIZE-2) + 3
                           Position:CGPointMake(x,y)];
@@ -152,8 +158,8 @@ static double distance(double x1, double y1, double x2, double y2){
         self.stars = [NSMutableArray array];
         
         int part_size = STARS_GENERATOR_PART_SIZE;
-        int x_parts = WORLD_SIZE_X / part_size + 1;
-        int y_parts = WORLD_SIZE_Y / part_size + 1;
+        int x_parts = self.worldSize.width / part_size + 1;
+        int y_parts = self.worldSize.height / part_size + 1;
         int stars_per_part = STARS_DENCITY;
         
         int star_x;
@@ -326,19 +332,20 @@ static double distance(double x1, double y1, double x2, double y2){
     }
 }
 
-- (CGPoint) worldCoordinatesForX:(double) x Y:(double) y{
-    if (x > WORLD_SIZE_X/2) {
-        x -= WORLD_SIZE_X;
+- (CGPoint) worldCoordinatesForX:(double)x Y:(double)y {
+    CGSize worldSize = self.worldSize;
+    if (x > worldSize.width / 2) {
+        x -= worldSize.width;
     }
-    else if (x < -WORLD_SIZE_X/2){
-        x += WORLD_SIZE_X;
+    else if (x < -worldSize.width/2){
+        x += worldSize.width;
     }
     
-    if (y > WORLD_SIZE_Y/2) {
-        y -= WORLD_SIZE_Y;
+    if (y > worldSize.height / 2) {
+        y -= worldSize.height;
     }
-    else if (y < -WORLD_SIZE_Y/2){
-        y += WORLD_SIZE_Y;
+    else if (y < -worldSize.height/2){
+        y += worldSize.height;
     }
     return CGPointMake(x, y);
 }

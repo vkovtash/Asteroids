@@ -23,15 +23,18 @@
 @end
 
 @interface ZIMGameWorldController : NSObject
+@property (assign, nonatomic) NSUInteger initialAsteroidsCount;
+@property (readonly, nonatomic) CGSize worldSize;
 @property (readonly, nonatomic) VKShip *ship;
 @property (readonly, nonatomic) VKGLView *glView;
-@property (weak, nonatomic) id<ZIMGameWorldControllerDelegate> delegate;
+@property (readonly, nonatomic) NSUInteger currentAsteroidsCount;
 @property (readonly, nonatomic) BOOL isExecuting;
 @property (readonly, nonatomic) BOOL isPaused;
 @property (readonly, nonatomic) BOOL isFinished;
-@property (readonly, nonatomic) NSUInteger asteroidsCount;
+@property (weak, nonatomic) id<ZIMGameWorldControllerDelegate> delegate;
 
 - (instancetype) initWithGlViewSize:(CGSize)size;
+- (instancetype) initWithGlViewSize:(CGSize)size worldSize:(CGSize)worldSize;
 
 - (void) fire;
 
