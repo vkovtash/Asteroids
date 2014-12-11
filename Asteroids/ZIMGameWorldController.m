@@ -11,13 +11,14 @@
 #import "VKMissle.h"
 #import "VKStar.h"
 
-static CGFloat kDefaultWorldSideSize = 2200;
+static CGFloat kDefaultWorldSideSize = 2200; //in points
 static NSUInteger kDefaultInitialAsteroidsCount = 15;
-static CGFloat kDefaultAsteroidMaxSize = 4;  //in parts
+static CGFloat kDefaultAsteroidMaxSize = 20;  //in parts
+static CGFloat kAsteroidPartArea = 50;
+static CGFloat kShipCollisionRadiusMultiplier = 0.75;
 
 #define FREE_SPACE_RADIUS 80.0f //points - radius around the ship that will be free of asteroids on the start
 #define GAME_LOOP_RATE 60.0f //loops per second
-#define ASTEROID_PART_SIZE 5 //points
 #define ASTEROID_MIN_SPEED 50.0f //points per sec
 #define ASTEROID_MAX_SPEED 200.0f //points per sec
 #define ASTEROID_MIN_ROTATION_SPEED 50.0f //degrees per sec
@@ -29,11 +30,10 @@ static CGFloat kDefaultAsteroidMaxSize = 4;  //in parts
 #define STAR_RADIUS 2.0f //points
 #define STARS_DENCITY 1 //starts per start STARS_GENERATOR_PART_SIZE
 #define STARS_GENERATOR_PART_SIZE 160.0f //points
-#define COLLISION_RADIUS_MULTIPLIER 0.8f
 
 
-static inline double distance(double x1, double y1, double x2, double y2){
-    return sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
+static inline double distance(CGPoint p1, CGPoint p2){
+    return sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2));
 }
 
 @interface ZIMGameWorldController()
@@ -125,34 +125,35 @@ static inline double distance(double x1, double y1, double x2, double y2){
 
 #pragma mark - Factory methods
 
-- (void) makeAsteroidWithSize:(int)parts Position:(CGPoint) position{
-    VKAsteroid *asteroid = [[VKAsteroid alloc] initWithRadius:parts * ASTEROID_PART_SIZE];
+- (void) makeAsteroidWithSize:(int)parts Position:(CGPoint)position {
+    VKAsteroid *asteroid = [[VKAsteroid alloc] initWithRadius:sqrt(parts * kAsteroidPartArea)];
     asteroid.parts = parts;
     asteroid.position = position;
     asteroid.direction = arc4random_uniform(360);
-    asteroid.velocity = ASTEROID_MIN_SPEED +
-    arc4random_uniform(ASTEROID_MAX_SPEED - ASTEROID_MIN_SPEED);
-    asteroid.rotationVelocity = ASTEROID_MIN_ROTATION_SPEED +
-    arc4random_uniform(ASTEROID_MAX_ROTATION_SPEED - ASTEROID_MIN_ROTATION_SPEED);
+    asteroid.velocity = ASTEROID_MIN_SPEED + arc4random_uniform(ASTEROID_MAX_SPEED - ASTEROID_MIN_SPEED);
+    asteroid.rotationVelocity = ASTEROID_MIN_ROTATION_SPEED + arc4random_uniform(ASTEROID_MAX_ROTATION_SPEED - ASTEROID_MIN_ROTATION_SPEED);
     [self.glView addGLObject:asteroid];
     [self.asteroids addObject:asteroid];
+}
+
+- (int) chooseAsteroidSize {
+    int sizeDistorsion = 5;
+    return _asteroidMaxSize - sizeDistorsion + arc4random_uniform(sizeDistorsion);
 }
 
 #pragma mark - Game events
 
 - (void) prepareWorld {
-    double x, y;
     for (int i = 0; i < self.initialAsteroidsCount; i++) {
-        x = arc4random_uniform((int)self.worldSize.width);
-        y = arc4random_uniform((int)self.worldSize.height);
-        
+        CGPoint point = CGPointMake(arc4random_uniform((int)self.worldSize.width),
+                                    arc4random_uniform((int)self.worldSize.height));
         //ensure that any of asteroids will be placed over the ship on game start
-        while (distance(x,y,self.ship.position.x, self.ship.position.y) < FREE_SPACE_RADIUS) {
-            x = arc4random_uniform((int)self.worldSize.width);
-            y = arc4random_uniform((int)self.worldSize.height);
+        while (distance(point, self.ship.position) < FREE_SPACE_RADIUS) {
+            point.x = arc4random_uniform((int)self.worldSize.width);
+            point.y = arc4random_uniform((int)self.worldSize.height);
         }
-        [self makeAsteroidWithSize:arc4random_uniform(self.asteroidMaxSize - 2) + 3
-                          Position:CGPointMake(x,y)];
+        [self makeAsteroidWithSize:[self chooseAsteroidSize]
+                          Position:point];
     }
     
     if (!self.stars){
@@ -296,9 +297,8 @@ static inline double distance(double x1, double y1, double x2, double y2){
 - (BOOL) checkCollision:(NSArray *)asteroids {
     double distance_value;
     for (VKAsteroid *asteroid in asteroids){
-        distance_value = distance(asteroid.position.x, asteroid.position.y,
-                                  self.ship.position.x, self.ship.position.y);
-        if (distance_value < (asteroid.radius + self.ship.radius) * COLLISION_RADIUS_MULTIPLIER) {
+        distance_value = distance(asteroid.position, self.ship.position);
+        if (distance_value < (asteroid.radius + self.ship.radius) * kShipCollisionRadiusMultiplier) {
             return YES;
         }
     }
@@ -309,27 +309,38 @@ static inline double distance(double x1, double y1, double x2, double y2){
     double distance_value;
     for (VKMissle *missle in missles) {
         for (VKAsteroid *asteroid in asteroids){
-            distance_value = distance(asteroid.position.x, asteroid.position.y,
-                                      missle.position.x, missle.position.y);
+            distance_value = distance(asteroid.position, missle.position);
             if (distance_value < asteroid.radius + missle.radius) {
                 dispatch_sync(dispatch_get_main_queue(), ^{
                     [self.glView removeGLObject:asteroid];
                     [self.glView removeGLObject:missle];
                     [self.asteroids removeObject:asteroid];
                     [self.missles removeObject:missle];
-                    
-                    if (asteroid.parts > 1){
-                        for (int i=0; i<asteroid.parts; i++) {
-                            [self makeAsteroidWithSize:asteroid.parts - 1
-                                              Position:asteroid.position];
-                        }
-                    }
-                    
+                    [self splitAsteroid:asteroid];
                     [self.delegate controller:self didDetectAsteroidHit:asteroid];
                 });
                 break;
             }
         }
+    }
+}
+
+- (void) splitAsteroid:(VKAsteroid *) asteroid {
+    if (asteroid.parts < 2) {
+        return;
+    }
+    
+    int newAsteroidSize;
+    int parts = asteroid.parts;
+    
+    newAsteroidSize = arc4random_uniform(parts - 1) + 1;
+    [self makeAsteroidWithSize:newAsteroidSize Position:asteroid.position];
+    parts -= newAsteroidSize;
+    
+    while (parts > 0) {
+        newAsteroidSize = arc4random_uniform(parts) + 1;
+        [self makeAsteroidWithSize:newAsteroidSize Position:asteroid.position];
+        parts -= newAsteroidSize;
     }
 }
 
