@@ -17,6 +17,7 @@
 
 
 static CGFloat kScoreMultiplier = 5;
+static int kSpawnStep = 1000;
 
 @interface VKViewController () <ZIMGameWorldControllerDelegate, JSAnalogueStickDelegate>
 @property (assign, nonatomic) int points;
@@ -58,7 +59,6 @@ static CGFloat kScoreMultiplier = 5;
 - (void) setPoints:(int)points {
     _points = points;
     self.pointsLabel.text = [NSString stringWithFormat:@"%d", points];
-    self.asteroidsCountLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)self.worldController.currentAsteroidsCount];
 }
 
 #pragma mark - ViewController life cycle
@@ -132,6 +132,8 @@ static CGFloat kScoreMultiplier = 5;
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - private API
+
 - (void) stop {
     [self.audioPlayer stop];
     [self.worldController pause];
@@ -143,10 +145,11 @@ static CGFloat kScoreMultiplier = 5;
 
 - (void) resume {
     if (self.worldController.isFinished) {
-        self.points = 0;
         [self.worldController reset];
         [self.audioPlayer next];
-        self.asteroidsCountLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)self.worldController.currentAsteroidsCount];
+        
+        self.points = 0;
+        [self refreshAsteroidsLabel];
     }
     [self.worldController resume];
 }
@@ -162,6 +165,10 @@ static CGFloat kScoreMultiplier = 5;
 
 - (void) stopAcceleration{
     self.worldController.ship.accelerating = NO;
+}
+
+- (void) refreshAsteroidsLabel {
+    self.asteroidsCountLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)self.worldController.currentAsteroidsCount];
 }
 
 #pragma mark - ZIMGameWorldControllerDelegate
@@ -184,7 +191,19 @@ static CGFloat kScoreMultiplier = 5;
 
 - (void) controller:(ZIMGameWorldController *)controller didDetectAsteroidHit:(VKAsteroid *)asteroid {
     [self.sfxController explosion];
-    self.points += kScoreMultiplier * (controller.asteroidMaxSize - asteroid.parts + 1);
+    
+    int newPoints = self.points + kScoreMultiplier * (controller.asteroidMaxSize - asteroid.parts + 1);
+    
+    if (self.points / kSpawnStep != newPoints / kSpawnStep ||
+        self.worldController.currentAsteroidsCount < self.worldController.initialAsteroidsCount) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.worldController spawnAsteroid];
+            [self refreshAsteroidsLabel];
+        });
+    }
+    
+    self.points = newPoints;
+    [self refreshAsteroidsLabel];
 }
 
 #pragma mark - JSAnalogueStickDelegate
