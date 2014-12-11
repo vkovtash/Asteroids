@@ -8,7 +8,6 @@
 
 #import "VKViewController.h"
 #import "VKPlayer.h"
-#import "SIAlertView.h"
 #import "ZIMSFXController.h"
 #import "ZIMGameWorldController.h"
 #import "JSAnalogueStick.h"
@@ -133,11 +132,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void) start {
-    [self.worldController resume];
-    //[self.audioPlayer next];
-}
-
 - (void) stop {
     [self.audioPlayer stop];
     [self.worldController pause];
@@ -148,6 +142,12 @@
 }
 
 - (void) resume {
+    if (self.worldController.isFinished) {
+        self.points = 0;
+        [self.worldController reset];
+        [self.audioPlayer next];
+        self.asteroidsCountLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)self.worldController.asteroidsCount];
+    }
     [self.worldController resume];
 }
 
@@ -178,18 +178,8 @@
 
 - (void) controllerDidFinishGame:(ZIMGameWorldController *)controller {
     [self.audioPlayer stop];
-    [self.audioPlayer next];
     [self.sfxController explosion];
-    SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"Game Over"
-                                                     andMessage:[NSString stringWithFormat:@"Your score is %d", self.points]];
-    [alertView addButtonWithTitle:@"Try again"
-                             type:SIAlertViewDidDismissNotification
-                          handler:^(SIAlertView *alertView){
-                              self.points = 0;
-                              [self.worldController reset];
-                              [self resume];
-                          }];
-    [alertView show];
+    [self.controlContainerView replaceCurrentViewWithView:self.playButton];
 }
 
 - (void) controller:(ZIMGameWorldController *)controller didDetectAsteroidHit:(VKAsteroid *)asteroid {

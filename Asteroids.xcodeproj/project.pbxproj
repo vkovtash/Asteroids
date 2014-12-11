@@ -79,8 +79,6 @@
 		F38B0B9D17CA525E001951BA /* JSButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B7017CA525E001951BA /* JSButton.m */; };
 		F38B0B9E17CA525E001951BA /* JSControlLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B7217CA525E001951BA /* JSControlLayout.m */; };
 		F38B0B9F17CA525E001951BA /* JSDPad.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B7417CA525E001951BA /* JSDPad.m */; };
-		F38B0BA417CA5442001951BA /* SIAlertView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F38B0BA117CA5442001951BA /* SIAlertView.bundle */; };
-		F38B0BA517CA5442001951BA /* SIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0BA317CA5442001951BA /* SIAlertView.m */; };
 		F38B0BA817CA9B03001951BA /* VKStar.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0BA717CA9B03001951BA /* VKStar.m */; };
 		F39937BA17CC6CD0004BE9CB /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F39937B917CC6CD0004BE9CB /* MainWindow-iPad.xib */; };
 		F3E26B531A35BABB0053111A /* ZIMSFXController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3E26B521A35BABB0053111A /* ZIMSFXController.m */; };
@@ -199,9 +197,6 @@
 		F38B0B7217CA525E001951BA /* JSControlLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSControlLayout.m; sourceTree = "<group>"; };
 		F38B0B7317CA525E001951BA /* JSDPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSDPad.h; sourceTree = "<group>"; };
 		F38B0B7417CA525E001951BA /* JSDPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSDPad.m; sourceTree = "<group>"; };
-		F38B0BA117CA5442001951BA /* SIAlertView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SIAlertView.bundle; sourceTree = "<group>"; };
-		F38B0BA217CA5442001951BA /* SIAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIAlertView.h; sourceTree = "<group>"; };
-		F38B0BA317CA5442001951BA /* SIAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIAlertView.m; sourceTree = "<group>"; };
 		F38B0BA617CA9B03001951BA /* VKStar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKStar.h; sourceTree = "<group>"; };
 		F38B0BA717CA9B03001951BA /* VKStar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKStar.m; sourceTree = "<group>"; };
 		F39937B917CC6CD0004BE9CB /* MainWindow-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "MainWindow-iPad.xib"; sourceTree = "<group>"; };
@@ -277,7 +272,6 @@
 			isa = PBXGroup;
 			children = (
 				F37675FB17CB314500C8DEC4 /* Resources */,
-				F38B0BA017CA5442001951BA /* SIAlertView */,
 				F38B0B3817CA525E001951BA /* CC3 */,
 				F38B0B4317CA525E001951BA /* GameObjects */,
 				F38B0B4F17CA525E001951BA /* JSController */,
@@ -427,16 +421,6 @@
 			path = JSController;
 			sourceTree = "<group>";
 		};
-		F38B0BA017CA5442001951BA /* SIAlertView */ = {
-			isa = PBXGroup;
-			children = (
-				F38B0BA117CA5442001951BA /* SIAlertView.bundle */,
-				F38B0BA217CA5442001951BA /* SIAlertView.h */,
-				F38B0BA317CA5442001951BA /* SIAlertView.m */,
-			);
-			path = SIAlertView;
-			sourceTree = "<group>";
-		};
 		F3F4E99517CCE0E100EDA7CC /* Music */ = {
 			isa = PBXGroup;
 			children = (
@@ -544,7 +528,6 @@
 				F38B0B9A17CA525E001951BA /* dPad-UpRight.png in Resources */,
 				F378EF311A366D7600380D03 /* btn_pause.png in Resources */,
 				F38B0B9B17CA525E001951BA /* dPad-UpRight@2x.png in Resources */,
-				F38B0BA417CA5442001951BA /* SIAlertView.bundle in Resources */,
 				F33D393017CB2DD80026385A /* Icon-114.png in Resources */,
 				F37675FD17CB318400C8DEC4 /* Icon-57.png in Resources */,
 				F358A19017CB3BDB00CF776C /* blast.m4a in Resources */,
@@ -594,7 +577,6 @@
 				F38B0B9D17CA525E001951BA /* JSButton.m in Sources */,
 				F38B0B9E17CA525E001951BA /* JSControlLayout.m in Sources */,
 				F38B0B9F17CA525E001951BA /* JSDPad.m in Sources */,
-				F38B0BA517CA5442001951BA /* SIAlertView.m in Sources */,
 				F38B0BA817CA9B03001951BA /* VKStar.m in Sources */,
 				F378EF111A35D0BE00380D03 /* ZIMRingEnumertor.m in Sources */,
 				F3F4E99417CCD66700EDA7CC /* VKPlayer.m in Sources */,

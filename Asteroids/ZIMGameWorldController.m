@@ -84,12 +84,10 @@ static double distance(double x1, double y1, double x2, double y2){
 }
 
 - (void) reset {
-    if (self.gameThread.isExecuting) {
-        return;
-    }
-    
+    [self pause];
     [self clearWorld];
     [self prepareWorld];
+    _isFinished = NO;
     self.ship.x_velocity = 0;
     self.ship.y_velocity = 0;
     self.ship.accelerating = NO;
@@ -99,17 +97,23 @@ static double distance(double x1, double y1, double x2, double y2){
 }
 
 - (void) pause {
-    [self.gameThread cancel];
-    self.gameThread = nil;
+    if (self.isExecuting && !self.isFinished) {
+        _isPaused = YES;
+        [self.gameThread cancel];
+        self.gameThread = nil;
+    }
 }
 
 - (void) resume {
-    self.gameThread = [[NSThread alloc] initWithTarget:self
-                                              selector:@selector(loop)
-                                                object:nil];
-    self.gameThread.threadPriority = 1.0;
-    [self.gameThread start];
-    [self.delegate controllerDidResumeGame:self];
+    if (!self.isExecuting && !self.isFinished) {
+        _isPaused = NO;
+        self.gameThread = [[NSThread alloc] initWithTarget:self
+                                                  selector:@selector(loop)
+                                                    object:nil];
+        self.gameThread.threadPriority = 1.0;
+        [self.gameThread start];
+        [self.delegate controllerDidResumeGame:self];
+    }
 }
 
 #pragma mark - Factory methods
@@ -220,9 +224,11 @@ static double distance(double x1, double y1, double x2, double y2){
     __block BOOL isCancelled = thread.isCancelled;
     dispatch_async(dispatch_get_main_queue(), ^{
         if (isCancelled) {
+            _isPaused = YES;
             [self.delegate controllerDidPauseGame:self];
         }
         else {
+            _isFinished = YES;
             [self.delegate controllerDidFinishGame:self];
         }
     });

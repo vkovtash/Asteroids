@@ -27,6 +27,8 @@
 @property (readonly, nonatomic) VKGLView *glView;
 @property (weak, nonatomic) id<ZIMGameWorldControllerDelegate> delegate;
 @property (readonly, nonatomic) BOOL isExecuting;
+@property (readonly, nonatomic) BOOL isPaused;
+@property (readonly, nonatomic) BOOL isFinished;
 @property (readonly, nonatomic) NSUInteger asteroidsCount;
 
 - (instancetype) initWithGlViewSize:(CGSize)size;
