@@ -8,144 +8,112 @@
 
 #import "JSAnalogueStick.h"
 
-#define RADIUS ([self bounds].size.width / 2)
+#define RADIUS (self.bounds.size.width / 2)
+#define M_180_PI 57.29577951308232286464772187173366547
+#define M_2PI 6.28318530717958623199592693708837032
 
 @implementation JSAnalogueStick
 
-- (id)initWithFrame:(CGRect)frame
-{
-	if ((self = [super initWithFrame:frame]))
-	{
+- (id)initWithFrame:(CGRect)frame {
+	if ((self = [super initWithFrame:frame])) {
 		[self commonInit];
 	}
-	
 	return self;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-	if ((self = [super initWithCoder:aDecoder]))
-	{
+- (id)initWithCoder:(NSCoder *)aDecoder {
+	if ((self = [super initWithCoder:aDecoder])) {
 		[self commonInit];
 	}
-	
 	return self;
 }
 
-- (void)commonInit
-{
-	_backgroundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"analogue_bg"]];
-	CGRect backgroundImageFrame = [_backgroundImageView frame];
-	backgroundImageFrame.size = [self bounds].size;
-	backgroundImageFrame.origin = CGPointZero;
-	[_backgroundImageView setFrame:backgroundImageFrame];
+- (void)commonInit {
+    _backgroundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"analogue_bg"]];
+    _backgroundImageView.frame = self.bounds;
 	[self addSubview:_backgroundImageView];
 	
+    CGFloat center = RADIUS;
 	_handleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"analogue_handle"]];
-	CGRect handleImageFrame = [_handleImageView frame];
-	handleImageFrame.size = CGSizeMake([_backgroundImageView bounds].size.width / 1.5,
-									   [_backgroundImageView bounds].size.height / 1.5);
-	handleImageFrame.origin = CGPointMake(([self bounds].size.width - handleImageFrame.size.width) / 2,
-										  ([self bounds].size.height - handleImageFrame.size.height) / 2);
-	[_handleImageView setFrame:handleImageFrame];
+    _handleImageView.bounds = CGRectMake(0, 0,
+                                         [_backgroundImageView bounds].size.width / 1.5,
+                                         [_backgroundImageView bounds].size.height / 1.5);
+    _handleImageView.center= CGPointMake(center, center);
+    
 	[self addSubview:_handleImageView];
 	
 	_xValue = 0;
 	_yValue = 0;
+    _distance = 0;
+    _angle = 0;
+    _radians = 0;
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
+- (void) addGuides {
+    UIView *vGuide = [[UIView alloc] initWithFrame:CGRectMake(self.bounds.size.width/2 - 1, 0, 2, self.bounds.size.height)];
+    UIView *hGuide = [[UIView alloc] initWithFrame:CGRectMake(0, self.bounds.size.height/2 - 1, self.bounds.size.width, 2)];
+    vGuide.backgroundColor = [UIColor redColor];
+    hGuide.backgroundColor = [UIColor redColor];
+    
+    [self addSubview:vGuide];
+    [self addSubview:hGuide];
+}
+
+- (void) updateStateWithEventLocation:(CGPoint)location {
+    CGFloat radius = RADIUS;
+    CGFloat x = location.x - radius;
+    CGFloat y = location.y - radius;
+    int xSing = x < 0 ? -1 : 1;
+    int ySing = y < 0 ? -1 : 1;
+    
+    CGFloat distance = sqrt(x * x + y * y);
+    _radians = acosf(y / distance);
+    _radians += M_PI;
+    if (x > 0) {
+        _radians = M_2PI - _radians;
+    }
+    
+    if (distance > radius) {
+        CGFloat angle = asin(x * xSing / distance);
+        
+        distance = radius;
+        CGFloat nx = distance * sin(angle);
+        CGFloat ny = distance * sin ((M_PI_2 - angle));
+        
+        x = nx * xSing;
+        y = ny * ySing;
+    }
+    
+    _distance = distance / radius;
+    _xValue = x / radius;
+    _yValue = y / radius;
+    
+    _angle = _radians * M_180_PI;
+}
+
+- (CGPoint) normalizedLocation {
+    CGFloat radius = RADIUS;
+    return CGPointMake(_xValue * radius + radius, _yValue * radius + radius);
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	CGPoint location = [[touches anyObject] locationInView:self];
 	
-	CGFloat normalisedX = (location.x / RADIUS) - 1;
-	CGFloat normalisedY = ((location.y / RADIUS) - 1) * -1;
+    [self updateStateWithEventLocation:location];
+	_handleImageView.center = [self normalizedLocation];
 	
-	if (normalisedX > 1.0)
-	{
-		location.x = [self bounds].size.width;
-		normalisedX = 1.0;
-	}
-	else if (normalisedX < -1.0)
-	{
-		location.x = 0.0;
-		normalisedX = -1.0;
-	}
-	
-	if (normalisedY > 1.0)
-	{
-		location.y = 0.0;
-		normalisedY = 1.0;
-	}
-	else if (normalisedY < -1.0)
-	{
-		location.y = [self bounds].size.height;
-		normalisedY = -1.0;
-	}
-	
-	if (self.invertedYAxis)
-	{
-		normalisedY *= -1;
-	}
-	
-	_xValue = normalisedX;
-	_yValue = normalisedY;
-	
-	CGRect handleImageFrame = [_handleImageView frame];
-	handleImageFrame.origin = CGPointMake(location.x - ([_handleImageView bounds].size.width / 2),
-										  location.y - ([_handleImageView bounds].size.width / 2));
-	[_handleImageView setFrame:handleImageFrame];
-	
-	if ([self.delegate respondsToSelector:@selector(analogueStickDidChangeValue:)])
-	{
+	if ([self.delegate respondsToSelector:@selector(analogueStickDidChangeValue:)]) {
 		[self.delegate analogueStickDidChangeValue:self];
 	}
 }
 
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
 	CGPoint location = [[touches anyObject] locationInView:self];
 	
-	CGFloat normalisedX = (location.x / RADIUS) - 1;
-	CGFloat normalisedY = ((location.y / RADIUS) - 1) * -1;
+    [self updateStateWithEventLocation:location];
+    _handleImageView.center = [self normalizedLocation];
 	
-	if (normalisedX > 1.0)
-	{
-		location.x = [self bounds].size.width;
-		normalisedX = 1.0;
-	}
-	else if (normalisedX < -1.0)
-	{
-		location.x = 0.0;
-		normalisedX = -1.0;
-	}
-	
-	if (normalisedY > 1.0)
-	{
-		location.y = 0.0;
-		normalisedY = 1.0;
-	}
-	else if (normalisedY < -1.0)
-	{
-		location.y = [self bounds].size.height;
-		normalisedY = -1.0;
-	}
-	
-	if (self.invertedYAxis)
-	{
-		normalisedY *= -1;
-	}
-	
-	_xValue = normalisedX;
-	_yValue = normalisedY;
-	
-	CGRect handleImageFrame = [_handleImageView frame];
-	handleImageFrame.origin = CGPointMake(location.x - ([_handleImageView bounds].size.width / 2),
-										  location.y - ([_handleImageView bounds].size.width / 2));
-	[_handleImageView setFrame:handleImageFrame];
-	
-	if ([self.delegate respondsToSelector:@selector(analogueStickDidChangeValue:)])
-	{
+	if ([self.delegate respondsToSelector:@selector(analogueStickDidChangeValue:)]) {
 		[self.delegate analogueStickDidChangeValue:self];
 	}
 }
@@ -154,30 +122,25 @@
 {
 	_xValue = 0.0;
 	_yValue = 0.0;
+    _distance = 0.0;
 	
-	CGRect handleImageFrame = [_handleImageView frame];
-	handleImageFrame.origin = CGPointMake(([self bounds].size.width - [_handleImageView bounds].size.width) / 2,
-										  ([self bounds].size.height - [_handleImageView bounds].size.height) / 2);
-	[_handleImageView setFrame:handleImageFrame];
+    CGFloat center = RADIUS;
+    _handleImageView.center = CGPointMake(center, center);
 	
-	if ([self.delegate respondsToSelector:@selector(analogueStickDidChangeValue:)])
-	{
+	if ([self.delegate respondsToSelector:@selector(analogueStickDidChangeValue:)]) {
 		[self.delegate analogueStickDidChangeValue:self];
 	}
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	_xValue = 0.0;
 	_yValue = 0.0;
+    _distance = 0.0;
+
+    CGFloat center = RADIUS;
+    _handleImageView.center = CGPointMake(center, center);
 	
-	CGRect handleImageFrame = [_handleImageView frame];
-	handleImageFrame.origin = CGPointMake(([self bounds].size.width - [_handleImageView bounds].size.width) / 2,
-										  ([self bounds].size.height - [_handleImageView bounds].size.height) / 2);
-	[_handleImageView setFrame:handleImageFrame];
-	
-	if ([self.delegate respondsToSelector:@selector(analogueStickDidChangeValue:)])
-	{
+    if ([self.delegate respondsToSelector:@selector(analogueStickDidChangeValue:)]) {
 		[self.delegate analogueStickDidChangeValue:self];
 	}
 }

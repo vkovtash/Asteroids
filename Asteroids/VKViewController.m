@@ -205,18 +205,8 @@ static int kSpawnStep = 1000;
 #pragma mark - JSAnalogueStickDelegate
 
 - (void) analogueStickDidChangeValue:(JSAnalogueStick *)analogueStick {
-    //Setting ship direcrion and velocity
     if (self.worldController.isExecuting) {
-        double acceleration = sqrt(pow(analogueStick.xValue, 2)
-                                  + pow(analogueStick.yValue, 2));
-        
-        if (acceleration != 0) {
-            double rotation = acosf(analogueStick.yValue/acceleration) * 180 / M_PI;
-            if (analogueStick.xValue > 0) {
-                rotation = 360 - rotation;
-            }
-            self.worldController.ship.rotation = rotation;
-        }
+        self.worldController.ship.rotation = 360 - analogueStick.angle;
     }
 }
 

@@ -19,6 +19,9 @@
 
 @interface JSAnalogueStick : UIView
 
+@property (nonatomic, readonly) CGFloat distance;
+@property (nonatomic, readonly) CGFloat radians;
+@property (nonatomic, readonly) CGFloat angle;
 @property (nonatomic, readonly) CGFloat xValue;
 @property (nonatomic, readonly) CGFloat yValue;
 @property (nonatomic, assign) BOOL invertedYAxis;
