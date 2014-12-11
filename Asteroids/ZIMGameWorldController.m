@@ -13,10 +13,10 @@
 
 static CGFloat kDefaultWorldSideSize = 2200;
 static NSUInteger kDefaultInitialAsteroidsCount = 15;
+static CGFloat kDefaultAsteroidMaxSize = 4;  //in parts
 
 #define FREE_SPACE_RADIUS 80.0f //points - radius around the ship that will be free of asteroids on the start
 #define GAME_LOOP_RATE 60.0f //loops per second
-#define ASTEROID_MAX_SIZE 4.0f //in parts
 #define ASTEROID_PART_SIZE 5 //points
 #define ASTEROID_MIN_SPEED 50.0f //points per sec
 #define ASTEROID_MAX_SPEED 200.0f //points per sec
@@ -58,6 +58,7 @@ static inline double distance(double x1, double y1, double x2, double y2){
     
     _worldSize = worldSize;
     _initialAsteroidsCount = kDefaultInitialAsteroidsCount;
+    _asteroidMaxSize = kDefaultAsteroidMaxSize;
     
     _ship.color = [UIColor yellowColor];
     _ship.maxSpeed = SHIP_MAX_SPEED;
@@ -150,7 +151,7 @@ static inline double distance(double x1, double y1, double x2, double y2){
             x = arc4random_uniform((int)self.worldSize.width);
             y = arc4random_uniform((int)self.worldSize.height);
         }
-        [self makeAsteroidWithSize:arc4random_uniform(ASTEROID_MAX_SIZE-2) + 3
+        [self makeAsteroidWithSize:arc4random_uniform(self.asteroidMaxSize - 2) + 3
                           Position:CGPointMake(x,y)];
     }
     

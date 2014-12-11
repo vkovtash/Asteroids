@@ -24,6 +24,7 @@
 
 @interface ZIMGameWorldController : NSObject
 @property (assign, nonatomic) NSUInteger initialAsteroidsCount;
+@property (assign, nonatomic) CGFloat asteroidMaxSize;
 @property (readonly, nonatomic) CGSize worldSize;
 @property (readonly, nonatomic) VKShip *ship;
 @property (readonly, nonatomic) VKGLView *glView;

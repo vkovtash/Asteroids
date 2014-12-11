@@ -15,8 +15,8 @@
 #import "UIButton+ZIMAsteroidsButtons.h"
 #import "ZIMAnimationContainerView.h"
 
-#define SCORE_MULTIPLIER 5
-#define ASTEROID_MAX_SIZE 4.0f
+
+static CGFloat kScoreMultiplier = 5;
 
 @interface VKViewController () <ZIMGameWorldControllerDelegate, JSAnalogueStickDelegate>
 @property (assign, nonatomic) int points;
@@ -184,7 +184,7 @@
 
 - (void) controller:(ZIMGameWorldController *)controller didDetectAsteroidHit:(VKAsteroid *)asteroid {
     [self.sfxController explosion];
-    self.points += SCORE_MULTIPLIER * (ASTEROID_MAX_SIZE + 1) - asteroid.parts * SCORE_MULTIPLIER;
+    self.points += kScoreMultiplier * (controller.asteroidMaxSize - asteroid.parts + 1);
 }
 
 #pragma mark - JSAnalogueStickDelegate
@@ -192,12 +192,12 @@
 - (void) analogueStickDidChangeValue:(JSAnalogueStick *)analogueStick {
     //Setting ship direcrion and velocity
     if (self.worldController.isExecuting) {
-        double acceleration = sqrt(pow(self.joyStik.xValue, 2)
-                                  + pow(self.joyStik.yValue, 2));
+        double acceleration = sqrt(pow(analogueStick.xValue, 2)
+                                  + pow(analogueStick.yValue, 2));
         
         if (acceleration != 0) {
-            double rotation = acosf(self.joyStik.yValue/acceleration) * 180/M_PI;
-            if (self.joyStik.xValue > 0) {
+            double rotation = acosf(analogueStick.yValue/acceleration) * 180 / M_PI;
+            if (analogueStick.xValue > 0) {
                 rotation = 360 - rotation;
             }
             self.worldController.ship.rotation = rotation;
