@@ -9,7 +9,7 @@
 #import "ZIMGameWorldController.h"
 #import "VKAsteroid.h"
 #import "VKMissle.h"
-#import "VKStar.h"
+#import "VKStarsArray.h"
 
 static CGFloat kDefaultWorldSideSize = 2200; //in points
 static NSUInteger kDefaultInitialAsteroidsCount = 15;
@@ -38,8 +38,8 @@ static inline double distance(CGPoint p1, CGPoint p2) {
 
 @interface ZIMGameWorldController()
 @property (strong, nonatomic) NSMutableArray *asteroids;
-@property (strong, nonatomic) NSMutableArray *missles;
-@property (strong, nonatomic) NSMutableArray *stars;
+@property (strong, nonatomic) NSMutableArray *missles;;
+@property (strong, nonatomic) VKStarsArray *stars;
 @property (strong, nonatomic) NSThread *gameThread;
 @end
 
@@ -163,7 +163,8 @@ static inline double distance(CGPoint p1, CGPoint p2) {
     }
     
     if (!self.stars){
-        self.stars = [NSMutableArray array];
+        self.stars = [[VKStarsArray alloc] initWithRadius:STAR_RADIUS];
+        [self.glView addGLObject:self.stars];
         
         int part_size = STARS_GENERATOR_PART_SIZE;
         int x_parts = self.worldSize.width / part_size + 1;
@@ -177,10 +178,9 @@ static inline double distance(CGPoint p1, CGPoint p2) {
                 for (int i = 0; i < stars_per_part; i++) {
                     star_position.x = x * part_size + arc4random_uniform(part_size);
                     star_position.y = y * part_size + arc4random_uniform(part_size);
-                    VKStar *star = [[VKStar alloc] initWithRadius:STAR_RADIUS];
-                    star.position = [self worldCoordinatesFor:star_position];
-                    [self.stars addObject:star];
-                    [self.glView addGLObject:star];
+                    VKGameObjectPosition *starPosition = [VKGameObjectPosition new];
+                    starPosition.position = [self worldCoordinatesFor:star_position];
+                    [self.stars appendObjectAtPostion:starPosition];
                 }
             }
         }
@@ -287,10 +287,10 @@ static inline double distance(CGPoint p1, CGPoint p2) {
     }
     
     //moving starts
-    for (VKStar *star in self.stars) {
-        position.x = star.position.x + offset_x;
-        position.y = star.position.y + offset_y;
-        star.position = [self worldCoordinatesFor:position];
+    for (VKGameObjectPosition *starPosition in self.stars.objectsPosition) {
+        position.x = starPosition.position.x + offset_x;
+        position.y = starPosition.position.y + offset_y;
+        starPosition.position = [self worldCoordinatesFor:position];
     }
     
     [self checkHit:missles Asteroids:asteroids];

@@ -80,8 +80,9 @@
 		F38B0B9D17CA525E001951BA /* JSButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B7017CA525E001951BA /* JSButton.m */; };
 		F38B0B9E17CA525E001951BA /* JSControlLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B7217CA525E001951BA /* JSControlLayout.m */; };
 		F38B0B9F17CA525E001951BA /* JSDPad.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B7417CA525E001951BA /* JSDPad.m */; };
-		F38B0BA817CA9B03001951BA /* VKStar.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0BA717CA9B03001951BA /* VKStar.m */; };
 		F39937BA17CC6CD0004BE9CB /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F39937B917CC6CD0004BE9CB /* MainWindow-iPad.xib */; };
+		F3B5CD451A739E7900D091A0 /* VKGameObjectsArray.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B5CD441A739E7900D091A0 /* VKGameObjectsArray.m */; };
+		F3B5CD481A73A18000D091A0 /* VKStarsArray.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B5CD471A73A18000D091A0 /* VKStarsArray.m */; };
 		F3E26B531A35BABB0053111A /* ZIMSFXController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3E26B521A35BABB0053111A /* ZIMSFXController.m */; };
 		F3F4E99417CCD66700EDA7CC /* VKPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F4E99317CCD66700EDA7CC /* VKPlayer.m */; };
 		F3F4E9A117CCE0E100EDA7CC /* All_of_Us.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F3F4E99617CCE0E100EDA7CC /* All_of_Us.m4a */; };
@@ -200,9 +201,11 @@
 		F38B0B7217CA525E001951BA /* JSControlLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSControlLayout.m; sourceTree = "<group>"; };
 		F38B0B7317CA525E001951BA /* JSDPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSDPad.h; sourceTree = "<group>"; };
 		F38B0B7417CA525E001951BA /* JSDPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSDPad.m; sourceTree = "<group>"; };
-		F38B0BA617CA9B03001951BA /* VKStar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKStar.h; sourceTree = "<group>"; };
-		F38B0BA717CA9B03001951BA /* VKStar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKStar.m; sourceTree = "<group>"; };
 		F39937B917CC6CD0004BE9CB /* MainWindow-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "MainWindow-iPad.xib"; sourceTree = "<group>"; };
+		F3B5CD431A739E7900D091A0 /* VKGameObjectsArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKGameObjectsArray.h; sourceTree = "<group>"; };
+		F3B5CD441A739E7900D091A0 /* VKGameObjectsArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKGameObjectsArray.m; sourceTree = "<group>"; };
+		F3B5CD461A73A18000D091A0 /* VKStarsArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKStarsArray.h; sourceTree = "<group>"; };
+		F3B5CD471A73A18000D091A0 /* VKStarsArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKStarsArray.m; sourceTree = "<group>"; };
 		F3E26B511A35BABB0053111A /* ZIMSFXController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSFXController.h; sourceTree = "<group>"; };
 		F3E26B521A35BABB0053111A /* ZIMSFXController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSFXController.m; sourceTree = "<group>"; };
 		F3F4E99217CCD66700EDA7CC /* VKPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKPlayer.h; sourceTree = "<group>"; };
@@ -368,6 +371,8 @@
 		F38B0B4317CA525E001951BA /* GameObjects */ = {
 			isa = PBXGroup;
 			children = (
+				F3B5CD431A739E7900D091A0 /* VKGameObjectsArray.h */,
+				F3B5CD441A739E7900D091A0 /* VKGameObjectsArray.m */,
 				F38B0B4417CA525E001951BA /* SimpleFragment.glsl */,
 				F38B0B4517CA525E001951BA /* SimpleVertex.glsl */,
 				F38B0B4A17CA525E001951BA /* VKGLObject.h */,
@@ -379,8 +384,8 @@
 				F38B0B4C17CA525E001951BA /* VKMissle.m */,
 				F38B0B4D17CA525E001951BA /* VKShip.h */,
 				F38B0B4E17CA525E001951BA /* VKShip.m */,
-				F38B0BA617CA9B03001951BA /* VKStar.h */,
-				F38B0BA717CA9B03001951BA /* VKStar.m */,
+				F3B5CD461A73A18000D091A0 /* VKStarsArray.h */,
+				F3B5CD471A73A18000D091A0 /* VKStarsArray.m */,
 			);
 			path = GameObjects;
 			sourceTree = "<group>";
@@ -564,6 +569,7 @@
 			files = (
 				35DF644E138C40D500FF9459 /* main.m in Sources */,
 				35DF6451138C40D500FF9459 /* AsteroidsAppDelegate.m in Sources */,
+				F3B5CD481A73A18000D091A0 /* VKStarsArray.m in Sources */,
 				F374124E17C95E1000AF822B /* VKGLView.m in Sources */,
 				F38954F61A3A0FE4000B5081 /* VKPlayer+ZIMAsteroidsPlaylist.m in Sources */,
 				F38B0ADA17C9EBAD001951BA /* VKViewController.m in Sources */,
@@ -577,13 +583,13 @@
 				F38B0B7C17CA525E001951BA /* VKGameObject.m in Sources */,
 				F378EF221A36601800380D03 /* ZIMAnimationContainerView.m in Sources */,
 				F378EF1A1A35FC7700380D03 /* ZIMGameWorldController.m in Sources */,
+				F3B5CD451A739E7900D091A0 /* VKGameObjectsArray.m in Sources */,
 				F38B0B7D17CA525E001951BA /* VKMissle.m in Sources */,
 				F38B0B7E17CA525E001951BA /* VKShip.m in Sources */,
 				F38B0B9C17CA525E001951BA /* JSAnalogueStick.m in Sources */,
 				F38B0B9D17CA525E001951BA /* JSButton.m in Sources */,
 				F38B0B9E17CA525E001951BA /* JSControlLayout.m in Sources */,
 				F38B0B9F17CA525E001951BA /* JSDPad.m in Sources */,
-				F38B0BA817CA9B03001951BA /* VKStar.m in Sources */,
 				F378EF111A35D0BE00380D03 /* ZIMRingEnumertor.m in Sources */,
 				F3F4E99417CCD66700EDA7CC /* VKPlayer.m in Sources */,
 			);
