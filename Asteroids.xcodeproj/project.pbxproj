@@ -84,6 +84,7 @@
 		F3B5CD481A73A18000D091A0 /* VKStarsArray.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B5CD471A73A18000D091A0 /* VKStarsArray.m */; };
 		F3B5CD4B1A73A8AA00D091A0 /* VKMisslesArray.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B5CD4A1A73A8AA00D091A0 /* VKMisslesArray.m */; };
 		F3B5CD4E1A73AFB200D091A0 /* VKGameReusableObjectsArray.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B5CD4D1A73AFB200D091A0 /* VKGameReusableObjectsArray.m */; };
+		F3B5CD511A73BE5800D091A0 /* VKAsteroidProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B5CD501A73BE5800D091A0 /* VKAsteroidProperties.m */; };
 		F3E26B531A35BABB0053111A /* ZIMSFXController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3E26B521A35BABB0053111A /* ZIMSFXController.m */; };
 		F3F4E99417CCD66700EDA7CC /* VKPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F4E99317CCD66700EDA7CC /* VKPlayer.m */; };
 		F3F4E9A117CCE0E100EDA7CC /* All_of_Us.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F3F4E99617CCE0E100EDA7CC /* All_of_Us.m4a */; };
@@ -209,6 +210,8 @@
 		F3B5CD4A1A73A8AA00D091A0 /* VKMisslesArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKMisslesArray.m; sourceTree = "<group>"; };
 		F3B5CD4C1A73AFB200D091A0 /* VKGameReusableObjectsArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKGameReusableObjectsArray.h; sourceTree = "<group>"; };
 		F3B5CD4D1A73AFB200D091A0 /* VKGameReusableObjectsArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKGameReusableObjectsArray.m; sourceTree = "<group>"; };
+		F3B5CD4F1A73BE5800D091A0 /* VKAsteroidProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKAsteroidProperties.h; sourceTree = "<group>"; };
+		F3B5CD501A73BE5800D091A0 /* VKAsteroidProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKAsteroidProperties.m; sourceTree = "<group>"; };
 		F3E26B511A35BABB0053111A /* ZIMSFXController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSFXController.h; sourceTree = "<group>"; };
 		F3E26B521A35BABB0053111A /* ZIMSFXController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSFXController.m; sourceTree = "<group>"; };
 		F3F4E99217CCD66700EDA7CC /* VKPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKPlayer.h; sourceTree = "<group>"; };
@@ -391,6 +394,8 @@
 				F3B5CD4A1A73A8AA00D091A0 /* VKMisslesArray.m */,
 				F3B5CD4C1A73AFB200D091A0 /* VKGameReusableObjectsArray.h */,
 				F3B5CD4D1A73AFB200D091A0 /* VKGameReusableObjectsArray.m */,
+				F3B5CD4F1A73BE5800D091A0 /* VKAsteroidProperties.h */,
+				F3B5CD501A73BE5800D091A0 /* VKAsteroidProperties.m */,
 			);
 			path = GameObjects;
 			sourceTree = "<group>";
@@ -587,6 +592,7 @@
 				F38B0B7817CA525E001951BA /* CC3Math.m in Sources */,
 				F3E26B531A35BABB0053111A /* ZIMSFXController.m in Sources */,
 				F38B0B7B17CA525E001951BA /* VKAsteroid.m in Sources */,
+				F3B5CD511A73BE5800D091A0 /* VKAsteroidProperties.m in Sources */,
 				F38B0B7C17CA525E001951BA /* VKGameObject.m in Sources */,
 				F378EF221A36601800380D03 /* ZIMAnimationContainerView.m in Sources */,
 				F378EF1A1A35FC7700380D03 /* ZIMGameWorldController.m in Sources */,
