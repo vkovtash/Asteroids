@@ -31,8 +31,8 @@
         GLubyte indices[] = {0, 1, 2, 2, 3, 0};
         
         self.style = GL_TRIANGLES;
-        [self setVertexBuffer:4 Vertices:vertices];
-        [self setIndexBuffer:6 Indices:indices];
+        [self setVertexBuffer:4 vertices:vertices];
+        [self setIndexBuffer:6 indices:indices];
     }
     return self;
 }

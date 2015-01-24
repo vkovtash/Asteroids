@@ -40,7 +40,7 @@
 @property (strong, nonatomic) NSMutableArray *privateObjectsPosition;
 @end
 
-@implementation VKGameObjectsArray{
+@implementation VKGameObjectsArray {
     GLuint _positionSlot;
     GLuint _colorUniform;
     GLuint _projectionUniform;
@@ -59,10 +59,9 @@
 @synthesize color = _color;
 @synthesize glView = _glView;
 
-- (UIColor *) color{
+- (UIColor *) color {
     if (!_color) {
         _color = [UIColor colorWithRed:_red green:_green blue:_blue alpha:_alpha];
-        
     }
     return _color;
 }
@@ -72,9 +71,11 @@
     [_color getRed:&_red green:&_green blue:&_blue alpha:&_alpha];
 }
 
-- (id) init{
+- (id) init {
     self = [super init];
     if (self) {
+        glGenBuffers(1, &_indexBuffer);
+        glGenBuffers(1, &_vertexBuffer);
         
         _privateObjectsPosition = [NSMutableArray array];
         _matrix = [CC3GLMatrix matrix];
@@ -94,8 +95,8 @@
         
         GLubyte indices[6] = {0, 1, 2, 2, 3, 0};
         
-        [self setVertexBuffer:4 Vertices:vertices];
-        [self setIndexBuffer:6 Indices:indices];
+        [self setVertexBuffer:4 vertices:vertices];
+        [self setIndexBuffer:6 indices:indices];
         
         _style = GL_LINE_STRIP;
     }
@@ -103,7 +104,7 @@
     return self;
 }
 
-- (GLuint)compileShader:(NSString*)shaderName withType:(GLenum)shaderType {
+- (GLuint) compileShader:(NSString*)shaderName withType:(GLenum)shaderType {
     NSString* shaderPath = [[NSBundle mainBundle] pathForResource:shaderName ofType:@"glsl"];
     NSError* error;
     NSString* shaderString = [NSString stringWithContentsOfFile:shaderPath encoding:NSUTF8StringEncoding error:&error];
@@ -133,10 +134,10 @@
     return shaderHandle;
 }
 
-- (void)compileShaders {
+- (void) compileShaders {
     static GLuint programHandle = 0;
     
-    if (! programHandle){
+    if (! programHandle) {
         programHandle = glCreateProgram();
         GLuint vertexShader = [self compileShader:@"SimpleVertex" withType:GL_VERTEX_SHADER];
         GLuint fragmentShader = [self compileShader:@"SimpleFragment" withType:GL_FRAGMENT_SHADER];
@@ -165,14 +166,12 @@
     _modelViewUniform = glGetUniformLocation(programHandle, "Modelview");
 }
 
-- (void) setVertexBuffer:(int) verticesCount Vertices:(Vertex *) vertices{
-    glGenBuffers(1, &_vertexBuffer);
+- (void) setVertexBuffer:(int)verticesCount vertices:(Vertex *)vertices {
     glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
     glBufferData(GL_ARRAY_BUFFER, verticesCount*sizeof(Vertex), vertices, GL_STATIC_DRAW);
 }
 
-- (void) setIndexBuffer:(int) indicesCount Indices:(GLubyte *) indices{
-    glGenBuffers(1, &_indexBuffer);
+- (void) setIndexBuffer:(int)indicesCount indices:(GLubyte *)indices {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesCount*sizeof(GLubyte), indices, GL_STATIC_DRAW);
     _indicesCount = indicesCount;
@@ -182,15 +181,15 @@
     return _privateObjectsPosition;
 }
 
-- (void) appendObjectProperties:(VKGameObjectProperties *)position {
-    if (position) {
-        [self.privateObjectsPosition addObject:position];
+- (void) appendObjectProperties:(VKGameObjectProperties *)properties {
+    if (properties) {
+        [self.privateObjectsPosition addObject:properties];
     }
 }
 
-- (void) removeObjectProperties:(VKGameObjectProperties *)position {
-    if (position) {
-        [self.privateObjectsPosition removeObject:position];
+- (void) removeObjectProperties:(VKGameObjectProperties *)properties {
+    if (properties) {
+        [self.privateObjectsPosition removeObject:properties];
     }
 }
 
@@ -232,4 +231,5 @@
 - (void) removeFromGLView {
     [self.glView removeGLObject:self];
 }
+
 @end

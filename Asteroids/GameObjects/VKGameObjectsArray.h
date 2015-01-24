@@ -32,9 +32,9 @@
 
 - (void) removeFromGLView;
 - (void) compileShaders;
-- (void) setVertexBuffer:(int)verticesCount Vertices:(Vertex *)vertices;
-- (void) setIndexBuffer:(int)indicesCount Indices:(GLubyte *)indices;
-- (void) appendObjectProperties:(VKGameObjectProperties *)position;
-- (void) removeObjectProperties:(VKGameObjectProperties *)position;
+- (void) setVertexBuffer:(int)verticesCount vertices:(Vertex *)vertices;
+- (void) setIndexBuffer:(int)indicesCount indices:(GLubyte *)indices;
+- (void) appendObjectProperties:(VKGameObjectProperties *)properties;
+- (void) removeObjectProperties:(VKGameObjectProperties *)properties;
 - (void) removeAllObjects;
 @end
