@@ -16,6 +16,11 @@
 @interface VKGameObjectPosition : NSObject
 @property (nonatomic) CGPoint position;
 @property (nonatomic) CGFloat rotation;
+
+- (instancetype) initWithPosition:(CGPoint)position rotation:(CGFloat)rotation;
+- (instancetype) initWithPosition:(CGPoint)position;
++ (instancetype) newWithPosition:(CGPoint)position rotation:(CGFloat)rotation;
++ (instancetype) newWithPosition:(CGPoint)position;
 @end
 
 @interface VKGameObjectsArray : NSObject <VKGLObject>

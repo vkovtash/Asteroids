@@ -178,8 +178,7 @@ static inline double distance(CGPoint p1, CGPoint p2) {
                 for (int i = 0; i < stars_per_part; i++) {
                     star_position.x = x * part_size + arc4random_uniform(part_size);
                     star_position.y = y * part_size + arc4random_uniform(part_size);
-                    VKGameObjectPosition *starPosition = [VKGameObjectPosition new];
-                    starPosition.position = [self worldCoordinatesFor:star_position];
+                    VKGameObjectPosition *starPosition = [VKGameObjectPosition newWithPosition:[self worldCoordinatesFor:star_position]];
                     [self.stars appendObjectAtPostion:starPosition];
                 }
             }

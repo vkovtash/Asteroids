@@ -10,6 +10,28 @@
 
 @implementation VKGameObjectPosition
 
+- (instancetype) initWithPosition:(CGPoint)position rotation:(CGFloat)rotation {
+    self = [super init];
+    if (self) {
+        _position = position;
+        _rotation = rotation;
+    }
+    return self;
+}
+
+- (instancetype) initWithPosition:(CGPoint)position {
+    self = [self initWithPosition:position rotation:0];
+    return self;
+}
+
++ (instancetype) newWithPosition:(CGPoint)position rotation:(CGFloat)rotation {
+    return [[[self class] alloc] initWithPosition:position rotation:rotation];
+}
+
++ (instancetype) newWithPosition:(CGPoint)position {
+    return [[[self class] alloc] initWithPosition:position];
+}
+
 @end
 
 @interface VKGameObjectsArray()
