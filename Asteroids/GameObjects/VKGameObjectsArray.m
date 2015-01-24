@@ -8,6 +8,7 @@
 
 #import "VKGameObjectsArray.h"
 
+
 @implementation VKGameObjectProperties
 
 - (instancetype) initWithPosition:(CGPoint)position rotation:(CGFloat)rotation {
@@ -34,8 +35,8 @@
 
 @end
 
+
 @interface VKGameObjectsArray()
-@property (nonatomic) CGColorRef internalColor;
 @property (strong, nonatomic) CC3GLMatrix *matrix;
 @property (strong, nonatomic) NSMutableArray *privateObjectsPosition;
 @end
@@ -78,11 +79,12 @@
         glGenBuffers(1, &_vertexBuffer);
         
         _privateObjectsPosition = [NSMutableArray array];
-        _matrix = [CC3GLMatrix matrix];
         _red = 1.0;
         _green = 1.0;
         _blue = 1.0;
         _alpha = 1.0;
+        
+        _matrix = [CC3GLMatrix new];
         
         [self compileShaders];
         
@@ -206,6 +208,8 @@
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
     glUniform4f(_colorUniform, _red, _green, _blue, _alpha);
     
+    CC3GLMatrix *modelView = _matrix;
+    
     for (VKGameObjectProperties *objProperties in self.objectsProperties) {
         CGSize glViewSize = _glView.glViewSize;
         if (objProperties.position.x < 0 || objProperties.position.x > glViewSize.width ||
@@ -216,7 +220,7 @@
         
         glUniformMatrix4fv(_projectionUniform, 1, GL_FALSE, _glView.projection.glMatrix);
         
-        CC3GLMatrix *modelView = _matrix;
+        
         [modelView populateFromTranslation:CC3VectorMake(-glViewSize.width/2, glViewSize.height/2, 0)];
         [modelView translateByX:objProperties.position.x];
         [modelView translateByY:-objProperties.position.y];

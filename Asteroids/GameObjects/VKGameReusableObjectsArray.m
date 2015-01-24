@@ -72,12 +72,12 @@
 
 - (void) setVertexBuffer:(int)verticesCount vertices:(Vertex *)vertices {
     glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, verticesCount*sizeof(Vertex), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, verticesCount * sizeof(Vertex), vertices, GL_STATIC_DRAW);
 }
 
 - (void) setIndexBuffer:(int)indicesCount indices:(GLubyte *)indices {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesCount*sizeof(GLubyte), indices, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesCount * sizeof(GLubyte), indices, GL_STATIC_DRAW);
     _indicesCount = indicesCount;
 }
 
@@ -91,6 +91,7 @@
 @end
 
 @implementation VKGameReusableObjectProperties(AssociatedBuffers)
+
 - (VKGameReusableBuffers *) associatedBuffers {
     return objc_getAssociatedObject(self, @selector(associatedBuffers));
 }
@@ -113,9 +114,8 @@
 
 
 @interface VKGameReusableObjectsArray()
-@property (strong, nonatomic) NSMutableSet *freeBuffers;
-@property (nonatomic) CGColorRef internalColor;
 @property (strong, nonatomic) CC3GLMatrix *matrix;
+@property (strong, nonatomic) NSMutableSet *freeBuffers;
 @property (strong, nonatomic) NSMutableArray *privateObjectsPosition;
 @end
 
@@ -133,7 +133,8 @@
     if (self) {
         _freeBuffers = [NSMutableSet set];
         _privateObjectsPosition = [NSMutableArray array];
-        _matrix = [CC3GLMatrix matrix];
+        _matrix = [CC3GLMatrix new];
+        [self compileShaders];
     }
     return self;
 }
@@ -209,9 +210,14 @@
         return;
     }
     
+    VKGameReusableBuffers *buffers = nil;
+    
+    CC3GLMatrix *modelView = _matrix;
+    
     for (VKGameReusableObjectProperties *objProperties in self.objectsProperties) {
         CGSize glViewSize = _glView.glViewSize;
-        if (!objProperties.associatedBuffers) {
+        buffers = objProperties.associatedBuffers;
+        if (!buffers) {
             continue; //nothing to render
         }
         
@@ -221,21 +227,20 @@
             continue;
         }
         
+        glBindBuffer(GL_ARRAY_BUFFER, buffers.vertexBuffer);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers.indexBuffer);
+        glUniform4f(_colorUniform, objProperties.red, objProperties.green, objProperties.blue, objProperties.alpha);
+        
         glUniformMatrix4fv(_projectionUniform, 1, GL_FALSE, _glView.projection.glMatrix);
         
-        CC3GLMatrix *modelView = _matrix;
         [modelView populateFromTranslation:CC3VectorMake(-glViewSize.width/2, glViewSize.height/2, 0)];
         [modelView translateByX:objProperties.position.x];
         [modelView translateByY:-objProperties.position.y];
         [modelView rotateByZ:objProperties.rotation];
         
-        glBindBuffer(GL_ARRAY_BUFFER, objProperties.associatedBuffers.vertexBuffer);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, objProperties.associatedBuffers.indexBuffer);
-        glUniform4f(_colorUniform, objProperties.red, objProperties.green, objProperties.blue, objProperties.alpha);
-        
         glUniformMatrix4fv(_modelViewUniform, 1, 0, modelView.glMatrix);
         glVertexAttribPointer(_positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-        glDrawElements(objProperties.style, objProperties.associatedBuffers.indicesCount, GL_UNSIGNED_BYTE, 0);
+        glDrawElements(objProperties.style, buffers.indicesCount, GL_UNSIGNED_BYTE, 0);
     }
 }
 

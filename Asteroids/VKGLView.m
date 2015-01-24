@@ -8,7 +8,6 @@
 
 #import "VKGLView.h"
 #import "VKShip.h"
-#import "VKAsteroid.h"
 
 @interface VKGLView()
 @property (strong, nonatomic) NSMutableArray *gameObjects;

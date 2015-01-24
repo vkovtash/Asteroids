@@ -13,10 +13,13 @@
 #define ASTEROID_SIDE_STEP 3
 
 @implementation VKAsteroidProperties {
-    Vertex *vertices;
-    GLubyte *indices;
     double _direction_radians;
 }
+
+@synthesize verticies = _verticies;
+@synthesize indices = _indices;
+@synthesize verticiesCount = _verticiesCount;
+@synthesize indicesCount = _indicesCount;
 
 - (void) setDirection:(float)direction{
     if (_direction != direction) {
@@ -33,33 +36,37 @@
     }
 }
 
-- (id) init{
-    self = [self initWithRadius:ASTEROID_SIZE];
+- (id) init {
+    self = [self initWithRadius:ASTEROID_SIZE position:CGPointMake(0, 0)];
     return self;
 }
 
-- (id) initWithRadius:(float) radius{
-    self = [super init];
+- (id) initWithRadius:(float)radius position:(CGPoint)position {
+    self = [super initWithPosition:position rotation:0];
     if (self) {
         _radius = radius;
         int additionalSides = radius/ASTEROID_SIDE_STEP;
         if (additionalSides > ASTEROID_MAX_SIDES){
             additionalSides = ASTEROID_MAX_SIDES;
         }
+        
         int sides = ASTEROID_MIN_SIDES + arc4random_uniform(additionalSides);
+        _verticiesCount = sides;
+        _indicesCount = _verticiesCount + 1;
+        
         float step = 2 * M_PI / sides;
         
-        vertices = malloc(sizeof(Vertex)*sides);
-        indices = malloc(sizeof(GLubyte)*sides + 1);
+        _verticies = malloc(sizeof(Vertex) * _verticiesCount);
+        _indices = malloc(sizeof(GLubyte) * _indicesCount);
         
-        for(int i = 0; i < sides; i++)
+        for(int i = 0; i < _verticiesCount; i++)
         {
-            vertices[i] = (Vertex){
+            _verticies[i] = (Vertex){
                 cos(i * step) * radius * ((float)arc4random_uniform(10)/20 + 0.5),
                 sin(i * step) * radius * ((float)arc4random_uniform(10)/20 + 0.5), 0};
-            indices[i] = i;
+            _indices[i] = i;
         }
-        indices[sides] = 0;
+        _indices[_indicesCount - 1] = 0;
     }
     return self;
 }
@@ -74,7 +81,7 @@
 }
 
 - (void) dealloc{
-    free(vertices);
-    free(indices);
+    free(_verticies);
+    free(_indices);
 }
 @end

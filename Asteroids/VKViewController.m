@@ -185,7 +185,7 @@ static int kSpawnStep = 1000;
     [self.controlContainerView replaceCurrentViewWithView:self.playButton];
 }
 
-- (void) controller:(ZIMGameWorldController *)controller didDetectAsteroidHit:(VKAsteroid *)asteroid {
+- (void) controller:(ZIMGameWorldController *)controller didDetectAsteroidHit:(VKAsteroidProperties *)asteroid {
     [self.sfxController explosion];
     
     int newPoints = self.points + kScoreMultiplier * (controller.asteroidMaxSize - asteroid.parts + 1);

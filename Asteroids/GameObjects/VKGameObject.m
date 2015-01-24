@@ -13,7 +13,7 @@
 @property (strong, nonatomic) CC3GLMatrix *matrix;
 @end
 
-@implementation VKGameObject{
+@implementation VKGameObject {
     GLuint _positionSlot;
     GLuint _colorUniform;
     GLuint _projectionUniform;
@@ -34,7 +34,7 @@
 @synthesize color = _color;
 @synthesize glView = _glView;
 
-- (UIColor *) color{
+- (UIColor *) color {
     if (!_color) {
         _color = [UIColor colorWithRed:_red green:_green blue:_blue alpha:_alpha];
         
@@ -42,7 +42,7 @@
     return _color;
 }
 
-- (void) setColor:(UIColor *)color{
+- (void) setColor:(UIColor *)color {
     _color = color;
     [_color getRed:&_red green:&_green blue:&_blue alpha:&_alpha];
 }
@@ -50,6 +50,9 @@
 - (id) init{
     self = [super init];
     if (self) {
+        
+        glGenBuffers(1, &_vertexBuffer);
+        glGenBuffers(1, &_indexBuffer);
         
         _matrix = [CC3GLMatrix matrix];
         _red = 1.0;
@@ -77,7 +80,7 @@
     return self;
 }
 
-- (GLuint)compileShader:(NSString*)shaderName withType:(GLenum)shaderType {
+- (GLuint) compileShader:(NSString*)shaderName withType:(GLenum)shaderType {
     NSString* shaderPath = [[NSBundle mainBundle] pathForResource:shaderName ofType:@"glsl"];
     NSError* error;
     NSString* shaderString = [NSString stringWithContentsOfFile:shaderPath encoding:NSUTF8StringEncoding error:&error];
@@ -107,7 +110,7 @@
     return shaderHandle;
 }
 
-- (void)compileShaders {
+- (void) compileShaders {
     static GLuint programHandle = 0;
     
     if (! programHandle){
@@ -139,14 +142,12 @@
     _modelViewUniform = glGetUniformLocation(programHandle, "Modelview");
 }
 
-- (void) setVertexBuffer:(int) verticesCount Vertices:(Vertex *) vertices{
-    glGenBuffers(1, &_vertexBuffer);
+- (void) setVertexBuffer:(int)verticesCount Vertices:(Vertex *)vertices {
     glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
     glBufferData(GL_ARRAY_BUFFER, verticesCount*sizeof(Vertex), vertices, GL_STATIC_DRAW);
 }
 
-- (void) setIndexBuffer:(int) indicesCount Indices:(GLubyte *) indices{
-    glGenBuffers(1, &_indexBuffer);
+- (void) setIndexBuffer:(int)indicesCount Indices:(GLubyte *)indices {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesCount*sizeof(GLubyte), indices, GL_STATIC_DRAW);
     _indicesCount = indicesCount;

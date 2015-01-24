@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "VKShip.h"
-#import "VKAsteroid.h"
+#import "VKAsteroidProperties.h"
 
 @class ZIMGameWorldController;
 
@@ -19,7 +19,7 @@
 - (void) controllerDidPauseGame:(ZIMGameWorldController *)controller;
 - (void) controllerDidResumeGame:(ZIMGameWorldController *)controller;
 
-- (void) controller:(ZIMGameWorldController *)controller didDetectAsteroidHit:(VKAsteroid *)asteroid;
+- (void) controller:(ZIMGameWorldController *)controller didDetectAsteroidHit:(VKAsteroidProperties *)asteroid;
 @end
 
 @interface ZIMGameWorldController : NSObject

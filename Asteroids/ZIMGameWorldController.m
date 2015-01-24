@@ -7,9 +7,10 @@
 //
 
 #import "ZIMGameWorldController.h"
-#import "VKAsteroid.h"
 #import "VKStarsArray.h"
 #import "VKMisslesArray.h"
+#import "VKGameReusableObjectsArray.h"
+#import "VKAsteroidProperties.h"
 
 static CGFloat kDefaultWorldSideSize = 2200; //in points
 static NSUInteger kDefaultInitialAsteroidsCount = 15;
@@ -37,7 +38,7 @@ static inline double distance(CGPoint p1, CGPoint p2) {
 }
 
 @interface ZIMGameWorldController()
-@property (strong, nonatomic) NSMutableArray *asteroids;
+@property (strong, nonatomic) VKGameReusableObjectsArray *asteroids;
 @property (strong, nonatomic) VKMisslesArray *missles;
 @property (strong, nonatomic) VKStarsArray *stars;
 @property (strong, nonatomic) NSThread *gameThread;
@@ -53,7 +54,7 @@ static inline double distance(CGPoint p1, CGPoint p2) {
     
     _glView = [[VKGLView alloc] initWithGlViewSize:size];
     _ship = [[VKShip alloc] init];
-    _asteroids = [NSMutableArray array];
+    _asteroids = [VKGameReusableObjectsArray new];
     _missles = [VKMisslesArray new];
     
     _worldSize = worldSize;
@@ -66,6 +67,7 @@ static inline double distance(CGPoint p1, CGPoint p2) {
     
     [_glView addGLObject:_ship];
     [_glView addGLObject:_missles];
+    [_glView addGLObject:_asteroids];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(pause)
@@ -88,7 +90,7 @@ static inline double distance(CGPoint p1, CGPoint p2) {
 }
 
 - (NSUInteger) currentAsteroidsCount {
-    return self.asteroids.count;
+    return self.asteroids.objectsProperties.count;
 }
 
 - (void) reset {
@@ -133,14 +135,12 @@ static inline double distance(CGPoint p1, CGPoint p2) {
 #pragma mark - Factory methods
 
 - (void) makeAsteroidWithSize:(int)parts Position:(CGPoint)position {
-    VKAsteroid *asteroid = [[VKAsteroid alloc] initWithRadius:sqrt(parts * kAsteroidPartArea)];
+    VKAsteroidProperties *asteroid = [[VKAsteroidProperties alloc] initWithRadius:sqrt(parts * kAsteroidPartArea) position:position];
     asteroid.parts = parts;
-    asteroid.position = position;
     asteroid.direction = arc4random_uniform(360);
     asteroid.velocity = ASTEROID_MIN_SPEED + arc4random_uniform(ASTEROID_MAX_SPEED - ASTEROID_MIN_SPEED);
     asteroid.rotationVelocity = ASTEROID_MIN_ROTATION_SPEED + arc4random_uniform(ASTEROID_MAX_ROTATION_SPEED - ASTEROID_MIN_ROTATION_SPEED);
-    [self.glView addGLObject:asteroid];
-    [self.asteroids addObject:asteroid];
+    [self.asteroids appendObjectProperties:asteroid];
 }
 
 - (int) chooseAsteroidSize {
@@ -188,9 +188,6 @@ static inline double distance(CGPoint p1, CGPoint p2) {
 }
 
 - (void) clearWorld {
-    for (VKAsteroid *asteroid in self.asteroids) {
-        [asteroid removeFromGLView];
-    }
     [self.asteroids removeAllObjects];
     [self.missles removeAllObjects];
 }
@@ -253,9 +250,9 @@ static inline double distance(CGPoint p1, CGPoint p2) {
     double offset_y = self.ship.y_velocity * time;
     
     //moving asteroids
-    NSArray *asteroids = [self.asteroids copy];
+    NSArray *asteroids = [self.asteroids.objectsProperties copy];
     
-    for (VKAsteroid *asteroid in asteroids) {
+    for (VKAsteroidProperties *asteroid in asteroids) {
         position.x = asteroid.position.x - asteroid.x_velocity * time + offset_x;
         position.y = asteroid.position.y - asteroid.y_velocity * time + offset_y;
         asteroid.position = [self worldCoordinatesFor:position];
@@ -295,7 +292,7 @@ static inline double distance(CGPoint p1, CGPoint p2) {
 
 - (BOOL) checkCollision:(NSArray *)asteroids {
     float ship_radius = _ship.radius;
-    for (VKAsteroid *asteroid in asteroids){
+    for (VKAsteroidProperties *asteroid in asteroids){
         if (asteroid.distance < (asteroid.radius + ship_radius) * kShipCollisionRadiusMultiplier) {
             return YES;
         }
@@ -306,7 +303,7 @@ static inline double distance(CGPoint p1, CGPoint p2) {
 - (void) checkHit:(NSArray *)missles Asteroids:(NSArray *)asteroids {
     double distance_value;
     float missle_radius = _missles.radius;
-    for (VKAsteroid *asteroid in asteroids) {
+    for (VKAsteroidProperties *asteroid in asteroids) {
         if (asteroid.distance > MISSLE_MAX_DISTANCE) {
             continue;
         }
@@ -315,8 +312,7 @@ static inline double distance(CGPoint p1, CGPoint p2) {
             distance_value = distance(asteroid.position, missle.position);
             if (distance_value < asteroid.radius + missle_radius) {
                 dispatch_sync(dispatch_get_main_queue(), ^{
-                    [self.glView removeGLObject:asteroid];
-                    [self.asteroids removeObject:asteroid];
+                    [self.asteroids removeObjectProperties:asteroid];
                     [self.missles removeObjectProperties:missle];
                     [self splitAsteroid:asteroid];
                     [self.delegate controller:self didDetectAsteroidHit:asteroid];
@@ -327,7 +323,7 @@ static inline double distance(CGPoint p1, CGPoint p2) {
     }
 }
 
-- (void) splitAsteroid:(VKAsteroid *)asteroid {
+- (void) splitAsteroid:(VKAsteroidProperties *)asteroid {
     if (asteroid.parts < 2) {
         return;
     }

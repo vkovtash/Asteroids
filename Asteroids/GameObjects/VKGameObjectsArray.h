@@ -13,6 +13,7 @@
 #import "VKGLObject.h"
 #import "VKGameObject.h"
 
+
 @interface VKGameObjectProperties : NSObject
 @property (nonatomic) CGPoint position;
 @property (nonatomic) CGFloat rotation;
@@ -22,6 +23,7 @@
 + (instancetype) propertiesWithPosition:(CGPoint)position rotation:(CGFloat)rotation;
 + (instancetype) propertiesWithPosition:(CGPoint)position;
 @end
+
 
 @interface VKGameObjectsArray : NSObject <VKGLObject>
 
