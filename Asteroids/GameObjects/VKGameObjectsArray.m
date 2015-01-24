@@ -194,6 +194,10 @@
     }
 }
 
+- (void) removeAllObjects {
+    [self.privateObjectsPosition removeAllObjects];
+}
+
 - (void) render {
     if (!_glView || self.objectsPosition.count == 0) {
         return;

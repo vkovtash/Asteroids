@@ -36,4 +36,5 @@
 - (void) setIndexBuffer:(int)indicesCount Indices:(GLubyte *)indices;
 - (void) appendObjectAtPostion:(VKGameObjectPosition *)position;
 - (void) removeObjectAtPostion:(VKGameObjectPosition *)position;
+- (void) removeAllObjects;
 @end
