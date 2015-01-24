@@ -13,20 +13,20 @@
 #import "VKGLObject.h"
 #import "VKGameObject.h"
 
-@interface VKGameObjectPosition : NSObject
+@interface VKGameObjectProperties : NSObject
 @property (nonatomic) CGPoint position;
 @property (nonatomic) CGFloat rotation;
 
 - (instancetype) initWithPosition:(CGPoint)position rotation:(CGFloat)rotation;
 - (instancetype) initWithPosition:(CGPoint)position;
-+ (instancetype) newWithPosition:(CGPoint)position rotation:(CGFloat)rotation;
-+ (instancetype) newWithPosition:(CGPoint)position;
++ (instancetype) propertiesWithPosition:(CGPoint)position rotation:(CGFloat)rotation;
++ (instancetype) propertiesWithPosition:(CGPoint)position;
 @end
 
 @interface VKGameObjectsArray : NSObject <VKGLObject>
 
 @property (strong, nonatomic) CC3GLMatrix *projection;
-@property (readonly, nonatomic) NSArray *objectsPosition;
+@property (readonly, nonatomic) NSArray *objectsProperties;
 @property (nonatomic) GLushort style;
 @property (strong, nonatomic) UIColor *color;
 
@@ -34,7 +34,7 @@
 - (void) compileShaders;
 - (void) setVertexBuffer:(int)verticesCount Vertices:(Vertex *)vertices;
 - (void) setIndexBuffer:(int)indicesCount Indices:(GLubyte *)indices;
-- (void) appendObjectAtPostion:(VKGameObjectPosition *)position;
-- (void) removeObjectAtPostion:(VKGameObjectPosition *)position;
+- (void) appendObjectProperties:(VKGameObjectProperties *)position;
+- (void) removeObjectProperties:(VKGameObjectProperties *)position;
 - (void) removeAllObjects;
 @end

@@ -8,7 +8,7 @@
 
 #import "VKGameObjectsArray.h"
 
-@implementation VKGameObjectPosition
+@implementation VKGameObjectProperties
 
 - (instancetype) initWithPosition:(CGPoint)position rotation:(CGFloat)rotation {
     self = [super init];
@@ -24,11 +24,11 @@
     return self;
 }
 
-+ (instancetype) newWithPosition:(CGPoint)position rotation:(CGFloat)rotation {
++ (instancetype) propertiesWithPosition:(CGPoint)position rotation:(CGFloat)rotation {
     return [[[self class] alloc] initWithPosition:position rotation:rotation];
 }
 
-+ (instancetype) newWithPosition:(CGPoint)position {
++ (instancetype) propertiesWithPosition:(CGPoint)position {
     return [[[self class] alloc] initWithPosition:position];
 }
 
@@ -178,17 +178,17 @@
     _indicesCount = indicesCount;
 }
 
-- (NSArray *) objectsPosition {
+- (NSArray *) objectsProperties {
     return _privateObjectsPosition;
 }
 
-- (void) appendObjectAtPostion:(VKGameObjectPosition *)position {
+- (void) appendObjectProperties:(VKGameObjectProperties *)position {
     if (position) {
         [self.privateObjectsPosition addObject:position];
     }
 }
 
-- (void) removeObjectAtPostion:(VKGameObjectPosition *)position {
+- (void) removeObjectProperties:(VKGameObjectProperties *)position {
     if (position) {
         [self.privateObjectsPosition removeObject:position];
     }
@@ -199,17 +199,18 @@
 }
 
 - (void) render {
-    if (!_glView || self.objectsPosition.count == 0) {
+    if (!_glView || self.objectsProperties.count == 0) {
         return;
     }
 
     glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
+    glUniform4f(_colorUniform, _red, _green, _blue, _alpha);
     
-    for (VKGameObjectPosition *objPosition in self.objectsPosition) {
+    for (VKGameObjectProperties *objProperties in self.objectsProperties) {
         CGSize glViewSize = _glView.glViewSize;
-        if (objPosition.position.x < 0 || objPosition.position.x > glViewSize.width ||
-            objPosition.position.y < 0 || objPosition.position.y > glViewSize.height) {
+        if (objProperties.position.x < 0 || objProperties.position.x > glViewSize.width ||
+            objProperties.position.y < 0 || objProperties.position.y > glViewSize.height) {
             //offscreen
             continue;
         }
@@ -218,13 +219,12 @@
         
         CC3GLMatrix *modelView = _matrix;
         [modelView populateFromTranslation:CC3VectorMake(-glViewSize.width/2, glViewSize.height/2, 0)];
-        [modelView translateByX:objPosition.position.x];
-        [modelView translateByY:-objPosition.position.y];
-        [modelView rotateByZ:objPosition.rotation];
+        [modelView translateByX:objProperties.position.x];
+        [modelView translateByY:-objProperties.position.y];
+        [modelView rotateByZ:objProperties.rotation];
         
         glUniformMatrix4fv(_modelViewUniform, 1, 0, modelView.glMatrix);
         glVertexAttribPointer(_positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-        glUniform4f(_colorUniform, _red, _green, _blue, _alpha);
         glDrawElements(_style, _indicesCount, GL_UNSIGNED_BYTE, 0);
     }
 }

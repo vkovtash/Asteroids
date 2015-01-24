@@ -178,8 +178,8 @@ static inline double distance(CGPoint p1, CGPoint p2) {
                 for (int i = 0; i < stars_per_part; i++) {
                     star_position.x = x * part_size + arc4random_uniform(part_size);
                     star_position.y = y * part_size + arc4random_uniform(part_size);
-                    VKGameObjectPosition *starPosition = [VKGameObjectPosition newWithPosition:[self worldCoordinatesFor:star_position]];
-                    [self.stars appendObjectAtPostion:starPosition];
+                    VKGameObjectProperties *star = [VKGameObjectProperties propertiesWithPosition:[self worldCoordinatesFor:star_position]];
+                    [self.stars appendObjectProperties:star];
                 }
             }
         }
@@ -286,10 +286,10 @@ static inline double distance(CGPoint p1, CGPoint p2) {
     }
     
     //moving starts
-    for (VKGameObjectPosition *starPosition in self.stars.objectsPosition) {
-        position.x = starPosition.position.x + offset_x;
-        position.y = starPosition.position.y + offset_y;
-        starPosition.position = [self worldCoordinatesFor:position];
+    for (VKGameObjectProperties *star in self.stars.objectsProperties) {
+        position.x = star.position.x + offset_x;
+        position.y = star.position.y + offset_y;
+        star.position = [self worldCoordinatesFor:position];
     }
     
     [self checkHit:missles Asteroids:asteroids];
