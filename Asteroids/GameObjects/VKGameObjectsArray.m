@@ -229,7 +229,7 @@
     }
 }
 
-- (void) removeFromGLView{
+- (void) removeFromGLView {
     [self.glView removeGLObject:self];
 }
 @end

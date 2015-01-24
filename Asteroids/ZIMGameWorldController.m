@@ -8,8 +8,8 @@
 
 #import "ZIMGameWorldController.h"
 #import "VKAsteroid.h"
-#import "VKMissle.h"
 #import "VKStarsArray.h"
+#import "VKMisslesArray.h"
 
 static CGFloat kDefaultWorldSideSize = 2200; //in points
 static NSUInteger kDefaultInitialAsteroidsCount = 15;
@@ -38,7 +38,7 @@ static inline double distance(CGPoint p1, CGPoint p2) {
 
 @interface ZIMGameWorldController()
 @property (strong, nonatomic) NSMutableArray *asteroids;
-@property (strong, nonatomic) NSMutableArray *missles;;
+@property (strong, nonatomic) VKMisslesArray *missles;
 @property (strong, nonatomic) VKStarsArray *stars;
 @property (strong, nonatomic) NSThread *gameThread;
 @end
@@ -54,7 +54,7 @@ static inline double distance(CGPoint p1, CGPoint p2) {
     _glView = [[VKGLView alloc] initWithGlViewSize:size];
     _ship = [[VKShip alloc] init];
     _asteroids = [NSMutableArray array];
-    _missles = [NSMutableArray array];
+    _missles = [VKMisslesArray new];
     
     _worldSize = worldSize;
     _initialAsteroidsCount = kDefaultInitialAsteroidsCount;
@@ -65,6 +65,7 @@ static inline double distance(CGPoint p1, CGPoint p2) {
     _ship.accelerationRate = SHIP_ACCELERATION_RATE;
     
     [_glView addGLObject:_ship];
+    [_glView addGLObject:_missles];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(pause)
@@ -191,10 +192,6 @@ static inline double distance(CGPoint p1, CGPoint p2) {
         [asteroid removeFromGLView];
     }
     [self.asteroids removeAllObjects];
-    
-    for (VKMissle * missle in self.missles) {
-        [missle removeFromGLView];
-    }
     [self.missles removeAllObjects];
 }
 
@@ -203,14 +200,13 @@ static inline double distance(CGPoint p1, CGPoint p2) {
         return;
     }
     
-    VKMissle *missle = [[VKMissle alloc] init];
+    VKMissleProperties *missle = [VKMissleProperties new];
     missle.position = self.ship.position;
     missle.direction = self.ship.rotation;
     missle.velocity = MISSLE_SPEED;
     missle.rotation = self.ship.rotation;
     missle.leftDistance = MISSLE_MAX_DISTANCE;
-    [self.glView addGLObject:missle];
-    [self.missles addObject:missle];
+    [self.missles appendObjectProperties:missle];
 }
 
 #pragma mark - game run loop
@@ -268,9 +264,9 @@ static inline double distance(CGPoint p1, CGPoint p2) {
     }
     
     //moving missles
-    NSArray *missles = [self.missles copy];
+    NSArray *missles = [self.missles.objectsProperties copy];
     
-    for (VKMissle *missle in missles) {
+    for (VKMissleProperties *missle in missles) {
         if (missle.leftDistance > 0) {
             position.x = missle.position.x - missle.x_velocity * time + offset_x;
             position.y = missle.position.y - missle.y_velocity * time + offset_y;
@@ -279,8 +275,7 @@ static inline double distance(CGPoint p1, CGPoint p2) {
         }
         else{
             dispatch_sync(dispatch_get_main_queue(), ^{
-                [self.glView removeGLObject:missle];
-                [self.missles removeObject:missle];
+                [self.missles removeObjectProperties:missle];
             });
         }
     }
@@ -299,8 +294,9 @@ static inline double distance(CGPoint p1, CGPoint p2) {
 #pragma mark - collision detection
 
 - (BOOL) checkCollision:(NSArray *)asteroids {
+    float ship_radius = _ship.radius;
     for (VKAsteroid *asteroid in asteroids){
-        if (asteroid.distance < (asteroid.radius + _ship.radius) * kShipCollisionRadiusMultiplier) {
+        if (asteroid.distance < (asteroid.radius + ship_radius) * kShipCollisionRadiusMultiplier) {
             return YES;
         }
     }
@@ -309,19 +305,19 @@ static inline double distance(CGPoint p1, CGPoint p2) {
 
 - (void) checkHit:(NSArray *)missles Asteroids:(NSArray *)asteroids {
     double distance_value;
+    float missle_radius = _missles.radius;
     for (VKAsteroid *asteroid in asteroids) {
         if (asteroid.distance > MISSLE_MAX_DISTANCE) {
             continue;
         }
         
-        for (VKMissle *missle in missles) {
+        for (VKMissleProperties *missle in missles) {
             distance_value = distance(asteroid.position, missle.position);
-            if (distance_value < asteroid.radius + missle.radius) {
+            if (distance_value < asteroid.radius + missle_radius) {
                 dispatch_sync(dispatch_get_main_queue(), ^{
                     [self.glView removeGLObject:asteroid];
-                    [self.glView removeGLObject:missle];
                     [self.asteroids removeObject:asteroid];
-                    [self.missles removeObject:missle];
+                    [self.missles removeObjectProperties:missle];
                     [self splitAsteroid:asteroid];
                     [self.delegate controller:self didDetectAsteroidHit:asteroid];
                 });

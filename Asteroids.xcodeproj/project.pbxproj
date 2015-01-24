@@ -45,7 +45,6 @@
 		F38B0B7A17CA525E001951BA /* SimpleVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B4517CA525E001951BA /* SimpleVertex.glsl */; };
 		F38B0B7B17CA525E001951BA /* VKAsteroid.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B4717CA525E001951BA /* VKAsteroid.m */; };
 		F38B0B7C17CA525E001951BA /* VKGameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B4917CA525E001951BA /* VKGameObject.m */; };
-		F38B0B7D17CA525E001951BA /* VKMissle.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B4C17CA525E001951BA /* VKMissle.m */; };
 		F38B0B7E17CA525E001951BA /* VKShip.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B4E17CA525E001951BA /* VKShip.m */; };
 		F38B0B7F17CA525E001951BA /* analogue_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B5017CA525E001951BA /* analogue_bg.png */; };
 		F38B0B8017CA525E001951BA /* analogue_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B5117CA525E001951BA /* analogue_bg@2x.png */; };
@@ -83,6 +82,7 @@
 		F39937BA17CC6CD0004BE9CB /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F39937B917CC6CD0004BE9CB /* MainWindow-iPad.xib */; };
 		F3B5CD451A739E7900D091A0 /* VKGameObjectsArray.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B5CD441A739E7900D091A0 /* VKGameObjectsArray.m */; };
 		F3B5CD481A73A18000D091A0 /* VKStarsArray.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B5CD471A73A18000D091A0 /* VKStarsArray.m */; };
+		F3B5CD4B1A73A8AA00D091A0 /* VKMisslesArray.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B5CD4A1A73A8AA00D091A0 /* VKMisslesArray.m */; };
 		F3E26B531A35BABB0053111A /* ZIMSFXController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3E26B521A35BABB0053111A /* ZIMSFXController.m */; };
 		F3F4E99417CCD66700EDA7CC /* VKPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F4E99317CCD66700EDA7CC /* VKPlayer.m */; };
 		F3F4E9A117CCE0E100EDA7CC /* All_of_Us.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F3F4E99617CCE0E100EDA7CC /* All_of_Us.m4a */; };
@@ -160,8 +160,6 @@
 		F38B0B4817CA525E001951BA /* VKGameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKGameObject.h; sourceTree = "<group>"; };
 		F38B0B4917CA525E001951BA /* VKGameObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKGameObject.m; sourceTree = "<group>"; };
 		F38B0B4A17CA525E001951BA /* VKGLObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKGLObject.h; sourceTree = "<group>"; };
-		F38B0B4B17CA525E001951BA /* VKMissle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKMissle.h; sourceTree = "<group>"; };
-		F38B0B4C17CA525E001951BA /* VKMissle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKMissle.m; sourceTree = "<group>"; };
 		F38B0B4D17CA525E001951BA /* VKShip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKShip.h; sourceTree = "<group>"; };
 		F38B0B4E17CA525E001951BA /* VKShip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKShip.m; sourceTree = "<group>"; };
 		F38B0B5017CA525E001951BA /* analogue_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = analogue_bg.png; sourceTree = "<group>"; };
@@ -206,6 +204,8 @@
 		F3B5CD441A739E7900D091A0 /* VKGameObjectsArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKGameObjectsArray.m; sourceTree = "<group>"; };
 		F3B5CD461A73A18000D091A0 /* VKStarsArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKStarsArray.h; sourceTree = "<group>"; };
 		F3B5CD471A73A18000D091A0 /* VKStarsArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKStarsArray.m; sourceTree = "<group>"; };
+		F3B5CD491A73A8AA00D091A0 /* VKMisslesArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKMisslesArray.h; sourceTree = "<group>"; };
+		F3B5CD4A1A73A8AA00D091A0 /* VKMisslesArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKMisslesArray.m; sourceTree = "<group>"; };
 		F3E26B511A35BABB0053111A /* ZIMSFXController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMSFXController.h; sourceTree = "<group>"; };
 		F3E26B521A35BABB0053111A /* ZIMSFXController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSFXController.m; sourceTree = "<group>"; };
 		F3F4E99217CCD66700EDA7CC /* VKPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKPlayer.h; sourceTree = "<group>"; };
@@ -380,12 +380,12 @@
 				F38B0B4917CA525E001951BA /* VKGameObject.m */,
 				F38B0B4617CA525E001951BA /* VKAsteroid.h */,
 				F38B0B4717CA525E001951BA /* VKAsteroid.m */,
-				F38B0B4B17CA525E001951BA /* VKMissle.h */,
-				F38B0B4C17CA525E001951BA /* VKMissle.m */,
 				F38B0B4D17CA525E001951BA /* VKShip.h */,
 				F38B0B4E17CA525E001951BA /* VKShip.m */,
 				F3B5CD461A73A18000D091A0 /* VKStarsArray.h */,
 				F3B5CD471A73A18000D091A0 /* VKStarsArray.m */,
+				F3B5CD491A73A8AA00D091A0 /* VKMisslesArray.h */,
+				F3B5CD4A1A73A8AA00D091A0 /* VKMisslesArray.m */,
 			);
 			path = GameObjects;
 			sourceTree = "<group>";
@@ -572,6 +572,7 @@
 				F3B5CD481A73A18000D091A0 /* VKStarsArray.m in Sources */,
 				F374124E17C95E1000AF822B /* VKGLView.m in Sources */,
 				F38954F61A3A0FE4000B5081 /* VKPlayer+ZIMAsteroidsPlaylist.m in Sources */,
+				F3B5CD4B1A73A8AA00D091A0 /* VKMisslesArray.m in Sources */,
 				F38B0ADA17C9EBAD001951BA /* VKViewController.m in Sources */,
 				F38B0B7517CA525E001951BA /* CC3Foundation.m in Sources */,
 				F378EF1F1A3657CF00380D03 /* UIButton+ZIMAsteroidsButtons.m in Sources */,
@@ -584,7 +585,6 @@
 				F378EF221A36601800380D03 /* ZIMAnimationContainerView.m in Sources */,
 				F378EF1A1A35FC7700380D03 /* ZIMGameWorldController.m in Sources */,
 				F3B5CD451A739E7900D091A0 /* VKGameObjectsArray.m in Sources */,
-				F38B0B7D17CA525E001951BA /* VKMissle.m in Sources */,
 				F38B0B7E17CA525E001951BA /* VKShip.m in Sources */,
 				F38B0B9C17CA525E001951BA /* JSAnalogueStick.m in Sources */,
 				F38B0B9D17CA525E001951BA /* JSButton.m in Sources */,
