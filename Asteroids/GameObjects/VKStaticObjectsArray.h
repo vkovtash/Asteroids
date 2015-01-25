@@ -7,9 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <OpenGLES/ES2/gl.h>
-#import <OpenGLES/ES2/glext.h>
-#import "CC3GLMatrix.h"
 #import "VKGLObject.h"
 #import "VKActiveGameObject.h"
 
@@ -27,7 +24,6 @@
 
 @interface VKStaticObjectsArray : NSObject <VKGLObject>
 
-@property (strong, nonatomic) CC3GLMatrix *projection;
 @property (readonly, nonatomic) NSArray *objects;
 @property (nonatomic) GLushort style;
 @property (strong, nonatomic) UIColor *color;

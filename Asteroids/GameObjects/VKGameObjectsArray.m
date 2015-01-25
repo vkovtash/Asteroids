@@ -40,7 +40,7 @@
     return _color;
 }
 
-- (void) setColor:(UIColor *)color{
+- (void) setColor:(UIColor *)color {
     _color = color;
     [_color getRed:&_red green:&_green blue:&_blue alpha:&_alpha];
 }

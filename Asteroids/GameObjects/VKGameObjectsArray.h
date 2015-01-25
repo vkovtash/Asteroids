@@ -18,7 +18,6 @@
 @end
 
 @interface VKGameObjectsArray : NSObject <VKGLObject>
-@property (strong, nonatomic) CC3GLMatrix *projection;
 @property (readonly, nonatomic) NSArray *objects;
 
 - (void) appendObject:(VKObject *)properties;

@@ -262,7 +262,6 @@ static inline double distance(CGPoint p1, CGPoint p2) {
     
     //moving missles
     NSArray *missles = [self.missles.objects copy];
-    
     for (VKMissle *missle in missles) {
         if (missle.leftDistance > 0) {
             position.x = missle.position.x - missle.x_velocity * time + offset_x;
