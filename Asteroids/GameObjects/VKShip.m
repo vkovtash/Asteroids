@@ -11,26 +11,26 @@
 #define DEFAULT_ACCELERATION_RATE 200
 #define DEFAULT_MAX_SPEED 400
 
-@interface VKShip(){
+@interface VKShip() {
     double _rotation_radians;
 }
 @end
 
 @implementation VKShip
 
-- (void) setRotation:(CGFloat)rotation{
+- (void) setRotation:(CGFloat)rotation {
     if (self.rotation != rotation) {
         [super setRotation:rotation];
         _rotation_radians = self.rotation * M_PI / 180;
     }
 }
 
-- (id) init{
+- (id) init {
     self = [self initWithRadius:DEFAULT_SHIP_SIZE];
     return self;
 }
 
-- (id) initWithRadius:(float) radius{
+- (id) initWithRadius:(float)radius {
     self = [super init];
     if (self) {
         _radius = radius;
@@ -46,13 +46,13 @@
         
         GLubyte indices[6] = {0, 1, 2, 2, 3, 0};
         
-        [self setVertexBuffer:4 Vertices:vertices];
-        [self setIndexBuffer:6 Indices:indices];
+        [self setVertexBuffer:4 vertices:vertices];
+        [self setIndexBuffer:6 indices:indices];
     }
     return self;
 }
 
-- (void) accelerateWithTimeInterval:(NSTimeInterval) timeInterval{
+- (void) accelerateWithTimeInterval:(NSTimeInterval)timeInterval {
     _x_velocity += self.accelerationRate * timeInterval * sin(_rotation_radians);
     
     if (_x_velocity < -_maxSpeed){
