@@ -42,16 +42,16 @@
 
 + (UIButton *) zim_playButton {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, 0, 40, 40);
+    button.frame = CGRectMake(0, 0, 50, 50);
     [button setImage:[[UIImage imageNamed:@"btn_play"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-    button.contentEdgeInsets = UIEdgeInsetsMake(2, 5, 2, -1);
+    button.contentEdgeInsets = UIEdgeInsetsMake(12, 15, 12, 9);
     return button;
 }
 
 + (UIButton *) zim_pauseButton {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, 0, 40, 40);
-    button.contentEdgeInsets = UIEdgeInsetsMake(2, 2, 2, 2);
+    button.frame = CGRectMake(0, 0, 50, 50);
+    button.contentEdgeInsets = UIEdgeInsetsMake(12, 12, 12, 12);
     [button setImage:[[UIImage imageNamed:@"btn_pause"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     return button;
 }
