@@ -17,6 +17,7 @@ static NSUInteger const kExplosionEffecsBufferSize = 3;
 @property (strong, nonatomic) ZIMRingEnumertor *explosionEffects;
 @property (strong, nonatomic) ZIMRingEnumertor *blastEffects;
 @property (strong, nonatomic) AVAudioPlayer *deathEffect;
+@property (nonatomic) dispatch_queue_t sfxQueue;
 @end
 
 @implementation ZIMSFXController
@@ -27,6 +28,8 @@ static NSUInteger const kExplosionEffecsBufferSize = 3;
     if (!self) {
         return nil;
     }
+    
+    _sfxQueue = dispatch_queue_create("zim.sfx.play_queue", DISPATCH_QUEUE_CONCURRENT);
     
     NSData *blastFileData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"blast" ofType:@"m4a"]];
     NSMutableArray *blastEffects = [NSMutableArray array];
@@ -58,15 +61,24 @@ static NSUInteger const kExplosionEffecsBufferSize = 3;
 }
 
 - (void) blast {
-    [(AVAudioPlayer *)[self.blastEffects nextObject] play];
+    __weak __typeof(&*self) weakSelf = self;
+    dispatch_async(self.sfxQueue, ^{
+        [(AVAudioPlayer *)[weakSelf.blastEffects nextObject] play];
+    });
 }
 
 - (void) explosion {
-    [(AVAudioPlayer *)[self.explosionEffects nextObject] play];
+    __weak __typeof(&*self) weakSelf = self;
+    dispatch_async(self.sfxQueue, ^{
+        [(AVAudioPlayer *)[weakSelf.explosionEffects nextObject] play];
+    });
 }
 
 - (void) death {
-    [self.deathEffect play];
+    __weak __typeof(&*self) weakSelf = self;
+    dispatch_async(self.sfxQueue, ^{
+        [weakSelf.deathEffect play];
+    });
 }
 
 - (void) setVolume:(float)volume {
