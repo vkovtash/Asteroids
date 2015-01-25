@@ -129,7 +129,7 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(setupDisplayLink)
-                                                     name:UIApplicationWillEnterForegroundNotification
+                                                     name:UIApplicationDidBecomeActiveNotification
                                                    object:nil];
         
         _projection = [CC3GLMatrix matrix];
