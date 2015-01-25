@@ -6,9 +6,9 @@
 //
 //
 
-#import "VKGameReusableObjectsArray.h"
+#import "VKGameObjectsArray.h"
 
-@interface VKAsteroidProperties : VKGameReusableObjectProperties
+@interface VKAsteroid : VKObject
 @property (nonatomic) float velocity;
 @property (nonatomic) float direction;
 @property (nonatomic) float rotationVelocity;

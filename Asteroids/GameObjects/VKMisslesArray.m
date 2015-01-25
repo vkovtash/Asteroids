@@ -10,12 +10,12 @@
 
 #define MISSLE_SIZE 5
 
-@interface VKMissleProperties() {
+@interface VKMissle() {
     double _direction_radians;
 }
 @end
 
-@implementation VKMissleProperties
+@implementation VKMissle
 
 - (void) setDirection:(float)direction {
     if (_direction != direction) {

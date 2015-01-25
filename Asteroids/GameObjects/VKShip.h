@@ -6,9 +6,9 @@
 //
 //
 
-#import "VKGameObject.h"
+#import "VKActiveGameObject.h"
 
-@interface VKShip : VKGameObject
+@interface VKShip : VKActiveGameObject
 @property (nonatomic, readonly) float radius;
 @property (nonatomic) float accelerationRate;
 @property (nonatomic) float maxSpeed;
@@ -16,6 +16,6 @@
 @property (nonatomic) float y_velocity;
 @property (nonatomic) BOOL accelerating;
 
-- (void) accelerateWithTimeInterval:(NSTimeInterval) timeInterval;
-- (id) initWithRadius:(float) radius;
+- (void) accelerateWithTimeInterval:(NSTimeInterval)timeInterval;
+- (id) initWithRadius:(float)radius;
 @end

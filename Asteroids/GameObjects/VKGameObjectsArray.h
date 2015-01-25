@@ -1,42 +1,29 @@
 //
-//  VKGameObject.h
+//  VKGameReusableObjectsArray.h
 //  Asteroids
 //
-//  Created by kovtash on 24.08.13.
+//  Created by kovtash on 24.01.15.
 //
 //
 
-#import <Foundation/Foundation.h>
-#import <OpenGLES/ES2/gl.h>
-#import <OpenGLES/ES2/glext.h>
-#import "CC3GLMatrix.h"
-#import "VKGLObject.h"
-#import "VKGameObject.h"
+#import "VKStaticObjectsArray.h"
 
-
-@interface VKGameObjectProperties : NSObject
-@property (nonatomic) CGPoint position;
-@property (nonatomic) CGFloat rotation;
-
-- (instancetype) initWithPosition:(CGPoint)position rotation:(CGFloat)rotation;
-- (instancetype) initWithPosition:(CGPoint)position;
-+ (instancetype) propertiesWithPosition:(CGPoint)position rotation:(CGFloat)rotation;
-+ (instancetype) propertiesWithPosition:(CGPoint)position;
-@end
-
-
-@interface VKGameObjectsArray : NSObject <VKGLObject>
-
-@property (strong, nonatomic) CC3GLMatrix *projection;
-@property (readonly, nonatomic) NSArray *objectsProperties;
+@interface VKObject : VKStaticGameObject
+@property (readonly, nonatomic) int verticiesCount;
+@property (readonly, nonatomic) int indicesCount;
+@property (readonly, nonatomic) Vertex *verticies;
+@property (readonly, nonatomic) GLubyte *indices;
 @property (nonatomic) GLushort style;
 @property (strong, nonatomic) UIColor *color;
+@end
 
+@interface VKGameObjectsArray : NSObject <VKGLObject>
+@property (strong, nonatomic) CC3GLMatrix *projection;
+@property (readonly, nonatomic) NSArray *objects;
+
+- (void) appendObject:(VKObject *)properties;
+- (void) removeObject:(VKObject *)properties;
+- (void) removeAllObjects;
 - (void) removeFromGLView;
 - (void) compileShaders;
-- (void) setVertexBuffer:(int)verticesCount vertices:(Vertex *)vertices;
-- (void) setIndexBuffer:(int)indicesCount indices:(GLubyte *)indices;
-- (void) appendObjectProperties:(VKGameObjectProperties *)properties;
-- (void) removeObjectProperties:(VKGameObjectProperties *)properties;
-- (void) removeAllObjects;
 @end

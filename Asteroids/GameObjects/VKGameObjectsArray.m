@@ -1,64 +1,37 @@
 //
-//  VKGameObject.m
+//  VKGameReusableObjectsArray.m
 //  Asteroids
 //
-//  Created by kovtash on 24.08.13.
+//  Created by kovtash on 24.01.15.
 //
 //
 
 #import "VKGameObjectsArray.h"
+#import <objc/runtime.h>
+#import "VKShader.h"
 
 
-@implementation VKGameObjectProperties
+@interface VKObject()
+@property (assign, nonatomic) CGFloat red;
+@property (assign, nonatomic) CGFloat green;
+@property (assign, nonatomic) CGFloat blue;
+@property (assign, nonatomic) CGFloat alpha;
+@end
+
+@implementation VKObject
+@synthesize color = _color;
 
 - (instancetype) initWithPosition:(CGPoint)position rotation:(CGFloat)rotation {
-    self = [super init];
+    self = [super initWithPosition:position rotation:rotation];
     if (self) {
-        _position = position;
-        _rotation = rotation;
+        _red = 1.0;
+        _green = 1.0;
+        _blue = 1.0;
+        _alpha = 1.0;
+        _style = GL_LINE_STRIP;
     }
     return self;
 }
-
-- (instancetype) initWithPosition:(CGPoint)position {
-    self = [self initWithPosition:position rotation:0];
-    return self;
-}
-
-+ (instancetype) propertiesWithPosition:(CGPoint)position rotation:(CGFloat)rotation {
-    return [[[self class] alloc] initWithPosition:position rotation:rotation];
-}
-
-+ (instancetype) propertiesWithPosition:(CGPoint)position {
-    return [[[self class] alloc] initWithPosition:position];
-}
-
-@end
-
-
-@interface VKGameObjectsArray()
-@property (strong, nonatomic) CC3GLMatrix *matrix;
-@property (strong, nonatomic) NSMutableArray *privateObjectsPosition;
-@end
-
-@implementation VKGameObjectsArray {
-    GLuint _positionSlot;
-    GLuint _colorUniform;
-    GLuint _projectionUniform;
-    GLuint _modelViewUniform;
-    int _indicesCount;
-    
-    GLuint _vertexBuffer;
-    GLuint _indexBuffer;
-    
-    CGFloat _red;
-    CGFloat _green;
-    CGFloat _blue;
-    CGFloat _alpha;
-}
-
-@synthesize color = _color;
-@synthesize glView = _glView;
 
 - (UIColor *) color {
     if (!_color) {
@@ -72,168 +45,194 @@
     [_color getRed:&_red green:&_green blue:&_blue alpha:&_alpha];
 }
 
-- (id) init {
+@end
+
+
+@interface VKGameReusableBuffers : NSObject
+@property (readonly) GLuint vertexBuffer;
+@property (readonly) GLuint indexBuffer;
+@property (readonly) int indicesCount;
+
+- (void) setVertexBuffer:(int)verticesCount vertices:(Vertex *)vertices;
+- (void) setIndexBuffer:(int)indicesCount indices:(GLubyte *)indices;
+@end
+
+@implementation VKGameReusableBuffers
+@synthesize vertexBuffer = _vertexBuffer;
+@synthesize indexBuffer = _indexBuffer;
+@synthesize indicesCount = _indicesCount;
+
+- (instancetype) init {
     self = [super init];
     if (self) {
-        glGenBuffers(1, &_indexBuffer);
         glGenBuffers(1, &_vertexBuffer);
-        
-        _privateObjectsPosition = [NSMutableArray array];
-        _red = 1.0;
-        _green = 1.0;
-        _blue = 1.0;
-        _alpha = 1.0;
-        
-        _matrix = [CC3GLMatrix new];
-        
-        [self compileShaders];
-        
-        Vertex vertices[4] = {
-            {{-50, -50, 0}},
-            {{0, 50, 0}},
-            {{50, -50, 0}},
-            {{0, -25, 0}}
-        };
-        
-        GLubyte indices[6] = {0, 1, 2, 2, 3, 0};
-        
-        [self setVertexBuffer:4 vertices:vertices];
-        [self setIndexBuffer:6 indices:indices];
-        
-        _style = GL_LINE_STRIP;
+        glGenBuffers(1, &_indexBuffer);
     }
-    
     return self;
-}
-
-- (GLuint) compileShader:(NSString*)shaderName withType:(GLenum)shaderType {
-    NSString* shaderPath = [[NSBundle mainBundle] pathForResource:shaderName ofType:@"glsl"];
-    NSError* error;
-    NSString* shaderString = [NSString stringWithContentsOfFile:shaderPath encoding:NSUTF8StringEncoding error:&error];
-    if (!shaderString) {
-        NSLog(@"Error loading shader: %@", error.localizedDescription);
-        exit(1);
-    }
-    
-    GLuint shaderHandle = glCreateShader(shaderType);
-    
-    const char * shaderStringUTF8 = [shaderString UTF8String];
-    int shaderStringLength = (int)[shaderString length];
-    glShaderSource(shaderHandle, 1, &shaderStringUTF8, &shaderStringLength);
-    
-    glCompileShader(shaderHandle);
-    
-    GLint compileSuccess;
-    glGetShaderiv(shaderHandle, GL_COMPILE_STATUS, &compileSuccess);
-    if (compileSuccess == GL_FALSE) {
-        GLchar messages[256];
-        glGetShaderInfoLog(shaderHandle, sizeof(messages), 0, &messages[0]);
-        NSString *messageString = [NSString stringWithUTF8String:messages];
-        NSLog(@"%@", messageString);
-        exit(1);
-    }
-    
-    return shaderHandle;
-}
-
-- (void) compileShaders {
-    static GLuint programHandle = 0;
-    
-    if (! programHandle) {
-        programHandle = glCreateProgram();
-        GLuint vertexShader = [self compileShader:@"SimpleVertex" withType:GL_VERTEX_SHADER];
-        GLuint fragmentShader = [self compileShader:@"SimpleFragment" withType:GL_FRAGMENT_SHADER];
-        
-        glAttachShader(programHandle, vertexShader);
-        glAttachShader(programHandle, fragmentShader);
-        glLinkProgram(programHandle);
-        
-        GLint linkSuccess;
-        glGetProgramiv(programHandle, GL_LINK_STATUS, &linkSuccess);
-        if (linkSuccess == GL_FALSE) {
-            GLchar messages[256];
-            glGetProgramInfoLog(programHandle, sizeof(messages), 0, &messages[0]);
-            NSString *messageString = [NSString stringWithUTF8String:messages];
-            NSLog(@"%@", messageString);
-            exit(1);
-        }
-    }
-    
-    glUseProgram(programHandle);
-    _positionSlot = glGetAttribLocation(programHandle, "Position");
-    glEnableVertexAttribArray(_positionSlot);
-    
-    _colorUniform = glGetUniformLocation(programHandle, "SourceColor");
-    _projectionUniform = glGetUniformLocation(programHandle, "Projection");
-    _modelViewUniform = glGetUniformLocation(programHandle, "Modelview");
 }
 
 - (void) setVertexBuffer:(int)verticesCount vertices:(Vertex *)vertices {
     glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, verticesCount*sizeof(Vertex), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, verticesCount * sizeof(Vertex), vertices, GL_STATIC_DRAW);
 }
 
 - (void) setIndexBuffer:(int)indicesCount indices:(GLubyte *)indices {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesCount*sizeof(GLubyte), indices, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesCount * sizeof(GLubyte), indices, GL_STATIC_DRAW);
     _indicesCount = indicesCount;
 }
 
-- (NSArray *) objectsProperties {
+@end
+
+
+@interface VKObject(AssociatedBuffers)
+@property (readonly, nonatomic) VKGameReusableBuffers *associatedBuffers;
+
+- (void) associateBuffers:(VKGameReusableBuffers *)buffers;
+@end
+
+@implementation VKObject(AssociatedBuffers)
+
+- (VKGameReusableBuffers *) associatedBuffers {
+    return objc_getAssociatedObject(self, @selector(associatedBuffers));
+}
+
+- (void) associateBuffers:(VKGameReusableBuffers *)buffers {
+    if (!buffers) {
+        return;
+    }
+    
+    objc_setAssociatedObject(self, @selector(associatedBuffers), buffers, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    
+    if (self.verticiesCount > 0) {
+        [buffers setVertexBuffer:self.verticiesCount vertices:self.verticies];
+    }
+    if (self.indicesCount > 0) {
+        [buffers setIndexBuffer:self.indicesCount indices:self.indices];
+    }
+}
+@end
+
+
+@interface VKGameObjectsArray()
+@property (strong, nonatomic) CC3GLMatrix *matrix;
+@property (strong, nonatomic) NSMutableSet *freeBuffers;
+@property (strong, nonatomic) NSMutableArray *privateObjectsPosition;
+@end
+
+@implementation VKGameObjectsArray {
+    VKShader _shader;
+}
+
+@synthesize glView = _glView;
+
+- (instancetype) init {
+    self = [super init];
+    if (self) {
+        _freeBuffers = [NSMutableSet set];
+        _privateObjectsPosition = [NSMutableArray array];
+        _matrix = [CC3GLMatrix new];
+        [self compileShaders];
+    }
+    return self;
+}
+
+- (void) compileShaders {
+    _shader = defailt_shader();
+}
+
+- (NSArray *) objects {
     return _privateObjectsPosition;
 }
 
-- (void) appendObjectProperties:(VKGameObjectProperties *)properties {
-    if (properties) {
-        [self.privateObjectsPosition addObject:properties];
-    }
-}
-
-- (void) removeObjectProperties:(VKGameObjectProperties *)properties {
-    if (properties) {
-        [self.privateObjectsPosition removeObject:properties];
-    }
-}
-
-- (void) removeAllObjects {
-    [self.privateObjectsPosition removeAllObjects];
-}
-
 - (void) render {
-    if (!_glView || self.objectsProperties.count == 0) {
+    if (!_glView || self.objects.count == 0) {
         return;
     }
-
-    glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
-    glUniform4f(_colorUniform, _red, _green, _blue, _alpha);
+    
+    VKGameReusableBuffers *buffers = nil;
     
     CC3GLMatrix *modelView = _matrix;
     
-    for (VKGameObjectProperties *objProperties in self.objectsProperties) {
+    for (VKObject *objProperties in self.objects) {
         CGSize glViewSize = _glView.glViewSize;
+        buffers = objProperties.associatedBuffers;
+        if (!buffers) {
+            continue; //nothing to render
+        }
+        
         if (objProperties.position.x < 0 || objProperties.position.x > glViewSize.width ||
             objProperties.position.y < 0 || objProperties.position.y > glViewSize.height) {
             //offscreen
             continue;
         }
         
-        glUniformMatrix4fv(_projectionUniform, 1, GL_FALSE, _glView.projection.glMatrix);
+        glBindBuffer(GL_ARRAY_BUFFER, buffers.vertexBuffer);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers.indexBuffer);
+        glUniform4f(_shader.colorUniform, objProperties.red, objProperties.green, objProperties.blue, objProperties.alpha);
         
+        glUniformMatrix4fv(_shader.projectionUniform, 1, GL_FALSE, _glView.projection.glMatrix);
         
         [modelView populateFromTranslation:CC3VectorMake(-glViewSize.width/2, glViewSize.height/2, 0)];
         [modelView translateByX:objProperties.position.x];
         [modelView translateByY:-objProperties.position.y];
         [modelView rotateByZ:objProperties.rotation];
         
-        glUniformMatrix4fv(_modelViewUniform, 1, 0, modelView.glMatrix);
-        glVertexAttribPointer(_positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-        glDrawElements(_style, _indicesCount, GL_UNSIGNED_BYTE, 0);
+        glUniformMatrix4fv(_shader.modelViewUniform, 1, 0, modelView.glMatrix);
+        glVertexAttribPointer(_shader.positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
+        glDrawElements(objProperties.style, buffers.indicesCount, GL_UNSIGNED_BYTE, 0);
     }
 }
 
 - (void) removeFromGLView {
     [self.glView removeGLObject:self];
+}
+
+- (VKGameReusableBuffers *) getReusableBuffers {
+    VKGameReusableBuffers *buffers = [self.freeBuffers anyObject];
+    
+    if (buffers) {
+        [self.freeBuffers removeObject:buffers];
+    }
+    else {
+        buffers = [VKGameReusableBuffers new];
+    }
+    return buffers;
+}
+
+- (void) appendObject:(VKObject *)properties {
+    if (!properties) {
+        return;
+    }
+    
+    [self.privateObjectsPosition addObject:properties];
+    [properties associateBuffers:[self getReusableBuffers]];
+}
+
+- (void) removeObject:(VKObject *)properties {
+    if (!properties) {
+        return;
+    }
+    
+    [self.privateObjectsPosition removeObject:properties];
+    
+    VKGameReusableBuffers *buffers = [properties associatedBuffers];
+    if (buffers) {
+        [self.freeBuffers addObject:buffers];
+    }
+}
+
+- (void) removeAllObjects {
+    NSArray *objects = [self.objects copy];
+    [self.privateObjectsPosition removeAllObjects];
+    
+    VKGameReusableBuffers *buffers = nil;
+    for (VKObject *properties in objects) {
+        buffers = properties.associatedBuffers;
+        if (buffers) {
+            [self.freeBuffers addObject:buffers];
+        }
+    }
 }
 
 @end

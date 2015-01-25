@@ -16,7 +16,7 @@ typedef struct {
     float Position[3];
 } Vertex;
 
-@interface VKGameObject : NSObject <VKGLObject>
+@interface VKActiveGameObject : NSObject <VKGLObject>
 
 @property (strong, nonatomic) CC3GLMatrix *projection;
 @property (nonatomic) CGPoint position;
@@ -24,8 +24,10 @@ typedef struct {
 @property (nonatomic) GLushort style;
 @property (strong, nonatomic) UIColor *color;
 
+- (BOOL) isOffTheScreen;
+
 - (void) removeFromGLView;
 - (void) compileShaders;
-- (void) setVertexBuffer:(int) verticesCount Vertices:(Vertex *) vertices;
-- (void) setIndexBuffer:(int) indicesCount Indices:(GLubyte *) indices;
+- (void) setVertexBuffer:(int)verticesCount vertices:(Vertex *)vertices;
+- (void) setIndexBuffer:(int)indicesCount indices:(GLubyte *)indices;
 @end

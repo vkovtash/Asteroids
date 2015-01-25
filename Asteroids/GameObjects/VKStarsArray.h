@@ -6,9 +6,9 @@
 //
 //
 
-#import "VKGameObjectsArray.h"
+#import "VKStaticObjectsArray.h"
 
-@interface VKStarsArray : VKGameObjectsArray
+@interface VKStarsArray : VKStaticObjectsArray
 @property (nonatomic, readonly) float radius;
 
 - (id) initWithRadius:(float)radius;

@@ -6,9 +6,9 @@
 //
 //
 
-#import "VKGameObjectsArray.h"
+#import "VKStaticObjectsArray.h"
 
-@interface VKMissleProperties : VKGameObjectProperties
+@interface VKMissle : VKStaticGameObject
 @property (nonatomic) float velocity;
 @property (nonatomic) float direction;
 @property (nonatomic) float leftDistance;
@@ -18,7 +18,7 @@
 - (void) decreaseLeftDistanceWithTimeInterval:(NSTimeInterval)timeInterval;
 @end
 
-@interface VKMisslesArray : VKGameObjectsArray
+@interface VKMisslesArray : VKStaticObjectsArray
 @property (nonatomic, readonly) float radius;
 
 - (id) initWithRadius:(float)radius;

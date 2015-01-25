@@ -6,13 +6,13 @@
 //
 //
 
-#import "VKAsteroidProperties.h"
+#import "VKAsteroid.h"
 #define ASTEROID_SIZE 20
 #define ASTEROID_MIN_SIDES 6
 #define ASTEROID_MAX_SIDES 12
 #define ASTEROID_SIDE_STEP 3
 
-@implementation VKAsteroidProperties {
+@implementation VKAsteroid {
     double _direction_radians;
 }
 
