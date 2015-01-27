@@ -87,7 +87,7 @@
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)successfully {
     [self next];
-    if (!successfully) {
+    if (successfully) {
         [self play];
     }
 }
