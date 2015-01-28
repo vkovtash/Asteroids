@@ -24,8 +24,9 @@ static CGFloat kShipCollisionRadiusMultiplier = 0.75;
 #define ASTEROID_MAX_SPEED 200.0f //points per sec
 #define ASTEROID_MIN_ROTATION_SPEED 50.0f //degrees per sec
 #define ASTEROID_MAX_ROTATION_SPEED 180.0f //degrees per sec
+#define FIRE_INTERVAL 0.20f
 #define MISSLE_MAX_DISTANCE 300.0f //points
-#define MISSLE_SPEED 1800.0f //points per sec
+#define MISSLE_SPEED 600.0f //points per sec
 #define SHIP_MAX_SPEED 400.0f //points per sec
 #define SHIP_ACCELERATION_RATE 200.0f //poins per sec^2c
 #define STAR_RADIUS 2.0f //points
@@ -56,6 +57,9 @@ static inline double distance(CGPoint p1, CGPoint p2) {
     _ship = [VKShip new];
     _asteroids = [VKGameObjectsArray new];
     _missles = [VKMisslesArray new];
+    _fireInterval = FIRE_INTERVAL;
+    _missleSpeed = MISSLE_SPEED;
+    _missleDistance = MISSLE_MAX_DISTANCE;
     
     _worldSize = worldSize;
     _initialAsteroidsCount = kDefaultInitialAsteroidsCount;
@@ -109,6 +113,7 @@ static inline double distance(CGPoint p1, CGPoint p2) {
 - (void) pause {
     if (self.isExecuting && !self.isFinished) {
         _isPaused = YES;
+        self.firePressed = NO;
         [self.gameThread cancel];
         self.gameThread = nil;
     }
@@ -192,18 +197,44 @@ static inline double distance(CGPoint p1, CGPoint p2) {
     [self.missles removeAllObjects];
 }
 
+- (void) setFirePressed:(BOOL)firePressed {
+    if (_firePressed != firePressed) {
+        _firePressed = firePressed;
+        if (!_firePressed) {
+            [NSObject cancelPreviousPerformRequestsWithTarget:self];
+        }
+        [self fireIfNeeded];
+    }
+}
+
+- (void) fireIfNeeded {
+    if (self.firePressed) {
+        [self fire];
+        [self performSelector:@selector(fireIfNeeded) withObject:nil afterDelay:self.fireInterval];
+    }
+}
+
 - (void) fire {
     if (!self.gameThread.isExecuting) {
         return;
     }
     
+    VKShip *ship = self.ship;
     VKMissle *missle = [VKMissle new];
-    missle.position = self.ship.position;
-    missle.direction = self.ship.rotation;
-    missle.velocity = MISSLE_SPEED;
-    missle.rotation = self.ship.rotation;
-    missle.leftDistance = MISSLE_MAX_DISTANCE;
+    missle.direction = ship.rotation;
+    missle.velocity = self.missleSpeed;
+    missle.leftDistance = self.missleDistance;
+    missle.rotation = ship.rotation;
+    
+    //speed correction
+    missle.x_velocity += ship.x_velocity;
+    missle.y_velocity += ship.y_velocity;
+    
+    missle.position = CGPointMake(ship.position.x - missle.x_velocity / missle.velocity * ship.radius,
+                                  ship.position.y - missle.y_velocity / missle.velocity * ship.radius);
+    
     [self.missles appendObject:missle];
+    [self.delegate controller:self didLaunchMissle:missle];
 }
 
 #pragma mark - game run loop
@@ -303,7 +334,7 @@ static inline double distance(CGPoint p1, CGPoint p2) {
     double distance_value;
     float missle_radius = _missles.radius;
     for (VKAsteroid *asteroid in asteroids) {
-        if (asteroid.distance > MISSLE_MAX_DISTANCE) {
+        if (asteroid.distance > self.missleDistance) {
             continue;
         }
         

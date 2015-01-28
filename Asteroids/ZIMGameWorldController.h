@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "VKShip.h"
 #import "VKAsteroid.h"
+#import "VKMisslesArray.h"
 
 @class ZIMGameWorldController;
 
@@ -20,9 +21,13 @@
 - (void) controllerDidResumeGame:(ZIMGameWorldController *)controller;
 
 - (void) controller:(ZIMGameWorldController *)controller didDetectAsteroidHit:(VKAsteroid *)asteroid;
+- (void) controller:(ZIMGameWorldController *)controller didLaunchMissle:(VKMissle *)missle;
 @end
 
 @interface ZIMGameWorldController : NSObject
+@property (assign, nonatomic) NSTimeInterval fireInterval;
+@property (assign, nonatomic) CGFloat missleSpeed;
+@property (assign, nonatomic) CGFloat missleDistance;
 @property (assign, nonatomic) NSUInteger initialAsteroidsCount;
 @property (assign, nonatomic) CGFloat asteroidMaxSize;
 @property (readonly, nonatomic) CGSize worldSize;
@@ -33,6 +38,7 @@
 @property (readonly, nonatomic) BOOL isPaused;
 @property (readonly, nonatomic) BOOL isFinished;
 @property (weak, nonatomic) id<ZIMGameWorldControllerDelegate> delegate;
+@property (assign, nonatomic) BOOL firePressed;
 
 - (instancetype) initWithGlViewSize:(CGSize)size;
 - (instancetype) initWithGlViewSize:(CGSize)size worldSize:(CGSize)worldSize;

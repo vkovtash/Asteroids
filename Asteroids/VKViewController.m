@@ -68,6 +68,7 @@ static int kSpawnStep = 1000;
     self.fireButton = [UIButton zim_fireButton];
     self.fireButton.center = fireButtonCenter;
     [self.fireButton addTarget:self action:@selector(fire) forControlEvents:UIControlEventTouchDown];
+    [self.fireButton addTarget:self action:@selector(fireCancel) forControlEvents:UIControlEventTouchUpInside|UIControlEventTouchUpOutside];
     
     self.accelerationButton = [UIButton zim_accelerationButton];
     self.accelerationButton.center = accelButtonCenter;
@@ -148,11 +149,16 @@ static int kSpawnStep = 1000;
         [self refreshAsteroidsLabel];
     }
     [self.worldController resume];
+    self.worldController.firePressed = self.fireButton.isTouchInside;
+    self.worldController.ship.accelerating = self.accelerationButton.isTouchInside;
 }
 
 - (void) fire {
-    [self.sfxController blast];
-    [self.worldController fire];
+    self.worldController.firePressed = YES;
+}
+
+- (void) fireCancel {
+    self.worldController.firePressed = NO;
 }
 
 - (void) startAcceleration{
@@ -200,6 +206,10 @@ static int kSpawnStep = 1000;
     
     self.points = newPoints;
     [self refreshAsteroidsLabel];
+}
+
+- (void) controller:(ZIMGameWorldController *)controller didLaunchMissle:(VKMissle *)missle {
+    [self.sfxController blast];
 }
 
 #pragma mark - JSAnalogueStickDelegate

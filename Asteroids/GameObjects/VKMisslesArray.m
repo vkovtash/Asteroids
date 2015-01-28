@@ -57,11 +57,13 @@
     self = [super init];
     if (self) {
         _radius = radius;
+        self.style = GL_TRIANGLES;
+        
         Vertex vertices[4] = {
-            {{-radius/2, -radius, 0}},
+            {{-radius/3, radius/2, 0}},
             {{0, radius, 0}},
-            {{radius/2, -radius, 0}},
-            {{0, -radius/2, 0}}
+            {{radius/3, radius/2, 0}},
+            {{0, -radius, 0}}
         };
         
         GLubyte indices[6] = {0, 1, 2, 2, 3, 0};

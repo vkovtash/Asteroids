@@ -12,8 +12,8 @@
 @property (nonatomic) float velocity;
 @property (nonatomic) float direction;
 @property (nonatomic) float leftDistance;
-@property (nonatomic, readonly) float x_velocity;
-@property (nonatomic, readonly) float y_velocity;
+@property (nonatomic) float x_velocity;
+@property (nonatomic) float y_velocity;
 
 - (void) decreaseLeftDistanceWithTimeInterval:(NSTimeInterval)timeInterval;
 @end
