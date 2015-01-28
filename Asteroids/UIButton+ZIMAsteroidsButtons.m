@@ -20,7 +20,7 @@
 
 + (UIButton *) zim_gamepadButtonWithText:(NSString *)text {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, 0, 60, 60);
+    button.frame = CGRectMake(0, 0, 90, 90);
     button.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin;
     
     [button setImage:[UIImage imageNamed:@"button"] forState:UIControlStateNormal];

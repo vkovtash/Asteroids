@@ -54,14 +54,14 @@ static int kSpawnStep = 1000;
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         visibleWorldHeight = 500;
-        fireButtonCenter = CGPointMake(bounds.size.width - 130, bounds.size.height - 60);
-        accelButtonCenter = CGPointMake(bounds.size.width - 50, bounds.size.height - 90);
+        fireButtonCenter = CGPointMake(bounds.size.width - 135, bounds.size.height - 60);
+        accelButtonCenter = CGPointMake(bounds.size.width - 45, bounds.size.height - 90);
         joyStikCenter = CGPointMake(70, bounds.size.height - 70);
     }
     else {
         visibleWorldHeight = 600;
-        fireButtonCenter = CGPointMake(bounds.size.width - 130, bounds.size.height - 100);
-        accelButtonCenter = CGPointMake(bounds.size.width - 50, bounds.size.height - 130);
+        fireButtonCenter = CGPointMake(bounds.size.width - 135, bounds.size.height - 100);
+        accelButtonCenter = CGPointMake(bounds.size.width - 45, bounds.size.height - 130);
         joyStikCenter = CGPointMake(90, bounds.size.height - 110);
     }
     
