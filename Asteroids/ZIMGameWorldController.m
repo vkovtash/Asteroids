@@ -273,32 +273,30 @@ static inline double distance(CGPoint p1, CGPoint p2) {
 - (BOOL) processGameStep:(NSTimeInterval)time {
     CGPoint position;
     
-    //moving ship
-    if (self.ship.accelerating) {
-        [self.ship accelerateWithTimeInterval:time];
+    VKShip *ship = self.ship;
+    double offset_x = ship.x_velocity * time;
+    double offset_y = ship.y_velocity * time;
+    
+    if (ship.accelerating) {
+        [ship accelerateWithTimeInterval:time];
     }
-    double offset_x = self.ship.x_velocity * time;
-    double offset_y = self.ship.y_velocity * time;
     
-    //moving asteroids
     NSArray *asteroids = [self.asteroids.objects copy];
-    
     for (VKAsteroid *asteroid in asteroids) {
         position.x = asteroid.position.x - asteroid.x_velocity * time + offset_x;
         position.y = asteroid.position.y - asteroid.y_velocity * time + offset_y;
         asteroid.position = [self worldCoordinatesFor:position];
         [asteroid rotateWithTimeInterval:time];
-        asteroid.distance = distance(asteroid.position, self.ship.position);
+        asteroid.distance = distance(asteroid.position, ship.position);
     }
     
-    //moving missles
     NSArray *missles = [self.missles.objects copy];
     for (VKMissle *missle in missles) {
+        [missle decreaseLeftDistanceWithTimeInterval:time];
         if (missle.leftDistance > 0) {
             position.x = missle.position.x - missle.x_velocity * time + offset_x;
             position.y = missle.position.y - missle.y_velocity * time + offset_y;
             missle.position = [self worldCoordinatesFor:position];
-            [missle decreaseLeftDistanceWithTimeInterval:time];
         }
         else{
             dispatch_sync(dispatch_get_main_queue(), ^{
@@ -307,7 +305,6 @@ static inline double distance(CGPoint p1, CGPoint p2) {
         }
     }
     
-    //moving starts
     for (VKStaticGameObject *star in self.stars.objects) {
         position.x = star.position.x + offset_x;
         position.y = star.position.y + offset_y;
@@ -333,15 +330,17 @@ static inline double distance(CGPoint p1, CGPoint p2) {
 - (void) checkHit:(NSArray *)missles Asteroids:(NSArray *)asteroids {
     double distance_value;
     float missle_radius = _missles.radius;
+    float missle_range = self.missleDistance + missle_radius + self.ship.radius;
     for (VKAsteroid *asteroid in asteroids) {
-        if (asteroid.distance > self.missleDistance) {
+        if (asteroid.distance - asteroid.radius > missle_range) {
             continue;
         }
         
         for (VKMissle *missle in missles) {
             distance_value = distance(asteroid.position, missle.position);
-            if (distance_value < asteroid.radius + missle_radius) {
+            if (!missle.isDetonated && distance_value < asteroid.radius + missle_radius) {
                 dispatch_sync(dispatch_get_main_queue(), ^{
+                    missle.isDetonated = YES;
                     [self.asteroids removeObject:asteroid];
                     [self.missles removeObject:missle];
                     [self splitAsteroid:asteroid];

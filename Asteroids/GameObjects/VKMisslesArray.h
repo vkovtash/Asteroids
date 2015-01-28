@@ -14,6 +14,7 @@
 @property (nonatomic) float leftDistance;
 @property (nonatomic) float x_velocity;
 @property (nonatomic) float y_velocity;
+@property (assign, nonatomic) BOOL isDetonated;
 
 - (void) decreaseLeftDistanceWithTimeInterval:(NSTimeInterval)timeInterval;
 @end
