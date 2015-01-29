@@ -25,4 +25,6 @@
 - (void) removeAllObjects;
 - (void) removeFromGLView;
 - (void) compileShaders;
+
+- (BOOL) isObjectOffScreen:(VKObject *)object;
 @end

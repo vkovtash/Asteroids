@@ -9,7 +9,7 @@
 #import "ZIMGameWorldController.h"
 #import "VKStarsArray.h"
 #import "VKMisslesArray.h"
-#import "VKGameObjectsArray.h"
+#import "VKAsteroidsArray.h"
 #import "VKAsteroid.h"
 
 static CGFloat kDefaultWorldSideSize = 2200; //in points
@@ -39,7 +39,7 @@ static inline double distance(CGPoint p1, CGPoint p2) {
 }
 
 @interface ZIMGameWorldController()
-@property (strong, nonatomic) VKGameObjectsArray *asteroids;
+@property (strong, nonatomic) VKAsteroidsArray *asteroids;
 @property (strong, nonatomic) VKMisslesArray *missles;
 @property (strong, nonatomic) VKStarsArray *stars;
 @property (strong, nonatomic) NSThread *gameThread;
@@ -55,7 +55,7 @@ static inline double distance(CGPoint p1, CGPoint p2) {
     
     _glView = [[VKGLView alloc] initWithGlViewSize:size];
     _ship = [VKShip new];
-    _asteroids = [VKGameObjectsArray new];
+    _asteroids = [VKAsteroidsArray new];
     _missles = [VKMisslesArray new];
     _fireInterval = FIRE_INTERVAL;
     _missleSpeed = MISSLE_SPEED;

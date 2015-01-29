@@ -145,42 +145,46 @@
     return _privateObjectsPosition;
 }
 
+- (BOOL) isObjectOffScreen:(VKObject *)object {
+    CGSize glViewSize = self.glView.glViewSize;
+    return (object.position.x < 0 || object.position.x > glViewSize.width ||
+            object.position.y < 0 || object.position.y > glViewSize.height);
+}
+
 - (void) render {
-    if (!_glView || self.objects.count == 0) {
+    if (!self.glView || self.objects.count == 0) {
         return;
     }
     
     VKGameReusableBuffers *buffers = nil;
     
     CC3GLMatrix *modelView = _matrix;
+    CGSize glViewSize = self.glView.glViewSize;
     
-    for (VKObject *objProperties in self.objects) {
-        CGSize glViewSize = _glView.glViewSize;
-        buffers = objProperties.associatedBuffers;
+    for (VKObject *object in self.objects) {
+        buffers = object.associatedBuffers;
         if (!buffers) {
             continue; //nothing to render
         }
         
-        if (objProperties.position.x < 0 || objProperties.position.x > glViewSize.width ||
-            objProperties.position.y < 0 || objProperties.position.y > glViewSize.height) {
-            //offscreen
+        if ([self isObjectOffScreen:object]) {
             continue;
         }
         
         glBindBuffer(GL_ARRAY_BUFFER, buffers.vertexBuffer);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers.indexBuffer);
-        glUniform4f(_shader.colorUniform, objProperties.red, objProperties.green, objProperties.blue, objProperties.alpha);
+        glUniform4f(_shader.colorUniform, object.red, object.green, object.blue, object.alpha);
         
         glUniformMatrix4fv(_shader.projectionUniform, 1, GL_FALSE, _glView.projection.glMatrix);
         
         [modelView populateFromTranslation:CC3VectorMake(-glViewSize.width/2, glViewSize.height/2, 0)];
-        [modelView translateByX:objProperties.position.x];
-        [modelView translateByY:-objProperties.position.y];
-        [modelView rotateByZ:objProperties.rotation];
+        [modelView translateByX:object.position.x];
+        [modelView translateByY:-object.position.y];
+        [modelView rotateByZ:object.rotation];
         
         glUniformMatrix4fv(_shader.modelViewUniform, 1, 0, modelView.glMatrix);
         glVertexAttribPointer(_shader.positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-        glDrawElements(objProperties.style, buffers.indicesCount, GL_UNSIGNED_BYTE, 0);
+        glDrawElements(object.style, buffers.indicesCount, GL_UNSIGNED_BYTE, 0);
     }
 }
 
