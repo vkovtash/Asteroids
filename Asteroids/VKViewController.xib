@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C106a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Orbitron Medium.otf">
+            <string>Orbitron-Medium</string>
+            <string>Orbitron-Medium</string>
+        </mutableArray>
+        <mutableArray key="trench100free.otf">
+            <string>Trench-Thin</string>
+            <string>Trench-Thin</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VKViewController">
             <connections>
@@ -32,18 +42,19 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="160" id="rTK-oo-lZ8"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="22"/>
+                    <fontDescription key="fontDescription" name="Trench-Thin" family="Trench" pointSize="25"/>
                     <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ox0-mI-NAU">
-                    <rect key="frame" x="295" y="7" width="160" height="50"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 40" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ox0-mI-NAU">
+                    <rect key="frame" x="291" y="7" width="160" height="50"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="160" id="M6p-3d-EK1"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="22"/>
+                    <fontDescription key="fontDescription" name="Trench-Thin" family="Trench" pointSize="25"/>
                     <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
+                    <size key="shadowOffset" width="0.0" height="0.0"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCORE" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x6w-PQ-qUA">
                     <rect key="frame" x="181" y="0.0" width="49" height="21"/>
@@ -51,7 +62,7 @@
                         <constraint firstAttribute="height" constant="21" id="b7C-ra-orq"/>
                         <constraint firstAttribute="width" constant="49" id="kiu-B3-OY6"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <fontDescription key="fontDescription" name="Orbitron-Medium" family="Orbitron" pointSize="10"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -61,7 +72,7 @@
                         <constraint firstAttribute="width" constant="80" id="c55-rl-uhZ"/>
                         <constraint firstAttribute="height" constant="21" id="pss-nT-0MT"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <fontDescription key="fontDescription" name="Orbitron-Medium" family="Orbitron" pointSize="10"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -79,7 +90,7 @@
                 <constraint firstItem="KfQ-5W-VdP" firstAttribute="leading" secondItem="VVj-sh-CSc" secondAttribute="trailing" constant="8" id="l5F-2C-a0j"/>
                 <constraint firstItem="VVj-sh-CSc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="7" id="pno-LJ-g5Z"/>
                 <constraint firstItem="KfQ-5W-VdP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="r4g-wL-tlM"/>
-                <constraint firstItem="ox0-mI-NAU" firstAttribute="leading" secondItem="VVj-sh-CSc" secondAttribute="trailing" constant="8" id="vw7-5N-2rd"/>
+                <constraint firstItem="ox0-mI-NAU" firstAttribute="leading" secondItem="VVj-sh-CSc" secondAttribute="trailing" constant="4" id="vw7-5N-2rd"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
@@ -88,9 +99,4 @@
             <point key="canvasLocation" x="-113.5" y="335"/>
         </view>
     </objects>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

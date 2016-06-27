@@ -149,9 +149,9 @@
     glUniform4f(_shader.colorUniform, _red, _green, _blue, _alpha);
     
     CC3GLMatrix *modelView = _matrix;
+    CGSize glViewSize = _glView.glViewSize;
     
     for (VKStaticGameObject *objProperties in self.objects) {
-        CGSize glViewSize = _glView.glViewSize;
         if (objProperties.position.x < 0 || objProperties.position.x > glViewSize.width ||
             objProperties.position.y < 0 || objProperties.position.y > glViewSize.height) {
             //offscreen
@@ -159,7 +159,6 @@
         }
         
         glUniformMatrix4fv(_shader.projectionUniform, 1, GL_FALSE, _glView.projection.glMatrix);
-        
         
         [modelView populateFromTranslation:CC3VectorMake(-glViewSize.width/2, glViewSize.height/2, 0)];
         [modelView translateByX:objProperties.position.x];

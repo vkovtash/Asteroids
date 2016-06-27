@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class JSAnalogueStick;
+
 @interface UIButton (ZIMAsteroidsButtons)
-+ (UIButton *) zim_fireButton;
-+ (UIButton *) zim_accelerationButton;
-+ (UIButton *) zim_playButton;
-+ (UIButton *) zim_pauseButton;
++ (UIButton *)zim_fireButton;
++ (UIButton *)zim_accelerationButton;
++ (UIButton *)zim_playButton;
++ (UIButton *)zim_pauseButton;
 @end

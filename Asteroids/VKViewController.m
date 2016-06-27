@@ -15,6 +15,7 @@
 #import "UIButton+ZIMAsteroidsButtons.h"
 #import "ZIMAnimationContainerView.h"
 #import "VKPlayer+ZIMAsteroidsPlaylist.h"
+#import "JSAnalogueStick+ZIMStick.h"
 
 
 static CGFloat kScoreMultiplier = 5;
@@ -67,11 +68,13 @@ static int kSpawnStep = 1000;
     
     self.fireButton = [UIButton zim_fireButton];
     self.fireButton.center = fireButtonCenter;
+    self.fireButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin;
     [self.fireButton addTarget:self action:@selector(fire) forControlEvents:UIControlEventTouchDown];
     [self.fireButton addTarget:self action:@selector(fireCancel) forControlEvents:UIControlEventTouchUpInside|UIControlEventTouchUpOutside];
     
     self.accelerationButton = [UIButton zim_accelerationButton];
     self.accelerationButton.center = accelButtonCenter;
+    self.accelerationButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin;
     [self.accelerationButton addTarget:self action:@selector(startAcceleration) forControlEvents:UIControlEventTouchDown];
     [self.accelerationButton addTarget:self action:@selector(stopAcceleration) forControlEvents:UIControlEventTouchUpInside];
     
@@ -81,7 +84,7 @@ static int kSpawnStep = 1000;
     self.pauseButton = [UIButton zim_pauseButton];
     [self.pauseButton addTarget:self action:@selector(pause) forControlEvents:UIControlEventTouchUpInside];
     
-    self.joyStik = [[JSAnalogueStick alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    self.joyStik = [JSAnalogueStick zim_stick];
     self.joyStik.center = joyStikCenter;
     self.joyStik.delegate = self;
     self.joyStik.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleRightMargin;
@@ -110,6 +113,8 @@ static int kSpawnStep = 1000;
     [self.view sendSubviewToBack:self.worldController.glView];
     [self.worldController reset];
     [self.audioPlayer stop];
+
+    [self refreshAsteroidsLabel];
 }
 
 - (BOOL) prefersStatusBarHidden {
@@ -170,7 +175,7 @@ static int kSpawnStep = 1000;
 }
 
 - (void) refreshAsteroidsLabel {
-    self.asteroidsCountLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)self.worldController.currentAsteroidsCount];
+    self.asteroidsCountLabel.text = [NSString stringWithFormat:@" %lu", (unsigned long)self.worldController.currentAsteroidsCount];
 }
 
 #pragma mark - ZIMGameWorldControllerDelegate
@@ -198,9 +203,12 @@ static int kSpawnStep = 1000;
     
     if (self.points / kSpawnStep != newPoints / kSpawnStep ||
         self.worldController.currentAsteroidsCount < self.worldController.initialAsteroidsCount) {
+
+        __weak __typeof(&*self) weakSelf = self;
+        __weak ZIMGameWorldController *weakController = self.worldController;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.worldController spawnAsteroid];
-            [self refreshAsteroidsLabel];
+            [weakController spawnAsteroid];
+            [weakSelf refreshAsteroidsLabel];
         });
     }
     

@@ -16,70 +16,51 @@
 		35DF6454138C40D500FF9459 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35DF6452138C40D500FF9459 /* MainWindow.xib */; };
 		35DF645E138C427700FF9459 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35DF645D138C427700FF9459 /* QuartzCore.framework */; };
 		35DF6460138C427E00FF9459 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35DF645F138C427E00FF9459 /* OpenGLES.framework */; };
+		6BEF7E6F1D213BA9003EF135 /* JSAnalogueStick+ZIMStick.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BEF7E6E1D213BA9003EF135 /* JSAnalogueStick+ZIMStick.m */; };
+		6BEF7E721D2178A0003EF135 /* ZIMJoystikButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BEF7E711D2178A0003EF135 /* ZIMJoystikButton.m */; };
+		6BEF7E7D1D218716003EF135 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BEF7E7C1D218716003EF135 /* Images.xcassets */; };
+		6BEF7E7F1D218873003EF135 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BEF7E7E1D218873003EF135 /* Launch Screen.storyboard */; };
+		6BEF7E8F1D21B86A003EF135 /* death.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6BEF7E8C1D21B86A003EF135 /* death.m4a */; };
+		6BEF7E901D21B86A003EF135 /* explosion.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6BEF7E8D1D21B86A003EF135 /* explosion.m4a */; };
+		6BEF7E911D21B86A003EF135 /* blast.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6BEF7E8E1D21B86A003EF135 /* blast.m4a */; };
+		6BEF7E951D21B876003EF135 /* trench100free.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6BEF7E921D21B876003EF135 /* trench100free.otf */; };
+		6BEF7E961D21B876003EF135 /* Orbitron Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6BEF7E931D21B876003EF135 /* Orbitron Light.otf */; };
+		6BEF7E971D21B876003EF135 /* Orbitron Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6BEF7E941D21B876003EF135 /* Orbitron Medium.otf */; };
+		6BEF7EA21D21B882003EF135 /* Searching.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6BEF7E981D21B882003EF135 /* Searching.m4a */; };
+		6BEF7EA31D21B882003EF135 /* Ascending.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6BEF7E991D21B882003EF135 /* Ascending.m4a */; };
+		6BEF7EA41D21B882003EF135 /* Come_and_Find_Me.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6BEF7E9A1D21B882003EF135 /* Come_and_Find_Me.m4a */; };
+		6BEF7EA51D21B882003EF135 /* Digital_Native.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6BEF7E9B1D21B882003EF135 /* Digital_Native.m4a */; };
+		6BEF7EA61D21B882003EF135 /* HHavok-intro.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6BEF7E9C1D21B882003EF135 /* HHavok-intro.m4a */; };
+		6BEF7EA71D21B882003EF135 /* HHavok-main.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6BEF7E9D1D21B882003EF135 /* HHavok-main.m4a */; };
+		6BEF7EA81D21B882003EF135 /* Underclocked.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6BEF7E9E1D21B882003EF135 /* Underclocked.m4a */; };
+		6BEF7EA91D21B882003EF135 /* We're_the_Resistors.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6BEF7E9F1D21B882003EF135 /* We're_the_Resistors.m4a */; };
+		6BEF7EAA1D21B882003EF135 /* All_of_Us.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6BEF7EA01D21B882003EF135 /* All_of_Us.m4a */; };
+		6BEF7EAB1D21B882003EF135 /* Arpanauts.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 6BEF7EA11D21B882003EF135 /* Arpanauts.m4a */; };
+		6BEF7EB01D21B99A003EF135 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BEF7EAE1D21B99A003EF135 /* MainWindow-iPad.xib */; };
+		6BEF7EBE1D21BA03003EF135 /* CC3Foundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BEF7EB41D21BA03003EF135 /* CC3Foundation.m */; };
+		6BEF7EBF1D21BA03003EF135 /* CC3GLMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BEF7EB51D21BA03003EF135 /* CC3GLMatrix.m */; };
+		6BEF7EC01D21BA03003EF135 /* CC3Kazmath.c in Sources */ = {isa = PBXBuildFile; fileRef = 6BEF7EB61D21BA03003EF135 /* CC3Kazmath.c */; };
+		6BEF7EC11D21BA03003EF135 /* CC3Math.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BEF7EB81D21BA03003EF135 /* CC3Math.m */; };
+		6BEF7ECB1D21BA0F003EF135 /* JSController.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BEF7EC21D21BA0F003EF135 /* JSController.xcassets */; };
+		6BEF7ECC1D21BA0F003EF135 /* JSAnalogueStick.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BEF7EC41D21BA0F003EF135 /* JSAnalogueStick.m */; };
+		6BEF7ECD1D21BA0F003EF135 /* JSButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BEF7EC61D21BA0F003EF135 /* JSButton.m */; };
+		6BEF7ECE1D21BA0F003EF135 /* JSControlLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BEF7EC81D21BA0F003EF135 /* JSControlLayout.m */; };
+		6BEF7ECF1D21BA0F003EF135 /* JSDPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BEF7ECA1D21BA0F003EF135 /* JSDPad.m */; };
 		F33CB5A01A75152200F7482A /* VKShader.m in Sources */ = {isa = PBXBuildFile; fileRef = F33CB59F1A75152200F7482A /* VKShader.m */; };
-		F33D393017CB2DD80026385A /* Icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = F33D392F17CB2DD80026385A /* Icon-114.png */; };
-		F358A19017CB3BDB00CF776C /* blast.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F358A18E17CB3BDB00CF776C /* blast.m4a */; };
-		F358A19117CB3BDB00CF776C /* explosion.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F358A18F17CB3BDB00CF776C /* explosion.m4a */; };
-		F358A19517CB908D00CF776C /* death.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F358A19417CB908D00CF776C /* death.m4a */; };
 		F374124E17C95E1000AF822B /* VKGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = F374124D17C95E1000AF822B /* VKGLView.m */; };
 		F375408A17CB360700B2D482 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F375408917CB360700B2D482 /* AudioToolbox.framework */; };
 		F375408C17CB368200B2D482 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F375408B17CB368200B2D482 /* AVFoundation.framework */; };
-		F37675FD17CB318400C8DEC4 /* Icon-57.png in Resources */ = {isa = PBXBuildFile; fileRef = F37675FC17CB318400C8DEC4 /* Icon-57.png */; };
 		F378EF111A35D0BE00380D03 /* ZIMRingEnumertor.m in Sources */ = {isa = PBXBuildFile; fileRef = F378EF101A35D0BE00380D03 /* ZIMRingEnumertor.m */; };
 		F378EF1A1A35FC7700380D03 /* ZIMGameWorldController.m in Sources */ = {isa = PBXBuildFile; fileRef = F378EF191A35FC7700380D03 /* ZIMGameWorldController.m */; };
 		F378EF1C1A36298100380D03 /* VKViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F378EF1B1A36298100380D03 /* VKViewController.xib */; };
 		F378EF1F1A3657CF00380D03 /* UIButton+ZIMAsteroidsButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = F378EF1E1A3657CF00380D03 /* UIButton+ZIMAsteroidsButtons.m */; };
 		F378EF221A36601800380D03 /* ZIMAnimationContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F378EF211A36601800380D03 /* ZIMAnimationContainerView.m */; };
-		F378EF251A366CF200380D03 /* btn_pause@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F378EF231A366CF200380D03 /* btn_pause@3x.png */; };
-		F378EF261A366CF200380D03 /* btn_play@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F378EF241A366CF200380D03 /* btn_play@3x.png */; };
-		F378EF2C1A366D2600380D03 /* btn_pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F378EF281A366D2600380D03 /* btn_pause@2x.png */; };
-		F378EF2E1A366D2600380D03 /* btn_play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F378EF2A1A366D2600380D03 /* btn_play@2x.png */; };
-		F378EF311A366D7600380D03 /* btn_pause.png in Resources */ = {isa = PBXBuildFile; fileRef = F378EF2F1A366D7600380D03 /* btn_pause.png */; };
-		F378EF321A366D7600380D03 /* btn_play.png in Resources */ = {isa = PBXBuildFile; fileRef = F378EF301A366D7600380D03 /* btn_play.png */; };
 		F38954F61A3A0FE4000B5081 /* VKPlayer+ZIMAsteroidsPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = F38954F51A3A0FE4000B5081 /* VKPlayer+ZIMAsteroidsPlaylist.m */; };
 		F38B0ADA17C9EBAD001951BA /* VKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0AD917C9EBAD001951BA /* VKViewController.m */; };
-		F38B0B7517CA525E001951BA /* CC3Foundation.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B3A17CA525E001951BA /* CC3Foundation.m */; };
-		F38B0B7617CA525E001951BA /* CC3GLMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B3C17CA525E001951BA /* CC3GLMatrix.m */; };
-		F38B0B7717CA525E001951BA /* CC3Kazmath.c in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B3D17CA525E001951BA /* CC3Kazmath.c */; };
-		F38B0B7817CA525E001951BA /* CC3Math.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B4117CA525E001951BA /* CC3Math.m */; };
 		F38B0B7917CA525E001951BA /* SimpleFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B4417CA525E001951BA /* SimpleFragment.glsl */; };
 		F38B0B7A17CA525E001951BA /* SimpleVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B4517CA525E001951BA /* SimpleVertex.glsl */; };
 		F38B0B7C17CA525E001951BA /* VKActiveGameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B4917CA525E001951BA /* VKActiveGameObject.m */; };
 		F38B0B7E17CA525E001951BA /* VKShip.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B4E17CA525E001951BA /* VKShip.m */; };
-		F38B0B7F17CA525E001951BA /* analogue_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B5017CA525E001951BA /* analogue_bg.png */; };
-		F38B0B8017CA525E001951BA /* analogue_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B5117CA525E001951BA /* analogue_bg@2x.png */; };
-		F38B0B8117CA525E001951BA /* analogue_handle.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B5217CA525E001951BA /* analogue_handle.png */; };
-		F38B0B8217CA525E001951BA /* analogue_handle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B5317CA525E001951BA /* analogue_handle@2x.png */; };
-		F38B0B8317CA525E001951BA /* button-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B5417CA525E001951BA /* button-pressed.png */; };
-		F38B0B8417CA525E001951BA /* button-pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B5517CA525E001951BA /* button-pressed@2x.png */; };
-		F38B0B8517CA525E001951BA /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B5617CA525E001951BA /* button.png */; };
-		F38B0B8617CA525E001951BA /* button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B5717CA525E001951BA /* button@2x.png */; };
-		F38B0B8717CA525E001951BA /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B5817CA525E001951BA /* Default-568h@2x.png */; };
-		F38B0B8817CA525E001951BA /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B5917CA525E001951BA /* Default.png */; };
-		F38B0B8917CA525E001951BA /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B5A17CA525E001951BA /* Default@2x.png */; };
-		F38B0B8A17CA525E001951BA /* dPad-Down.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B5B17CA525E001951BA /* dPad-Down.png */; };
-		F38B0B8B17CA525E001951BA /* dPad-Down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B5C17CA525E001951BA /* dPad-Down@2x.png */; };
-		F38B0B8C17CA525E001951BA /* dPad-DownLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B5D17CA525E001951BA /* dPad-DownLeft.png */; };
-		F38B0B8D17CA525E001951BA /* dPad-DownLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B5E17CA525E001951BA /* dPad-DownLeft@2x.png */; };
-		F38B0B8E17CA525E001951BA /* dPad-DownRight.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B5F17CA525E001951BA /* dPad-DownRight.png */; };
-		F38B0B8F17CA525E001951BA /* dPad-DownRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B6017CA525E001951BA /* dPad-DownRight@2x.png */; };
-		F38B0B9017CA525E001951BA /* dPad-Left.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B6117CA525E001951BA /* dPad-Left.png */; };
-		F38B0B9117CA525E001951BA /* dPad-Left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B6217CA525E001951BA /* dPad-Left@2x.png */; };
-		F38B0B9217CA525E001951BA /* dPad-None.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B6317CA525E001951BA /* dPad-None.png */; };
-		F38B0B9317CA525E001951BA /* dPad-None@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B6417CA525E001951BA /* dPad-None@2x.png */; };
-		F38B0B9417CA525E001951BA /* dPad-Right.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B6517CA525E001951BA /* dPad-Right.png */; };
-		F38B0B9517CA525E001951BA /* dPad-Right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B6617CA525E001951BA /* dPad-Right@2x.png */; };
-		F38B0B9617CA525E001951BA /* dPad-Up.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B6717CA525E001951BA /* dPad-Up.png */; };
-		F38B0B9717CA525E001951BA /* dPad-Up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B6817CA525E001951BA /* dPad-Up@2x.png */; };
-		F38B0B9817CA525E001951BA /* dPad-UpLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B6917CA525E001951BA /* dPad-UpLeft.png */; };
-		F38B0B9917CA525E001951BA /* dPad-UpLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B6A17CA525E001951BA /* dPad-UpLeft@2x.png */; };
-		F38B0B9A17CA525E001951BA /* dPad-UpRight.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B6B17CA525E001951BA /* dPad-UpRight.png */; };
-		F38B0B9B17CA525E001951BA /* dPad-UpRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F38B0B6C17CA525E001951BA /* dPad-UpRight@2x.png */; };
-		F38B0B9C17CA525E001951BA /* JSAnalogueStick.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B6E17CA525E001951BA /* JSAnalogueStick.m */; };
-		F38B0B9D17CA525E001951BA /* JSButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B7017CA525E001951BA /* JSButton.m */; };
-		F38B0B9E17CA525E001951BA /* JSControlLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B7217CA525E001951BA /* JSControlLayout.m */; };
-		F38B0B9F17CA525E001951BA /* JSDPad.m in Sources */ = {isa = PBXBuildFile; fileRef = F38B0B7417CA525E001951BA /* JSDPad.m */; };
-		F39937BA17CC6CD0004BE9CB /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F39937B917CC6CD0004BE9CB /* MainWindow-iPad.xib */; };
 		F3B5CD451A739E7900D091A0 /* VKStaticObjectsArray.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B5CD441A739E7900D091A0 /* VKStaticObjectsArray.m */; };
 		F3B5CD481A73A18000D091A0 /* VKStarsArray.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B5CD471A73A18000D091A0 /* VKStarsArray.m */; };
 		F3B5CD4B1A73A8AA00D091A0 /* VKMisslesArray.m in Sources */ = {isa = PBXBuildFile; fileRef = F3B5CD4A1A73A8AA00D091A0 /* VKMisslesArray.m */; };
@@ -88,17 +69,6 @@
 		F3D0EF851A7A1176005A0D8B /* VKAsteroidsArray.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D0EF841A7A1176005A0D8B /* VKAsteroidsArray.m */; };
 		F3E26B531A35BABB0053111A /* ZIMSFXController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3E26B521A35BABB0053111A /* ZIMSFXController.m */; };
 		F3F4E99417CCD66700EDA7CC /* VKPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F3F4E99317CCD66700EDA7CC /* VKPlayer.m */; };
-		F3F4E9A117CCE0E100EDA7CC /* All_of_Us.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F3F4E99617CCE0E100EDA7CC /* All_of_Us.m4a */; };
-		F3F4E9A217CCE0E100EDA7CC /* Arpanauts.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F3F4E99717CCE0E100EDA7CC /* Arpanauts.m4a */; };
-		F3F4E9A317CCE0E100EDA7CC /* Ascending.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F3F4E99817CCE0E100EDA7CC /* Ascending.m4a */; };
-		F3F4E9A417CCE0E100EDA7CC /* Come_and_Find_Me.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F3F4E99917CCE0E100EDA7CC /* Come_and_Find_Me.m4a */; };
-		F3F4E9A517CCE0E100EDA7CC /* Digital_Native.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F3F4E99A17CCE0E100EDA7CC /* Digital_Native.m4a */; };
-		F3F4E9A617CCE0E100EDA7CC /* HHavok-intro.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F3F4E99B17CCE0E100EDA7CC /* HHavok-intro.m4a */; };
-		F3F4E9A717CCE0E100EDA7CC /* HHavok-main.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F3F4E99C17CCE0E100EDA7CC /* HHavok-main.m4a */; };
-		F3F4E9A817CCE0E100EDA7CC /* LICENSE.md in Resources */ = {isa = PBXBuildFile; fileRef = F3F4E99D17CCE0E100EDA7CC /* LICENSE.md */; };
-		F3F4E9A917CCE0E100EDA7CC /* Searching.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F3F4E99E17CCE0E100EDA7CC /* Searching.m4a */; };
-		F3F4E9AA17CCE0E100EDA7CC /* Underclocked.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F3F4E99F17CCE0E100EDA7CC /* Underclocked.m4a */; };
-		F3F4E9AB17CCE0E100EDA7CC /* We're_the_Resistors.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F3F4E9A017CCE0E100EDA7CC /* We're_the_Resistors.m4a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,18 +87,55 @@
 		35DF645D138C427700FF9459 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		35DF645F138C427E00FF9459 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		38F8D2C3856F807B2B07192C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		6BEF7E6D1D213BA9003EF135 /* JSAnalogueStick+ZIMStick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JSAnalogueStick+ZIMStick.h"; sourceTree = "<group>"; };
+		6BEF7E6E1D213BA9003EF135 /* JSAnalogueStick+ZIMStick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JSAnalogueStick+ZIMStick.m"; sourceTree = "<group>"; };
+		6BEF7E701D2178A0003EF135 /* ZIMJoystikButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMJoystikButton.h; sourceTree = "<group>"; };
+		6BEF7E711D2178A0003EF135 /* ZIMJoystikButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMJoystikButton.m; sourceTree = "<group>"; };
+		6BEF7E7C1D218716003EF135 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		6BEF7E7E1D218873003EF135 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		6BEF7E8C1D21B86A003EF135 /* death.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = death.m4a; sourceTree = "<group>"; };
+		6BEF7E8D1D21B86A003EF135 /* explosion.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = explosion.m4a; sourceTree = "<group>"; };
+		6BEF7E8E1D21B86A003EF135 /* blast.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = blast.m4a; sourceTree = "<group>"; };
+		6BEF7E921D21B876003EF135 /* trench100free.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = trench100free.otf; path = Trench/trench100free.otf; sourceTree = "<group>"; };
+		6BEF7E931D21B876003EF135 /* Orbitron Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Orbitron Light.otf"; path = "Orbitron/Orbitron Light.otf"; sourceTree = "<group>"; };
+		6BEF7E941D21B876003EF135 /* Orbitron Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Orbitron Medium.otf"; path = "Orbitron/Orbitron Medium.otf"; sourceTree = "<group>"; };
+		6BEF7E981D21B882003EF135 /* Searching.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Searching.m4a; sourceTree = "<group>"; };
+		6BEF7E991D21B882003EF135 /* Ascending.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ascending.m4a; sourceTree = "<group>"; };
+		6BEF7E9A1D21B882003EF135 /* Come_and_Find_Me.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Come_and_Find_Me.m4a; sourceTree = "<group>"; };
+		6BEF7E9B1D21B882003EF135 /* Digital_Native.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Digital_Native.m4a; sourceTree = "<group>"; };
+		6BEF7E9C1D21B882003EF135 /* HHavok-intro.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HHavok-intro.m4a"; sourceTree = "<group>"; };
+		6BEF7E9D1D21B882003EF135 /* HHavok-main.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HHavok-main.m4a"; sourceTree = "<group>"; };
+		6BEF7E9E1D21B882003EF135 /* Underclocked.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Underclocked.m4a; sourceTree = "<group>"; };
+		6BEF7E9F1D21B882003EF135 /* We're_the_Resistors.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "We're_the_Resistors.m4a"; sourceTree = "<group>"; };
+		6BEF7EA01D21B882003EF135 /* All_of_Us.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = All_of_Us.m4a; sourceTree = "<group>"; };
+		6BEF7EA11D21B882003EF135 /* Arpanauts.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Arpanauts.m4a; sourceTree = "<group>"; };
+		6BEF7EAF1D21B99A003EF135 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/MainWindow-iPad.xib"; sourceTree = "<group>"; };
+		6BEF7EB41D21BA03003EF135 /* CC3Foundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CC3Foundation.m; sourceTree = "<group>"; };
+		6BEF7EB51D21BA03003EF135 /* CC3GLMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CC3GLMatrix.m; sourceTree = "<group>"; };
+		6BEF7EB61D21BA03003EF135 /* CC3Kazmath.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CC3Kazmath.c; sourceTree = "<group>"; };
+		6BEF7EB71D21BA03003EF135 /* CC3GLMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3GLMatrix.h; sourceTree = "<group>"; };
+		6BEF7EB81D21BA03003EF135 /* CC3Math.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CC3Math.m; sourceTree = "<group>"; };
+		6BEF7EB91D21BA03003EF135 /* CC3Foundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3Foundation.h; sourceTree = "<group>"; };
+		6BEF7EBA1D21BA03003EF135 /* ccTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ccTypes.h; sourceTree = "<group>"; };
+		6BEF7EBB1D21BA03003EF135 /* CC3Kazmath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3Kazmath.h; sourceTree = "<group>"; };
+		6BEF7EBC1D21BA03003EF135 /* CC3Logging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3Logging.h; sourceTree = "<group>"; };
+		6BEF7EBD1D21BA03003EF135 /* CC3Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3Math.h; sourceTree = "<group>"; };
+		6BEF7EC21D21BA0F003EF135 /* JSController.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = JSController.xcassets; sourceTree = "<group>"; };
+		6BEF7EC31D21BA0F003EF135 /* JSAnalogueStick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSAnalogueStick.h; sourceTree = "<group>"; };
+		6BEF7EC41D21BA0F003EF135 /* JSAnalogueStick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSAnalogueStick.m; sourceTree = "<group>"; };
+		6BEF7EC51D21BA0F003EF135 /* JSButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSButton.h; sourceTree = "<group>"; };
+		6BEF7EC61D21BA0F003EF135 /* JSButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSButton.m; sourceTree = "<group>"; };
+		6BEF7EC71D21BA0F003EF135 /* JSControlLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSControlLayout.h; sourceTree = "<group>"; };
+		6BEF7EC81D21BA0F003EF135 /* JSControlLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSControlLayout.m; sourceTree = "<group>"; };
+		6BEF7EC91D21BA0F003EF135 /* JSDPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSDPad.h; sourceTree = "<group>"; };
+		6BEF7ECA1D21BA0F003EF135 /* JSDPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSDPad.m; sourceTree = "<group>"; };
 		BDE42F26979978B3B9C06561 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F33CB59E1A75152200F7482A /* VKShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKShader.h; sourceTree = "<group>"; };
 		F33CB59F1A75152200F7482A /* VKShader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKShader.m; sourceTree = "<group>"; };
-		F33D392F17CB2DD80026385A /* Icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-114.png"; path = "Resources/Icon-114.png"; sourceTree = "<group>"; };
-		F358A18E17CB3BDB00CF776C /* blast.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = blast.m4a; path = Resources/blast.m4a; sourceTree = "<group>"; };
-		F358A18F17CB3BDB00CF776C /* explosion.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = explosion.m4a; path = Resources/explosion.m4a; sourceTree = "<group>"; };
-		F358A19417CB908D00CF776C /* death.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = death.m4a; path = Resources/death.m4a; sourceTree = "<group>"; };
 		F374124C17C95E1000AF822B /* VKGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKGLView.h; sourceTree = "<group>"; };
 		F374124D17C95E1000AF822B /* VKGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKGLView.m; sourceTree = "<group>"; };
 		F375408917CB360700B2D482 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		F375408B17CB368200B2D482 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		F37675FC17CB318400C8DEC4 /* Icon-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-57.png"; path = "Resources/Icon-57.png"; sourceTree = "<group>"; };
 		F378EF0F1A35D0BE00380D03 /* ZIMRingEnumertor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMRingEnumertor.h; sourceTree = "<group>"; };
 		F378EF101A35D0BE00380D03 /* ZIMRingEnumertor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMRingEnumertor.m; sourceTree = "<group>"; };
 		F378EF181A35FC7700380D03 /* ZIMGameWorldController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMGameWorldController.h; sourceTree = "<group>"; };
@@ -138,26 +145,10 @@
 		F378EF1E1A3657CF00380D03 /* UIButton+ZIMAsteroidsButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+ZIMAsteroidsButtons.m"; sourceTree = "<group>"; };
 		F378EF201A36601800380D03 /* ZIMAnimationContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZIMAnimationContainerView.h; sourceTree = "<group>"; };
 		F378EF211A36601800380D03 /* ZIMAnimationContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMAnimationContainerView.m; sourceTree = "<group>"; };
-		F378EF231A366CF200380D03 /* btn_pause@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_pause@3x.png"; path = "Resources/btn_pause@3x.png"; sourceTree = "<group>"; };
-		F378EF241A366CF200380D03 /* btn_play@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_play@3x.png"; path = "Resources/btn_play@3x.png"; sourceTree = "<group>"; };
-		F378EF281A366D2600380D03 /* btn_pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_pause@2x.png"; path = "Resources/btn_pause@2x.png"; sourceTree = "<group>"; };
-		F378EF2A1A366D2600380D03 /* btn_play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn_play@2x.png"; path = "Resources/btn_play@2x.png"; sourceTree = "<group>"; };
-		F378EF2F1A366D7600380D03 /* btn_pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btn_pause.png; path = Resources/btn_pause.png; sourceTree = "<group>"; };
-		F378EF301A366D7600380D03 /* btn_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btn_play.png; path = Resources/btn_play.png; sourceTree = "<group>"; };
 		F38954F41A3A0FE4000B5081 /* VKPlayer+ZIMAsteroidsPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VKPlayer+ZIMAsteroidsPlaylist.h"; sourceTree = "<group>"; };
 		F38954F51A3A0FE4000B5081 /* VKPlayer+ZIMAsteroidsPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VKPlayer+ZIMAsteroidsPlaylist.m"; sourceTree = "<group>"; };
 		F38B0AD817C9EBAD001951BA /* VKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKViewController.h; sourceTree = "<group>"; };
 		F38B0AD917C9EBAD001951BA /* VKViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKViewController.m; sourceTree = "<group>"; };
-		F38B0B3917CA525E001951BA /* CC3Foundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3Foundation.h; sourceTree = "<group>"; };
-		F38B0B3A17CA525E001951BA /* CC3Foundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CC3Foundation.m; sourceTree = "<group>"; };
-		F38B0B3B17CA525E001951BA /* CC3GLMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3GLMatrix.h; sourceTree = "<group>"; };
-		F38B0B3C17CA525E001951BA /* CC3GLMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CC3GLMatrix.m; sourceTree = "<group>"; };
-		F38B0B3D17CA525E001951BA /* CC3Kazmath.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CC3Kazmath.c; sourceTree = "<group>"; };
-		F38B0B3E17CA525E001951BA /* CC3Kazmath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3Kazmath.h; sourceTree = "<group>"; };
-		F38B0B3F17CA525E001951BA /* CC3Logging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3Logging.h; sourceTree = "<group>"; };
-		F38B0B4017CA525E001951BA /* CC3Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CC3Math.h; sourceTree = "<group>"; };
-		F38B0B4117CA525E001951BA /* CC3Math.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CC3Math.m; sourceTree = "<group>"; };
-		F38B0B4217CA525E001951BA /* ccTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ccTypes.h; sourceTree = "<group>"; };
 		F38B0B4417CA525E001951BA /* SimpleFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleFragment.glsl; sourceTree = "<group>"; };
 		F38B0B4517CA525E001951BA /* SimpleVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleVertex.glsl; sourceTree = "<group>"; };
 		F38B0B4817CA525E001951BA /* VKActiveGameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKActiveGameObject.h; sourceTree = "<group>"; };
@@ -165,44 +156,6 @@
 		F38B0B4A17CA525E001951BA /* VKGLObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKGLObject.h; sourceTree = "<group>"; };
 		F38B0B4D17CA525E001951BA /* VKShip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKShip.h; sourceTree = "<group>"; };
 		F38B0B4E17CA525E001951BA /* VKShip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKShip.m; sourceTree = "<group>"; };
-		F38B0B5017CA525E001951BA /* analogue_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = analogue_bg.png; sourceTree = "<group>"; };
-		F38B0B5117CA525E001951BA /* analogue_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "analogue_bg@2x.png"; sourceTree = "<group>"; };
-		F38B0B5217CA525E001951BA /* analogue_handle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = analogue_handle.png; sourceTree = "<group>"; };
-		F38B0B5317CA525E001951BA /* analogue_handle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "analogue_handle@2x.png"; sourceTree = "<group>"; };
-		F38B0B5417CA525E001951BA /* button-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-pressed.png"; sourceTree = "<group>"; };
-		F38B0B5517CA525E001951BA /* button-pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-pressed@2x.png"; sourceTree = "<group>"; };
-		F38B0B5617CA525E001951BA /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
-		F38B0B5717CA525E001951BA /* button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button@2x.png"; sourceTree = "<group>"; };
-		F38B0B5817CA525E001951BA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Resources/Default-568h@2x.png"; sourceTree = "<group>"; };
-		F38B0B5917CA525E001951BA /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resources/Default.png; sourceTree = "<group>"; };
-		F38B0B5A17CA525E001951BA /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Resources/Default@2x.png"; sourceTree = "<group>"; };
-		F38B0B5B17CA525E001951BA /* dPad-Down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-Down.png"; sourceTree = "<group>"; };
-		F38B0B5C17CA525E001951BA /* dPad-Down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-Down@2x.png"; sourceTree = "<group>"; };
-		F38B0B5D17CA525E001951BA /* dPad-DownLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-DownLeft.png"; sourceTree = "<group>"; };
-		F38B0B5E17CA525E001951BA /* dPad-DownLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-DownLeft@2x.png"; sourceTree = "<group>"; };
-		F38B0B5F17CA525E001951BA /* dPad-DownRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-DownRight.png"; sourceTree = "<group>"; };
-		F38B0B6017CA525E001951BA /* dPad-DownRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-DownRight@2x.png"; sourceTree = "<group>"; };
-		F38B0B6117CA525E001951BA /* dPad-Left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-Left.png"; sourceTree = "<group>"; };
-		F38B0B6217CA525E001951BA /* dPad-Left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-Left@2x.png"; sourceTree = "<group>"; };
-		F38B0B6317CA525E001951BA /* dPad-None.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-None.png"; sourceTree = "<group>"; };
-		F38B0B6417CA525E001951BA /* dPad-None@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-None@2x.png"; sourceTree = "<group>"; };
-		F38B0B6517CA525E001951BA /* dPad-Right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-Right.png"; sourceTree = "<group>"; };
-		F38B0B6617CA525E001951BA /* dPad-Right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-Right@2x.png"; sourceTree = "<group>"; };
-		F38B0B6717CA525E001951BA /* dPad-Up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-Up.png"; sourceTree = "<group>"; };
-		F38B0B6817CA525E001951BA /* dPad-Up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-Up@2x.png"; sourceTree = "<group>"; };
-		F38B0B6917CA525E001951BA /* dPad-UpLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-UpLeft.png"; sourceTree = "<group>"; };
-		F38B0B6A17CA525E001951BA /* dPad-UpLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-UpLeft@2x.png"; sourceTree = "<group>"; };
-		F38B0B6B17CA525E001951BA /* dPad-UpRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-UpRight.png"; sourceTree = "<group>"; };
-		F38B0B6C17CA525E001951BA /* dPad-UpRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dPad-UpRight@2x.png"; sourceTree = "<group>"; };
-		F38B0B6D17CA525E001951BA /* JSAnalogueStick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSAnalogueStick.h; sourceTree = "<group>"; };
-		F38B0B6E17CA525E001951BA /* JSAnalogueStick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSAnalogueStick.m; sourceTree = "<group>"; };
-		F38B0B6F17CA525E001951BA /* JSButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSButton.h; sourceTree = "<group>"; };
-		F38B0B7017CA525E001951BA /* JSButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSButton.m; sourceTree = "<group>"; };
-		F38B0B7117CA525E001951BA /* JSControlLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSControlLayout.h; sourceTree = "<group>"; };
-		F38B0B7217CA525E001951BA /* JSControlLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSControlLayout.m; sourceTree = "<group>"; };
-		F38B0B7317CA525E001951BA /* JSDPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSDPad.h; sourceTree = "<group>"; };
-		F38B0B7417CA525E001951BA /* JSDPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSDPad.m; sourceTree = "<group>"; };
-		F39937B917CC6CD0004BE9CB /* MainWindow-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		F3B5CD431A739E7900D091A0 /* VKStaticObjectsArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKStaticObjectsArray.h; sourceTree = "<group>"; };
 		F3B5CD441A739E7900D091A0 /* VKStaticObjectsArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKStaticObjectsArray.m; sourceTree = "<group>"; };
 		F3B5CD461A73A18000D091A0 /* VKStarsArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKStarsArray.h; sourceTree = "<group>"; };
@@ -219,17 +172,6 @@
 		F3E26B521A35BABB0053111A /* ZIMSFXController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZIMSFXController.m; sourceTree = "<group>"; };
 		F3F4E99217CCD66700EDA7CC /* VKPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKPlayer.h; sourceTree = "<group>"; };
 		F3F4E99317CCD66700EDA7CC /* VKPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKPlayer.m; sourceTree = "<group>"; };
-		F3F4E99617CCE0E100EDA7CC /* All_of_Us.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = All_of_Us.m4a; sourceTree = "<group>"; };
-		F3F4E99717CCE0E100EDA7CC /* Arpanauts.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Arpanauts.m4a; sourceTree = "<group>"; };
-		F3F4E99817CCE0E100EDA7CC /* Ascending.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ascending.m4a; sourceTree = "<group>"; };
-		F3F4E99917CCE0E100EDA7CC /* Come_and_Find_Me.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Come_and_Find_Me.m4a; sourceTree = "<group>"; };
-		F3F4E99A17CCE0E100EDA7CC /* Digital_Native.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Digital_Native.m4a; sourceTree = "<group>"; };
-		F3F4E99B17CCE0E100EDA7CC /* HHavok-intro.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HHavok-intro.m4a"; sourceTree = "<group>"; };
-		F3F4E99C17CCE0E100EDA7CC /* HHavok-main.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HHavok-main.m4a"; sourceTree = "<group>"; };
-		F3F4E99D17CCE0E100EDA7CC /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.md; sourceTree = "<group>"; };
-		F3F4E99E17CCE0E100EDA7CC /* Searching.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Searching.m4a; sourceTree = "<group>"; };
-		F3F4E99F17CCE0E100EDA7CC /* Underclocked.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Underclocked.m4a; sourceTree = "<group>"; };
-		F3F4E9A017CCE0E100EDA7CC /* We're_the_Resistors.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "We're_the_Resistors.m4a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,10 +228,9 @@
 		35DF6446138C40D500FF9459 /* Asteroids */ = {
 			isa = PBXGroup;
 			children = (
+				6BEF7EB11D21B9AD003EF135 /* lib */,
 				F37675FB17CB314500C8DEC4 /* Resources */,
-				F38B0B3817CA525E001951BA /* CC3 */,
 				F38B0B4317CA525E001951BA /* GameObjects */,
-				F38B0B4F17CA525E001951BA /* JSController */,
 				35DF644F138C40D500FF9459 /* AsteroidsAppDelegate.h */,
 				35DF6450138C40D500FF9459 /* AsteroidsAppDelegate.m */,
 				F374124C17C95E1000AF822B /* VKGLView.h */,
@@ -297,7 +238,7 @@
 				F378EF1B1A36298100380D03 /* VKViewController.xib */,
 				F38B0AD817C9EBAD001951BA /* VKViewController.h */,
 				F38B0AD917C9EBAD001951BA /* VKViewController.m */,
-				F39937B917CC6CD0004BE9CB /* MainWindow-iPad.xib */,
+				6BEF7EAE1D21B99A003EF135 /* MainWindow-iPad.xib */,
 				35DF6452138C40D500FF9459 /* MainWindow.xib */,
 				35DF6447138C40D500FF9459 /* Supporting Files */,
 				F3F4E99217CCD66700EDA7CC /* VKPlayer.h */,
@@ -314,6 +255,10 @@
 				F378EF211A36601800380D03 /* ZIMAnimationContainerView.m */,
 				F38954F41A3A0FE4000B5081 /* VKPlayer+ZIMAsteroidsPlaylist.h */,
 				F38954F51A3A0FE4000B5081 /* VKPlayer+ZIMAsteroidsPlaylist.m */,
+				6BEF7E6D1D213BA9003EF135 /* JSAnalogueStick+ZIMStick.h */,
+				6BEF7E6E1D213BA9003EF135 /* JSAnalogueStick+ZIMStick.m */,
+				6BEF7E701D2178A0003EF135 /* ZIMJoystikButton.h */,
+				6BEF7E711D2178A0003EF135 /* ZIMJoystikButton.m */,
 			);
 			path = Asteroids;
 			sourceTree = "<group>";
@@ -338,43 +283,79 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		6BEF7E751D21856A003EF135 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				6BEF7E921D21B876003EF135 /* trench100free.otf */,
+				6BEF7E931D21B876003EF135 /* Orbitron Light.otf */,
+				6BEF7E941D21B876003EF135 /* Orbitron Medium.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		6BEF7E851D21B7EE003EF135 /* SFX */ = {
+			isa = PBXGroup;
+			children = (
+				6BEF7E8C1D21B86A003EF135 /* death.m4a */,
+				6BEF7E8D1D21B86A003EF135 /* explosion.m4a */,
+				6BEF7E8E1D21B86A003EF135 /* blast.m4a */,
+			);
+			path = SFX;
+			sourceTree = "<group>";
+		};
+		6BEF7EB11D21B9AD003EF135 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				6BEF7EB31D21B9E1003EF135 /* CC3 */,
+				6BEF7EB21D21B9D3003EF135 /* JSController */,
+			);
+			name = lib;
+			path = ../lib;
+			sourceTree = "<group>";
+		};
+		6BEF7EB21D21B9D3003EF135 /* JSController */ = {
+			isa = PBXGroup;
+			children = (
+				6BEF7EC21D21BA0F003EF135 /* JSController.xcassets */,
+				6BEF7EC31D21BA0F003EF135 /* JSAnalogueStick.h */,
+				6BEF7EC41D21BA0F003EF135 /* JSAnalogueStick.m */,
+				6BEF7EC51D21BA0F003EF135 /* JSButton.h */,
+				6BEF7EC61D21BA0F003EF135 /* JSButton.m */,
+				6BEF7EC71D21BA0F003EF135 /* JSControlLayout.h */,
+				6BEF7EC81D21BA0F003EF135 /* JSControlLayout.m */,
+				6BEF7EC91D21BA0F003EF135 /* JSDPad.h */,
+				6BEF7ECA1D21BA0F003EF135 /* JSDPad.m */,
+			);
+			path = JSController;
+			sourceTree = "<group>";
+		};
+		6BEF7EB31D21B9E1003EF135 /* CC3 */ = {
+			isa = PBXGroup;
+			children = (
+				6BEF7EB41D21BA03003EF135 /* CC3Foundation.m */,
+				6BEF7EB51D21BA03003EF135 /* CC3GLMatrix.m */,
+				6BEF7EB61D21BA03003EF135 /* CC3Kazmath.c */,
+				6BEF7EB71D21BA03003EF135 /* CC3GLMatrix.h */,
+				6BEF7EB81D21BA03003EF135 /* CC3Math.m */,
+				6BEF7EB91D21BA03003EF135 /* CC3Foundation.h */,
+				6BEF7EBA1D21BA03003EF135 /* ccTypes.h */,
+				6BEF7EBB1D21BA03003EF135 /* CC3Kazmath.h */,
+				6BEF7EBC1D21BA03003EF135 /* CC3Logging.h */,
+				6BEF7EBD1D21BA03003EF135 /* CC3Math.h */,
+			);
+			path = CC3;
+			sourceTree = "<group>";
+		};
 		F37675FB17CB314500C8DEC4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				F378EF2F1A366D7600380D03 /* btn_pause.png */,
-				F378EF301A366D7600380D03 /* btn_play.png */,
-				F378EF281A366D2600380D03 /* btn_pause@2x.png */,
-				F378EF2A1A366D2600380D03 /* btn_play@2x.png */,
-				F378EF231A366CF200380D03 /* btn_pause@3x.png */,
-				F378EF241A366CF200380D03 /* btn_play@3x.png */,
+				6BEF7E851D21B7EE003EF135 /* SFX */,
+				6BEF7E751D21856A003EF135 /* Fonts */,
 				F3F4E99517CCE0E100EDA7CC /* Music */,
-				F358A19417CB908D00CF776C /* death.m4a */,
-				F358A18E17CB3BDB00CF776C /* blast.m4a */,
-				F358A18F17CB3BDB00CF776C /* explosion.m4a */,
-				F37675FC17CB318400C8DEC4 /* Icon-57.png */,
-				F38B0B5817CA525E001951BA /* Default-568h@2x.png */,
-				F38B0B5917CA525E001951BA /* Default.png */,
-				F38B0B5A17CA525E001951BA /* Default@2x.png */,
-				F33D392F17CB2DD80026385A /* Icon-114.png */,
+				6BEF7E7C1D218716003EF135 /* Images.xcassets */,
+				6BEF7E7E1D218873003EF135 /* Launch Screen.storyboard */,
 			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		F38B0B3817CA525E001951BA /* CC3 */ = {
-			isa = PBXGroup;
-			children = (
-				F38B0B3917CA525E001951BA /* CC3Foundation.h */,
-				F38B0B3A17CA525E001951BA /* CC3Foundation.m */,
-				F38B0B3B17CA525E001951BA /* CC3GLMatrix.h */,
-				F38B0B3C17CA525E001951BA /* CC3GLMatrix.m */,
-				F38B0B3D17CA525E001951BA /* CC3Kazmath.c */,
-				F38B0B3E17CA525E001951BA /* CC3Kazmath.h */,
-				F38B0B3F17CA525E001951BA /* CC3Logging.h */,
-				F38B0B4017CA525E001951BA /* CC3Math.h */,
-				F38B0B4117CA525E001951BA /* CC3Math.m */,
-				F38B0B4217CA525E001951BA /* ccTypes.h */,
-			);
-			path = CC3;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		F38B0B4317CA525E001951BA /* GameObjects */ = {
@@ -405,64 +386,21 @@
 			path = GameObjects;
 			sourceTree = "<group>";
 		};
-		F38B0B4F17CA525E001951BA /* JSController */ = {
-			isa = PBXGroup;
-			children = (
-				F38B0B5017CA525E001951BA /* analogue_bg.png */,
-				F38B0B5117CA525E001951BA /* analogue_bg@2x.png */,
-				F38B0B5217CA525E001951BA /* analogue_handle.png */,
-				F38B0B5317CA525E001951BA /* analogue_handle@2x.png */,
-				F38B0B5417CA525E001951BA /* button-pressed.png */,
-				F38B0B5517CA525E001951BA /* button-pressed@2x.png */,
-				F38B0B5617CA525E001951BA /* button.png */,
-				F38B0B5717CA525E001951BA /* button@2x.png */,
-				F38B0B5B17CA525E001951BA /* dPad-Down.png */,
-				F38B0B5C17CA525E001951BA /* dPad-Down@2x.png */,
-				F38B0B5D17CA525E001951BA /* dPad-DownLeft.png */,
-				F38B0B5E17CA525E001951BA /* dPad-DownLeft@2x.png */,
-				F38B0B5F17CA525E001951BA /* dPad-DownRight.png */,
-				F38B0B6017CA525E001951BA /* dPad-DownRight@2x.png */,
-				F38B0B6117CA525E001951BA /* dPad-Left.png */,
-				F38B0B6217CA525E001951BA /* dPad-Left@2x.png */,
-				F38B0B6317CA525E001951BA /* dPad-None.png */,
-				F38B0B6417CA525E001951BA /* dPad-None@2x.png */,
-				F38B0B6517CA525E001951BA /* dPad-Right.png */,
-				F38B0B6617CA525E001951BA /* dPad-Right@2x.png */,
-				F38B0B6717CA525E001951BA /* dPad-Up.png */,
-				F38B0B6817CA525E001951BA /* dPad-Up@2x.png */,
-				F38B0B6917CA525E001951BA /* dPad-UpLeft.png */,
-				F38B0B6A17CA525E001951BA /* dPad-UpLeft@2x.png */,
-				F38B0B6B17CA525E001951BA /* dPad-UpRight.png */,
-				F38B0B6C17CA525E001951BA /* dPad-UpRight@2x.png */,
-				F38B0B6D17CA525E001951BA /* JSAnalogueStick.h */,
-				F38B0B6E17CA525E001951BA /* JSAnalogueStick.m */,
-				F38B0B6F17CA525E001951BA /* JSButton.h */,
-				F38B0B7017CA525E001951BA /* JSButton.m */,
-				F38B0B7117CA525E001951BA /* JSControlLayout.h */,
-				F38B0B7217CA525E001951BA /* JSControlLayout.m */,
-				F38B0B7317CA525E001951BA /* JSDPad.h */,
-				F38B0B7417CA525E001951BA /* JSDPad.m */,
-			);
-			path = JSController;
-			sourceTree = "<group>";
-		};
 		F3F4E99517CCE0E100EDA7CC /* Music */ = {
 			isa = PBXGroup;
 			children = (
-				F3F4E99617CCE0E100EDA7CC /* All_of_Us.m4a */,
-				F3F4E99717CCE0E100EDA7CC /* Arpanauts.m4a */,
-				F3F4E99817CCE0E100EDA7CC /* Ascending.m4a */,
-				F3F4E99917CCE0E100EDA7CC /* Come_and_Find_Me.m4a */,
-				F3F4E99A17CCE0E100EDA7CC /* Digital_Native.m4a */,
-				F3F4E99B17CCE0E100EDA7CC /* HHavok-intro.m4a */,
-				F3F4E99C17CCE0E100EDA7CC /* HHavok-main.m4a */,
-				F3F4E99D17CCE0E100EDA7CC /* LICENSE.md */,
-				F3F4E99E17CCE0E100EDA7CC /* Searching.m4a */,
-				F3F4E99F17CCE0E100EDA7CC /* Underclocked.m4a */,
-				F3F4E9A017CCE0E100EDA7CC /* We're_the_Resistors.m4a */,
+				6BEF7E981D21B882003EF135 /* Searching.m4a */,
+				6BEF7E991D21B882003EF135 /* Ascending.m4a */,
+				6BEF7E9A1D21B882003EF135 /* Come_and_Find_Me.m4a */,
+				6BEF7E9B1D21B882003EF135 /* Digital_Native.m4a */,
+				6BEF7E9C1D21B882003EF135 /* HHavok-intro.m4a */,
+				6BEF7E9D1D21B882003EF135 /* HHavok-main.m4a */,
+				6BEF7E9E1D21B882003EF135 /* Underclocked.m4a */,
+				6BEF7E9F1D21B882003EF135 /* We're_the_Resistors.m4a */,
+				6BEF7EA01D21B882003EF135 /* All_of_Us.m4a */,
+				6BEF7EA11D21B882003EF135 /* Arpanauts.m4a */,
 			);
-			name = Music;
-			path = Resources/Music;
+			path = Music;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -491,7 +429,12 @@
 		35DF6433138C40D500FF9459 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0730;
+				TargetAttributes = {
+					35DF643B138C40D500FF9459 = {
+						DevelopmentTeam = ENT9X9U544;
+					};
+				};
 			};
 			buildConfigurationList = 35DF6436138C40D500FF9459 /* Build configuration list for PBXProject "Asteroids" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -515,63 +458,31 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BEF7EAB1D21B882003EF135 /* Arpanauts.m4a in Resources */,
 				35DF644B138C40D500FF9459 /* InfoPlist.strings in Resources */,
 				35DF6454138C40D500FF9459 /* MainWindow.xib in Resources */,
+				6BEF7E971D21B876003EF135 /* Orbitron Medium.otf in Resources */,
 				F38B0B7917CA525E001951BA /* SimpleFragment.glsl in Resources */,
+				6BEF7E7D1D218716003EF135 /* Images.xcassets in Resources */,
 				F38B0B7A17CA525E001951BA /* SimpleVertex.glsl in Resources */,
-				F378EF261A366CF200380D03 /* btn_play@3x.png in Resources */,
-				F38B0B7F17CA525E001951BA /* analogue_bg.png in Resources */,
-				F38B0B8017CA525E001951BA /* analogue_bg@2x.png in Resources */,
-				F38B0B8117CA525E001951BA /* analogue_handle.png in Resources */,
-				F38B0B8217CA525E001951BA /* analogue_handle@2x.png in Resources */,
-				F38B0B8317CA525E001951BA /* button-pressed.png in Resources */,
-				F38B0B8417CA525E001951BA /* button-pressed@2x.png in Resources */,
-				F38B0B8517CA525E001951BA /* button.png in Resources */,
-				F38B0B8617CA525E001951BA /* button@2x.png in Resources */,
-				F38B0B8717CA525E001951BA /* Default-568h@2x.png in Resources */,
-				F38B0B8817CA525E001951BA /* Default.png in Resources */,
-				F38B0B8917CA525E001951BA /* Default@2x.png in Resources */,
-				F38B0B8A17CA525E001951BA /* dPad-Down.png in Resources */,
-				F38B0B8B17CA525E001951BA /* dPad-Down@2x.png in Resources */,
-				F38B0B8C17CA525E001951BA /* dPad-DownLeft.png in Resources */,
-				F38B0B8D17CA525E001951BA /* dPad-DownLeft@2x.png in Resources */,
-				F38B0B8E17CA525E001951BA /* dPad-DownRight.png in Resources */,
-				F38B0B8F17CA525E001951BA /* dPad-DownRight@2x.png in Resources */,
-				F378EF2C1A366D2600380D03 /* btn_pause@2x.png in Resources */,
-				F38B0B9017CA525E001951BA /* dPad-Left.png in Resources */,
-				F38B0B9117CA525E001951BA /* dPad-Left@2x.png in Resources */,
-				F38B0B9217CA525E001951BA /* dPad-None.png in Resources */,
-				F378EF251A366CF200380D03 /* btn_pause@3x.png in Resources */,
-				F38B0B9317CA525E001951BA /* dPad-None@2x.png in Resources */,
+				6BEF7E8F1D21B86A003EF135 /* death.m4a in Resources */,
+				6BEF7EA41D21B882003EF135 /* Come_and_Find_Me.m4a in Resources */,
+				6BEF7EB01D21B99A003EF135 /* MainWindow-iPad.xib in Resources */,
+				6BEF7EA31D21B882003EF135 /* Ascending.m4a in Resources */,
+				6BEF7EA91D21B882003EF135 /* We're_the_Resistors.m4a in Resources */,
+				6BEF7EA51D21B882003EF135 /* Digital_Native.m4a in Resources */,
+				6BEF7EA81D21B882003EF135 /* Underclocked.m4a in Resources */,
+				6BEF7E901D21B86A003EF135 /* explosion.m4a in Resources */,
 				F378EF1C1A36298100380D03 /* VKViewController.xib in Resources */,
-				F38B0B9417CA525E001951BA /* dPad-Right.png in Resources */,
-				F38B0B9517CA525E001951BA /* dPad-Right@2x.png in Resources */,
-				F38B0B9617CA525E001951BA /* dPad-Up.png in Resources */,
-				F38B0B9717CA525E001951BA /* dPad-Up@2x.png in Resources */,
-				F38B0B9817CA525E001951BA /* dPad-UpLeft.png in Resources */,
-				F38B0B9917CA525E001951BA /* dPad-UpLeft@2x.png in Resources */,
-				F38B0B9A17CA525E001951BA /* dPad-UpRight.png in Resources */,
-				F378EF311A366D7600380D03 /* btn_pause.png in Resources */,
-				F38B0B9B17CA525E001951BA /* dPad-UpRight@2x.png in Resources */,
-				F33D393017CB2DD80026385A /* Icon-114.png in Resources */,
-				F37675FD17CB318400C8DEC4 /* Icon-57.png in Resources */,
-				F358A19017CB3BDB00CF776C /* blast.m4a in Resources */,
-				F358A19117CB3BDB00CF776C /* explosion.m4a in Resources */,
-				F358A19517CB908D00CF776C /* death.m4a in Resources */,
-				F39937BA17CC6CD0004BE9CB /* MainWindow-iPad.xib in Resources */,
-				F3F4E9A117CCE0E100EDA7CC /* All_of_Us.m4a in Resources */,
-				F3F4E9A217CCE0E100EDA7CC /* Arpanauts.m4a in Resources */,
-				F3F4E9A317CCE0E100EDA7CC /* Ascending.m4a in Resources */,
-				F3F4E9A417CCE0E100EDA7CC /* Come_and_Find_Me.m4a in Resources */,
-				F3F4E9A517CCE0E100EDA7CC /* Digital_Native.m4a in Resources */,
-				F3F4E9A617CCE0E100EDA7CC /* HHavok-intro.m4a in Resources */,
-				F3F4E9A717CCE0E100EDA7CC /* HHavok-main.m4a in Resources */,
-				F3F4E9A817CCE0E100EDA7CC /* LICENSE.md in Resources */,
-				F3F4E9A917CCE0E100EDA7CC /* Searching.m4a in Resources */,
-				F378EF321A366D7600380D03 /* btn_play.png in Resources */,
-				F3F4E9AA17CCE0E100EDA7CC /* Underclocked.m4a in Resources */,
-				F3F4E9AB17CCE0E100EDA7CC /* We're_the_Resistors.m4a in Resources */,
-				F378EF2E1A366D2600380D03 /* btn_play@2x.png in Resources */,
+				6BEF7EA21D21B882003EF135 /* Searching.m4a in Resources */,
+				6BEF7EAA1D21B882003EF135 /* All_of_Us.m4a in Resources */,
+				6BEF7E7F1D218873003EF135 /* Launch Screen.storyboard in Resources */,
+				6BEF7E961D21B876003EF135 /* Orbitron Light.otf in Resources */,
+				6BEF7EA61D21B882003EF135 /* HHavok-intro.m4a in Resources */,
+				6BEF7ECB1D21BA0F003EF135 /* JSController.xcassets in Resources */,
+				6BEF7E911D21B86A003EF135 /* blast.m4a in Resources */,
+				6BEF7EA71D21B882003EF135 /* HHavok-main.m4a in Resources */,
+				6BEF7E951D21B876003EF135 /* trench100free.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -584,29 +495,31 @@
 			files = (
 				F3B5CD4E1A73AFB200D091A0 /* VKGameObjectsArray.m in Sources */,
 				35DF644E138C40D500FF9459 /* main.m in Sources */,
+				6BEF7ECD1D21BA0F003EF135 /* JSButton.m in Sources */,
+				6BEF7E721D2178A0003EF135 /* ZIMJoystikButton.m in Sources */,
 				35DF6451138C40D500FF9459 /* AsteroidsAppDelegate.m in Sources */,
 				F3B5CD481A73A18000D091A0 /* VKStarsArray.m in Sources */,
 				F374124E17C95E1000AF822B /* VKGLView.m in Sources */,
+				6BEF7ECF1D21BA0F003EF135 /* JSDPad.m in Sources */,
 				F38954F61A3A0FE4000B5081 /* VKPlayer+ZIMAsteroidsPlaylist.m in Sources */,
 				F3B5CD4B1A73A8AA00D091A0 /* VKMisslesArray.m in Sources */,
 				F38B0ADA17C9EBAD001951BA /* VKViewController.m in Sources */,
-				F38B0B7517CA525E001951BA /* CC3Foundation.m in Sources */,
+				6BEF7EC01D21BA03003EF135 /* CC3Kazmath.c in Sources */,
+				6BEF7EBF1D21BA03003EF135 /* CC3GLMatrix.m in Sources */,
 				F378EF1F1A3657CF00380D03 /* UIButton+ZIMAsteroidsButtons.m in Sources */,
-				F38B0B7617CA525E001951BA /* CC3GLMatrix.m in Sources */,
-				F38B0B7717CA525E001951BA /* CC3Kazmath.c in Sources */,
-				F38B0B7817CA525E001951BA /* CC3Math.m in Sources */,
+				6BEF7EC11D21BA03003EF135 /* CC3Math.m in Sources */,
+				6BEF7ECE1D21BA0F003EF135 /* JSControlLayout.m in Sources */,
+				6BEF7E6F1D213BA9003EF135 /* JSAnalogueStick+ZIMStick.m in Sources */,
 				F3E26B531A35BABB0053111A /* ZIMSFXController.m in Sources */,
 				F3B5CD511A73BE5800D091A0 /* VKAsteroid.m in Sources */,
 				F38B0B7C17CA525E001951BA /* VKActiveGameObject.m in Sources */,
 				F378EF221A36601800380D03 /* ZIMAnimationContainerView.m in Sources */,
 				F378EF1A1A35FC7700380D03 /* ZIMGameWorldController.m in Sources */,
 				F3B5CD451A739E7900D091A0 /* VKStaticObjectsArray.m in Sources */,
+				6BEF7ECC1D21BA0F003EF135 /* JSAnalogueStick.m in Sources */,
+				6BEF7EBE1D21BA03003EF135 /* CC3Foundation.m in Sources */,
 				F38B0B7E17CA525E001951BA /* VKShip.m in Sources */,
-				F38B0B9C17CA525E001951BA /* JSAnalogueStick.m in Sources */,
-				F38B0B9D17CA525E001951BA /* JSButton.m in Sources */,
 				F33CB5A01A75152200F7482A /* VKShader.m in Sources */,
-				F38B0B9E17CA525E001951BA /* JSControlLayout.m in Sources */,
-				F38B0B9F17CA525E001951BA /* JSDPad.m in Sources */,
 				F378EF111A35D0BE00380D03 /* ZIMRingEnumertor.m in Sources */,
 				F3F4E99417CCD66700EDA7CC /* VKPlayer.m in Sources */,
 				F3D0EF851A7A1176005A0D8B /* VKAsteroidsArray.m in Sources */,
@@ -632,6 +545,14 @@
 			name = MainWindow.xib;
 			sourceTree = "<group>";
 		};
+		6BEF7EAE1D21B99A003EF135 /* MainWindow-iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6BEF7EAF1D21B99A003EF135 /* en */,
+			);
+			name = "MainWindow-iPad.xib";
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -640,6 +561,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
@@ -647,7 +569,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -662,7 +584,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 			};
@@ -672,16 +594,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Asteroids/Asteroids-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Asteroids/Asteroids-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kovtash.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Asteroids;
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -691,15 +618,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Asteroids/Asteroids-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Asteroids/Asteroids-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kovtash.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Asteroids;
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
